@@ -1,0 +1,184 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersFormDeathEditModal       -->
+<!-- ===================================== -->
+<template name="PersFormDeathEditModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ========== -->
+					{{#if hlp_eq action "INSERT"}}
+						<div class="modal-header modal-insert">
+							{{> LibIcone "iconePers"}} Ajout  des informations de décès
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "UPDATE"}}
+						<div class="modal-header modal-update">
+							{{> LibIcone "iconePers"}} Modification des informations de décès
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "DELETE"}}
+						<div class="modal-header modal-delete">
+							{{> LibIcone "iconePers"}} Suppression  des informations de décès
+						</div>
+					{{/if}}
+					<!-- BODY ======== -->
+					<div class="modal-body row">
+						<div class="col-sm-12">
+							{{#if hlp_eq action "INSERT"}}
+								Template "PersFormDeathEditModal" : pas de sens à implémenter.
+								<br/>
+								<div class="row">
+									<div class="col-sm-12 text-center">
+										<button type="submit" class="btn btn-danger">Supprimer</button>
+										<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+									</div>
+								</div>
+							{{/if}}
+							{{#if hlp_eq action "UPDATE"}}
+								{{#with pers}}
+									{{#autoForm collection="Pers" doc=. id="updatePersFormDeath" type="update"}}
+										{{> PersFormDeath}}
+										<br/>
+										<div class="row">
+											<div class="col-sm-12 text-center">
+												<button type="submit" class="btn btn-warning">Modifier</button>
+												<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+											</div>
+										</div>
+									{{/autoForm}}
+								{{/with}}
+							{{/if}}
+							{{#if hlp_eq action "DELETE"}}
+								Template "PersFormDeathEditModal" : pas de sens à implémenter.
+								<br/>
+								<div class="row">
+									<div class="col-sm-12 text-center">
+										<button type="submit" class="btn btn-danger">Supprimer</button>
+										<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+									</div>
+								</div>
+							{{/if}}
+						</div>
+					</div>
+			</div>
+		</div>
+    </div>
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersFormDeathEditModal_DOCAUTO        -->
+<!-- ===================================== -->
+<template name="PersFormDeathEditModal_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>action::{"INSERT","UPDATE","DELETE"}</code></td>
+			<td>Type de formulaire demandé.</td>
+		</tr>
+		<tr>
+			<td><code>pers::PERS</code></td>
+			<td>informations sur la <code>pers</code> à insérer, modifier ou supprimer.</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code><br/>
+<code>PersFormDeath</code><br/>
+<code>PersCompletAvecLien</code><br/>
+<code>LibDisplayPointingObjectList</code><br/>
+
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Fenêtre modale d'édition de infos sur le décès d'une personne. S'appuie sur le formulaire <code>PersFormDeath</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une popup Bootstrap qui lui transmet les paramètres.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Appel uniquement par code Javascript, ex : <pre>Modal.show(
+	"PersFormDeathEditModal",
+	{
+		action:"UPDATE",
+		pers:unePersonne
+	},
+	{backdrop:'static',keyboard:false}
+);</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

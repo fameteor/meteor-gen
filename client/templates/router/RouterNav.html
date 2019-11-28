@@ -1,0 +1,175 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RouterNav                    -->
+<!-- ===================================== -->
+<template name="RouterNav">
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+
+			<!-- Brand and toggle get grouped for better mobile display -->
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand noBorderOnFocus" href="/">Marais V1.20</a>
+				<!-- Non collapsing zone -->
+				{{#if currentUser}}
+					<div class="navbar-text">   
+						<ul class="navbar-nav list-inline">
+							<li><a class="noBorderOnFocus" id="previousButton" href="#" title="page précédente">{{> LibIcone "iconePrecedent"}}</a></li>
+							<li><a class="noBorderOnFocus" id="nextButton" href="#" title="page suivante">{{> LibIcone "iconeSuivant"}}</a></li>
+						</ul>
+					</div>
+				{{/if}}
+			</div>
+
+			<!-- Collect the nav links, forms, and other content for toggling -->
+			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+				<ul class="nav navbar-nav">
+				{{#if currentUser}}
+					
+					
+					{{#unless gh_accountJustCreated}}
+
+					<li class="dropdown {{activeIfRouteContains 'Ajouter'}}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{> LibIcone "iconeAjouter"}} ajouter <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a id="ajouterPers" href="#">{{> LibIcone "iconePers"}} une personne</a></li>
+							<li class="{{activeIfRouteIs 'LieuAjouter'}}"><a href="/lieu/ajouter">{{> LibIcone "iconeLieu"}} un lieu</a></li>
+							<li class="{{activeIfRouteIs 'HistAjouter'}}"><a href="/hist/ajouter">{{> LibIcone "iconeHist"}} un pt d'histoire</a></li>
+							<li><a id="ajouterDoc" href="#">{{> LibIcone "iconeDoc"}} un document</a></li>
+							<li role="separator" class="divider"></li>
+							<li><a id="ajouterTag" href="#">{{> LibIcone "iconeTag"}} une étiquette</a></li>
+						</ul>
+					</li>
+          
+					<li class="dropdown {{activeIfRouteContains 'Chercher'}}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{> LibIcone "iconeChercher"}} chercher <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li><a id="chercherPers" href="#">{{> LibIcone "iconePers"}} une personne</a></li>
+							<li><a id="chercherLieu" href="#">{{> LibIcone "iconeLieu"}} un lieu</a></li>
+							<li class="{{activeIfRouteIs 'HistChercher'}}"><a href="/hist/chercher">{{> LibIcone "iconeHist"}} un pt d'histoire</a></li>
+							<li class="{{activeIfRouteIs 'DocChercher'}}"><a href="/doc/chercher">{{> LibIcone "iconeDoc"}} un document</a></li>
+						</ul>
+					</li>
+	  
+					<li class="dropdown {{activeIfRouteContains 'Outils'}}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{> LibIcone "iconeOutils"}} outils <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="{{activeIfRouteIs 'OutilsAnniversairesMain'}}"><a href="/outils/anniversairesMain">les anniversaires de la semaine</a></li>
+							<li class="{{activeIfRouteIs 'OutilsCalendrierRepublicain'}}"><a href="/outils/calendrierRepublicain">les calendriers (conversions)</a></li>
+							<li class="{{activeIfRouteIs 'OutilsFaitsMarquants'}}"><a href="/outils/faitsMarquants">ma famille dans l'histoire</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="{{activeIfRouteIs 'OutilsGestionDesNoms'}}"><a href="/outils/gestionDesNoms">gestion de l'orthographe des noms</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="{{activeIfRouteIs 'TagManagement'}}"><a href="/tag/management">gestion des étiquettes</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Préférences</li>
+							<li class="{{activeIfRouteIs 'PrefsChangerSosasRef'}}"><a href="/prefs/changerSosasRef">{{> LibIcone "iconePreferences"}} changer le sosa n°1</a></li>
+							<li class="{{activeIfRouteIs 'PrefsArbreDescCouleurs'}}"><a href="/prefs/arbreDescCouleurs">{{> LibIcone "iconePreferences"}} couleurs arbre descendant</a></li>
+						</ul>
+					</li>
+					{{/unless}}
+				{{/if}}
+				</ul>
+	
+				<ul class="nav navbar-nav navbar-right">
+					{{#if currentUser}}
+					{{#if gh_isAdmin}}
+					<li class="dropdown {{activeIfAdminMenu}}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{> LibIcone "iconeAdmin"}} admin <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="dropdown-header">Gestion utilisateurs</li>
+							<li class="{{activeIfRouteIs 'AdminUsers'}}"><a href="/admin/users">{{> LibIcone "iconeAdmin"}} gestion des utilisateurs</a></li>
+							<!-- si c'est une page de personne vivante, sans encore de login on peut créer un login directement -->
+							{{#if currentPageIsLivePersonWithoutAccount}}
+								{{#with currentPers}}
+									<li class="{{activeIfRouteIs 'AdminUsersCreate'}}">
+										<a href="/admin/usersCreate/{{_id}}">{{> LibIcone "iconeAdmin"}} créer un login pour {{nom}} {{> PersPrenomUsuel}}</a>
+									</li>
+								{{/with}}
+							{{/if}}
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Gestion serveur</li>
+							<li class="{{activeIfRouteIs 'AdminDump'}}"><a href="/admin/dump">{{> LibIcone "iconeAdmin"}} dump/restore MongoDB</a></li>
+							<li class="{{activeIfRouteIs 'AdminModifierUrlDoc'}}"><a href="/admin/modifierUrlDoc">{{> LibIcone "iconeAdmin"}}modifier la DIR des docs</a></li>
+							<li class="{{activeIfRouteIs 'AdminDataCheck'}}"><a href="/admin/dataCheck">{{> LibIcone "iconeAdmin"}} vérification des données et des liens</a></li>
+							<li class="{{activeIfRouteIs 'AdminSchemaCheck'}}"><a href="/admin/schemaCheck">{{> LibIcone "iconeAdmin"}} vérification des schémas</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Gestion des données</li>
+							<li class="{{activeIfRouteIs 'LieuListetout'}}"><a href="/lieu/listetout">{{> LibIcone "iconeLieu"}} liste des lieux</a></li>
+							<li class="{{activeIfRouteIs 'HistListetout'}}"><a href="/hist/listetout">{{> LibIcone "iconeHist"}} liste des pt d'histoires</a></li>
+							<li class="{{activeIfRouteIs 'DocListetout'}}"><a href="/doc/listetout">{{> LibIcone "iconeDoc"}} liste des documents</a></li>
+							<li class="{{activeIfRouteIs 'ProfListetout'}}"><a href="/prof/listetout">{{> LibIcone "iconeDoc"}} liste des professions</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Gestion des registres</li>
+							<li class="{{activeIfRouteIs 'RegistreListe'}}"><a href="/registre/listetout">{{> LibIcone "iconeRegistre"}} liste des registres</a></li>
+							<li class="{{activeIfRouteIs 'RegistreAjouter'}}"><a href="/registre/ajouter">{{> LibIcone "iconeRegistre"}} ajouter un registre</a></li>
+							<li class="{{activeIfRouteIs 'RegistreIndexer'}}"><a href="/registre/indexer">{{> LibIcone "iconeRegistre"}} indexer un registre</a></li>
+							<li class="{{activeIfRouteIs 'RegistreOrdonner'}}"><a href="/registre/ordonner">{{> LibIcone "iconeRegistre"}} ordonner les registres d'une commune</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Gestion des liens</li>
+							<li class="{{activeIfRouteIs 'LienListeTout'}}"><a href="/lien/listetout">{{> LibIcone "iconeLien"}} liste des liens</a></li>
+							<li class="{{activeIfRouteIs 'LienAjouter'}}"><a href="/lien/ajouter">{{> LibIcone "iconeLien"}} ajouter un lien</a></li>
+						</ul>
+					</li>
+					<li class="dropdown {{activeIfRouteContains 'AdminDocprog'}}">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">{{> LibIcone "iconeAdmin"}} pgm <span class="caret"></span></a>
+						<ul class="dropdown-menu" role="menu">
+							<li class="dropdown-header">Documentation</li>
+							<li class="{{activeIfRouteIs 'AdminDocprogSchemaMain'}}"><a href="/admin/docprog/schema/main">{{> LibIcone "iconeAdmin"}} doc - modèle de données</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogRoutage'}}"><a href="/admin/docprog/routage">{{> LibIcone "iconeAdmin"}} doc - routage client</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Templates</li>
+							<li class="{{activeIfRouteIs 'AdminDocprogTemplatesAuto'}}"><a href="/admin/docprog/templatesAuto/AdminDocprogTemplatesAuto">{{> LibIcone "iconeAdmin"}} templates - AUTO</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogTemplates'}}"><a href="/admin/docprog/templates">{{> LibIcone "iconeAdmin"}} templates - objets GEN et Lib</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogPopups'}}"><a href="/admin/docprog/popups">{{> LibIcone "iconeAdmin"}} templates - modal choisir objets GEN</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogPaginationListe'}}"><a href="/admin/docprog/paginationListe">{{> LibIcone "iconeAdmin"}} templates - pagination liste objets GEN</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogDecoupeDocImage'}}"><a href="/admin/docprog/decoupeDocImage">{{> LibIcone "iconeAdmin"}} templates - découpe image</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogSvgToPngDownload'}}"><a href="/admin/docprog/svgToPngDownload">{{> LibIcone "iconeAdmin"}} templates - SVG to PNG Download</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogTexteXml'}}"><a href="/admin/docprog/texteXml">{{> LibIcone "iconeAdmin"}} doc - texte XML</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogPointersCheck'}}"><a href="/admin/docprog/pointersCheck">{{> LibIcone "iconeAdmin"}} gestion des liens</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogCodage'}}"><a href="/admin/docprog/codage">{{> LibIcone "iconeAdmin"}} doc - codage autre</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogDates'}}"><a href="/admin/docprog/dates">{{> LibIcone "iconeAdmin"}} doc - objet Date <span class="bg-danger">cible</span></a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogCalRep'}}"><a href="/admin/docprog/calRep">{{> LibIcone "iconeAdmin"}} doc - objet CalendrierRepublicain</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogMetier'}}"><a href="/admin/docprog/metier">{{> LibIcone "iconeAdmin"}} doc - besoins métier</a></li>
+							<li class="{{activeIfRouteIs 'AdminDocprogInstall'}}"><a href="/admin/docprog/install">{{> LibIcone "iconeAdmin"}} doc - installation et exploitation</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="dropdown-header">Développement</li>
+							<li class="{{activeIfRouteIs 'AdminBugs'}}"><a href="/admin/bugs">gestion des bugs et évolutions</a></li>
+							
+						</ul>
+					</li>
+					{{/if}}
+					{{/if}}
+					
+					<li><p class="navbar-text">{{> loginButtons align="right"}}</p></li>
+					<li>
+						<p class="navbar-text">
+							{{#if (hlp_eq status "connected")}}
+								<i class="fa fa-feed" title="connecté"></i>
+							{{else}}
+								<span class="red"><i class="fa fa-spinner fa-pulse" title="connexion en cours"></i></span>
+							{{/if}}
+							{{#if gh_isAudioTranscriptCapable}}
+								{{#if gh_audioTranscriptIsOn}}
+									<span class="red" title="Reconnaissance vocale en cours">{{> LibIcone "audioTranscript"}}</span>
+								{{else}}
+									<span title="Reconnaissance vocale disponible">{{> LibIcone "audioTranscript"}}</span>
+								{{/if}}
+							{{else}}
+								<span title="Reconnaissance vocale non disponible">{{> LibIcone "stopAudioTranscript"}}</span>
+							{{/if}}
+						</p>
+					</li>
+				</ul>
+				
+			</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+	</nav>
+</template>

@@ -1,0 +1,60 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogTemplatesAutoContent    -->
+<!-- ===================================== -->
+<template name="AdminDocprogTemplatesAutoContent">
+	<!-- Doc du template courant = -->
+	<h4>{{label}}</h4>
+	{{> Template.dynamic template=contentTemplate}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogTemplatesAutoContent_DOCAUTO -->
+<!-- ===================================== -->
+<template name="AdminDocprogTemplatesAutoContent_DOCAUTO">
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+<!-- Contexte ============================= -->
+				<td>
+Aucun.
+				</td>
+				<!-- Paramètres ===== -->
+				<td>
+<table>
+	<tr>
+		<td><code>label</code></td>
+		<td><code>::String</code></td>
+	</tr>
+	<tr>
+		<td><code>contentTemplate</code></td>
+		<td><code>::String</code></td>
+	</tr>
+</table>
+				</td>
+<!-- Dépendances ========================== -->
+				<td>Aucune</td>
+<!-- Explication ========================== -->
+				<td>Appelé par le template <code>AdminDocprogTemplatesAuto</code>, affiche automatiquement la documentation disponible sur le template dont le nom est passé dans le paramètre <code>label</code>. Cette documentation est le template dont le nom est passé dans le paramètre <code>contentTemplate</code>.</td>
+<!-- Responsive =========================== -->
+				<td>Aucun formatage Bootstrap.</td>
+			</tr>
+		</tbody>
+	</table>
+	
+<h4>Améliorations</h4>
+<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->
+</div>
+</template>

@@ -1,0 +1,208 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE LienListeObjetsDedoublonnes  -->
+<!-- ===================================== -->
+<template name="LienListeObjetsDedoublonnes">
+	{{#with listeObjetsDedoublonneeOrdonnee}}
+		<h4>
+			{{> LibObjectIconByType type=../typeCible}}
+			{{hlp_count . }}
+			{{#if hlp_gt (hlp_count .) 1}}
+				{{objectPlural ../typeCible}}
+			{{else}}
+				{{objectSingular ../typeCible}}
+			{{/if}}
+		</h4>
+		{{> LibPaginateGenObjectsList list=. objectType=../typeCible nbElemPerPage=10 nbPagesMax=4}}
+	{{else}}
+		<h4>
+			{{> LibObjectIconByType type=typeCible}} 0 {{objectSingular typeCible}}
+		</h4>
+	{{/with}}
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LienListeObjetsDedoublonnes_DOCAUTO   -->
+<!-- ===================================== -->
+<template name="LienListeObjetsDedoublonnes_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>obj</code></td>
+		<td><code>::genObject</code></td>
+	</tr>
+	<tr>
+		<td><code>pointingObjects</code></td>
+		<td><code>::pointingObjects</code></td>
+	</tr>
+	<tr>
+		<td><code>type</code></td>
+		<td><code>::["PERS","LIEU","HIST","DOC"]</code></td>
+	</tr>
+	<tr>
+		<td><code>typeCible</code></td>
+		<td><code>::["PERS","LIEU","HIST","DOC"]</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibPaginateGenObjectsList</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+<p>Affiche les objets du type indiqué dans le paramètre <code>typeCible</code> liés à l'objet passé dans le paramêtre <code>obj</code> et de type indiqué dans la paramètre <code>type</code> présents dans la structure de données passée dans le paramètre <code>pointingObjects</code>.</p><p>Ce paramètre est hors du template pour des raisons d'optimisation (cas ou on appelle successivement ce template pour le même objet mais pour différents objet cible : une seule requête à la base est effectuée).</p><p>Il est renvoyé par la fonction globale <code>gf_getPointingObjects(obj::genObject, type::["PERS","LIEU","HIST","DOC"])</code> ou par le helper global <code>gh_getPointingObjects obj::genObject type::["PERS","LIEU","HIST","DOC"]</code> (cf doc <a href="/admin/docprog/pointersCheck">gestion des liens</a>). Cet affichage est formaté par le template de pagination <code>LibPaginateGenObjectsList</code>.</p>
+<p>Les objets sont triés :</p>
+<ul>
+	<li>par date de naissance croissante pour les objets de type <code>::PERS</code></li>
+	<li>par ordre alphabétique pour les objets de type <code>::LIEU</code></li>
+	<li>par type (ordre special (cf code JS) : vidéos, carte postale, photos...) puis par date croissante pour les objets de type <code>::HIST</code></li>
+	<li>par date croissante pour les objets de type <code>::DOC</code></li>
+</ul>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une <code>div</code> de classe <code>container</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|#with souvenirBanquet}}
+	{{|#with gh_getPointingObjects . "DOC"}}
+		{{|> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="DOC" typeCible="HIST"}}
+	{{|/with}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{#with souvenirBanquet}}
+	{{#with gh_getPointingObjects . "DOC"}}
+		{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="DOC" typeCible="HIST"}}
+	{{/with}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|#with souvenirBanquet}}
+	{{|#with gh_getPointingObjects . "DOC"}}
+		{{|> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="DOC" typeCible="DOC"}}
+	{{|/with}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{#with souvenirBanquet}}
+	{{#with gh_getPointingObjects . "DOC"}}
+		{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="DOC" typeCible="DOC"}}
+	{{/with}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|#with souvenirBanquet}}
+	{{|#with gh_getPointingObjects . "DOC"}}
+		{{|> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="DOC" typeCible="PERS"}}
+	{{|/with}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{#with souvenirBanquet}}
+	{{#with gh_getPointingObjects . "DOC"}}
+		{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="DOC" typeCible="PERS"}}
+	{{/with}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+		</tbody>
+	</table>
+	
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->
+	</div>
+</template>
+
+
+
+
+

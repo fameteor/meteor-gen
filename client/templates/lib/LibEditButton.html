@@ -1,0 +1,153 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibEditButton                -->
+<!-- Parameters :                          -->
+<!-- action::{"INSERT"/"UPDATE"/"DELETE"}  -->
+<!-- accessRightCheckObj::GenObject        -->
+<!-- modalTemplate::String                 -->
+<!-- title::String                         -->
+<!-- Et tout autre paramètre qui sera transmis à la fenêtre modale -->
+<!-- ===================================== -->
+<template name="LibEditButton">
+	{{#with accessRightCheckObj}}
+		{{#if gh_isAdminOrOwner}}
+			{{#with ..}}
+				{{#if hlp_eq action "INSERT"}}
+					<span class="LibEditButton_insert" aria-hidden="true">{{> LibButton action="INSERT" title=title}}</span>
+				{{/if}}
+				{{#if hlp_eq action "UPDATE"}}
+					<span class="LibEditButton_update" aria-hidden="true">{{> LibButton action="UPDATE" title=title}}</span>
+				{{/if}}
+				{{#if hlp_eq action "DELETE"}}
+					<span class="LibEditButton_delete" aria-hidden="true">{{> LibButton action="DELETE" title=title}}</span>
+				{{/if}}
+			{{/with}}
+		{{/if}}
+	{{/with}}
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibEditButton_DOCAUTO                 -->
+<!-- ===================================== -->
+<template name="LibEditButton_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>action::{"INSERT"/"UPDATE"/"DELETE"}</code></td>
+			<td>Type de bouton souhaité.</td>
+		</tr>
+		<tr>
+			<td><code>modalTemplate::String</code></td>
+			<td>Nom du template modal à afficher.</td>
+		</tr>
+		<tr>
+			<td><code>accessRightCheckObj::GenObject</code></td>
+			<td>Objet sur lequel on vérifie les droits de l'utilisateur.</td>
+		</tr>
+		<tr>
+			<td><code>title::String</code></td>
+			<td>Texte à afficher au survol du bouton par la souris.</td>
+		</tr>
+		<tr>
+			<td><code>...</code></td>
+			<td>Tout autre paramètre qui sera transmis à la fenêtre modale à l'ouverture.</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibButton</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Si l'utilisateur a les droits sur l'objet passé dans le paramètre <code>accessRightCheckObj</code>, ce template affiche un bouton d'édition d'objet GEN (en mode  <code>INSERT</code>, <code>UPDATE</code> ou <code>DELETE</code> selon le paramètre <code>action</code>.). Si l'utilisateur n'a pas les droits sur l'objet, rien n'est affiché. Au survol du bouton par la souris, le texte contenu dans le paramètre <code>title</code> s'affiche. Si l'utilisateur appuie sur le bouton, la popup modale dont le nom a été passée dans le paramètre <code>modalTemplate</code> s'ouvre et reçoit l'ensemble des paramètres reçus par ce template.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans un <code>span</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with benjaminARTUS}}
+	{{|&gt;LibEditButton 
+		action="UPDATE" 
+		accessRightCheckObj=. 
+		modalTemplate="PersFormBirthEditModal" 
+		title="Modifier les informations de naissance" 
+		pers=.
+	}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with benjaminARTUS}}{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="PersFormBirthEditModal" title="Modifier les informations de naissance" pers=.}}{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

@@ -1,0 +1,27 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuListeFormatCourt         -->
+<!-- ===================================== -->
+<template name="LieuListeFormatCourt">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Lieu</th>
+				<th>Fait partie de</th>
+				{{#if gh_isAdmin}}<th class="center">IDs</th>{{/if}}
+				<th class="center">Modifier</th>
+				<th class="center">Supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each .}}
+			<tr>
+				<td>{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}}</td>
+				<td>{{#with gh_lieuById inclusDans}}{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}}{{/with}}</td>
+				{{#if gh_isAdmin}}<td class="center">{{> LibClipId}}<br/><small>{{id}}</small></td>{{/if}}
+				<td class="center">{{> LieuBoutonModifier}}</td>
+				<td class="center">{{> LieuBoutonSupprimer}}</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+</template>

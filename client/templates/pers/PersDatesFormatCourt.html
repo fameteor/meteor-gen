@@ -1,0 +1,6 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersDatesFormatCourt         -->
+<!-- ===================================== -->
+<template name="PersDatesFormatCourt">
+	(<span class="{{gh_classIncertainForNaissance}}">{{#with naissance.date}}{{> DateformatCourt}}{{else}}?{{/with}}</span>{{#if estVivant}}){{else}}-<span class="{{gh_classIncertainForDeces}}">{{#with deces.date}}{{> DateformatCourt}}{{else}}?{{/with}})</span>{{/if}}
+</template>

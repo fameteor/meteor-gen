@@ -1,0 +1,20 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreModifier             -->
+<!-- ===================================== -->
+<template name="RegistreModifier">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>Modifier registre
+					{{contenu}}
+					{{periode}}
+					{{#with gh_lieuById commune}}{{> LieuNomLienDe}}{{/with}}
+					<small>({{id}} - {{_id}})</small></h2>
+			</div>
+		</div>
+		{{#autoForm collection="Registres" doc=this id="updateRegistreForm" type="update"}}
+			{{> RegistreFormulaire}}
+			<button type="submit" class="btn btn-primary">Modifier</button>
+		{{/autoForm}}
+	</div>
+</template>

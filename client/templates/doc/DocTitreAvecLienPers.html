@@ -1,0 +1,31 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocTitreAvecLienPers         -->
+<!-- Contexte ::DOC                        -->
+<!-- ===================================== -->
+<template name="DocTitreAvecLienPers">
+	{{# if titre}}
+		{{titre}}
+	{{else}}
+		{{#if (hlp_eq type "ACTE")}}
+			{{#if acteIsCoupleEvent}}
+				{{#with gh_coupleEventsByDocId _id}}
+					Acte de 
+					{{#each .}}
+						{{> CoupleEventTitle coupleEvent=.}}{{#unless (hlp_last .. .)}}, {{/unless}}
+					{{/each}}
+				{{else}}
+					- NOUVEAU - {{getActeTypeFormate .}} 
+				{{/with}}
+			{{else}}
+				{{#with personnesConcernees}}
+					{{getActeTypeFormate ..}} de
+					{{#each .}}
+						{{> PersCompletAvecLien}}{{#unless (hlp_last .. .)}}, {{/unless}}
+					{{/each}}
+				{{else}}
+					- NOUVEAU - {{getActeTypeFormate .}} 
+				{{/with}}
+			{{/if}}
+		{{/if}}
+	{{/if}}
+</template>

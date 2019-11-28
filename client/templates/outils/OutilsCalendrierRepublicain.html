@@ -1,0 +1,267 @@
+<!-- ===================================== -->
+<!-- TEMPLATE OutilsCalendrierRepublicain  -->
+<!-- ===================================== -->
+<template name="OutilsCalendrierRepublicain">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Conversions</h2>
+			</div>
+		</div>
+		<div class="row surligne">
+			<div class="hidden-xs">
+				<div class="col-sm-5 text-center">
+					<h3>Calendrier  républicain</h3>
+				</div>
+				<div class="col-sm-2 text-center">
+				</div>
+				<div class="col-sm-5 text-center">
+					<h3>Calendrier grégorien</h3>
+				</div>
+			</div>
+			<div>
+				<form class="form-horizontal">
+					<div class="col-sm-5 text-center">
+						<h3 class="hidden-sm hidden-md hidden-lg hidden-xl hidden-xxl">Calendrier  républicain</h3>
+						<div class="form-group">
+							<div>
+								<select class="form-control" id="choix_jourRep">
+									<option value="" selected>- choisir un jour :</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">1er jour complémentaire (jour de la Vertu)</option>
+									<option value="32">2ième jour complémentaire (jour du Génie)</option>
+									<option value="33">3ième jour complémentaire (jour du Travail)</option>
+									<option value="34">4ième jour complémentaire (jour de l'Opinion)</option>
+									<option value="35">5ième jour complémentaire (jour des Récompenses)</option>
+									<option value="36">6ième jour complémentaire (jour de la Révolution)</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<select class="form-control" id="choix_moisRep">
+									<option value="" selected>- choisir un mois :</option>
+									<option value="1">Vendémiaire</option>
+									<option value="2">Brumaire</option>
+									<option value="3">Frimaire</option>
+									<option value="4">Nivôse</option>
+									<option value="5">Pluviôse</option>
+									<option value="6">Ventôse</option>
+									<option value="7">Germinal</option>
+									<option value="8">Floréal</option>
+									<option value="9">Prairial</option>
+									<option value="10">Messidor</option>
+									<option value="11">Thermidor</option>
+									<option value="12">Fructidor</option>
+									<option value="12">jours complémentaires ou Sans-culottides</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+								<div>
+								<select class="form-control" id="choix_anneeRep">
+									<option value="Années" selected>- choisir une année :</option>
+									<option value="1">An I</option>
+									<option value="2">An II</option>
+									<option value="3">An III</option>
+									<option value="4">An IV</option>
+									<option value="5">An V</option>
+									<option value="6">An VI</option>
+									<option value="7">An VII</option>
+									<option value="8">An VIII</option>
+									<option value="9">An IX</option>
+									<option value="10">An X</option>
+									<option value="11">An XI</option>
+									<option value="12">An XII</option>
+									<option value="13">An XIII</option>
+									<option value="14">An XIV</option>
+								</select>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-2 text-center" style="padding-top:25px;">
+						<div class="form-group">
+							<button id="bouton_repToGreg" class="btn btn-primary">convertir -&gt;</button>
+						</div>
+						<div class="form-group">
+							<button id="bouton_gregToRep" class="btn btn-primary">&lt;- convertir</button>
+						</div>
+					</div>
+					<div class="col-sm-5 text-center">
+						<h3 class="hidden-sm hidden-md hidden-lg hidden-xl hidden-xxl">Calendrier grégorien</h3>
+						<div class="form-group">
+							<div>
+								<select class="form-control" id="choix_jourGreg">
+									<option value="" selected>- choisir un jour :</option>
+									<option value="1">1</option>
+									<option value="2">2</option>
+									<option value="3">3</option>
+									<option value="4">4</option>
+									<option value="5">5</option>
+									<option value="6">6</option>
+									<option value="7">7</option>
+									<option value="8">8</option>
+									<option value="9">9</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+									<option value="13">13</option>
+									<option value="14">14</option>
+									<option value="15">15</option>
+									<option value="16">16</option>
+									<option value="17">17</option>
+									<option value="18">18</option>
+									<option value="19">19</option>
+									<option value="20">20</option>
+									<option value="21">21</option>
+									<option value="22">22</option>
+									<option value="23">23</option>
+									<option value="24">24</option>
+									<option value="25">25</option>
+									<option value="26">26</option>
+									<option value="27">27</option>
+									<option value="28">28</option>
+									<option value="29">29</option>
+									<option value="30">30</option>
+									<option value="31">31</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+							<div>
+								<select class="form-control" id="choix_moisGreg">
+									<option value="" selected>- choisir un mois :</option>
+									<option value="1">Janvier</option>
+									<option value="2">Février</option>
+									<option value="3">Mars</option>
+									<option value="4">Avril</option>
+									<option value="5">Mai</option>
+									<option value="6">Juin</option>
+									<option value="7">Juillet</option>
+									<option value="8">Août</option>
+									<option value="9">Septembre</option>
+									<option value="10">Octobre</option>
+									<option value="11">Novembre</option>
+									<option value="12">Décembre</option>
+								</select>
+							</div>
+						</div>
+						<div class="form-group">
+								<div>
+								<select class="form-control" id="choix_anneeGreg">
+									<option value="Années" selected>- choisir une année :</option>
+									<option value="1792">1792</option>
+									<option value="1793">1793</option>
+									<option value="1794">1794</option>
+									<option value="1795">1795</option>
+									<option value="1796">1796</option>
+									<option value="1797">1797</option>
+									<option value="1798">1798</option>
+									<option value="1799">1799</option>
+									<option value="1800">1800</option>
+									<option value="1801">1801</option>
+									<option value="1802">1802</option>
+									<option value="1803">1803</option>
+									<option value="1804">1804</option>
+									<option value="1805">1805</option>
+								</select>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<h2>Les calendriers</h2>
+				<h3>Calendrier julien <small>(Cf. <a href="https://fr.wikipedia.org/wiki/Calendrier_julien" target="_blank">Wikipédia</a>)</small></h3>
+				<p>Le calendrier julien fut introduite à l'initiative de Jules César en 46 av. J.-C. (708 depuis la fondation de la Ville (Rome), ab Urbe condita, AUC) et entra en application en 45 av. J.-C. (709 AUC). Elle fut établie après consultation de l'astronome Sosigène d'Alexandrie et probablement conçue pour approcher l'année tropique, déterminée depuis au moins Hipparque.</p>
+				<h3>Calendrier grégorien <small>(Cf. <a href="https://fr.wikipedia.org/wiki/Calendrier_gr%C3%A9gorien" target="_blank">Wikipédia</a>)</small></h3>
+				<p>Le calendrier grégorien a été conçu par le pape Grégoire XIII pour corriger la dérive séculaire du calendrier julien alors en usage. La différence majeure réside dans la détermination plus précise des années bissextiles et la correction de la dérive accumulée en supprimant 10 jours du calendrier afin de retrouver la concordance entre l'équinoxe de printemps et le 21 mars calendaire.</p>
+				<p>Le pape Grégoire XIII décida que le jeudi 4 octobre 1582 (julien) serait immédiatement suivi par le vendredi 15 octobre (grégorien). En France, Henri III l'adopta le 9 décembre 1582  (julien), dont le lendemain fut le 20 décembre 1582  (grégorien).</p>
+				<h3>Calendrier révolutionnaire <small>(Cf. <a href="https://fr.wikipedia.org/wiki/Calendrier_r%C3%A9publicain" target="_blank">Wikipédia</a>)</small></h3>
+				<p>Le calendrier républicain, ou calendrier révolutionnaire français, fut créé pendant la Révolution française, et fut utilisé de 1792 à 1806, ainsi que brièvement durant la Commune de Paris. Il entre en vigueur le 15 vendémiaire an II (6 octobre 1793), mais débute le 1er vendémiaire an I (22 septembre 1792), jour de proclamation de la République, déclaré premier jour de l'« ère des Français ».
+</p>
+				<p>L'année du calendrier républicain était découpée en douze mois de trente jours chacun (soit 360 jours), plus cinq ou six jours (pour les années sextiles : An III, An VII et An XI) ajoutés en fin d'année pour qu'elle reste alignée avec l'année tropique (environ 365,24 jours).</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				<h4>Les mois</h4>
+				<p>Mois d'automne (terminaison en -aire)</p>
+				<ul>
+					<li><strong>Vendémiaire</strong> (22 septembre ~ 21 octobre) - Période des vendanges</li>
+					<li><strong>Brumaire</strong> (22 octobre ~ 20 novembre) - Période des brumes et des brouillards</li>
+					<li><strong>Frimaire</strong> (21 novembre ~ 20 décembre) - Période des froids (frimas)</li>
+				</ul>
+				<p>Mois d'hiver (terminaison en -ose à l'origine, abusivement orthographiée ôse par la suite)</p>
+				<ul>
+					<li><strong>Nivôse</strong> (21 décembre ~ 19 janvier) - Période de la neige</li>
+					<li><strong>Pluviôse</strong> (20 janvier ~ 18 février) - Période des pluies</li>
+					<li><strong>Ventôse</strong> (19 février ~ 20 mars) - Période des vents</li>
+				</ul>
+				<p>Mois du printemps (terminaison en -al)</p>
+				<ul>
+					<li><strong>Germinal</strong> (21 mars ~ 19 avril) - Période de la germination</li>
+					<li><strong>Floréal</strong> (20 avril ~ 19 mai) - Période de l'épanouissement des fleurs</li>
+					<li><strong>Prairial</strong> (20 mai ~ 18 juin) - Période des récoltes des prairies</li>
+				</ul>
+				<p>Mois d'été (terminaison en -idor)</p>
+				<ul>
+					<li><strong>Messidor</strong> (19 juin ~ 18 juillet) - Période des moissons</li>
+					<li><strong>Thermidor</strong> (19 juillet ~ 17 août) - Période des chaleurs</li>
+					<li><strong>Fructidor</strong> (18 août ~ 16 septembre) - Période des fruits</li>
+				</ul>
+			</div>
+
+			<div class="col-sm-6">
+				<h4>Les six jours de fin d'année : les sans-culottides</h4>
+				<p>Les six jours supplémentaires de fin d'année, parfois appelés sans-culottides ou sanculottides :</p>
+				<ul>
+					<li>jour de la vertu (17 septembre)</li>
+					<li>jour du génie (18 septembre)</li>
+					<li>jour du travail (19 septembre)</li>
+					<li>jour de l'opinion (20 septembre)</li>
+					<li>jour des récompenses (21 septembre)</li>
+					<li>jour de la révolution (seulement les années sextiles (An III, An VII et An XI) (22 septembre)</li>
+				</ul>
+				<h4>Les décades</h4>
+				<p>Chaque mois est divisé en trois décades (semaines de 10 jours), et chacun des jours porte chronologiquement les noms suivants : Primidi, Duodi, Tridi, Quartidi, Quintidi, Sextidi, Septidi, Octidi, Nonidi et Décadi.</p>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				<p>Le 22 fructidor an XIII (9 septembre 1805), Napoléon signa le sénatus-consulte qui abrogea le calendrier républicain et instaura le retour au calendrier grégorien à partir du 1er janvier 1806.</p>
+			</div>
+		</div>
+	</div>
+</template>

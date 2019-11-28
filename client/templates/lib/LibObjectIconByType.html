@@ -1,0 +1,162 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibObjectIconByType          -->
+<!-- ===================================== -->
+<template name="LibObjectIconByType">{{> Template.dynamic template="LibIcone" data=iconName}}</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibObjectIconByType_DOCAUTO           -->
+<!-- ===================================== -->
+<template name="LibObjectIconByType_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>type</code></td>
+		<td><code>::["PERS","LIEU","HIST","DOC"]</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche l'icone de l'objet dont le type a été passé dans le paramètre <code>type</code>. Si le type n'est pas correct, une erreur est enregistrée et rien n'est affiché.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+N/A.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|> LibObjectIconByType type="PERS"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{> LibObjectIconByType type="PERS"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->
+
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|> LibObjectIconByType type="LIEU"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{> LibObjectIconByType type="LIEU"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|> LibObjectIconByType type="HIST"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{> LibObjectIconByType type="HIST"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|> LibObjectIconByType type="DOC"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{> LibObjectIconByType type="DOC"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+		</tbody>
+	</table>
+	
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->
+	</div>
+</template>

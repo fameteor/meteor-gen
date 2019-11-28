@@ -1,0 +1,53 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienFormulaire pour Ajouter ou Modifier               -->
+<!-- ===================================== -->
+<template name="LienFormulaire">
+	<fieldset>
+		<div class="row formEnTete">
+			<div class="col-sm-6">
+				{{> afQuickField name='pour' autocomplete='off'}}
+			</div>
+			<div class="col-sm-6">
+				{{> afQuickField name='vers' autocomplete='off'}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				{{> afQuickField name='zone' autocomplete='off'}}
+			</div>
+			<div class="col-sm-6">
+				{{#if afFieldValueIs name="zone" value="CIRCLE"}}
+					{{> afQuickField name='CIRCLE_page' autocomplete='off'}}
+					{{> afQuickField name='CIRCLE_centreX' autocomplete='off'}}
+					{{> afQuickField name='CIRCLE_centreY' autocomplete='off'}}
+					{{> afQuickField name='CIRCLE_rayon' autocomplete='off'}}
+				{{/if}}
+				{{#if afFieldValueIs name="zone" value="RECT"}}
+					{{> afQuickField name='RECT_page' autocomplete='off'}}
+					{{> afQuickField name='RECT_x' autocomplete='off'}}
+					{{> afQuickField name='RECT_y' autocomplete='off'}}
+					{{> afQuickField name='RECT_width' autocomplete='off'}}
+					{{> afQuickField name='RECT_height' autocomplete='off'}}	
+				{{/if}}
+				{{#if afFieldValueIs name="zone" value="POINT"}}
+					{{> afQuickField name='POINT_x' autocomplete='off'}}
+					{{> afQuickField name='POINT_y' autocomplete='off'}}
+					{{> afQuickField name='POINT_px' autocomplete='off'}}
+					{{> afQuickField name='POINT_py' autocomplete='off'}}	
+				{{/if}}
+				{{#if afFieldValueIs name="zone" value="PDF"}}
+					{{> afQuickField name='PDF_page' autocomplete='off'}}
+				{{/if}}
+				{{#if afFieldValueIs name="zone" value="RECORDING"}}
+					{{> afQuickField name='RECORDING_startTS' autocomplete='off'}}
+					{{> afQuickField name='RECORDING_endTS' autocomplete='off'}}
+				{{/if}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-12">
+				{{> afQuickField name='comment' rows=6 autocomplete='off'}}
+			</div>
+		</div>
+	</fieldset>
+</template>

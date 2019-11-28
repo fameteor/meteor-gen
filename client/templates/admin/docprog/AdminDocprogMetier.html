@@ -1,0 +1,82 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogMetier                                          -->
+<!-- Contexte : aucun		      					           -->
+<!-- ===================================== -->
+<template name="AdminDocprogMetier">
+	<div class="container">
+		<h2>Besoins métier</h2>
+		<ul>
+			<li><a href="#vocabulaire">1) Vocabulaire</a></li>
+			<li><a href="#organisation">2) Liens/zones</a></li>
+			<li><a href="#liens">3) Liens/zones</a></li>
+			<li><a href="#groupes">4) Groupes</a></li>
+		</ul>
+		
+		
+		<!-- ============================== -->
+		<h3><a id="ergonomie"></a>1) Ergonomie</h3>
+		Points à améliorer :
+		<ul>
+			<li>Dans les titres des actes, prévoir un autre template <code>DocTitreAvecLiensPers</code> pour pouvoir cliquer sur les personnes.</li>
+			<li>Quand on est sur une fiche info d'une personne d'une fratrie, cette personne n'est plus développable. La mettre développable si ca reste clair quand même.</li>
+			<li>Popups de saisie, bouton d'effacement du champ : faut-il le mettre à côté du champ plustot que sur la popup ? Dans le cas popup, si on efface une commune, on ne peux plus effacer le lieu dit !</li>
+		</ul>
+		
+		<!-- ============================== -->
+		<h3><a id="vocabulaire"></a>1) Vocabulaire</h3>
+		<img class="img-responsive" src="/liens.png"/>
+		
+		<!-- ============================== -->
+		<h3><a id="organisation"></a>2) Organisation des liens</h3>
+		<ul>
+			<li><strong>Lien</strong> ou <strong>Zone</strong> : un lien concerne l'ensemble du document, une zone est un lien sur une partie spacio-temporelle d'un document. 
+			</li>
+		</ul>
+		
+		<!-- ============================== -->
+		<h3><a id="liens"></a>3) Liens/zones</h3>
+		Selon le codage du documents, les liens/zones peuvent être entrants (ex: afficher le doc avec en surligné l'élément cible), ou sortants (ex : quand on clique sur une partie d'un doc, on affiche les infos sur la personne concernée).<br/>
+		Un lien/zone a les attributs suivants :
+		<ul>
+			<li>l'objet pour lequel ces liens sont définis et le type de cet objet.</li>
+			<li>l'objet cible du liens et le type de ce objet.</li>
+			<li>le type de lien (par exemple pour un acte lié à une personne : le rôle de cette personne dans l'acte : fonction des types des deux objets : source et cible.</li>
+			<li>le commentaire sur le lien</li>
+			<li>le type de zone (selon codage) ou TOUT (pour un simple lien).</li>
+			<li>selon le type de zone : les propriétés spacio-temporelle de la zone</li>
+		</ul>
+		
+		On a une collection des <code>Liens</code> qui contient des objets liens :
+<pre>{
+	pourObj ::ID
+	pourType :: "PERS", "LIEU", "HIST", "DOC"
+	versObj ::ID
+	versType :: "PERS", "LIEU", "HIST", "DOC"
+	comment ::String
+	type :: //????????????? à définir ????????????????????
+	zone :: 	"TOUT" 					: tout codage
+			"CERCLE", "RECT", "POLY" 	: codage IMAGE
+			"EXTRAIT"		 	: codage VIDEO
+			"PDF"		 		: codage PDF
+	// Attributs selon codage (aucun attribut pour "TOUT")
+	CERCLE_centreX
+	CERCLE_centreY
+	CERCLE_rayon
+	EXTRAIT_tsDebut
+	EXTRAIT_tsFin
+	PDF_page
+	
+	createdBy
+	createdAt
+	lastUpdateAt
+}</pre>
+		
+		
+		
+		<!-- ============================== -->
+		<h3><a id="groupes"></a>4) Groupes de documents</h3>
+		Un groupe contient un ensemble de documents qui ont tous des liens vers les mêmes objets (ensemble cohérent : ex: correspondance de A avec B, album photo de A ...). Quand on recherche les documents liés à un de ces objets, seul le groupe apparait et non chaque document séparément. Les documents peuvent en plus avoir,, séparément,  d'autres liens vers d'autres objets. Dans ce cas, ils s'affichent séparéments pour ces objets.
+		
+	</div>
+</template>
+

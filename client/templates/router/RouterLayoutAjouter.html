@@ -1,0 +1,19 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RouterLayoutAjouter          -->
+<!-- Contexte : aucun          			   -->
+<!-- ===================================== -->
+<template name="RouterLayoutAjouter">
+	<header>
+		{{> RouterNav}}
+	</header>
+	<article class="navBarRemainingHeight">
+		 <div class="container-fluid scrollable">
+			<div class="row">
+				<div class="col-sm-12">
+					<h2>{{> yield "icone"}} Ajouter</h2>
+				</div>
+			</div>
+			{{> yield}}
+		</div>
+	</article>
+</template>

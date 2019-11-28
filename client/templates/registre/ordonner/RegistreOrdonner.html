@@ -1,0 +1,55 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreOrdonner             -->
+<!-- ===================================== -->
+<template name="RegistreOrdonner">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-12" >
+				<!-- CHOIX commune ======= -->
+				<h4>Choisir une commune</h4>
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="hidden" id="commune" name="commune" value="{{communeChoisie_registreIndexer}}"/>
+						<input class="form-control intitule" id="commune_intitule" name="commune_intitule" type="text" value="{{commune_intitule}}" placeholder="commune">
+					</div>
+				</form>
+				{{#if communeChoisie_registreIndexer}}
+					<!-- Liste des registres == -->
+					{{#with listeRegistres}}
+					<h4>Liste des {{hlp_count .}} registres</h4>
+						<table class="table indexerRegistre">
+							<tbody>
+								{{#each .}}
+									<tr class="dragElement {{selected}}">
+										<td>{{> LibIcone "iconeRegistre"}}</td>
+										<td>{{type}}</td>
+										<td>{{contenu}}</td>
+										<td>{{periode}}</td>
+										<td>{{> RegistreBoutonModifier}}</td>
+										<td>{{> RegistreBoutonSupprimer}}</td>
+										<td><span class="badge">{{ordreParCommune}}</span></td>
+										{{#if hlp_eq registreChoisi_registreIndexer _id}}
+										<td>
+											<form class="form-inline">
+											  <div class="form-group">
+												<input type="text" class="form-control" id="nouvelOrdre" value="{{ordreParCommune}}" placeholder="nouvel ordre">
+											  </div>
+											  <button type="submit" class="btn btn-primary">Modifier</button>
+											  <button type="button" class="btn btn-primary minus_1">-1</button>
+											  <button type="button" class="btn btn-primary plus_1">+1</button>
+											</form>
+										</td>
+										{{else}}
+										<td>&nbsp;</td>
+										{{/if}}
+									</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					{{/with}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</template>
+	

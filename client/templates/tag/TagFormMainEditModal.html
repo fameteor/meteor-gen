@@ -1,0 +1,92 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE TagFormMainEditModal         -->
+<!-- ===================================== -->
+<template name="TagFormMainEditModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ========== -->
+					{{#if hlp_eq action "INSERT"}}
+						<div class="modal-header modal-insert">
+							{{> LibIcone "iconeAdmin"}} Ajout d'un tag
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "UPDATE"}}
+						<div class="modal-header modal-update">
+							{{> LibIcone "iconeAdmin"}} Modification d'un tag
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "DELETE"}}
+						<div class="modal-header modal-delete">
+							{{> LibIcone "iconeAdmin"}} Suppression d'un tag
+						</div>
+					{{/if}}
+					<!-- BODY ======== -->
+					<div class="modal-body row">
+						<div class="col-sm-12">
+							{{#if hlp_eq action "INSERT"}}
+								{{#autoForm collection="Tags" id="addTagFormMain" type="insert"}}
+									{{> TagFormMain}}
+									<br/>
+									<div class="row">
+										<div class="col-sm-12 text-center">
+											<button type="submit" class="btn btn-primary">Ajouter</button>
+											<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+										</div>
+									</div>
+								{{/autoForm}}
+							{{/if}}
+							{{#if hlp_eq action "UPDATE"}}
+								{{#with tag}}
+									{{#autoForm collection="Tags" doc=. id="updateTagFormMain" type="update"}}
+										{{> TagFormMainModify}}
+										<br/>
+										<div class="row">
+											<div class="col-sm-12 text-center">
+												<button type="submit" class="btn btn-warning">Modifier</button>
+												<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+											</div>
+										</div>
+									{{/autoForm}}
+								{{/with}}
+							{{/if}}
+							{{#if hlp_eq action "DELETE"}}
+								{{#with tag}}
+									{{#with (gh_getPointingObjects . "TAG")}}
+										{{#if gh_thereIsNoPointingObject .}}
+											<!-- BODY ======== -->
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 class="text-danger">{{> LibIcone "warning"}} Le tag {{> TagAvecLien tag=..}} va être supprimé (aucun objet ne l'utilise), êtes-vous sûr de vouloir continuer ?</h4>
+												</div>
+											</div>
+											<br/>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button id="supprimer" type="button" class="btn btn-danger" data-dismiss="modal">Supprimer</button>
+													<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+												</div>
+											</div>
+										{{else}}
+											<!-- BODY ======== -->
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 class="text-danger">{{> LibIcone "warning"}} Le tag {{> TagAvecLien tag=..}} ne peut pas être supprimé, il faut d'abord supprimer les objets suivants qui utilisent ce tag :</h4>
+													{{> LibDisplayPointingObjectList list=.}}
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+												</div>
+											</div>
+										{{/if}}
+									{{/with}}
+								{{/with}}
+							{{/if}}
+						</div>
+					</div>
+			</div>
+		</div>
+    </div>
+</template>

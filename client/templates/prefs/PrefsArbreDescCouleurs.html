@@ -1,0 +1,68 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PrefsArbreDescCouleurs                                     -->
+<!-- Contexte : aucun          					           -->
+<!-- ===================================== -->
+<template name="PrefsArbreDescCouleurs">
+	<div class="container">
+		<h2 class="modifier">{{> LibIcone "iconePreferences"}} Modifier les préférences</h2>
+		<h3>Couleurs de fond par génération pour les arbres descendants développables</h3>
+		<br/>
+		{{# each listeDesCouleurs}}
+		<div class="row">
+			<div class="col-sm-2">
+				<h4>Génération {{generation}}</h4>
+			</div>
+			<div class="col-sm-4">
+				<center>
+					<div style="width:100px;height:30px;background-color:{{couleur}};border:2px solid #dddddd;"></div>
+				</center>
+			</div>
+			<div class="col-sm-4 text-center">
+				<form class="form-inline">
+					<div class="form-group">
+						<input id="{{index}}" type="text" class="form-control couleur" placeholder="Ex : #A2CF23" value="{{couleur}}">
+					</div>
+					<button type="button" class="btn btn-warning boutonModifier" title="Modifier cette couleur">
+						{{> LibIcone "iconeModifier"}}
+					</button>
+				</form>
+			</div>
+			<div class="col-sm-2">
+				<button type="button" class="btn btn-danger boutonSupprimer" title="Supprimer cette couleur">
+					{{> LibIcone "iconeSupprimer"}}
+				</button>
+			</div>
+		</div>
+		{{/each}}
+		<div class="row">
+			<div class="col-sm-6">
+			</div>
+			<div class="col-sm-4 text-center">
+				<br/>
+				<button type="button" class="btn btn-primary boutonDefault" title="Remettre les valeurs par défaut">
+					Remettre les valeurs par défaut
+				</button>	
+			</div>
+			<div class="col-sm-2">
+			</div>
+		</div>
+		<hr/>
+		<div class="row">
+			<div class="col-sm-6">
+			<h4>Ajouter une nouvelle couleur</h4>
+			</div>
+			<div class="col-sm-4 text-center">
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="text" class="form-control" id="nouvelleCouleur" placeholder="Ex : #A2CF23">
+					</div>
+					<button type="button" class="btn btn-warning boutonAjouter" title="Ajouter une couleur">
+						<span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+					</button>
+				</form>
+			</div>
+			<div class="col-sm-2">
+			</div>
+		</div>
+	</div>
+</template>

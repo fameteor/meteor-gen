@@ -1,0 +1,479 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck               -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2>{{> LibIcone "iconeAdmin"}} Vérification des données et des pointeurs</h2>
+				
+				<h3>{{> LibIcone "iconePers"}} Collection PERS</h3>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Vérification selon SCHEMA</td>
+							<td class="checkNotDone text-center">A faire</td>
+						</tr>
+						{{#with persCheck}}
+							<!-- Pointeurs PERS -->
+							<tr class="bigBorderTop">
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconePers"}} <code>pere</code> pointant vers PERS inexistante</td>
+								{{#with pere}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconePers"}} <code>mere</code> pointant vers PERS inexistante</td>
+								{{#with mere}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							
+							<!-- Pointeurs LIEU -->
+							<tr class="bigBorderTop">
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeLieu"}} <code>naissance.commune</code> pointant vers LIEU inexistant</td>
+								{{#with naissanceCommune}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeLieu"}}<code>naissance.lieudit</code> pointant vers LIEU inexistant</td>
+								{{#with naissanceLieudit}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeLieu"}}<code>mariage.$.commune</code> pointant vers LIEU inexistant</td>
+								{{#with mariageCommune}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeLieu"}}<code>mariage.$.lieudit</code> pointant vers LIEU inexistant</td>
+								{{#with mariageLieudit}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeLieu"}}<code>deces.commune</code> pointant vers LIEU inexistant</td>
+								{{#with decesCommune}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeLieu"}}<code>deces.lieudit</code> pointant vers LIEU inexistant</td>
+								{{#with decesLieudit}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec <code>comment</code> contenant un pointeur {{> LibIcone "iconeLieu"}} vers LIEU inexistant</td>
+								{{> AdminDataCheck_td_aFaire}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec <code>note</code> contenant un pointeur {{> LibIcone "iconeLieu"}} vers LIEU inexistant</td>
+								{{> AdminDataCheck_td_aFaire}}
+							</tr>
+							<!-- Pointeurs DOC -->
+							
+							<tr class="bigBorderTop">
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeDoc"}} <code>naissance.acte</code> pointant vers DOC/ACTE inexistant <span class="bg-danger">Vérifier que c'est bien un type/codage ACTE</span></td>
+								{{#with naissanceDoc}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeDoc"}}<code>mariage.$.acte</code> pointant vers DOC/ACTE inexistant <span class="bg-danger">Vérifier que c'est bien un type/codage ACTE</span></td>
+								{{#with mariageDoc}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeDoc"}}<code>deces.acte</code> pointant vers DOC/ACTE inexistant <span class="bg-danger">Vérifier que c'est bien un type/codage ACTE</span></td>
+								{{#with decesDoc}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec pointeur {{> LibIcone "iconeDoc"}}<code>photo.docId</code> pointant vers DOC inexistant <span class="bg-danger">Vérifier que c'est bien un codage IMAGE</span></td>
+								{{#with photoDocId}}	
+									{{> AdminDataCheck_td_listePers}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunePers}}
+								{{/with}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec <code>comment</code> contenant un pointeur {{> LibIcone "iconeDoc"}} vers DOC inexistant</td>
+								{{> AdminDataCheck_td_aFaire}}
+							</tr>
+							<tr>
+								<td>{{> LibIcone "iconePers"}} avec <code>note</code> contenant un pointeur {{> LibIcone "iconeDoc"}} vers DOC inexistant</td>
+								{{> AdminDataCheck_td_aFaire}}
+							</tr>
+							
+							
+							
+						{{/with}}
+					</tbody>
+				</table>
+				
+				<h3>{{> LibIcone "iconeLieu"}} Collection LIEUX</h3>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Vérification selon SCHEMA</td>
+							{{> AdminDataCheck_td_aFaire}}
+						</tr>
+						<tr class="bigBorderTop">
+							<td>{{> LibIcone "iconeLieu"}} sans pointeur {{> LibIcone "iconeLieu"}} <code>inclusDans</code></td>
+							{{#with lieuxSansInclusDans}}
+								{{> AdminDataCheck_td_listeLieux}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>{{> LibIcone "iconeLieu"}} avec pointeur {{> LibIcone "iconeLieu"}} <code>inclusDans</code> null</td>
+							{{#with lieuxAvecInclusDansNull}}
+								{{> AdminDataCheck_td_listeLieux}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>{{> LibIcone "iconeLieu"}} avec pointeur {{> LibIcone "iconeLieu"}} <code>inclusDans</code> pointant vers LIEU inexistant</td>
+							{{#with lieuxAvecInclusDansPointantVersLieuInexistant}}
+								{{> AdminDataCheck_td_listeLieux}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLieu}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>{{> LibIcone "iconeLieu"}} avec pointeur {{> LibIcone "iconeDoc"}} <code>positionSurCartes.$.id</code> pointant vers DOC inexistant <span class="bg-danger">Vérifier que c'est bien un type/codage CARTE</span></td>
+							{{> AdminDataCheck_td_aFaire}}
+						</tr>
+						
+						
+					</tbody>
+				</table>
+				Supprimer les documents liés et les remplacer par les  liens
+				
+				<h3>{{> LibIcone "iconeHist"}} Collection HIST</h3>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Vérification selon SCHEMA</td>
+							{{> AdminDataCheck_td_aFaire}}
+						</tr>
+					</tbody>
+				</table>
+				Supprimer les documents liés, lieux, personnes et les points d'histoire liés s'il y en a et les remplacer par les  liens
+				
+				<h3>{{> LibIcone "iconeDoc"}} Collection DOCS</h3>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Vérification selon SCHEMA</td>
+							{{> AdminDataCheck_td_aFaire}}
+						</tr>
+					</tbody>
+				</table>
+				A faire :
+				<ul>
+					<li>Vérifier la cohérence type/codage</li>
+					<li>Supprimer les documents liés, lieux, personnes et les points d'histoire liés s'il y en a et les remplacer par les  liens</li>
+				</ul>
+				
+				<h3>Collection LIENS</h3>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Vérification selon SCHEMA</td>
+							{{> AdminDataCheck_td_aFaire}}
+						</tr>
+						{{#with lienCheck}}
+						<!-- POUR -->
+						<tr class="bigBorderTop">
+							<td>avec propriété <code>pour</code> inexistante ou nulle</td>
+							{{#with pourAbsent}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec propriété <code>pour.type</code> inexistante ou nulle</td>
+							{{#with pourTypeAbsent}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec propriété <code>pour.type</code> contenant une valeur non supportée</td>
+							{{#with pourTypeErreur}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec propriété <code>pour.id</code> inexistante ou nulle</td>
+							{{#with pourIdAbsent}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconePers"}} <code>pour.id</code> pointant vers une PERS inexistante</td>
+							{{#with pourPERS}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconeLieu"}} <code>pour.id</code> pointant vers un LIEU inexistant</td>
+							{{#with pourLIEU}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconeHist"}} <code>pour.id</code> pointant vers un HIST inexistant</td>
+							{{#with pourHIST}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconeDoc"}} <code>pour.id</code> pointant vers un DOC inexistant</td>
+							{{#with pourDOC}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<!-- VERS -->
+						<tr class="bigBorderTop">
+							<td>avec propriété <code>vers</code> inexistante, vide ou incorrecte</td>
+							{{#with versAbsent}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec propriété <code>vers.type</code> inexistante ou nulle</td>
+							{{#with versTypeAbsent}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec propriété <code>vers.type</code> contenant une valeur non supportée</td>
+							{{#with versTypeErreur}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec propriété <code>vers.id</code> inexistante ou nulle</td>
+							{{#with versIdAbsent}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconePers"}} <code>vers.id</code> pointant vers une PERS inexistante</td>
+							{{#with versPERS}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconeLieu"}} <code>vers.id</code> pointant vers un LIEU inexistant</td>
+							{{#with versLIEU}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconeHist"}} <code>vers.id</code> pointant vers un HIST inexistant</td>
+							{{#with versHIST}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						<tr>
+							<td>avec pointeur {{> LibIcone "iconeDoc"}} <code>vers.id</code> pointant vers un DOC inexistant</td>
+							{{#with versDOC}}
+								{{> AdminDataCheck_td_listeLiens}}
+							{{else}}
+								{{> AdminDataCheck_td_aucunLien}}
+							{{/with}}
+						</tr>
+						{{/with}}
+					</tbody>
+				</table>
+				
+				<h3>Collection REGISTRES</h3>
+				<table class="table table-bordered">
+					<tbody>
+						{{#with registreCheck}}
+							<tr>
+								<td>Vérification selon SCHEMA</td>
+								{{> AdminDataCheck_td_aFaire}}
+								
+								<!-- Validation du schéma à mettre en place
+								{{#with schemaNotOk}}
+									{{> AdminDataCheck_td_listeRegistres}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunRegistre}}
+								{{/with}}
+								-->
+							</tr>
+						
+							<tr class="bigBorderTop">
+								<td>avec pointeur {{> LibIcone "iconeLieu"}} <code>commune</code> pointant vers LIEU inexistant</td>
+								{{#with commune}}
+									{{> AdminDataCheck_td_listeRegistres}}
+								{{else}}
+									{{> AdminDataCheck_td_aucunRegistre}}
+								{{/with}}
+							</tr>
+						{{/with}}
+					</tbody>
+				</table>
+				
+				<h3>Collection ACTESARCHIVES</h3>
+				<table class="table table-bordered">
+					<tbody>
+						<tr>
+							<td>Vérification selon SCHEMA</td>
+							{{> AdminDataCheck_td_aFaire}}
+							
+							</tr>
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_aFaire     -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_aFaire">
+	<td class="checkNotDone text-center">A faire</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_listeLieux  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_listeLieux">
+	<td class="{{checkIfEmpty .}}">
+		{{> LibPaginateGenObjectsList list=. objectType="LIEU" nbElemPerPage=10 nbPagesMax=4}}
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_aucunLieu  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_aucunLieu">
+	<td class="checkOk">
+		<p class="text-danger">{{> LibIcone "info"}} Aucun lieu</p>
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_listePers  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_listePers">
+	<td class="{{checkIfEmpty .}}">
+		{{> LibPaginateGenObjectsList list=. objectType="PERS" nbElemPerPage=10 nbPagesMax=4}}
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_aucunePers -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_aucunePers">
+	<td class="checkOk">
+		<p class="text-danger">{{> LibIcone "info"}} Aucune personne</p>
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_listeLiens  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_listeLiens">
+	<td class="{{checkIfEmpty .}}">
+		{{> LibPaginateGenObjectsList list=. objectType="LIEN" nbElemPerPage=10 nbPagesMax=4 title="modifier ce lien"}}
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_aucunLien -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_aucunLien">
+	<td class="checkOk">
+		<p class="text-danger">{{> LibIcone "info"}} Aucun lien</p>
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_listeRegistres  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_listeRegistres">
+	<td class="{{checkIfEmpty .}}">
+		{{> LibPaginateGenObjectsList list=. objectType="REGISTRE" nbElemPerPage=10 nbPagesMax=4}}
+	</td>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDataCheck_td_aucunRegistre -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDataCheck_td_aucunRegistre">
+	<td class="checkOk">
+		<p class="text-danger">{{> LibIcone "info"}} Aucun registre</p>
+	</td>
+</template>

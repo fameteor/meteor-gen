@@ -1,0 +1,488 @@
+/* Pour la nav bar fixed en haut                                   */
+/* --------------------------------------------------------------- */
+body, html {
+	height: 100%;
+	overflow: hidden;
+}
+
+.navBarRemainingHeight {
+	padding-top: 51px;
+	height: 100%;
+}
+
+.scrollable {
+	height: 100%;
+	overflow: auto;
+}
+
+/* Navbar collapses from MD devices and less                       */
+/* --------------------------------------------------------------- */
+@media (max-width: 1199px) {
+    .navbar-header {
+        float: none;
+    }
+    .navbar-toggle {
+        display: block;
+    }
+    .navbar-collapse {
+        border-top: 1px solid transparent;
+        box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
+    }
+    .navbar-collapse.collapse {
+        display: none!important;
+    }
+    .navbar-nav {
+        float: none!important;
+        margin: 7.5px -15px;
+    }
+    .navbar-nav>li {
+        float: none;
+    }
+    .navbar-nav>li>a {
+        padding-top: 10px;
+        padding-bottom: 10px;
+    }
+    .navbar-text {
+        float: none;
+        margin: 15px 0;
+    }
+    /* since 3.1.0 */
+    .navbar-collapse.collapse.in { 
+        display: block!important;
+    }
+    .collapsing {
+        overflow: hidden!important;
+    }
+}
+
+/* Pour éviter la bordure blanche au click sur les flèches de nav  */
+/* --------------------------------------------------------------- */
+.noBorderOnFocus:focus {outline-width: 0;}
+
+/* Pour le titre de templates INFOS                                */
+/* --------------------------------------------------------------- */
+.titre {background-color:#EEE;padding:5px;margin-bottom:8px;}
+
+/* Pour les éléments surlignés                                     */
+/* --------------------------------------------------------------- */
+.surligne {background-color:#EEE;padding:5px;margin-top:5px;margin-bottom:8px; border-radius:5px;}
+
+/* Pour les données incertaine                                     */
+/* --------------------------------------------------------------- */
+.incertain:not(tr) 					{color : #FF0601;font-style: italic;}
+.incertain:not(tr) a:link 			{color : #D40601;font-style: italic;}
+.incertain:not(tr) a:visited 			{color : #D40601;font-style: italic;}
+.incertain:not(tr) a:hover  			{color : #FF0601;font-style: italic;}
+.incertain:not(tr) a:active  			{color : #D40601;font-style: italic;}
+
+table.table-striped > tbody > tr.incertain:nth-of-type(2n+1) {
+    background-color: rgb(230, 187, 186);
+}
+table.table-striped > tbody > tr.incertain:nth-of-type(2n) {
+    background-color: rgb(254, 207, 205);
+}
+/* Pour les liens incertains mais données sures ! */
+a:link.lien_incertain 		{font-style: italic;border-bottom:1px solid #FF0601;border-style: dashed;border-top:none;border-left:none;border-right:none;}
+a:visited.lien_incertain 	{font-style: italic;}
+a:hover.lien_incertain  		{font-style: italic;color : #FF0601;text-decoration:none;border-style: solid;border-top:none;border-left:none;border-right:none;}
+a:active.lien_incertain  	{font-style: italic;color : #FF0601;text-decoration:none;}
+
+/* Pour les éléments sous la barre de menu                         */
+/* --------------------------------------------------------------- */
+.margin-top {margin-top:7px;}
+
+
+/* Pour enlever les spinners des "input de type "number  */
+/* --------------------------------------------------------------- */
+input[type=number]::-webkit-outer-spin-button, input[type=number]::-webkit-inner-spin-button {-webkit-appearance: none;margin: 0;}
+input[type=number] {-moz-appearance:textfield;}
+
+/* Très important pour le carousel                                         */
+/* --------------------------------------------------------------- */
+.carousel-inner > .item > img,
+.carousel-inner > .item > a > img 	{max-width: 100%; max-height:100px; margin: auto;}
+	
+/* Pour svg Arbre ascendant                                        */
+/* --------------------------------------------------------------- */
+g.nom					{fill:#140174;}
+g.nom:hover				{text-decoration:underline;fill:#000000;cursor:grab;}
+text.nomPrenom			{font-family:Arial;font-size:7px;fill:#140174;}
+text.dates				{font-family:Arial;font-size:6px;fill:#140174;}
+text.implexe				{fill:#A94442;}
+text.incertain			{fill:#FF0601;}
+/* Nb : padding-bottom : ratio between the SVG illustration's height and width */
+
+/* Positionnement dans les tables                                  */
+/* --------------------------------------------------------------- */
+table th.center 	{text-align : center;}
+table td.center 	{text-align : center;}
+
+/* Pour les layouts chercher, ajouter, modifier                    */
+/* --------------------------------------------------------------- */
+.fondLayoutModifier		{background-color : #FCF8E3;border-radius:5px;padding:0px;}
+.fondLayoutChercher		{background-color : #D9EDF7;border-radius:5px;padding:5px;}
+.formNonModifiable 		{background-color : #EEEEEE;border-radius:5px;}
+
+/* Message routers (not found, login, interdit...)                */
+/* --------------------------------------------------------------- */
+.messageRouter			{width:400px;border-radius: 5px;padding:5px 5px 30px 5px;margin-top:5px;margin-bottom:8px;}
+
+
+/* Pour les editable-text, en cas de champs initialement vide   */
+/* --------------------------------------------------------------- */
+.placeholder					{color:#BBBBBB;}
+.inEdition						{background-color :#FCF8E3;padding:5px;border-radius:5px;}
+
+/* Pour l'éditeur de photos                                                       */
+/* --------------------------------------------------------------- */
+.outilsImage				{margin:5px, padding:5px;background-color : #FCF8E3;border-radius:5px;}
+.zoneVisible				{opacity: 0.5;fill:#FFFF00; stroke:rgba(0,0,0,1); stroke-width:1;stroke-dasharray:5,5; cursor: pointer; }
+.zoneHidden				{opacity: 0; cursor: pointer; }
+.zoneEditable			{opacity: 0.4;fill:rgb(255,255,0); stroke:rgba(0,0,0,1); stroke-width:1;stroke-dasharray:5,5; }
+.zoneEditable:hover	{opacity: 0.4;fill:rgb(0,255,0); stroke:rgba(0,0,0,1); stroke-width:1;stroke-dasharray:5,5; }
+
+
+.separation { margin-top:5px; }
+
+/* Pour le texte XML                                               */
+/* --------------------------------------------------------------- */
+.textXml					{}
+.entete 						{padding:5px; background-color : #EEEEEE;margin-bottom:10px;font-style: italic;}
+.enmarge 					{float: left; padding:5px; background-color : #EEEEEE;font-style: italic;}
+.ensignature 				{padding:5px; background-color : #EEEEEE;font-style: italic;}
+.ennote 						{padding:5px; background-color : #EEEEEE;font-style: italic;}
+/*.incertain 				voir ci-dessus : style + general */
+
+h1.transcript				{font-size:26px;}
+h2.transcript 				{font-size:22px;margin-left:20px;}
+h3.transcript 				{font-size:18px;margin-left:40px;}
+
+#editionZone 				{background-color:#EEEEEE;padding:7px;border-left: 1px solid #F0AD4E;border-right: 1px solid #F0AD4E;min-height:50px;}
+#previewZone 				{background-color:#FFFFFF;padding:7px;border-left: 1px solid #F0AD4E;border-right: 1px solid #F0AD4E;border-bottom: 1px solid #F0AD4E;min-height:50px;}
+#saveButton, #cancelButton 	{float:right;margin-right:3px;}
+
+.textXmlEditorToolBar 		{background-color:#F0AD4E;border: 1px solid #F0AD4E;}
+
+.LEFT 	{float:left;margin-right:5px;}
+.RIGHT	{float:right;margin:5px;}
+.CENTER	{}
+
+
+
+/* Pour un comportement du login comme les autres boutons du menu  */
+/* --------------------------------------------------------------- */
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+    background-color: #101010;
+    border-color: #337AB7;
+	color:white;
+}
+
+#login-dropdown-list div.dropdown-menu {
+	margin-top:15px;
+}
+
+/* Pour la pagination des listes d'objets gen                      */
+/* --------------------------------------------------------------- */
+.boutonPage {width:40px;}
+
+/* Pour le sous-fourmulaire                                        */
+/* --------------------------------------------------------------- */
+.list-group-item 	{padding:3px;border:none;background-color:transparent;}
+#panelPrenom, #listePrenoms {padding:0px;border:none;background-color:transparent;box-shadow:none;}
+
+/* Pour l'affichage du sexe                                        */
+/* --------------------------------------------------------------- */
+.fa-venus {color:#F707C8;}
+.fa-mars {color:#000A7A;}
+
+/* Pour le découpeur de photos                                     */
+/* --------------------------------------------------------------- */
+table.decoupe td.valignMiddle	{vertical-align:middle;}
+table.decoupe td.selected	{background-color:#337AB7;color:white;}
+table.decoupe tr.doc		{height:91px}
+rect#decoupe {fill:red;stroke-width:3;stroke:red;fill-opacity:0.1;}
+
+
+/* Pour les multilinks pour la photo d'identité, A REVOIR !!!      */
+/* --------------------------------------------------------------- */
+
+/* ??????????????????????????????????????????????????????????????? */
+ul#menu 					{display:none;position:absolute;left:80px;top:40px;border:0;padding:0;}
+ul#menu li 				{list-style-type:none;position:relative;width: 200px;background-color:#FFFFFF;padding:2px;margin:0px}
+ul#menu li:hover 			{background-color:#EEE;}
+ul#menu:hover 			{display:block;}
+
+/* When over the persPhoto, display the menu */
+#persPhoto:hover~#menu 	{display:block;}
+/* ??????????????????????????????????????????????????????????????? */
+
+/* Pour tous les SVG                                               */
+/* --------------------------------------------------------------- */
+svg	{
+	background-color:#EEEEEE;
+	border: 1px solid rgba(0, 0, 0, 0.15);
+	border-radius:4px;
+	box-shadow:0px 6px 12px rgba(0, 0, 0, 0.176);
+}
+
+/* Pour la représentation chronologique de la famille proche       */
+/* --------------------------------------------------------------- */
+line.legendeTemp_axe 			{stroke:#666666;stroke-width:1;}
+line.legendeTemp_traitsNiv1 	{stroke:#666666;stroke-width:1;stroke-dasharray:4 2;}
+line.legendeTemp_traitsNiv2 	{stroke:#666666;stroke-width:1;stroke-dasharray:1 5;}
+text.legendeTemp				{fill:#666666;text-anchor:middle;}
+
+line.pers_grandParent 		{stroke:#16089E;stroke-width:2;}
+line.pers_parent 				{stroke:#0554FF;stroke-width:2;}
+line.pers_enfant 				{stroke:#8200FF;stroke-width:2;}
+
+line.lienConjoints.pers_grandParent	{stroke:#16089E;fill-opacity:0.6;stroke-width:2;stroke-dasharray:2 2;}
+line.lienConjoints_pers_parent		{stroke:#0554FF;fill-opacity:0.6;stroke-width:2;stroke-dasharray:2 2;}
+
+line.marqueDate 				{stroke:#000000;stroke-width:2;}
+text.marqueDate 				{fill:#000000;}
+
+line.marquePointilles			{stroke:red;stroke-width:2;stroke-dasharray:2 2;}
+path.marqueDateIncertaine, rect.marqueDateIncertaine, text.marqueDateIncertaine	{fill:red;}
+.ptHist						{stroke:white;stroke-width:1.5;fill:#444444;}
+
+path.pers_grandParent, rect.pers_grandParent 	{fill:#16089E;fill-opacity:0.6;stroke-width:0;}
+path.pers_parent , rect.pers_parent 			{fill:#0554FF;fill-opacity:0.6;stroke-width:0;}
+path.pers_enfant , rect.pers_enfant 			{fill:#8200FF;fill-opacity:0.6;stroke-width:0;}
+
+text.pers_grandParent 		{fill:#16089E;}
+text.pers_parent 				{fill:#0554FF;}
+text.pers_enfant 				{fill:#8200FF}
+text.pers_inconnue			{font-style:italic;fill:red;}
+text.nom:hover				{text-decoration:underline;fill:#000000;cursor:grab;}
+
+/* Workaround car :nth-child pas supporté par Batik                */
+rect.periodeHistEven 		{stroke-width:0;fill:#DDDDDD;}
+rect.periodeHistOdd 		{stroke-width:0;fill:#EEEEEE;}
+
+text.periodeHistText	{fill:#666666;font-style:italic;font-size:13px;}
+
+span#pers_grandParent 	{color:#16089E}
+span#pers_parent 		{color:#0554FF}
+span#pers_enfant 		{color:#8200FF}
+
+/* Pour les seconds (et plus) bouton de class "pull-right"         */
+/* --------------------------------------------------------------- */
+button.margeDroite 			{margin-right:10px;}
+
+
+/* =============================================================== */
+/* =============================================================== */
+/* =============================================================== */
+/* MODELE DE FORMATAGE CSS
+/* =============================================================== */
+/* =============================================================== */
+/* =============================================================== */
+
+
+
+/* =============================================================== */
+/* Pour le TEMPLATE "RegistreIndexer"                              */
+/* =============================================================== */
+
+/* Pour la liste des registres ----------------------------------- */
+.depouillementRegistre_listeRegistre 					{max-height:200px;overflow: auto;}
+table#depouillementRegistre_listeRegistre tr.selected		{background-color:#337AB7;color:white;}
+table#depouillementRegistre_listeRegistre tr.selected a	{color:white;}
+
+/* Pour le SVG infos sur le registre ----------------------------- */
+/* Global                        */
+svg.registreIndexer rect.registre 						{fill:#888888;fill-opacity:1;stroke-width:0;}
+/* Legende                       */
+svg.registreIndexer line.legende							{stroke:#666666;stroke-width:0.4}
+svg.registreIndexer text.legende  							{fill:#666666;text-anchor:middle;font-size:7px;}
+/* Actes dans la base            */
+svg.registreIndexer line.acteDansLaBase					{stroke:#E9411C;stroke-width:1}
+svg.registreIndexer text.acteDansLaBase					{fill:#E9411C;text-anchor:left;font-size:7px;}
+/* Pages indexees                */
+svg.registreIndexer text.pageIndexee						{fill:#21C813;text-anchor:left;font-size:7px;}
+svg.registreIndexer rect.pageIndexee	 					{fill:#21C813;fill-opacity:1;stroke-width:0;}
+
+/* =============================================================== */
+/* Pour le TEMPLATE "AdminDataCheck"                               */
+/* =============================================================== */
+
+/* Pour les couleurs des cases de résultat des texts               */
+.checkNotDone											{background-color:#EEEEEE;}
+.checkOk												{background-color:#BBFFD2;}
+.checkFailed											{background-color:#FFBDBB;}
+.bigBorderTop											{border-top:5px solid #DDD;}
+
+
+/* =============================================================== */
+/* Pour le TEMPLATE "RegistreOrdonner"                             */
+/* =============================================================== */
+table.indexerRegistre .dragElement:hover	{background-color:#d9edf7;}
+table.indexerRegistre tr.selected			{background-color:#fcf8e3;}
+table.indexerRegistre  #nouvelOrdre		{width:80px;}
+
+/* =============================================================== */
+/* Pour le TEMPLATE "DocViewerCarte"                               */
+/* =============================================================== */
+.spanArrow 			{font-size:30px;}
+/* correspond à la largeur des icônes des flèches de déplacement   */
+td.DocViewerCarte	{width:43px;height:43px;}
+
+/* --------------------------------------------------------------- */
+/* --------------------------------------------------------------- */
+/* Pour l'impression
+/* --------------------------------------------------------------- */
+/* --------------------------------------------------------------- */
+
+/* Pour ne pas imprimer les URLS et gérer les sauts de page        */
+/* --------------------------------------------------------------- */
+@media all {
+	.page-break	{ display: none; }
+}
+
+@media print {
+	.page-break						{display:block;page-break-before:always;}
+    .noprint, .no-print * 			{display:none !important;}
+    a:link:after, a:visited:after 	{display: none;content:"";}
+}
+
+/* =============================================================== */
+/* Call Control banner                                             */
+/* =============================================================== */
+.callControl {
+	position: fixed;
+	top: 50px;
+	border-radius: 0px 0px 5px 5px;
+	z-index: 100;
+	padding:5px;
+	height:44px;
+	box-shadow: 5px 5px 3px #888888;}
+	
+/* =============================================================== */
+/* Slider (google map) cross-browser                               */
+/* =============================================================== */
+input[type=range] {
+    /*removes default webkit styles*/
+    -webkit-appearance: none;
+    
+    /*fix for FF unable to apply focus style bug */
+    border: 1px solid white;
+    
+    /*required for proper track sizing in FF*/
+    width: 120px;
+	display: inline-block;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    width: 120px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #337ab7;
+    margin-top: -4px;
+}
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]:focus::-webkit-slider-runnable-track {
+    background: #ccc;
+}
+
+input[type=range]::-moz-range-track {
+    width: 120px;
+    height: 5px;
+    background: #ddd;
+    border: none;
+    border-radius: 3px;
+}
+input[type=range]::-moz-range-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #337ab7;
+}
+
+/*hide the outline behind the border*/
+input[type=range]:-moz-focusring{
+    outline: 1px solid white;
+    outline-offset: -1px;
+}
+
+input[type=range]::-ms-track {
+    width: 120px;
+    height: 5px;
+    
+    /*remove bg colour from the track, we'll use ms-fill-lower and ms-fill-upper instead */
+    background: transparent;
+    
+    /*leave room for the larger thumb to overflow with a transparent border */
+    border-color: transparent;
+    border-width: 6px 0;
+
+    /*remove default tick marks*/
+    color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+    background: #777;
+    border-radius: 10px;
+}
+input[type=range]::-ms-fill-upper {
+    background: #ddd;
+    border-radius: 10px;
+}
+input[type=range]::-ms-thumb {
+    border: none;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background: #337ab7;
+}
+input[type=range]:focus::-ms-fill-lower {
+    background: #888;
+}
+input[type=range]:focus::-ms-fill-upper {
+    background: #ccc;
+}
+
+
+/* TagInfo template                                                */
+/* --------------------------------------------------------------- */
+div.taginfo-alt-background {
+	padding:5px;
+}
+div.taginfo-alt-background:nth-child(2n+1) {
+	background-color:#EEEEEE;
+}
+div.taginfo-comment {
+	overflow:auto;max-height:100px;
+}
+
+
+/* TagManagement template                                          */
+/* --------------------------------------------------------------- */
+div.tagmanagement-alt-background {
+	padding:5px;
+}
+div.tagmanagement-alt-background:nth-child(2n+1) {
+	background-color:#EEEEEE;
+}
+
+/* Pour alignement vertical bouton et en cas de champs d'erreur des in-line form bootstrap */
+/* --------------------------------------------------------------- */
+.form-inline > .form-group {
+	vertical-align: top;
+}
+
+/* Specific padding for date input fields                          */
+/* --------------------------------------------------------------- */
+.date-input {
+	padding:6px
+}

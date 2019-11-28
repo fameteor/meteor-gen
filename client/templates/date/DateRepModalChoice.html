@@ -1,0 +1,60 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DateRepModalChoice           -->
+<!-- - callback : function(selectedGregorianDate) -->
+<!-- 	  	with selectedGregorianDate : {   -->
+<!--				'jour':value,               	 -->
+<!--				'mois':value,                  -->
+<!--				'annee':value                	 -->
+<!--			}                              	 -->
+<!-- ===================================== -->
+<template name="DateRepModalChoice">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+				<!-- HEADER ============== -->
+				<div class="modal-header modal-update">
+					Choisir une date républicaine
+				</div>
+				<!-- BODY ================ -->
+				<div class="modal-body row">
+					<div class="col-sm-12 text-center">
+						<form class="form-inline">
+							<div class="form-group {{hasError 'repDay'}}">
+								<select class="form-control" name="repDay" aria-describedby="repDayHelp">
+									<option value="" {{repDaySelectedIf ""}}>- choisir un jour républicain :</option>
+									{{#each day in repDays}}
+										<option value="{{day.value}}" {{repDaySelectedIf day.value}}>{{day.label}}</option>
+									{{/each}}
+								</select>
+								<span id="repDayHelp" class="help-block">{{validityCheck.repDay.helpText}}</span>
+							</div>
+							<div class="form-group {{hasError 'repMonth'}}">
+								<select class="form-control" name="repMonth" aria-describedby="repMonthHelp">
+									<option value="" {{repMonthSelectedIf ""}}>- choisir un mois républicain :</option>
+									{{#each month in repMonths}}
+										<option value="{{month.value}}" {{repMonthSelectedIf month.value}}>{{month.label}}</option>
+									{{/each}}
+								</select>
+								<span id="repMonthHelp" class="help-block">{{validityCheck.repMonth.helpText}}</span>
+							</div>
+							<div class="form-group {{hasError 'repYear'}}">
+								<select class="form-control" name="repYear" aria-describedby="repYearHelp">
+									<option value="" {{repYearSelectedIf ""}}>- choisir une année républicaine :</option>
+									{{#each year in repYears}}
+										<option value="{{year.value}}" {{repYearSelectedIf year.value}}>{{year.label}}</option>
+									{{/each}}
+								</select>
+								<span id="repYearHelp" class="help-block">{{validityCheck.repYear.helpText}}</span>
+							</div>
+							<button type="submit" class="btn btn-primary">Continuer</button>
+						</form>
+					</div>
+				</div>
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

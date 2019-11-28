@@ -1,0 +1,208 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogDates            -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogDates">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur l'objet DateGEN</h2>
+		<ul>
+			<li><a href="#definitions">1) Définitions</a></li>
+			<li><a href="#objectifs">2) Objectifs</a></li>
+			<li><a href="#dateincompletesautorisees">3) Dates incomplètes autorisées</a></li>
+			
+
+		</ul>
+		
+<h3 class="bg-danger">Ceci est la cible de l'implémentation de l'objet Date, pas encore implémentée complètement.</h3>
+
+<h3><a id="definitions"></a>1) Définitions</h3>
+<!-- ===================================== -->
+<h4>Date, Date Valide, Date inconnue, Date complète, Date incomplète</h4>
+<p>Une <strong>date</strong> correspond à un triplé (jj, mm, aaaa) contenant des entiers numériques ayant des valeurs dans la limite autorisée par l'existence de la date réelle que le triplet représente (<strong>date valide</strong>).</p>
+<p>Une ou plusieurs valeurs du triplé peuvent-être nulles si elles ne sont pas connues.</p>
+<p>Une date peut-être soit :
+	<ul>
+		<li><strong>inconnue</strong> : tous les éléments du triplé : (jj, mm, aaaa) sont nulls, ex : (null, null, null).</li>
+		<li><strong>complète</strong> : aucun des  3 éléments du triplé : (jj, mm, aaaa) n'est null, ex : (12, 5, 1798).</li>
+		<li><strong>incomplète</strong> : un ou plusieurs des éléments du triplé : (jj, mm, aaaa) sont nulls (mais pas tous, sinon la date serait inconnue), ex : (null, 5, 1798) ou (12, null, 1798) ou (null, 5, null).</li>
+	</ul>
+</p>
+
+<h4>DateGen, DateGen inconnue</h4>
+<p>Une <strong>dateGen</strong> correspond à couple (dateQualifier, date) ou un triplet (dateQualifier, date 1, date2), ce dernier cas uniquement si dateQualifier="ENTRE".</p>
+<p>Une dateGen peut aussi prendre la valeur <code>null</code> si elle est <strong>inconnue</strong>.</p>
+<p>Le qualifier est un STRING qui peut prendre les valeurs suivantes :
+	<ul>
+		<li>"LE"</li>
+		<li>"VERS"</li>
+		<li>"AVANT"</li>
+		<li>"APRES"</li>
+		<li>"ENTRE"</li>
+	</ul>
+</p>
+<p>Une dateGen représente une date réelle avec ou sans incertitude, ou un créneau temporel, par exemple :
+<ul>
+	<li>LE 12 mai 1798</li>
+	<li>VERS 1803</li>
+	<li>ENTRE le 12 mais 1805 ET le 31 mars 1809</li>
+	<li>APRES le 12 octobre 1845</li>
+	<li>AVANT septembre 1632</li>
+</ul>
+</p>
+
+<h4>DateGen qualifiée</h4>
+<p>Une <strong>dateGen qualifiée</strong> est une dateGen :
+	<ul>
+		<li>soit <strong>inconnue</strong></li>
+		<li>ou soit une dateGen dont les dates sont <strong>complètes</strong> et <strong>valides</strong>.</li>
+	</ul>
+</p>
+
+
+<h3><a id="objectifs"></a>2) Objectifs</h3>
+<!-- ===================================== -->
+<ul>
+	<li>Pouvoir gérer des dates incomplètes et des dates incertaines.</li>
+	<li>Permettre la saisie et l'affichage d'une date, même incomplète ou incertaine, ou sous format républicain (le stockage se fait toujours sous la forme grégorienne).</li>
+	<li>Permettre d'associer un timestamp à une date, même incomplète ou incertaine.</li>
+	<li>Permettre d'extraire des données de la BD classée selon le timestamp de leur date.</li>
+	<li>Permettre d'afficher sous forme textuelle une date, même incomplète ou incertaine, sous différent formats <span class="bg-danger">(à définir)</span>.</li>
+	<li>Permettre de calculer une durée entre deux dates, même incomplète ou incertaine.</li>
+	<li>Permettre d'afficher une durée de façon textuelle pour tout couple de dates, même incomplètes ou incertaines (environ 8 ans, plus de 3 mois ...) avec différents mode d'affichage <span class="bg-danger">(à définir)</span>.</li>
+</ul>
+
+<h3><a id="dateincompletesautorisees"></a>3) Vérification et transformation à la saisie d'une dateGen</h3>
+<!-- ===================================== -->
+
+<p class="bg-info">Principe 1 : dans la BD, on ne doit avoir que des dateGen soit nulles, soit qualifiées.</p>
+
+
+
+
+<p>L'objectif des dates étant de permettre l'aide à la recherche, le classement des données et leur affichage graphique, la date doit avoir un sens.</p>
+<p><strong>L'IHM de saisie transforme toute date incomplète en date complète ou inconnue</strong> de la façon suivante :
+	<ul>
+		<li><span class="bg-success">AUTORISE</span> : <span class="text-success">12 mai 1800</span>, la date est complète.</li>
+		<li><span class="bg-success">AUTORISE</span> : <span class="text-success">? mai 1800</span>, mais traduit en créneau temporel (ENTRE D1 et D2).</li>
+		<li><span class="bg-success">AUTORISE</span> : <span class="text-success">? ? 1800</span>, mais traduit en créneau temporel (ENTRE D1 et D2).</li>
+		<li><span class="bg-success">AUTORISE</span> : <span class="text-success">? ? ?</span>, la date est alors inconnue.</li>
+		
+		<li><span class="bg-danger">INTERDIT</span> : <span class="text-danger">12 mai ?</span>, l'interface de saisie doit alors proposer de saisir un créneau temporel connu pour cette date ou de saisir une date inconnue : <span class="text-success">? ? ?</span>.</li>
+		<li><span class="bg-danger">INTERDIT</span> : <span class="text-danger">12 ? 1800</span>, l'interface de saisie doit alors proposer de saisir un créneau temporel connu pour cette date ou de saisir : <span class="text-success">? ? 1800</span>.</li>
+		<li><span class="bg-danger">INTERDIT</span> : <span class="text-danger">12 ? ?</span>, l'interface de saisie doit alors proposer de saisir un créneau temporel connu pour cette date ou de saisir une date inconnue : <span class="text-success">? ? ?</span>.</li>
+		<li><span class="bg-danger">INTERDIT</span> : <span class="text-danger">? mai ?</span>, l'interface de saisie doit alors proposer de saisir un créneau temporel connu pour cette date ou de saisir une date inconnue : <span class="text-success">? ? ?</span>.</li>
+	</ul>
+</p>
+<p><span class="bg-success">Dans les cas interdit (ex : ? mai ?), on perd l'information que cela s'est passé en mai, mais cela semble difficilement gérable autrement ?</span></p>
+
+<h3><a id="timestamps"></a>4) Timestamps générés</h3>
+<!-- ===================================== -->
+<h4>Pour les dates incomplètes</h4>
+	<table>
+		<thead>
+			<tr>
+				<th>Date incomplète</th>
+				<th>Timestamp généré au :</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><span class="text-danger">? mai 1800</span></td>
+				<td><span class="text-success">1 mai 1800 00:00:00.000</span> <span class="bg-danger">cas à creuser : faut-il générer un créneau "entre le 1 mai 1800 et le 31 mai 1800" ?</span></td>
+			</tr>
+			<tr>
+				<td><span class="text-danger">? ? 1800</span></td>
+				<td><span class="text-success">1 janvier 1800 00:00:00.000</span> <span class="bg-danger">cas à creuser : faut-il générer un créneau "entre le 1 janvier 1800 et le 31 décembre 1800" ?</span></td>
+			</tr>
+			<tr>
+				<td><span class="text-danger">? ? ?</span></td>
+				<td><span class="text-success">null</span> : TS null généré pour une date nulle.</td>
+			</tr>
+			<tr>
+				<td><span class="text-danger">12 mai ?</span></td>
+				<td><span class="text-success">null</span> : TS null généré pour une date nulle.</td>
+			</tr>
+			<tr>
+				<td><span class="text-danger">12 ? 1800</span></td>
+				<td><span class="text-success">12 janvier 1800 00:00:00.000</span> <span class="bg-danger">cas à creuser : faut-il générer un créneau "entre le 12 janvier 1800 et le 12 décembre 1800" ?</span></td>
+			</tr>
+			<tr>
+				<td><span class="text-danger">12 ? ?</span></td>
+				<td><span class="text-success">null</span> : TS null généré pour une date nulle.</td>
+			</tr>
+			<tr>
+				<td><span class="text-danger">? mai ?</span></td>
+				<td><span class="text-success">null</span> : TS null généré pour une date nulle.</td>
+			</tr>
+		</tbody>
+	</table>
+
+<h4>Pour les dates incertaines</h4>
+<p>ENTRE D1 et D2 : si D1 null = AVANT D2</p>
+<p>ENTRE D1 et D2 : si D2 null = APRES D1</p>
+
+<h3><a id="duree"></a>5) Durée to Text</h3>
+<!-- ===================================== -->
+Avec D1, D'1, D2 et D'2 non nuls (sinon rien n'est retourné)
+<table class="table">
+		<thead>
+			<tr>
+				<th></th>
+				<th>de LE D1</th>
+				<th>de VERS D1</th>
+				<th>de AVANT D1</th>
+				<th>de APRES D1</th>
+				<th>de ENTRE D1 et D2</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<th>à LE D'1</th>
+				<td>âgé de de X ans</td>
+				<td>âgé d'environ X ans</td>
+				<td>âgé de plus de X ans</td>
+				<td>âgé de moins de X ans</td>
+				<td>Y = TS(D'1) - TS(D1); X = TS(D'1) - TS(D2) : âgé de entre X ans et Y ans</td>
+			</tr>
+			<tr>
+				<th>à VERS D'1</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>à AVANT D'1</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>à APRES D'1</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<th>à ENTRE D'1 et D'2</th>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+				<td></td>
+			</tr>
+		</tbody>
+	</table>
+	
+<h3><a id="duree"></a>6) Interface de saisie d'une date</h3>
+<!-- ===================================== -->
+
+
+
+	</div>
+</template>

@@ -1,0 +1,36 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreFormaterListe        -->
+<!-- ===================================== -->
+<template name="RegistreFormaterListe">
+	<p>{{hlp_count .}} registres(s)</p>
+	<table class="table table-hover">
+		<thead>
+			<tr>
+				<th>_id</th>
+				<th>type</th>
+				<th>commune</th>
+				<th>contenu</th>
+				<th>période</th>
+				<th>nb pages</th>
+				<th>n° ordre</th>
+				<th>modifier</th>
+				<th>supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each .}}
+				<tr>
+					<td>{{> LibClipId}}<br/>{{#if id}}<small>({{id}})</small>{{/if}}</td>
+					<td>{{type}}</td>
+					<td>{{#with gh_lieuById commune}}{{> LieuNomLienArticle}}{{/with}}</td>
+					<td>{{contenu}}</td>
+					<td>{{periode}}</td>
+					<td>{{nbPages}}</td>
+					<td>{{ordreParCommune}}</td>
+					<td>{{> RegistreBoutonModifier}}</td>
+					<td>{{> RegistreBoutonSupprimer}}</td>
+				</tr>
+			{{/each}}
+		</tbody>
+	</table>
+</template>

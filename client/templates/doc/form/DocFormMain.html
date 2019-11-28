@@ -1,0 +1,90 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE DocFormMain                  -->
+<!-- For create or update                  -->
+<!-- ===================================== -->
+<template name="DocFormMain">
+	<fieldset>
+		<div class="row">
+			<div class="col-md-3">
+				{{> afQuickField name='type'}}
+				<div class="form-group {{#if afFieldIsInvalid name="date"}}has-error{{/if}}">
+					{{> DateFormulaire name="date"}}
+					<span class="help-block">{{{afFieldMessage name="date"}}}</span>
+				</div>
+			</div>
+			<div class="col-md-3">
+				{{#if typeIsChoosen}}
+					{{#unless afFieldValueIs name="type" value="ACTE"}}
+						{{> afQuickField name='titre' autocomplete='off'}}
+						{{> afQuickField name='urlDocument' autocomplete='off'}}
+						{{> afQuickField name='urlIcone' autocomplete='off'}}
+					{{else}}
+						{{> afQuickField name='urlDocument' autocomplete='off'}}
+					{{/unless}}
+				{{/if}}
+				{{> afQuickField name='codage' value=codage}}
+				{{#if afFieldValueIs name="codage" value="GEO_REF"}}
+					{{> afQuickField name='specif.IMAGE_mode' value="IMAGE" type="hidden"}}
+					{{> afQuickField name='specif.IMAGE_px' autocomplete='off'}}
+					{{> afQuickField name='specif.IMAGE_py' autocomplete='off'}}
+					{{> afQuickField name='specif.IMAGE_nbPages' value=1 type="hidden"}}
+				{{/if}}
+			</div>
+			<div class="col-md-3">
+				{{#if afFieldValueIs name="codage" value="IMAGE"}}
+					{{> afQuickField name='specif.IMAGE_mode'}}
+					{{> afQuickField name='specif.IMAGE_px'}}
+					{{> afQuickField name='specif.IMAGE_py'}}
+					{{> afQuickField name='specif.IMAGE_nbPages'}}
+				{{/if}}
+				{{#if afFieldValueIs name="codage" value="ACTE"}}
+					{{> afQuickField name='specif.ACTE_type'}}
+					{{> afQuickField name='specif.ACTE_commune' type='hidden'}}
+					<!-- Pour affichage du l'intitulé du lieu -->
+					<div class="form-group">
+						<label class="control-label" for="specif.ACTE_commune_intitule">ACTE : Commune de l'acte (*)</label>
+						<input class="form-control intitule" id="specif.ACTE_commune_intitule" name="specif.ACTE_commune_intitule" type="text" value="">
+						<span class="help-block"></span>
+					</div>
+					<!-- ==================================== -->
+					{{> afQuickField name='specif.ACTE_registre' type='hidden'}}
+					<!-- Pour affichage du l'intitulé du registre -->
+					<div class="form-group">
+						<label class="control-label" for="specif.ACTE_registre_intitule">ACTE : Registre de l'acte (*)</label>
+						<input class="form-control intitule" id="specif.ACTE_registre_intitule" name="specif.ACTE_registre_intitule" type="text" value="">
+						<span class="help-block"></span>
+					</div>
+					<!-- ==================================== -->
+					{{> afQuickField name='specif.ACTE_page'}}
+				{{/if}}
+				{{#if afFieldValueIs name="codage" value="CARTE"}}
+					{{> afQuickField name='specif.CARTE_defX'}}
+					{{> afQuickField name='specif.CARTE_defY'}}
+					{{> afQuickField name='specif.CARTE_xMin'}}
+					{{> afQuickField name='specif.CARTE_xMax'}}
+					{{> afQuickField name='specif.CARTE_yMin'}}
+					{{> afQuickField name='specif.CARTE_yMax'}}
+					{{> afQuickField name='specif.CARTE_urlLegende'}}
+				{{/if}}
+				{{#if afFieldValueIs name="codage" value="GEO_REF"}}
+					{{> afQuickField name='specif.GEO_REF_coordPoint1' autocomplete='off'}}
+					{{> afQuickField name='specif.GEO_REF_coordPoint2' autocomplete='off'}}
+				{{/if}}
+			</div>
+			<div class="col-md-3">
+				{{#if typeIsChoosen}}
+					{{> afQuickField name='tags'}}
+					{{> afQuickField name='source' autocomplete='off'}}
+					{{#if afFieldValueIs name="type" value="LIVRE"}}
+						{{> afQuickField name='auteur' autocomplete='off'}}
+					{{/if}}
+				{{/if}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<label class="control-label">(*) : saisie obligatoire</label>
+			</div>
+		</div>
+	</fieldset>
+</template>

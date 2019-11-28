@@ -1,0 +1,76 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocInfos                     -->
+<!-- ===================================== -->
+<template name="DocInfos">
+	{{> LibTitreInfos type="DOC" context=.}}
+	<div class="container-fluid">
+		{{> LibTabs tabsList=listeTabs}}
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- DocInfos_DOCAUTO                     -->
+<!-- ===================================== -->
+<template name="DocInfos_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>::DOC</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibTitreInfos</code><br/>
+<code>LibTabs</code><br/>
+<code>DocInfosFiche</code><br/>
+<code>DocInfosObjetsLies</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les informations sur le document passé en contexte en appelant le template <code>LibTabs</code> qui appelle les autres templates d'affichage des infos sur ce pointd'histoire : fiche, liens.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Pas de formatage propre. Les templates utilisés renvoient des suites de <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

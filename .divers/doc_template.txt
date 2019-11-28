@@ -1,0 +1,111 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LienListePour_DOCAUTO                 -->
+<!-- ===================================== -->
+<template name="LienListePour_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>obj::genObject</code></td>
+			<td>Explication</td>
+		</tr>
+		<tr>
+			<td><code>type::["PERS","LIEU","HIST","DOC"]</code></td>
+			<td>Explication</td>
+		</tr>
+		<tr>
+			<td><code>typeCible::["PERS","LIEU","HIST","DOC"]</code></td>
+			<td>Explication</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>A voir</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les liens (collection <code>Liens</code>) de l'objet passé en contexte vers d'autres objets. Possibilité d'ajouter, modifier ou supprimer un lien depuis cet objet passé en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une <code>div</code> de classe <code>container</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with souvenirBanquet}}
+	{{|> LienListePour id=_id type="DOC"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibDebug}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

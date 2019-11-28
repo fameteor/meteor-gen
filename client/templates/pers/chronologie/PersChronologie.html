@@ -1,0 +1,48 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersChronologie              -->
+<!-- ===================================== -->
+<template name="PersChronologie">
+	{{#with listeStructurePersFamilleProche}}
+		<svg version="1.1" viewBox="{{viewBox}}" width="100%" height="100%" preserveAspectRatio ="none" xmlns="http://www.w3.org/2000/svg">
+			<!-- Symboles pour les dates VERS, AVANT, APRES, ENTRE ====== -->
+			{{> PersChronologieSymboles}}
+			<!-- On trace les périodes d'histoire -->
+			{{#each periodesHist}}
+				<rect x="{{xPeriodeHist}}" y="{{yPeriodeHist}}" width="{{widthPeriodeHist}}" height="{{heightPeriodeHist}}" class="{{classePeriodeHist}}"/>
+			{{/each}}
+			<!-- On trace les intitulés des périodes d'histoire séparément pour avoir un style différent selon la position dans le DOM -->
+			{{#each periodesHist}}
+				<g transform="translate(3,{{offsetY}})">
+					<text x="{{xPeriodeHist}}" y="0" class="periodeHistText">{{intitule}}</text>
+				</g>
+			{{/each}}
+			<!-- Génération de l'axe temporel X (échelle 5px par ans) === -->
+			<line x1="0" y1="0" x2="11000" y2="0" class="legendeTemp_axe" />
+			{{#each legendeTemp}}
+				<line x1="{{x}}" y1="-5" x2="{{x}}" y2="2950" class="{{classe}}" />
+				<text x="{{x}}" y="-10" class="legendeTemp">{{label}}</text>
+			{{/each}}
+			<!-- Génération des lignes de vie des personnes ============= -->
+			{{#each .}}
+				{{> PersChronologieLignePers}}
+			{{/each}}
+			
+			{{#each hists}}
+				<use class="goToPtHist" x="{{histPosition}}" y="75" xlink:href="#{{typeTemplate}}">
+					<title>{{titre}}</title>
+				</use>
+			{{/each}}
+			
+			<!-- Mouse cuurent date cursor -->
+			{{#if cursorDate}}
+				<line x1="{{xCursorDate}}" y1="0" x2="{{xCursorDate}}" y2="{{yCursorDate}}" class="cursorDate" />
+			{{/if}}
+				
+		</svg>
+	{{/with}}
+	<div class="row margin-top noprint">
+		<div class="col-md-12">
+			{{> LibPrintThisSvgButton label="Exporter en .png" svgTemplate=svgTemplate fileName=fileName cssFile="chronologie.css"}}
+		</div>
+	</div>
+</template>

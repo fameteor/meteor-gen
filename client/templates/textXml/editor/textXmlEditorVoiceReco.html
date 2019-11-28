@@ -1,0 +1,8 @@
+<!-- ===================================== -->
+<!-- TEMPLATE textXmlEditorVoiceReco       -->
+<!-- ===================================== -->
+<template name="textXmlEditorVoiceReco">
+	{{#if gh_isAudioTranscriptCapable}}
+		<button id="dicter"  title="{{#if audioTranscriptIsOn}}Arrêter la dictée{{else}}Dicter{{/if}}" class="btn btn-default" {{disabled}}><span class="{{#if audioTranscriptIsOn}}red{{/if}}">{{> LibIcone "audioTranscript"}}</span></button>
+	{{/if}}
+</template>

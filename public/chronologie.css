@@ -1,0 +1,48 @@
+svg {
+	background-color:#EEEEEE;
+}
+
+
+/* Pour la représentation chronologique de la famille proche       */
+/* --------------------------------------------------------------- */
+line.legendeTemp_axe 			{stroke:#666666;stroke-width:1;}
+line.legendeTemp_traitsNiv1 	{stroke:#666666;stroke-width:1;stroke-dasharray:4 2;}
+line.legendeTemp_traitsNiv2 	{stroke:#666666;stroke-width:1;stroke-dasharray:1 5;}
+text.legendeTemp				{fill:#666666;text-anchor:middle;}
+
+line.pers_grandParent 		{stroke:#16089E;stroke-width:2;}
+line.pers_parent 				{stroke:#0554FF;stroke-width:2;}
+line.pers_enfant 				{stroke:#8200FF;stroke-width:2;}
+
+line.lienConjoints.pers_grandParent	{stroke:#16089E;fill-opacity:0.6;stroke-width:2;stroke-dasharray:2 2;}
+line.lienConjoints_pers_parent		{stroke:#0554FF;fill-opacity:0.6;stroke-width:2;stroke-dasharray:2 2;}
+
+line.marqueDate 				{stroke:#000000;stroke-width:2;}
+text.marqueDate 				{fill:#000000;}
+
+line.marquePointilles			{stroke:red;stroke-width:2;stroke-dasharray:2 2;}
+path.marqueDateIncertaine, rect.marqueDateIncertaine, text.marqueDateIncertaine	{fill:red;}
+.ptHist						{stroke:white;stroke-width:1.5;fill:#444444;}
+
+path.pers_grandParent, rect.pers_grandParent 	{fill:#16089E;fill-opacity:0.6;stroke-width:0;}
+path.pers_parent , rect.pers_parent 			{fill:#0554FF;fill-opacity:0.6;stroke-width:0;}
+path.pers_enfant , rect.pers_enfant 			{fill:#8200FF;fill-opacity:0.6;stroke-width:0;}
+
+text.pers_grandParent 		{fill:#16089E;}
+text.pers_parent 				{fill:#0554FF;}
+text.pers_enfant 				{fill:#8200FF}
+text.pers_inconnue			{font-style:italic;fill:red;}
+
+rect.periodeHistEven 		{stroke-width:0;fill:#DDDDDD;}
+rect.periodeHistOdd 		{stroke-width:0;fill:#EEEEEE;}
+
+text.periodeHistText	{fill:#666666;font-style:italic;font-size:13px;}
+
+span#pers_grandParent 	{color:#16089E}
+span#pers_parent 		{color:#0554FF}
+span#pers_enfant 		{color:#8200FF}
+
+
+/* Problème d'interprétaion par Batik !! */
+rect.periodeHist:nth-child(even) {fill:#DDDDDD;}
+rect.periodeHist:nth-child(odd) {fill:#EEEEEE;}

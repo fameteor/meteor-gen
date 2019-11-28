@@ -1,0 +1,35 @@
+<!-- ===================================== -->
+<!-- TEMPLATE ProfListetout                -->
+<!-- ===================================== -->
+<template name="ProfListetout">
+	<div class="container">
+		<h4>Liste des professions</h4>
+		<table class="table table-striped">
+			<thead>
+				<th>ID</th>
+				<th>ID legacy</th>
+				<th>Intitulé masculin</th>
+				<th>Intitulé féminin</th>
+				<th>Modifier</th>
+				<th>Supprimer</th>
+			</thead>
+			<tbody>
+				{{#each .}}
+					<tr>
+						<td>{{> LibClipId}}</td>
+						<td>{{id}}</td>
+						<td>{{M}}</td>
+						<td>{{F}}</td>
+						<td>
+							<button title="Modifier la profession" type="button" class="btn btn-warning modifyProf">{{> LibIcone "iconeModifier"}}</button>
+						</td>
+						<td>
+							<button title="Supprimer la profession" type="button" class="btn btn-danger deleteProf">{{> LibIcone "iconeSupprimer"}}</button>
+						</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		<button title="Ajouter une profession" type="button" class="btn btn-primary addProf">{{> LibIcone "iconeAjouter"}}</button>
+	</div>
+</template>

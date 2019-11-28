@@ -1,0 +1,17 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogSchemaMain       -->
+<!-- ===================================== -->
+<template name="AdminDocprogSchemaMain">
+	<div class="container">
+		<h3>{{> LibIcone "iconeAdmin"}} Modèle de données</h3>
+		<h4><a id="intro"></a>1) Introduction</h4>
+		Les structures autorisées des données utilisées sont définies dans la variable globale Javascript <code>SCHEMA</code> décrite dans le fichier <code>/common/schemas.js</code>. Ce fichier décrit les structures de données selon le modèle de <a href="https://github.com/aldeed/node-simple-schema" target="_blank">Node simple-schema</a>.
+		<h4><a id="intro"></a>2) Schémas disponibles</h4>
+		<ul>
+			{{#each listeSchemas}}
+				<li>{{index}}) Schéma de <a href="/admin/docprog/schema/detail/{{nomSchema}}"><code>{{nomSchema}}</code></a></li>
+			{{/each}}
+		</ul>
+		<hr/>
+	</div>
+</template>

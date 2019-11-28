@@ -1,0 +1,60 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminBugs                                                       -->
+<!-- Contexte : curseur BUG      					           -->
+<!-- ===================================== -->
+<template name="AdminBugs">
+	<div class="container">
+		<!-- ============================== -->
+		<h2><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Bugs / améliorations</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Type</th>
+					<th>Description</th>
+					<th>Criticité</th>
+					<th>Module(s) concerné(s)</th>
+					<th>Résolu</th>
+					<th>Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each .}}
+				<tr>
+					<td>{{{type}}}</td>
+					<td>{{description}}</td>
+					<td>{{{criticiteEnTexteHtml}}}</td>
+					<td><code>{{module}}</code></td>
+					<td class="center">
+						{{#if estResolu}}
+							<p class="text-success">
+								<span class="glyphicon glyphicon-ok" aria-hidden="true"></span><br>
+							</p>
+						{{else}}
+							<input type="checkbox" class="checkboxResolu">
+						{{/if}}
+					</td>
+					<td>
+						<a class="btn btn-warning boutonSupprimer" href="#" role="button"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></a>
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+		
+		<!-- ============================== -->
+		<h2><span class="glyphicon glyphicon-cog" aria-hidden="true"></span> Ajouter un bug  / une améliorations</h2>
+		{{#autoForm collection="Bugs" id="addBugForm" type="insert"}}
+			<div class="row">
+				<div class="col-sm-6">
+					{{> afQuickField name='type'}}
+					{{> afQuickField name='criticite'}}
+					{{> afQuickField name='module' autocomplete='off'}}
+				</div>
+				<div class="col-sm-6">
+					{{> afQuickField name='description' rows=7 autocomplete='off'}}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">Ajouter</button>
+		{{/autoForm}}
+	</div>
+</template>

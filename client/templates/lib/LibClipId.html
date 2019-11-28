@@ -1,0 +1,10 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibClipId                    -->
+<!-- ===================================== -->
+<template name="LibClipId">
+	{{#if _id}}
+		<a class="clipId" href="#" title="Copier l'ID">{{> LibIcone "iconeCopierId"}}</a>
+		<!-- Pour faire le copie de l'id, on est obligé de mettre un champ caché contenant l'ID -->
+		<small>(<span id="{{_id}}">{{_id}}</span>)</small>
+	{{/if}}
+</template>

@@ -1,0 +1,9 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersFormaterListe                                              -->
+<!-- ===================================== -->
+<template name="PersFormaterListe">
+	<h4>{{nombre}} personne{{#if pluriel}}s{{/if}} connue{{#if pluriel}}s{{/if}}</h4>
+	{{#each .}}
+		{{> PersCompletAvecLien}} ({{id}})<br/>
+	{{/each}}
+</template>

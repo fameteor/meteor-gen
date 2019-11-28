@@ -1,0 +1,42 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuFormulaire pour Ajouter ou Modifier       	   -->
+<!-- ===================================== -->
+<template name="LieuFormulaire">
+	<fieldset>
+		<div class="row fondLayoutModifier">
+			<div class="col-sm-2">
+				{{> afQuickField name='genre'}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='nom' autocomplete='off'}}
+				{{> afQuickField name='complement' autocomplete='off'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='nature'}}
+				{{> afQuickField name='code'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='inclusDans' type="hidden" autocomplete='off'}}
+				<!-- Pour gérer l'affichage de l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="inclusDans_intitule">Intitulé lieu parent</label>
+					<input class="form-control intitule" id="inclusDans_intitule" name="inclusDans_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='tags'}}
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-sm-4">
+				{{> afQuickField name='topoFamille' autocomplete='off'}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='positionSurCartes'}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='latLng'}}
+			</div>
+		</div>
+	</fieldset>
+</template>

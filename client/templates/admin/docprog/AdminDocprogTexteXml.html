@@ -1,0 +1,316 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogTexteXml         -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogTexteXml">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Structures Texte XML</h2>
+		<ul>
+			<li><a href="#principe">1) Principe de fonctionnement</a></li>
+			<li><a href="#tags">2) Custom tags définis</a></li>
+			<li><a href="#editeur">3) Fonctionnement de l'éditeur</a></li>
+			<li><a href="#viewer">4) Afficher un texte XML sans l'éditeur/viewer</a></li>
+			<li><a href="#ameliorations">5) Améliorations</a></li>
+			<li><a href="#afaire">6) A faire</a></li>
+
+		</ul>
+
+<h3><a id="principe"></a>1) Principe de fonctionnement</h3>
+<!-- ===================================== -->
+	<p>Un certain nombre de "custom tags" sont définis selon deux modes d'usage :</p>
+	<h4>Mode commentaire <code>"COMMENT"</code> :</h4>
+	<p>L'objectif est de pouvoir simplement mettre en forme un commentaire avec des liens hypertextes vers les objets GEN :</p>
+	<ul>
+		<li>Mettre des liens hypertextes en taguant des entités nommées référencées dans la base (personnes, lieux, documents, points d'histoire).</li>
+		<li>Mettre en forme le commentaire : typographie + images.</li>
+	</ul>
+	
+	<h4>Mode transcription <code>"TRANSCRIPT"</code> :</h4>
+	<p>L'objectif est de pouvoir simplement réaliser une transcription avec des liens hypertextes vers les objets GEN et utiliser les informations de cette transcription :</p>
+	<ul>
+		<li>Mettre en forme des transcriptions (pour des éléments en note, en marge, en tête, des éléments incertains).</li>
+		<li>Mettre des liens hypertextes en taguant des entités nommées référencées dans la base (personnes, lieux, documents, points d'histoire).</li>
+		<li>Associer des informations extraites du texte aux entités nommées identifiées.</li>
+	</ul>
+	<p>Cela se fait sous la forme d'une structure XML avec des custom tags associés à des tags HTML classiques.</p>
+
+<p class="bg-danger">Nb : Pendant la phase de migration, les IDs de référence des objets Gen peuvent être soit des id de Mongo DB soit les id LCCCCCCCC de la version précédente de généalogie pour des pointeurs vers ces objets existant.</p>
+		
+<h3><a id="tags"></a>2) Custom tags définis et tags HTML utilisés</h3>
+<!-- ===================================== -->
+	
+<h4>Custom tags de mise en forme</h4>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Tag</th>
+			<th>mode <code>"COMMENT"</code></th>
+			<th>mode <code>"TRANSCRIPT"</code></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>&lt;x-img&gt;</code></td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@src</code> : path du fichier sans la parte host (par exemple : <code>/data/photos/00000001.jpg</code>, on laisse de côté ce qui peut dépendre du site d'hébergement des données : <code>http://localhost/marais</code>)</li>
+					<li><code>@align</code> : valeurs autorisées : <code>"LEFT"</code>, <code>"RIGHT"</code> ou <code>"IN_TEXT"</code>.</li>
+				</ul>
+			</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-entete&gt;</code></td>
+			<td>N/A</td>
+			<td>
+				Positionnement en tête du document. Aucun attribut.
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-enmarge&gt;</code></td>
+			<td>N/A</td>
+			<td>
+				Positionnement en marge du document. Aucun attribut.
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-ensignature&gt;</code></td>
+			<td>N/A</td>
+			<td>
+				Positionnement en signature, doit comprendre la liste des personnes ayant signé : <code>&lt;ul&gt;....&lt;/ul&gt;</code>. Aucun attribut.
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-ennote&gt;</code></td>
+			<td>N/A</td>
+			<td>
+				Positionnement en note du document. Aucun attribut.
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-incertain&gt;</code></td>
+			<td>N/A</td>
+			<td>
+				Incertitude sur la transcription des noeuds fils. Aucun attribut.
+			</td>
+		</tr>
+
+	</tbody>
+</table>
+
+<h4>Custom tags sémantiques</h4>
+<table class="table table-striped">
+	<!-- ======================= -->
+	<thead>
+		<tr>
+			<th>Tag</th>
+			<th>mode <code>"COMMENT"</code></th>
+			<th>mode <code>"TRANSCRIPT"</code></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>&lt;x-pers&gt;</code><br/>Maximum 1 par objet et par document.</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+					<li><code>@age</code></li>
+					<li><code>@status</code></li>
+					<li><code>@role</code></li>
+					<li><code>@signe</code></li>
+					<li><code>@habite</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-lieu&gt;</code><br/>Maximum 1 par objet et par document.</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-hist&gt;</code><br/>Maximum 1 par objet et par document.</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<td><code>&lt;x-doc&gt;</code><br/>Maximum 1 par objet et par document.</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+			<td>
+				Attributs obligatoires :
+				<ul>
+					<li><code>@id</code></li>
+				</ul>
+			</td>
+		</tr>
+						<tr>
+			<td><code>&lt;x-info&gt;</code><br/>Pas de limitation de nombre par objet.</td>
+			<td>N/A</td>
+			<td>
+				Information sur un objet GEN, l'un des attributs ci-dessous est obligatoire (toujours <code>@pers</code> dans le légacy)
+				<ul>
+					<li><code>@pers</code></li>
+					<li>ou <code>@lieu</code></li>
+					<li>ou <code>@hist</code></li>
+					<li>ou <code>@doc</code></li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>Tags html autorisés</h4>
+<table class="table table-striped">
+	<!-- ======================= -->
+	<thead>
+		<tr>
+			<th>Tag</th>
+			<th>mode <code>"COMMENT"</code></th>
+			<th>mode <code>"TRANSCRIPT"</code></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>&lt;b&gt;</code></td>
+			<td>Autorisé</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td><code>&lt;i&gt;</code></td>
+			<td>Autorisé</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td><code>&lt;h1&gt;</code></td>
+			<td>Autorisé</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td><code>&lt;h2&gt;</code></td>
+			<td>Autorisé</td>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<td><code>&lt;h3&gt;</code></td>
+			<td>Autorisé</td>
+			<td>N/A</td>
+		</tr>
+		
+		<tr>
+			<td><code>&lt;br&gt;</code></td>
+			<td>Autorisé</td>
+			<td>Autorisé</td>
+		</tr>
+		<tr>
+			<td><code>&lt;hr&gt;</code></td>
+			<td>Autorisé</td>
+			<td>Autorisé</td>
+		</tr>
+		<tr>
+			<td><code>&lt;p&gt;</code></td>
+			<td>Autorisé</td>
+			<td>Autorisé</td>
+		</tr>
+		<tr>
+			<td><code>&lt;ul&gt;</code></td>
+			<td>Autorisé</td>
+			<td>Autorisé</td>
+		</tr>
+		<tr>
+			<td><code>&lt;li&gt;</code></td>
+			<td>Autorisé</td>
+			<td>Autorisé</td>
+		</tr>
+	</tbody>
+</table>
+
+		
+<h3><a id="editeur"></a>3) Fonctionnement de l'éditeur/viewer</h3>
+<!-- ===================================== -->
+<p>
+	Le code pour appeler l'éditeur/viewer est le suivant en mode <code>"COMMENT"</code> (mode par défaut) :
+	<pre>{{|> textXmlEditor collection=Pers id=_id field="comment"}}</pre>
+	Le code pour appeler le viewer est le suivant en mode <code>"TRANSCRIPT"</code> :
+	<pre>{{|> textXmlEditor collection=Docs id=_id field="specif.ACTE_transcription" mode="TRANSCRIPT"}}</pre>
+
+
+</p>
+
+<h3><a id="viewer"></a>4) Afficher un texte XML sans l'éditeur/viewer</h3>
+<!-- ===================================== -->
+<p>
+	La transformation d'un texte XML en code HTML (texte) peut se faire :
+</p>
+<ul>
+	<li>
+		soit par une fonction globale <code>gf_transformTextXml = function(texteXML)</code> définie dans le fichier <code>/client/main.js</code>. Cette fonction renvoie un code HTML.
+	</li>
+	<li>
+		soit par un helper <code>gh_transformTextXml texteXML</code> défini aussi dans le fichier <code>/client/main.js</code>. Un code HTML est retourné, ne pas oublier donc les triples "mustaches".<br/>
+		Exemple :
+		<pre>{{{|> gh_transformTextXml specif.ACTE_transcription}}}</pre>
+	</li>
+</ul>
+<p>
+	Fonctionnement : les customs tags d'un texte XML (que ce soit en mode ou en mode ) sont remplacés en HTML par une transformation XSLT dont le code est dans la variable javascript <code>xsltForTexteXml</code> définie dans le fichier <code>/client/xsltForTexteXml.js</code>.
+</p>
+
+<h3><a id="ameliorations"></a>5) Améliorations</h3>
+<!-- ===================================== -->
+<ul>
+	<li>Permettre le surlignage des infos avec reconnaissance auto sémantique.</li>
+</ul>
+
+<h3><a id="afaire"></a>6) A faire</h3>
+<!-- ===================================== -->
+<ul>
+	<li><span class="bg-danger">Définir et implémenter l'attribut align du tag x-img</span></li>
+	<li>Mieux gérer la position des boutons pour une zone d'édition étroite</li>
+	<li>Passage de paramètres au viewer : passer un string au lieu de collection (pas besoin de faire un helper).</li>
+	<li><span class="bg-danger">Vérif bien formé et XSD avant enregistrement dans la base</span></li>
+	<li><span class="bg-danger">Vérifier que la sélection est bien dans le texte éditable</span></li>
+	<li>Faire marcher sur navigateurs autres que Firefox</li>
+	<li><span class="bg-danger">Mettre en forme pour entete en marge et ensignature et ennote correctement placés</span></li>
+	<li>Améliorer les styles h1,h2,h3</li>
+	<li>Prévoir undo et redo</li>
+	<li>Ne pas faire marcher les liens sur le preview, sinon on perd l'édition en cours</li>
+	<li><span class="bg-danger">Transformer le "field" pour tous niveaux en récursif (fonction <code>textXml()</code> de <code>textXmlEditor.js</code>)</span></li>
+	
+</ul>
+
+
+
+	</div>
+</template>

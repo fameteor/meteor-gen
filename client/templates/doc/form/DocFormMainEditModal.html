@@ -1,0 +1,210 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE DocFormMainEditModal         -->
+<!-- ===================================== -->
+<template name="DocFormMainEditModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ========== -->
+					{{#if hlp_eq action "INSERT"}}
+						<div class="modal-header modal-insert">
+							{{> LibIcone "iconeDoc"}} Ajout d'un document
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "UPDATE"}}
+						<div class="modal-header modal-update">
+							{{> LibIcone "iconeDoc"}} Modification d'un document
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "DELETE"}}
+						<div class="modal-header modal-delete">
+							{{> LibIcone "iconeDoc"}} Suppression d'un document
+						</div>
+					{{/if}}
+					<!-- BODY ======== -->
+					<div class="modal-body row">
+						<div class="col-sm-12">
+							{{#if hlp_eq action "INSERT"}}
+								{{#autoForm collection="Docs" doc=doc id="addDocFormMain" type="insert"}}
+									{{> DocFormMain}}
+									<br/>
+									<div class="row">
+										<div class="col-sm-12 text-center">
+											<button type="submit" class="btn btn-primary">Ajouter</button>
+											<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+										</div>
+									</div>
+								{{/autoForm}}
+							{{/if}}
+							{{#if hlp_eq action "UPDATE"}}
+								{{#with doc}}
+									{{#autoForm collection="Docs" doc=. id="updateDocFormMain" type="update"}}
+										{{> DocFormMain}}
+										<br/>
+										<div class="row">
+											<div class="col-sm-12 text-center">
+												<button type="submit" class="btn btn-warning">Modifier</button>
+												<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+											</div>
+										</div>
+									{{/autoForm}}
+								{{/with}}
+							{{/if}}
+							{{#if hlp_eq action "DELETE"}}
+								{{#with doc}}
+									{{#with (gh_getPointingObjects . "DOC")}}
+										{{#if gh_thereIsNoPointingObject .}}
+											<!-- BODY ======== -->
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 class="text-danger">{{> LibIcone "warning"}} Toutes les données concernant {{#with ..}}{{> DocTitreAvecLien}}{{/with}} vont-être supprimées, êtes-vous sûr de vouloir continuer ?</h4>
+												</div>
+											</div>
+											<br/>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button id="supprimer" type="button" class="btn btn-danger" data-dismiss="modal">Supprimer</button>
+													<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+												</div>
+											</div>
+										{{else}}
+											<!-- BODY ======== -->
+											<div class="row">
+												<div class="col-sm-12">
+													<h4 class="text-danger">{{> LibIcone "warning"}} Les données concernant {{#with ..}}{{> DocTitreAvecLien}}{{/with}} ne peuvent pas être supprimées, il faut d'abord supprimer les liens suivants qui pointent vers ce document :</h4>
+													{{> LibDisplayPointingObjectList list=.}}
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+												</div>
+											</div>
+										{{/if}}
+									{{/with}}
+								{{/with}}
+							{{/if}}
+						</div>
+					</div>
+			</div>
+		</div>
+    </div>
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- DocFormMainEditModal_DOCAUTO         -->
+<!-- ===================================== -->
+<template name="DocFormMainEditModal_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>action::{"INSERT","UPDATE","DELETE"}</code></td>
+			<td>Type de formulaire demandé.</td>
+		</tr>
+		<tr>
+			<td><code>doc::DOC</code></td>
+			<td>informations sur la <code>doc</code> à insérer, modifier ou supprimer.</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code><br/>
+<code>DocFormMain</code><br/>
+<code>DocTitreAvecLien</code><br/>
+<code>LibDisplayPointingObjectList</code><br/>
+
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Fenêtre modale d'édition de infos générales sur une personne. S'appuie sur le formulaire <code>DocFormMain</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une popup Bootstrap qui lui transmet les paramètres.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Appel uniquement par code Javascript, ex : <pre>Modal.show(
+	"DocFormMainEditModal",
+	{
+		action:"INSERT",
+		doc:unDoc
+	},
+	{backdrop:'static',keyboard:false}
+);</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

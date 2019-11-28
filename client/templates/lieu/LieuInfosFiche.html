@@ -1,0 +1,106 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuInfosFiche               -->
+<!-- ===================================== -->
+<template name="LieuInfosFiche">
+	{{#with lieu}}
+		<div class="row">
+			<div class="col-md-12" >
+					<!-- Commentaires ============ -->
+					<h4>Commentaires</h4>
+					{{> textXmlEditor collection=Lieux id=_id field="comment"}}
+					<!-- Famille toponymique ===== -->
+					{{#if topoFamille}}
+						<hr/>
+						<h4>Famille de toponymie</h4>
+						{{topoFamille}}
+					{{/if}}
+					<!-- Commentaire toponymique = -->
+					<hr/>
+					<h4>Commentaire de toponymie</h4>
+					{{> textXmlEditor collection=Lieux id=_id field="topoComment"}}
+					<!-- Recherche =============== -->
+					<hr/>
+					<h4>Remarques de recherche</h4>
+					{{> textXmlEditor collection=Lieux id=_id field="recherche"}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-12" >
+				<hr/>
+				<h4>Informations dans les actes</h4>
+				{{> LibDocAnalysis obj=. objType="LIEU"}}
+				<!-- Recherche ====================== -->
+				<hr/>
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LieuInfosFiche_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="LieuInfosFiche_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>lieu</code></td>
+		<td><code>::LIEU</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>textXmlEditor</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche la fiche d'informations sur le lieu passé en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

@@ -1,0 +1,14 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistAjouter                                                       -->
+<!-- ===================================== -->
+<template name="HistAjouter">
+	{{#autoForm collection="Hists" id="addHistForm" type="insert"}}
+		{{> HistFormulaire}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Ajouter</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

@@ -1,0 +1,124 @@
+<!-- ===================================== -->
+<!-- TEMPLATE UserJoignability             -->
+<!-- Contexte :                            -->
+<!-- 	id 							       -->
+<!-- ===================================== -->
+<template name="UserJoignability">
+	{{#with user=user}}
+		{{> UserPresence}}
+		<button type="button" class="btn btn-primary {{chatDisabled}} chat" title="{{titleChat}}">
+			{{> LibIcone "chat"}}
+		</button>
+		<button type="button" class="btn btn-primary {{phoneDisabled}} phone" title="{{titlePhone}}">
+			{{> LibIcone "phone"}}
+		</button>
+		<button type="button" class="btn btn-primary {{visioDisabled}} visio" title="{{titleVisio}}">
+			{{> LibIcone "visio"}}
+		</button>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- UserJoignability_DOCAUTO              -->
+<!-- ===================================== -->
+<template name="UserJoignability_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>user</code></td>
+		<td><code>::Meteor.user</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>UserPresence</code><br/>
+<code>LibIcone</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche la présence et les boutons de joignabilité de l'utilisateur passé dans le paramètre <code>user</code>. Les boutons sont actifs ou inactifs en fonction de la présence et des capacités de joignabilité de l'utilisateur courant et de l'utilisateur passé dans le paramètre <code>user</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Aucun tag Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with user=moi}}
+	{{|> UserJoignability}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with user=moi}}
+	{{> UserJoignability}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A implémenter : les actions et l'activation/inactivation des boutons.
+<!-- ===================================== -->	
+	</div>
+</template>

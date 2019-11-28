@@ -1,0 +1,42 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersFormMain                 -->
+<!-- For create or update                  -->
+<!-- ===================================== -->
+<template name="PersFormMain">
+	<fieldset>
+		<div class="row">
+			<div class="col-md-3">
+				{{> afQuickField name='nom' autocomplete='off'}}
+				{{> afQuickField name='sexe'}}
+				<label class="control-label">Situation actuelle</label>
+				<div class="row">
+					<div class="col-sm-6">
+						{{> afQuickField name='estVivant'}}
+					</div>
+					<div class="col-sm-6">
+						{{> afQuickField name='estCelibataire'}}
+					</div>
+				</div>
+			</div>
+			<div class="col-md-3">
+				{{> afArrayField name='prenoms' template='prenoms'}}
+				{{> afQuickField name='pere' type='hidden'}}
+				{{> afQuickField name='mere' type='hidden'}}
+			</div>
+			<div class="col-md-3">
+				{{> afQuickField name='prenomUsuel' type="text"}}
+				<label class="control-label">Prénom usuel non officiel</label>
+				{{> afQuickField name='prenomUsuelEstNonOfficiel'}}
+			</div>
+			<div class="col-md-3">
+				{{> afQuickField name='tags'}}
+				{{> afQuickField name='etatRechActes'}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
+				<label class="control-label">(*) : saisie obligatoire</label>
+			</div>
+		</div>
+	</fieldset>
+</template>

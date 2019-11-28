@@ -1,0 +1,89 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocChercher                  -->
+<!-- ===================================== -->
+<template name="DocChercher">
+	<div class="row fondLayoutChercher">
+		<form>
+			<div class="row">
+				<div class="col-sm-6">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-6">
+								{{#each premiersTypes}}
+								<div class="checkbox">
+									<label>
+										<input class="type" type="checkbox" value="{{valeur}}" {{typeChecked}}>
+										{{nomType}}
+									</label>
+								</div>
+								{{/each}}
+							</div>
+							<div class="col-sm-6">
+								{{#each derniersTypes}}
+								<div class="checkbox">
+									<label>
+										<input class="type" type="checkbox" value="{{valeur}}" {{typeChecked}}>
+										{{nomType}}
+									</label>
+								</div>
+								{{/each}}
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-12 text-center">
+								<a id="boutonTousTypes" class="btn btn-primary" href="#" role="button" title="Tout sélectionner">tous <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+								<a id="boutonAucunType" class="btn btn-primary" href="#" role="button" title="Tout désélectionner">aucun</a>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-sm-6">
+					<div class="form-group">
+						<label for="choix_doc_titre">dont le titre contient (non pris en compte pour les actes)</label>
+						<input	type="text" 
+								class="form-control" 
+								id="choix_doc_titre" 
+								autocomplete="off" 
+								placeholder="Saisir une partie du titre" 
+								value="{{choix_doc_titre}}">
+					</div>
+					<div class="form-group">
+						<label for="choix_doc_anneeDebut">entre l'année (comprise)</label>
+						<input	type="number" 
+								class="form-control" 
+								id="choix_doc_anneeDebut" 
+								autocomplete="off" 
+								value="{{choix_doc_anneeDebut}}">
+					</div>
+					<div class="form-group">
+						<label for="choix_doc_anneeFin">et l'année (comprise)</label>
+						<input	type="number" 
+								class="form-control" 
+								id="choix_doc_anneeFin" 
+								autocomplete="off" 
+								value="{{choix_doc_anneeFin}}">
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+	<!-- Resultat ======================= -->
+	<hr/>
+	<div class="row">
+		<div class="col-sm-12">
+			{{#if saisieValide}}
+				{{#with docsSelectionnes}}
+					<h4>{{hlp_count .}} document{{#if hlp_gt (hlp_count .) 1}}s{{/if}} sélectionné{{#if hlp_gt (hlp_count .) 1}}s{{/if}}</h4>
+					{{> LibPaginateGenObjectsList list=. objectType="DOC" nbElemPerPage=15 nbPagesMax=9}}
+				{{else}}
+					<h4>0 documents sélectionnés</h4>
+				{{/with}}
+			{{else}}
+				<p class="text-danger">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					La saisie est valide dans tous les cas pour ce formulaire (pour l'instant).
+				</p>
+			{{/if}}
+		</div>
+	</div>
+</template>

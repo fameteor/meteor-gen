@@ -1,0 +1,49 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienAjouterModal             -->
+<!-- ===================================== -->
+<template name="LienAjouterModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+				<!-- HEADER ============== -->
+				<div class="modal-header">
+					{{> LibIcone "iconeLien"}} Ajouter un lien vers
+				</div>
+				<!-- BODY ================ -->
+				<div class="modal-body row">
+					<form class="form-inline">
+						<div class="col-sm-12">
+							<!-- Genre ================ -->
+							<div class="form-group">
+								<select class="form-control" id="objType">
+									<option value="">- Choisir le type de cible</option>
+									{{#each listeObjetsGen}}
+										<option value="{{value}}">{{label}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<!-- Vers-ID ================ -->
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="idVers" placeholder="id" autocomplete='off'>
+							</div>
+							<!-- Vers-Intitulé ================ -->
+							<div class="form-group">
+								<input type="text" class="form-control intitule" id="idVers_intitule" placeholder="nom" autocomplete='off'>
+							</div>
+							<!-- Commentaire ================ -->
+							<div class="form-group">
+								<input type="text" class="form-control" id="comment" placeholder="commentaire" autocomplete='off'>
+							</div>
+							<!-- Submit ================ -->
+							<button type="submit" class="btn btn-warning pull-right">Ajouter</button>
+						</div>
+					</form>
+				</div>
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

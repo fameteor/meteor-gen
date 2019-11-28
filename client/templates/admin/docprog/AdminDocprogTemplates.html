@@ -1,0 +1,1188 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogTemplates        -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogTemplates">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur les templates</h2>
+		<ul>
+			<li><a href="#nomage">1) Nommage</a></li>
+			<li><a href="#DATE">2) Templates DATE</a></li>
+			<li><a href="#PERS">3) Templates PERS</a></li>
+			<li><a href="#LIEU">4) Templates LIEU</a></li>
+			<li><a href="#HIST">5) Templates HIST</a></li>
+			<li><a href="#DOC">6) Templates DOC</a></li>
+			<li><a href="#LIB">7) Templates LIB</a></li>
+		</ul>
+		
+		<!-- ============================== -->
+		<h3><a id="nomage"></a>1) Nommage</h3>
+		<ul>
+			<li>Règle 1 : Il n'y a qu'un template par fichier (et donc un fichier <code>.html</code> et zéro ou un fichier <code>.js</code> par template).</li>
+			<li>Règle 2 : Tous les noms de templates correspondent au nom du fichier et au path sous la directory <code>/client/templates/</code> avec des sous directories dont le nom est en <strong>minuscule</strong>. Par exemple : le template de nom <code>AdminBugsAjouter</code> est décrit dans les fichiers <code>AdminBugsAjouter.html</code> et <code>AdminBugsAjouter.js</code> situés dans la directory <code>/client/templates/admin/bugs/ajouter</code>. Nb : le path peut ne représenter qu'une partie du nom, exemple : <code>PersIconeSexe</code> est dans la directory <code>/client/template/pers</code>.</li>
+			<li>Règle 3 : Les noms de templates sont en camel case avec la première lettre en majuscule. Exemple : <code>AdminBugsAjouter</code> <span class="bg-danger">(à voir pour les librairies ?)</span>.</li>
+			<li>Règle 4 : Les templates qui sont <strong>routés selon l'URL</strong> et <strong>non paramètres de iron-router</strong> ont, <strong>si possible</strong>, un nom qui correspond au path de l'URL en mettant des majuscules partout ou il y a un "/". Par exemple, le template dont le nom est <code>AdminBugsAjouter</code> correspond au path <code>/admin/bugs/ajouter</code>. Si plusieurs path sont routés vers le même template (<strong>à limiter au maximum</strong>), cette règle ne sera vraie que pour un path.</li>
+			<li>Règle 5 : Les templates qui ne sont <strong>jamais routés selon l'URL</strong>, c'est à dire des templates <strong>librairie</strong> utilisés par les autres templates ou des fichiers <strong>paramètres de iron-router</strong> sont nommés comme suit : 
+				<ul>
+					<li>Les fichiers librairies <strong>liés à un objet</strong> ont un nom dont le début correspond à l'objet qu'ils traitent , par exemple : <code>PersPrenomUsuel</code>.</li>
+					<li>Les fichiers librairies <strong>indépendants des objets structurants</strong>, ont un nom commencant par <code>Lib</code>, par exemple : <code>LibFormatageDate</code>. Si ils ne sont utilisés <strong>que par iron-router</strong>.</li>
+					<li>Pour les fichiers <strong>paramètres de iron-router</strong>, le nom commence par <code>Router</code>, pare exemple : <code>RouterApplicationlayout</code>.</li>
+				</ul>
+			</li>
+		</ul>
+		<!-- ===================================== -->
+		<!--                          DATE                                                       -->
+		<!-- ===================================== -->
+		<h3><a id="DATE"></a>2) Templates DATE</h3>
+		<!-- ================================= -->
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom du template</th>
+					<th>Contexte</th>
+					<th>Utilité</th>
+					<th>Code</th>
+					<th>Exemple</th>
+				</tr>
+			</thead>
+			<tbody>
+			
+				<tr>
+					<td><code>DateformatCourt</code></td>
+					<td><code>::DATE</code></td>
+					<td>Affiche une date au format court (sans date au format calendrier républicain).</td>
+					<td>
+<pre>{{|#with date}}
+	{{|> DateformatCourt}}
+{{|/with}}
+
+{{|#with dateRep}}
+	{{|> DateformatCourt}}
+{{|/with}}
+
+{{|#with dateRep2}}
+	{{|> DateformatCourt}}
+{{|/with}}</pre>
+					</td>
+					<td>
+						{{#with date}}{{> DateformatCourt}}{{/with}}<hr/>
+						{{#with dateRep}}{{> DateformatCourt}}{{/with}}<hr/>
+						{{#with dateRep2}}{{> DateformatCourt}}{{/with}}
+					</td>
+				</tr>
+				<!-- ========================== -->
+				<tr>
+					<td><code>DateformatLong</code></td>
+					<td><code>::DATE</code></td>
+					<td>Affiche une date au format long avec la date au format républicaine entre parenthèses pour la période du calendrier républicain.</td>
+					<td>
+<pre>{{|#with date}}
+	{{|> DateformatLong}}
+{{|/with}}
+
+{{|#with dateRep}}
+	{{|> DateformatLong}}
+{{|/with}}
+
+{{|#with dateRep2}}
+	{{|> DateformatLong}}
+{{|/with}}</pre>
+					</td>
+					<td>
+						{{#with date}}{{> DateformatLong}}{{/with}}<hr/>
+						{{#with dateRep}}{{> DateformatLong}}{{/with}}<hr/>
+						{{#with dateRep2}}{{> DateformatLong}}{{/with}}
+					</td>
+				</tr>
+				<!-- ========================== -->
+				<tr>
+					<td><code>DateformatLongSansCalRep</code></td>
+					<td><code>::DATE</code></td>
+					<td>Affiche une date au format long sans la date au format républicaine pour la période du calendrier républicain.</td>
+					<td>
+<pre>{{|#with date}}
+	{{|> DateformatLongSansCalRep}}
+{{|/with}}
+
+{{|#with dateRep}}
+	{{|> DateformatLongSansCalRep}}
+{{|/with}}
+
+{{|#with dateRep2}}
+	{{|> DateformatLongSansCalRep}}
+{{|/with}}</pre>
+					</td>
+					<td>
+						{{#with date}}{{> DateformatLongSansCalRep}}{{/with}}<hr/>
+						{{#with dateRep}}{{> DateformatLongSansCalRep}}{{/with}}<hr/>
+						{{#with dateRep2}}{{> DateformatLongSansCalRep}}{{/with}}
+					</td>
+				</tr>
+				
+			</tbody>
+		</table>
+		
+		<!-- ===================================== -->
+		<!--                          PERS                                                       -->
+		<!-- ===================================== -->
+		<h3><a id="PERS"></a>3) Templates PERS</h3>
+		<!-- ================================= -->
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom du template</th>
+					<th>Contexte</th>
+					<th>Utilité</th>
+					<th>Code</th>
+					<th>Exemple</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersPhoto</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche la photo de la personne si elle est disponible, sinon affiche un profil d'homme ou de femme selon le sexe.
+				</td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersPhoto}}
+{{|/with}}
+
+{{|#with martheARTUS}}
+	{{|> PersPhoto}}
+{{|/with}}
+
+{{|#with sexeNonConnu}}
+	{{|> PersPhoto}}
+{{|/with}}
+
+{{|#with P00000004}}
+	{{|> PersPhoto}}
+{{|/with}}
+</pre>
+				</td>
+				<td>
+					{{#with benjaminARTUS}}{{> PersPhoto}}{{/with}}<hr/>
+					{{#with martheARTUS}}{{> PersPhoto}}{{/with}}<hr/>
+					{{#with sexeNonConnu}}{{> PersPhoto}}{{/with}}<hr/>
+					{{#with P00000004}}{{> PersPhoto}}{{/with}}
+					
+					
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersIconeSexe</code><br/> ou code HTML par fonction <code>PersIconeSexe(pers)</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche une icône donnant le sexe de la personne, suivie d'un espace.
+				</td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersIconeSexe}}
+{{|/with}}
+
+{{|#with martheARTUS}}
+	{{|> PersIconeSexe}}
+{{|/with}}
+
+{{|#with sexeNonConnu}}
+	{{|> PersIconeSexe}}
+{{|/with}}
+</pre>
+				</td>
+				<td>
+					{{#with benjaminARTUS}}{{> PersIconeSexe}}{{/with}}<hr/>
+					{{#with martheARTUS}}{{> PersIconeSexe}}{{/with}}<hr/>
+					{{#with sexeNonConnu}}{{> PersIconeSexe}}{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersSosas</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche la liste des sosas de la personne s'il y en a, sinon rien. Cette liste apparait en rouge en cas d'implexe.
+				</td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersSosas}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with benjaminARTUS}}{{> PersSosas}}{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersSosasIconeSeule</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche l'icône Sosa seule ({{> LibIcone "iconeSosa"}}). Cette icône apparait en rouge en cas d'implexe. Au survol de cette icône, la liste des sosas de la personne apparait.
+				</td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersSosasIconeSeule}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with benjaminARTUS}}{{> PersSosasIconeSeule}}{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersPrenomUsuel</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche uniquement le prénom usuel de la personne, en formatant de façon différence si c'est un prénom officiel ou non officiel.</td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersPrenomUsuel}}
+{{|/with}}
+
+{{|#with martheARTUS}}
+	{{|> PersPrenomUsuel}}
+{{|/with}}
+</pre>
+				</td>
+				<td>
+					Exemple pour un prénom officiel : {{#with benjaminARTUS}}{{> PersPrenomUsuel}}{{/with}}<hr/>
+					Exemple pour un prénom non officiel : {{#with martheARTUS}}{{> PersPrenomUsuel}}{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersPrenoms</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche les prénoms de la personne, en formatant de façon différence le prénom usuel (en plus gros), officiel ou non officiel.</td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersPrenoms}}
+{{|/with}}
+
+{{|#with martheARTUS}}
+	{{|> PersPrenoms}}
+{{|/with}}
+</pre>
+				</td>
+				<td>
+					{{#with benjaminARTUS}}{{> PersPrenoms}}{{/with}}<hr/>
+					{{#with martheARTUS}}{{> PersPrenoms}}{{/with}}
+				</td>
+			</tr>
+			<tr>
+				<td><code>PersDatesFormatCourt</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche les années de naissance et de décès de la personne contexte en les formatant entre parenthèses et séparées par un tiret .<br/>
+					<p class="bg-danger">Traiter les différents cas et en donner un exemple.</p>
+				</td>
+				<td>
+<pre>{{|#with elieRIVALLIN}}
+	{{|> PersDatesFormatCourt}}
+{{|/with}}</pre>
+				</td>
+				<td>{{#with elieRIVALLIN}}{{> PersDatesFormatCourt}}{{/with}}</td>
+			</tr>
+			<tr>
+				<td><code>PersNomPrenomsAvecLien</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche le nom est les prénoms formatés de la personne avec lien hypertexte.</td>
+				<td>
+<pre>{{|#with martheARTUS}}
+	{{|> PersNomPrenomsAvecLien}}
+{{|/with}}</pre>
+				</td>
+				<td>{{#with martheARTUS}}{{> PersNomPrenomsAvecLien}}{{/with}}</td>
+			</tr>
+			<tr>
+				<td><code>PersNomPrenomsSansLien</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche le nom est les prénoms formatés de la personne sans lien hypertexte.</td>
+				<td>
+<pre>{{|#with martheARTUS}}
+	{{|> PersNomPrenomsSansLien}}
+{{|/with}}</pre>
+				</td>
+				<td>{{#with martheARTUS}}{{> PersNomPrenomsSansLien}}{{/with}}</td>
+			</tr>
+			<tr>
+				<td><code>PersCompletAvecLien</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche les informations de la personne avec lien hypertexte (icône sexe, nom, prénoms, dates courtes).</td>
+				<td>
+<pre>{{|#with elieRIVALLIN}}
+	{{|> PersCompletAvecLien}}
+{{|/with}}</pre>
+<pre>{{|#with martheARTUS}}
+	{{|> PersCompletAvecLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with elieRIVALLIN}}{{> PersCompletAvecLien}}{{/with}}<br/>
+					{{#with martheARTUS}}{{> PersCompletAvecLien}}{{/with}}
+				</td>
+			</tr>
+			<tr>
+				<td><code>PersCompletSansLien</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche les informations de la personne sans lien hypertexte (icône sexe, nom, prénoms, dates courtes).</td>
+				<td>
+<pre>{{|#with elieRIVALLIN}}
+	{{|> PersCompletSansLien}}
+{{|/with}}</pre>
+<pre>{{|#with martheARTUS}}
+	{{|> PersCompletSansLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with elieRIVALLIN}}{{> PersCompletSansLien}}{{/with}}<br/>
+					{{#with martheARTUS}}{{> PersCompletSansLien}}{{/with}}
+				</td>
+			</tr>
+			<tr>
+				<td><code>PersListeEnfants</code></td>
+				<td>
+<pre>::{
+  parentA::PERS,
+  parentB::PERS,
+  focus:: PERS._id
+}</pre>
+				</td>
+				<td>Affiche la liste des enfants, classés par ordre de naissance (en affichage complet) correspondant aux parents spécifiés dans le contexte, avec affichage avec lien hypertexte si l'enfant a un id différent du focus, sans lien et en italique si l'enfant a un id correspondant au focus.</td>
+				<td>
+<pre>{{|#with martheARTUS}}
+	{{|> PersListeEnfants 
+		parentA = h_pere 
+		parentB = h_mere 
+		focus = .
+	}}
+{{|/with}}</pre>
+				</td>
+				<td>{{#with martheARTUS}}{{> PersListeEnfants parentA = h_pere parentB = h_mere focus = .}}{{/with}}</td>
+			</tr>
+			<tr>
+				<td><code>PersFormaterListe</code></td>
+				<td><code>curseur ::PERS</code></td>
+				<td>Formate une liste de personnes en donnant le nombre de personnes et en affichant la liste des personnes en format complet avec lien.</td>
+				<td>
+<pre>{{|#with listeMargueriteBurgaud}}
+	{{|> PersFormaterListe}}
+{{|/with}}</pre>
+				</td>
+				<td>{{#with listeMargueriteBurgaud}}{{> PersFormaterListe}}{{/with}}</td>
+			</tr>
+			
+			<tr>
+				<td><code>PersCarousel</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche un carousel des photos et images de lieux, documents ou points d'histoire en lien avec la vie de la personne. On peut cliquer sur les images pour voir l'objet correspondant.
+					<p class="bg-danger">A faire !!!!</p>
+				</td>
+				<td>
+<pre>{{|> PersCarousel}}</pre>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			
+			<tr>
+				<td><code>PersArbreAsc</code></td>
+				<td><code>::PERS</code></td>
+				<td>
+					Affiche l'arbre généalogique ascendant zoomable et spannable de la personne contexte.
+					<p class="bg-danger">A faire !!!!</p>
+				</td>
+				<td>
+				</td>
+				<td>Cf.menus.</td>
+			</tr>
+			
+<!-- ===================================== -->
+<tr>
+	<td>
+		<code>PersArbreDescExplorableRecursif</code><br/>
+	</td>
+	<td>
+<pre>::{
+  pers ::PERS,
+  generation : 1,
+  focus [::boolean]
+}</pre>
+	</td>
+	<td>
+		<p>Présente l'affichage complet de la personne (icône sexe, nom, prenoms, dates courtes) précédé d'une icone "+" si cette personne a eu au moins un conjoint. On peut cliquer sur ce "+" pour développer les mariages et les enfants, comme dans un explorateur de fichiers et ceci pour toutes les générations descendantes successives.</p>
+		<p>La propriété <code>generation</code> du contexte doit toujours être à <code>1</code> lors de l'appel initial.</p>
+		<p>Si la propriété <code>focus</code> du contexte est à <code>true</code>, la personne de la première génération apparait sans lien et en italique (personne sur lequel il y a le focus). </p>
+		
+		<p>Ce template RECURSIF appelé par lui même (en récursif pour balayer l'arbre des descendants). Le paramètre de contexte <code>generation</code> à 1 initialement, sera incrémenté par chaque appel récursif (pour affichage de la génération et pour une couleur différente de fond pour les générations paires et impaires).</p>
+	</td>
+	<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> PersArbreDescExplorableRecursif pers=. generation=1}}
+{{|/with}}
+{{|#with benjaminARTUS}}
+	{{|> PersArbreDescExplorableRecursif pers=. generation=1 focus=true}}
+{{|/with}}</pre>
+	</td>
+	<td>
+		{{#with benjaminARTUS}}{{> PersArbreDescExplorableRecursif pers=. generation=1}}{{/with}}
+		{{#with benjaminARTUS}}{{> PersArbreDescExplorableRecursif pers=. generation=1 focus=true}}{{/with}}
+	</td>
+</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersChercher</code></td>
+				<td>Aucun</td>
+				<td>Affiche un formulaire de recherche de personnes ainsi que la liste des personnes correspondant au critères de recherche.</td>
+				<td></td>
+				<td>Cf. menus.</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersAjouter</code></td>
+				<td>Aucun</td>
+				<td>Affiche un formulaire d'ajout de personne.</td>
+				<td></td>
+				<td>Cf. menus.</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersModifier</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche un formulaire de modification de la personne contexte.</td>
+				<td></td>
+				<td>Cf. menus.</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>PersInfos</code></td>
+				<td><code>::PERS</code></td>
+				<td>Affiche toutes les informations disponibles sur une personne.</td>
+				<td></td>
+				<td>Cf. menus.</td>
+			</tr>
+			</tbody>
+		</table>
+		
+		<!-- ===================================== -->
+		<!--                          LIEU                                                       -->
+		<!-- ===================================== -->
+		<h3><a id="LIEU"></a>4) Templates LIEU</h3>
+		<!-- ================================= -->
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom du template</th>
+					<th>Contexte</th>
+					<th>Utilité</th>
+					<th>Code</th>
+					<th>Exemple</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuBoutonModifier</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Affiche le bouton de modification du lieu passé en contexte si l'utilisateur loggué a le droit de modifier ce lieu.
+				</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuBoutonModifier}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}
+						{{> LieuBoutonModifier}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuBoutonSupprimer</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Affiche le bouton de suppression du lieu passé en contexte si l'utilisateur loggué a le droit de supprimer ce lieu.
+				</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuBoutonSupprimer}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}
+						{{> LieuBoutonSupprimer}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuArticle</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche l'article du lieu.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuArticle}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuArticle}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNomArticle</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche le nom du lieu avec article mais sans lien.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNomArticle}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNomArticle}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNomLien</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche le nom du lieu sans article. Si on clique sur le lieu, affiche les informations sur le lieu.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNomLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNomLien}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNomLienArticle</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche le nom du lieu précédé de l'article selon le genre du lieu. Si on clique sur le lieu, affiche les informations sur le lieu.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNomLienArticle}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNomLienArticle}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNature</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche la nature du lieu sans article et sans lien.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNature}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNature}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNomLienA</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche le nom du lieu précédé de la préposition "à, au, aux, à l', à la ..." selon le genre du lieu. Si on clique sur le lieu, affiche les informations sur le lieu.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNomLienA}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNomLienA}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNomSansLienDe</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche le nom du lieu précédé de la préposition "de, du, des, de la, de l'..." selon le genre du lieu. Pas de lien sur le nom.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNomSansLienDe}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNomSansLienDe}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuNomLienDe</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche le nom du lieu précédé de la préposition "de, du, des, de la, de l'..." selon le genre du lieu. Si on clique sur le lieu, affiche les informations sur le lieu.</td>
+				<td>
+<pre>{{|#with lePerrier}}
+	{{|> LieuNomLienDe}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with lePerrier}}{{> LieuNomLienDe}}{{/with}}
+				</td>
+			</tr>
+			<!-- ========================== -->
+			<tr>
+				<td><code>LieuCode</code></td>
+				<td><code>::LIEU</code></td>
+				<td>Affiche, s'il existe, le code du lieu entre parenthèses, le tout précédé d'un blanc. Rien n'est affiché si le code n'existe pas.</td>
+				<td>
+<pre>{{|#with vendee}}
+	{{|> LieuCode}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with vendee}}{{> LieuCode}}{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuFormaterListe</code></td>
+				<td><code>curseur ::LIEU</code></td>
+				<td>
+					Formate la liste de lieux contenue dans le <code>curseur</code>.
+				</td>
+				<td>
+<pre>{{|#with listeLieux}}
+	{{|> LieuFormaterListe}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with listeLieux}}{{> LieuFormaterListe}}{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuListetout</code></td>
+				<td><code>curseur ::LIEU</code></td>
+				<td>
+					Affiche la liste de tous les lieux de la base (mise en forme par <code>LieuFormaterListe</code>).
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuChercher</code></td>
+				<td>Aucun</td>
+				<td>
+					Affiche une IHM de recherche de lieux.
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuInfos</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Affiche toutes les informations sur un lieu.
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuAjouter</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Affiche le formulaire d'ajout du lieu.
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuModifier</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Affiche le formulaire de modification du lieu.
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuFormulaire</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Formulaire pour l'ajout et la modification de lieu, utilisé par <code>LieuAjouter</code> et par<code>LieuModifier</code>.
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LieuModifierLatLng</code></td>
+				<td><code>::LIEU</code></td>
+				<td>
+					Affiche IHM de modification des coordonnées géographiques sur Google Map.
+				</td>
+				<td>
+				</td>
+				<td>
+					Cf. menus.
+				</td>
+			</tr>
+			
+			
+			</tbody>
+		</table>		
+		
+		<!-- ===================================== -->
+		<!--                          HIST                                                       -->
+		<!-- ===================================== -->
+		<h3><a id="HIST"></a>5) Templates HIST</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom du template</th>
+					<th>Contexte</th>
+					<th>Utilité</th>
+					<th>Code</th>
+					<th>Exemple</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>HistTitreLien</code></td>
+				<td><code>::HIST</code></td>
+				<td>
+					Affiche le titre du point d'histoire avec un lien hypertexte vers ce point.
+				</td>
+				<td>
+<pre>{{|#with H00000020}}
+	{{|> HistTitreLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with H00000020}}
+						{{> HistTitreLien}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>HistBoutonModifier</code></td>
+				<td><code>::HIST</code></td>
+				<td>
+					Affiche le bouton de modification du point d'histoire passé en contexte si l'utilisateur loggué a le droit de modifier ce point d'histoire.
+				</td>
+				<td>
+<pre>{{|#with H00000020}}
+	{{|> HistBoutonModifier}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with H00000020}}
+						{{> HistBoutonModifier}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>HistBoutonSupprimer</code></td>
+				<td><code>::HIST</code></td>
+				<td>
+					Affiche le bouton de suppression du point d'histoire passé en contexte si l'utilisateur loggué a le droit de supprimer ce point d'histoire.
+				</td>
+				<td>
+<pre>{{|#with H00000020}}
+	{{|> HistBoutonSupprimer}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with H00000020}}
+						{{> HistBoutonSupprimer}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>HistListeFormatCourt</code></td>
+				<td><code>curseur ::HIST</code></td>
+				<td>
+					Affiche une liste de points d'histoire en précisant uniquement "Date", "Zones", "Thèmes", "Titre" avec un lien hypertexte sur le titre vers le point d'histoire.
+				</td>
+				<td>
+<pre>{{|#with listeHistBouin}}
+	{{|> HistListeFormatCourt}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with listeHistBouin}}
+						{{> HistListeFormatCourt}}
+					{{/with}}
+				</td>
+			</tr>
+			</tbody>
+		</table>
+		
+		<!-- ===================================== -->
+		<!--                          DOC                                                       -->
+		<!-- ===================================== -->
+		<h3><a id="DOC"></a>6) Templates DOC</h3>
+		<!-- ================================= -->
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom du template</th>
+					<th>Contexte</th>
+					<th>Utilité</th>
+					<th>Code</th>
+					<th>Exemple</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocMiniatureSansLien</code></td>
+				<td><code>::DOC</code></td>
+				<td>
+					Affiche la miniature du document si elle existe, sinon affiche l'icone document. Pas de lien hypertexte dessus la miniature.
+				</td>
+				<td>
+<pre>{{|#with D00000010}}
+	{{|> DocMiniatureSansLien}}
+{{|/with}}
+{{|#with B00001000}}
+	{{|> DocMiniatureSansLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with D00000010}}
+						{{> DocMiniatureSansLien}}
+					{{/with}}
+					<hr/>
+					{{#with B00001000}}
+						{{> DocMiniatureSansLien}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocMiniatureAvecLien</code></td>
+				<td><code>::DOC</code></td>
+				<td>
+					Affiche la miniature du document si elle existe, sinon affiche l'icone document avec un lien hypertexte vers les infos du document.
+				</td>
+				<td>
+<pre>{{|#with D00000010}}
+	{{|> DocMiniatureAvecLien}}
+{{|/with}}
+{{|#with B00001000}}
+	{{|> DocMiniatureAvecLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with D00000010}}
+						{{> DocMiniatureAvecLien}}
+					{{/with}}
+					<hr/>
+					{{#with B00001000}}
+						{{> DocMiniatureAvecLien}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocTitreSansLien</code></td>
+				<td><code>::DOC</code></td>
+				<td>
+					Affiche le titre du document sans un lien hypertexte. Le titre vient de la propriété <code>titre</code> ou est construit pour les actes.
+				</td>
+				<td>
+<pre>{{|#with D00000010}}
+	{{|> DocTitreSansLien}}
+{{|/with}}
+{{|#with B00001000}}
+	{{|> DocTitreSansLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with D00000010}}
+						{{> DocTitreSansLien}}
+					{{/with}}
+					<hr/>
+					{{#with B00001000}}
+						{{> DocTitreSansLien}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocTitreAvecLienPers</code></td>
+				<td><code>::DOC</code></td>
+				<td>
+					Affiche le titre du document sans un lien hypertexte, sauf pour les actes pour lesquel un lien est mis sur la ou les personne(s) concernée(s) par l'acte. Le titre vient de la propriété <code>titre</code> ou est construit pour les actes.
+				</td>
+				<td>
+<pre>{{|#with D00000010}}
+	{{|> DocTitreAvecLienPers}}
+{{|/with}}
+{{|#with B00001000}}
+	{{|> DocTitreAvecLienPers}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with D00000010}}
+						{{> DocTitreAvecLienPers}}
+					{{/with}}
+					<hr/>
+					{{#with B00001000}}
+						{{> DocTitreAvecLienPers}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocTitreAvecLien</code></td>
+				<td><code>::DOC</code></td>
+				<td>
+					Affiche le titre du document avec un lien hypertexte vers le document. Le titre vient de la propriété <code>titre</code> ou est construit pour les actes.
+				</td>
+				<td>
+<pre>{{|#with D00000010}}
+	{{|> DocTitreAvecLien}}
+{{|/with}}
+{{|#with B00001000}}
+	{{|> DocTitreAvecLien}}
+{{|/with}}</pre>
+				</td>
+				<td>
+					{{#with D00000010}}
+						{{> DocTitreAvecLien}}
+					{{/with}}
+					<hr/>
+					{{#with B00001000}}
+						{{> DocTitreAvecLien}}
+					{{/with}}
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocLienversdoc</code></td>
+				<td><code>_id de DOC</code></td>
+				<td>
+					Affiche l'icône avec lien vers de doc dont l'<code>_id</code> est dans le contexte.
+					<p class="bg-danger">A compléter quand les actes seront disponibles. Modifier pour que l'icone n'apparaisse que si un acte de cette référence existe. Modifier aussi pour simplifier la compréhension en mettant un contexte DOC simple.</p>
+				</td>
+				<td>
+<pre>{{|> DocLienversdoc "B00001000"}}</pre>
+				</td>
+				<td>{{> DocLienversdoc "B00001000"}}</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocFormaterListe</code></td>
+				<td><code>curseur ::DOC</code></td>
+				<td>
+					Formate une liste de documents en donnant le nombre de documents et en affichant la liste des des documents formatés.
+				</td>
+				<td>
+<pre>{{|#with listeDocs}}
+	{{|> DocFormaterListe}}
+{{|/with}}</pre>
+				</td>
+				<td>Cfs menus.</td>
+			</tr>
+			<tr>
+				<td><code>DocChercher</code></td>
+				<td>Aucun</td>
+				<td>Affiche un formulaire de recherche de documents ainsi que la liste des documents correspondant au critères de recherche.</td>
+				<td></td>
+				<td>Cf. menus.</td>
+			</tr>
+			<tr>
+				<td><code>DocModifier</code></td>
+				<td><code>::DOC</code></td>
+				<td>Affiche un formulaire de modification du document contexte.</td>
+				<td></td>
+				<td>Cf. menus.</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>DocViewerCarte</code></td>
+				<td><pre>{
+    "id": ::ID
+    // Id de la carte,
+    "x": ::String (optionnel)
+    // Coordonnées x de l'image du centre de la carte,
+    "y": ::String (optionnel)
+    // Coordonnées y de l'image du centre de la carte,
+    "px": ::String (optionnel)
+    // Coordonnées px en pixels de la cible à afficher,
+    "py": ::String (optionnel)
+    // Coordonnées py en pixels de de la cible à afficher
+}</pre></td>
+				<td>
+					Affiche le titre de la carte suivie de la carte avec les flèches de déplacement et éventuellement d'une cible si les coordonnées ont étés fournies.
+				</td>
+				<td>
+<pre>{{|> DocViewerCarte id="BzTM6ecNABeQTmJQy"}}</pre>
+				</td>
+				<td>
+				</td>
+			</tr>
+			
+			</tbody>
+		</table>
+		
+		<!-- ===================================== -->
+		<!--                          LIB          -->
+		<!-- ===================================== -->
+		<h3><a id="LIB"></a>7) Templates LIB</h3>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Nom du template</th>
+					<th>Contexte</th>
+					<th>Utilité</th>
+					<th>Code</th>
+					<th>Exemple</th>
+				</tr>
+			</thead>
+			<tbody>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LibFormulaireChampsCaches</code></td>
+				<td>aucun</td>
+				<td>
+					Utilisable uniquement comme sous-code d'une moustache <code>{{|#autoForm}}</code>. Affiche en <code>disabled</code> les champs des formulaires non modifiables : <code>id</code>, <code>createdBy</code>, <code>createdAt</code>, <code>lastModifiedAt</code>.
+				</td>
+				<td>
+<pre>{{|> LibFormulaireChampsCaches}}</pre>
+				</td>
+				<td>
+					Cf.menus "modifier".
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LibDebug</code></td>
+				<td><code>.</code> contexte courant du template dans lequel il est.</td>
+				<td>Imprime le JSON du contexte du template père selon l'état booléen de la variable de session <code>Session.setDefault('debug', true);</code></td>
+				<td>
+<pre>{{|> LibDebug}}</pre>
+				</td>
+				<td>{{> LibDebug}}</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LibListeOptions</code></td>
+				<td><pre>{
+"de" : string,
+"selected" : string (optionnel) 
+}</pre>
+				<code>de</code> : propriété du fichier paramètre dont on veut génerer les options<br/>
+				<code>selected</code> : valeur sélectionnée<br/>
+				</td>
+				<td>Génère la liste des options selon l'entrée du fichier  <code>/common/parametres.js</code>.</td>
+				<td>
+<pre>&lt;select id="typeDeLieu"&gt;
+{{|> LibListeOptions 
+  de="typesLieux" 
+  selected="PAYS"}}
+&lt;/select&gt;</pre>
+				</td>
+				<td><select>{{> LibListeOptions de="typesLieux" selected="PAYS"}}</select></td>
+			</tr>
+			<tr>
+				<td><code>LibListeOptionsDontTous</code></td>
+				<td><pre>{
+"de" : string,
+"selected" : string (optionnel) 
+}</pre>
+				<code>de</code> : propriété du fichier paramètre dont on veut génerer les options<br/>
+				<code>selected</code> : valeur sélectionnée<br/>
+				</td>
+				<td>Génère la liste des options selon l'entrée du fichier commun <code>/common/parametres.js</code> en ajoutant au début une option générique dont l'intitulé est aussi dans le fichier commun <code>/common/parametres.js</code>.</td>
+				<td>
+<pre>&lt;select id="typeDeLieu"&gt;
+{{|> LibListeOptionsDontTous 
+  de="typesLieux"}}
+&lt;/select&gt;</pre>
+				</td>
+				<td><select>{{> LibListeOptionsDontTous de="typesLieux"}}</select></td>
+			</tr>
+			<tr>
+				<td><code>LibTitreObjetLien</code></td>
+				<td><pre>{
+	id ::ID,
+	type :: {"PERS","LIEU","HIST","DOC"}
+}</pre></td>
+				<td>Affiche l'icone selon le type de l'objet, suivi du titre de l'objet avec lien, quelque soit l'objet (PERS, LIEU, HIST ou DOC). Si aucun objet n'existe, rien n'est affiché. Si le type est inexistant, une erreur est loggué sur la console, mais rien ne s'affiche.</td>
+				<td>
+<pre>{{|> LibTitreObjetLien  id="Nsh2qdGcSXJM9jKEB" type="PERS"}}
+{{|> LibTitreObjetLien  id="2SAJFTxY5FsMN8ACN" type="LIEU"}}
+{{|> LibTitreObjetLien  id="pk7zi63SvKsaSw3tF" type="HIST"}}
+{{|> LibTitreObjetLien  id="RA87WcfKFeeQNQy7J" type="DOC"}}
+{{|> LibTitreObjetLien  id="bidon" type="AUTRE"}}</pre>
+				</td>
+				<td>
+				{{> LibTitreObjetLien  id="Nsh2qdGcSXJM9jKEB" type="PERS"}}
+				<hr/>
+				{{> LibTitreObjetLien  id="2SAJFTxY5FsMN8ACN" type="LIEU"}}
+				<hr/>
+				{{> LibTitreObjetLien   id="pk7zi63SvKsaSw3tF" type="HIST"}}
+				<hr/>
+				{{> LibTitreObjetLien  id="RA87WcfKFeeQNQy7J" type="DOC"}}
+				<hr/>
+				{{> LibTitreObjetLien   id="bidon" type="AUTRE"}} Nb : rien n'est affiché, mais une erreur est générée sur la console pour le type inexistant.
+				<hr/>
+				</td>
+			</tr>
+			<!-- ===================================== -->
+			<tr>
+				<td><code>LibClipId</code></td>
+				<td><code>::objet</code> objet quelconque.</td>
+				<td>Affiche l'<code>_id</code> de l'objet contexte s'il existe avec une icone dont le lien permet de mettre directement dans le clipboard l'<code>_id</code> de l'objet contexte. Si l'objet contexte ne contient pas de propriété <code>_id</code>, rien n'est affiché. <span class="bg-danger">Ne marche pas sur IE, à tester sur Chrome !!!</span></td>
+				<td>
+<pre>{{|#with benjaminARTUS}}
+	{{|> LibClipId}}
+{{|/with}}
+
+{{|> LibClipId}}
+// N'affiche rien car pas de propriété _id du contexte</pre>
+				</td>
+				<td>
+					{{#with benjaminARTUS}}{{> LibClipId}}{{/with}}<br/>
+					{{> LibClipId}}
+				</td>
+			</tr>
+				
+				
+			</tbody>
+		</table>
+	</div>
+</template>

@@ -1,0 +1,176 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE ProfFormMainEditModal        -->
+<!-- ===================================== -->
+<template name="ProfFormMainEditModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ========== -->
+					{{#if hlp_eq action "INSERT"}}
+						<div class="modal-header modal-insert">
+							{{> LibIcone "iconePers"}} Ajout d'une profession
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "UPDATE"}}
+						<div class="modal-header modal-update">
+							{{> LibIcone "iconePers"}} Modification d'une profession
+						</div>
+					{{/if}}
+					{{#if hlp_eq action "DELETE"}}
+						<div class="modal-header modal-delete">
+							{{> LibIcone "iconePers"}} Suppression d'une profession
+						</div>
+					{{/if}}
+					<!-- BODY ======== -->
+					<div class="modal-body row">
+						<div class="col-sm-12">
+							{{#if hlp_eq action "INSERT"}}
+								{{#autoForm collection="Profs" doc=prof id="addProfFormMain" type="insert"}}
+									{{> ProfFormMain}}
+									<br/>
+									<div class="row">
+										<div class="col-sm-12 text-center">
+											<button type="submit" class="btn btn-primary">Ajouter</button>
+											<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+										</div>
+									</div>
+								{{/autoForm}}
+							{{/if}}
+							{{#if hlp_eq action "UPDATE"}}
+								{{#with prof}}
+									{{#autoForm collection="Profs" doc=. id="updateProfFormMain" type="update"}}
+										{{> ProfFormMain}}
+										<br/>
+										<div class="row">
+											<div class="col-sm-12 text-center">
+												<button type="submit" class="btn btn-warning">Modifier</button>
+												<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+											</div>
+										</div>
+									{{/autoForm}}
+								{{/with}}
+							{{/if}}
+							{{#if hlp_eq action "DELETE"}}
+								A implémenter
+								<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+							{{/if}}
+						</div>
+					</div>
+			</div>
+		</div>
+    </div>
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- ProfFormMainEditModal_DOCAUTO         -->
+<!-- ===================================== -->
+<template name="ProfFormMainEditModal_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>action::{"INSERT","UPDATE","DELETE"}</code></td>
+			<td>Type de formulaire demandé.</td>
+		</tr>
+		<tr>
+			<td><code>prof::PROF</code></td>
+			<td>informations sur la <code>prof</code> à insérer, modifier ou supprimer.</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code><br/>
+<code>ProfFormMain</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Fenêtre modale d'édition des informations sur les professions. S'appuie sur le formulaire <code>ProfFormMain</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une popup Bootstrap qui lui transmet les paramètres.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Appel uniquement par code Javascript, ex : <pre>Modal.show(
+	"ProfFormMainEditModal",
+	{
+		action:"INSERT",
+	},
+	{backdrop:'static',keyboard:false}
+);</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Faire le cas delete.
+<!-- ===================================== -->	
+	</div>
+</template>

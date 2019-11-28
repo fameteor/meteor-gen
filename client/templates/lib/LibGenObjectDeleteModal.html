@@ -1,0 +1,48 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibGenObjectDeleteModal      -->
+<!-- ===================================== -->
+<template name="LibGenObjectDeleteModal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				{{#with obj}}
+					<!-- HEADER ========== -->
+					<div class="modal-header modal-delete">
+						{{#if (hlp_eq ../type "PERS")}}{{> LibIcone "iconePers"}}{{/if}}
+						{{#if (hlp_eq ../type "LIEU")}}{{> LibIcone "iconeLieu"}}{{/if}}
+						{{#if (hlp_eq ../type "HIST")}}{{> LibIcone "iconeHist"}}{{/if}}
+						{{#if (hlp_eq ../type "DOC")}}{{> LibIcone "iconeDoc"}}{{/if}}
+						Supprimer
+					</div>
+					{{#with (gh_getPointingObjects . ../type)}}
+						{{#if gh_thereIsNoPointingObject .}}
+							<!-- BODY ======== -->
+							<div class="modal-body row">
+								<div class="col-sm-12">
+									<h4 class="text-danger">{{> LibIcone "warning"}} Les données concernant cet objet vont-être supprimées, êtes-vous sûr de vouloir continuer ?</h4>
+								</div>
+							</div>
+							<!-- FOOTER ====== -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary boutonSupprimer" data-dismiss="modal">Effacer</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+							</div>
+						{{else}}
+							<!-- BODY ======== -->
+							<div class="modal-body row">
+								<div class="col-sm-12">
+									<h4 class="text-danger">{{> LibIcone "warning"}} Cet objet ne peut être supprimé, il faut d'abord supprimer les liens suivants qui pointent vers lui :</h4>
+									{{> LibDisplayPointingObjectList list=.}}
+								</div>
+							</div>
+							<!-- FOOTER ====== -->
+							<div class="modal-footer">
+								<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+							</div>
+						{{/if}}
+					{{/with}}
+				{{/with}}
+			</div>
+		</div>
+    </div>
+</template>

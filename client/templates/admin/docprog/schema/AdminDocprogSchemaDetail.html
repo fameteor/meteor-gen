@@ -1,0 +1,35 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogSchemaDetail     -->
+<!-- ===================================== -->
+<template name="AdminDocprogSchemaDetail">
+	<div class="container">
+		<h3>{{> LibIcone "iconeAdmin"}}  Schéma de <code>{{name}}</code> <small>(Cf <a href="/admin/docprog/schema/brut/{{name}}">schéma détaillé</a>)</small></h3>
+		{{#with schema}}
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Propriété</th>
+						<th>Type</th>
+						<th>Label</th>
+						<th>Obligatoire</th>
+						<th>Saisie auto</th>
+						<th>Valeurs autorisées</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each properties}}
+					<tr>
+						<td><code>{{nom}}</code></td>
+						<td>{{{type}}}</td>
+						<td>{{valeur.label}}</td>
+						<td>{{{obligatoire}}}</td>
+						<td class="text-center">{{{autovalue}}}</td>
+						<td>{{{valeursAutorisees}}}</td>
+					</tr>
+					{{/each}}
+				</tbody>
+			</table>
+			<hr/>
+		{{/with}}
+	</div>
+</template>

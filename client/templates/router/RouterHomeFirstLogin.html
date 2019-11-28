@@ -1,0 +1,74 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RouterHomeFirstLogin                                        -->
+<!-- ===================================== -->
+<template name="RouterHomeFirstLogin">
+	<div class="container">
+		<div class="jumbotron margin-top" style="padding:5px;margin-bottom:5px;">
+			<div class="row">
+				<div class="col-sm-12">
+					<center>
+						<h2>Bienvenue sur Marais V1.00</h2>
+					</center>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-7">
+					<center>
+						<img class="img-responsive" src="/intro.gif"/>
+					</center>
+				</div>
+				<div class="col-sm-5">
+					<div class="container">
+						<p>Nous avons besoin des informations suivantes pour finaliser votre compte :</p>
+						<form class="form-horizontal">
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" id="choix_accountNom" placeholder="Votre nom" autocomplete='off'>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input type="text" class="form-control" id="choix_accountPrenom" placeholder="Votre prénom" autocomplete='off'>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<input type="date" class="form-control" id="choix_accountDateNaissance" placeholder="Votre date de naissance au format JJ/MM/AAAA" autocomplete='off'>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<select id="choix_sexe" class="form-control">
+										  <option value="M">Homme</option>
+										  <option value="F">Femme</option>
+										</select>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12">
+									<div class="radio">
+										<label>
+											<input type="radio" name="choix_typeGene" value="MA_GENE" checked>
+											Je veux faire ma généalogie
+										</label>
+									</div>
+									<div class="radio">
+										<label>
+											<input type="radio" name="choix_typeGene" value="GENE_AUTRE_PERSONNE">
+											Je veux faire la généalogie d'une autre personne
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-12 text-center">
+									<button type="submit" class="btn btn-primary">Enregistrer</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

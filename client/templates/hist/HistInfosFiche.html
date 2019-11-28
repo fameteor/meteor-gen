@@ -1,0 +1,116 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistInfosFiche               -->
+<!-- ===================================== -->
+<template name="HistInfosFiche">
+	{{#with hist}}
+		<!-- Chronologie ================= -->
+		<div class="row">
+			<div class="col-md-12" >
+				<h4>Chronologie</h4>
+				{{> LibChrono hist=.}}
+				<hr/>
+			</div>
+		</div>
+		<!-- Commentaire ================= -->
+		<div class="row">
+			<div class="col-md-12" >
+				<h4>Commentaire</h4>
+				{{> textXmlEditor collection=Hists id=_id field="comment"}}
+				<hr/>
+			</div>
+		</div>
+		<!-- Commentaire recherche ======= -->
+		<div class="row">
+			<div class="col-md-12" >
+				<h4>Commentaire de recherche</h4>
+				{{> textXmlEditor collection=Hists id=_id field="recherche"}}
+				<hr/>
+			</div>
+		</div>
+		<div class="row">
+			<!-- Zones =================== -->
+			<div class="col-md-12" >
+				<h4>Zones concernées</h4>
+				{{{listeZones}}}
+				<hr/>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-12" >
+				<h4>Informations dans les actes</h4>
+				{{> LibDocAnalysis obj=. objType="HIST"}}
+				<!-- Recherche ====================== -->
+				<hr/>
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- HistInfosFiche_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="HistInfosFiche_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>hist</code></td>
+		<td><code>::HIST</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>textXmlEditor</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche la fiche d'information sur le point d'histoire passé en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

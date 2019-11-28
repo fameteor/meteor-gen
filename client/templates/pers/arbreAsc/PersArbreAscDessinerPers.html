@@ -1,0 +1,41 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersArbreAscDessinerPers     -->
+<!-- contexte : idPers=_id idFils=0 sosa=1 gen=0 rotation=0  couleurs="COMMUNE_NAISSANCE"  -->
+<!-- ===================================== -->
+<template name="PersArbreAscDessinerPers">
+	{{#unless limiteGenerationAtteinte}}
+		{{#with pers}}
+		<g transform="rotate({{../rotation}})">
+			<use xmlns:xlink="http://www.w3.org/1999/xlink" style="fill:{{couleur}}" xlink:href="#niveau{{../gen}}"/>
+			<g class="nom">
+				<text class="nomPrenom {{#if gh_isMultipleSosas}}implexe{{/if}}">
+					<textPath xlink:href="#{{ecritureInversee}}{{../gen}}gen_nom" startOffset="3">{{../sosa}} - {{nom}} {{> PersPrenomUsuel}}</textPath>
+				</text>
+			</g>
+			<text class="dates {{gh_classIncertainForNaissance}}">
+				<textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{ecritureInversee}}{{../gen}}gen_date_nais" startOffset="3">N : {{#with naissance.date}}{{> DateformatLongSansCalRep .}}{{else}}à une date inconnue{{/with}}</textPath>
+			</text>
+			{{#unless estPremiereGeneration}}
+			<text class="dates {{classIncertainForMariage}}">
+				<textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{ecritureInversee}}{{../gen}}gen_date_mar" startOffset="3">M {{rangMariage}} : {{#with dateMariage}}{{> DateformatLongSansCalRep}}{{else}}à une date inconnue{{/with}}</textPath>
+			</text>
+			{{/unless}}
+			{{#unless estVivant}}
+			<text class="dates {{gh_classIncertainForDeces}}">
+				<textPath xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="#{{ecritureInversee}}{{../gen}}gen_date_dec" startOffset="3">D : {{#with deces.date}}{{> DateformatLongSansCalRep .}}{{else}}à une date inconnue{{/with}}</textPath>
+			</text>
+			{{/unless}}
+		</g>
+				{{#if pere}}
+					{{#with gh_persById pere}}
+						{{> PersArbreAscDessinerPers pers=. fils=../../pers sosa=sosaPere gen=generationSuivante rotation=../../rotation nbGenMax=../../nbGenMax couleurs=../../couleurs}}
+					{{/with}}
+				{{/if}}
+				{{#if mere}}
+					{{#with gh_persById mere}}
+						{{> PersArbreAscDessinerPers pers=. fils=../../pers sosa=sosaMere gen=generationSuivante rotation=calculerRotation nbGenMax=../../nbGenMax couleurs=../../couleurs}}
+					{{/with}}
+				{{/if}}
+		{{/with}}
+	{{/unless}}    
+</template>

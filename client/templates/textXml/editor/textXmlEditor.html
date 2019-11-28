@@ -1,0 +1,224 @@
+<!-- ===================================== -->
+<!-- TEMPLATE textXmlEditor                -->
+<!-- ===================================== -->
+<template name="textXmlEditor">
+	{{#if isInEdition}}
+		<!-- Tool bar ======================== -->
+		<div class="textXmlEditorToolBar" >
+			{{#if hlp_eq mode "TRANSCRIPT"}}
+			<button id="persTranscriptButton"  title="Ajouter un lien vers une personne" class="btn btn-default" {{disabledWhenEditTagMode}}>{{> LibIcone "iconePers"}}</button>
+			{{else}}
+			<button id="persButton"  title="Ajouter un lien vers une personne" class="btn btn-default" {{disabledWhenEditTagMode}}>{{> LibIcone "iconePers"}}</button>
+			{{/if}}
+			<button id="lieuButton"  title="Ajouter un lien vers un lieu" class="btn btn-default" {{disabledWhenEditTagMode}}>{{> LibIcone "iconeLieu"}}</button>
+			<button id="histButton"  title="Ajouter un lien vers un point d'histoire" class="btn btn-default" {{disabledWhenEditTagMode}}>{{> LibIcone "iconeHist"}}</button>
+			<button id="docButton"  title="Ajouter un lien vers un document" class="btn btn-default" {{disabledWhenEditTagMode}}>{{> LibIcone "iconeDoc"}}</button>
+			<button id="cancelButton" class="btn btn-default" type="submit" {{disabledWhenEditTagMode}}>Annuler</button>
+			<button id="saveButton" class="btn btn-primary" type="submit" {{disabledWhenEditTagMode}}>Enregistrer</button>
+			<br/>
+			{{#if hlp_eq mode "TRANSCRIPT"}}
+			<button id="infoButtonPers"  title="Information sur une personne" class="btn btn-default" {{disabledWhenEditTagMode}}>info {{> LibIcone "iconePers"}}</button>
+			<button id="infoButtonLieu"  title="Information sur un lieu" class="btn btn-default" {{disabledWhenEditTagMode}}>info {{> LibIcone "iconeLieu"}}</button>
+			<button id="infoButtonHist"  title="Information sur un point d'histoire" class="btn btn-default" {{disabledWhenEditTagMode}}>info {{> LibIcone "iconeHist"}}</button>
+			<button id="infoButtonDoc"  title="Information sur un document" class="btn btn-default" {{disabledWhenEditTagMode}}>info {{> LibIcone "iconeDoc"}}</button>
+			<br/>
+			{{/if}}
+			{{#if hlp_eq mode "TRANSCRIPT"}}
+			<button id="enteteButton"  title="Définir l'entête" class="btn btn-default" {{disabledWhenEditTagMode}}>entête</button>
+			<button id="enmargeButton"  title="Définir les notes en marge" class="btn btn-default" {{disabledWhenEditTagMode}}>marge</button>
+			<button id="ensignatureButton"  title="Définir une zone signature" class="btn btn-default" {{disabledWhenEditTagMode}}>signature</button>
+			<button id="ennoteButton"  title="Définir une zone notes de bas de page" class="btn btn-default" {{disabledWhenEditTagMode}}>notes</button>
+			<button id="incertainButton"  title="Taguer incertain" class="btn btn-default" {{disabledWhenEditTagMode}}><span style="color:red;"><i>incertain</i></span></button>
+			{{else}}
+			<button id="bButton"  title="Ajouter un tag b" class="btn btn-default" {{disabledWhenEditTagMode}}><b>b</b></button>
+			<button id="iButton"  title="Ajouter un tag i" class="btn btn-default" {{disabledWhenEditTagMode}}><i>i</i></button>
+			<button id="h1Button"  title="Ajouter un tag h1" class="btn btn-default" {{disabledWhenEditTagMode}}><b>H1</b></button>
+			<button id="h2Button"  title="Ajouter un tag h2" class="btn btn-default" {{disabledWhenEditTagMode}}><b>H2</b></button>
+			<button id="h3Button"  title="Ajouter un tag h3" class="btn btn-default" {{disabledWhenEditTagMode}}><b>H3</b></button>
+			{{/if}}
+			<br/>
+			<button id="pButton"  title="Ajouter un tag p" class="btn btn-default" {{disabledWhenEditTagMode}}>p</button>
+			<button id="brButton"  title="Ajouter un tag br" class="btn btn-default" {{disabledWhenEditTagMode}}>br</button>
+			<button id="hrButton"  title="Ajouter un tag hr" class="btn btn-default" {{disabledWhenEditTagMode}}>hr</button>
+			<button id="ulButton"  title="Ajouter un tag ul-li" class="btn btn-default" {{disabledWhenEditTagMode}}>ul</button>
+			{{#unless hlp_eq mode "TRANSCRIPT"}}
+			<img src="/textXmlEditor/separator.gif"/>
+			<button id="imgButton"  title="Ajouter une image" class="btn btn-default" {{disabledWhenEditTagMode}}>img</button>
+			{{/unless}}
+			{{#if gh_isAudioTranscriptCapable}}
+			<img src="/textXmlEditor/separator.gif"/>
+			{{> textXmlEditorVoiceReco callback=callback disabled=disabledWhenEditTagMode}}
+			{{/if}}
+		</div>
+		{{#if tagEditMode}}
+		<!-- tag editor ====================== -->
+		<div id="tagEditionZone" style="padding:7px; border: 1px solid #F0AD4E;">
+			{{#if (hlp_eq tagEditMode "HIST")}}
+				<h4>{{> LibIcone "iconePers"}} Ajout d'un tag info point d'histoire</h4>
+			{{/if}}
+			{{#if (hlp_eq tagEditMode "DOC")}}
+				<h4>{{> LibIcone "iconePers"}} Ajout d'un tag info document</h4>
+			{{/if}}			
+			{{#if (hlp_eq tagEditMode "INFO_HIST")}}
+				<h4>{{> LibIcone "iconePers"}} Ajout d'un tag info point d'histoire</h4>
+			{{/if}}
+			{{#if (hlp_eq tagEditMode "INFO_DOC")}}
+				<h4>{{> LibIcone "iconePers"}} Ajout d'un tag info document</h4>
+			{{/if}}
+			{{#if (hlp_eq tagEditMode "PERS_TRANSCRIPT")}}
+				<h4>{{> LibIcone "iconePers"}} Ajout d'un tag personne</h4>
+			{{/if}}
+			<form id="addPersTag" class="form-horizontal">
+			
+				{{#if (hlp_eq tagEditMode "HIST")}}
+					<div class="form-group {{#if tagEditErrors.hist}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">ID (*)</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="hist" name="hist" type="text">
+							<span class="help-block">{{tagEditErrors.hist}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Incertain</label>
+						<div class="col-sm-9">
+						  <input type="checkbox" id="unreliableLink" name="unreliableLink">
+						</div>
+					</div>
+				{{/if}}
+				
+				{{#if (hlp_eq tagEditMode "DOC")}}
+					<div class="form-group {{#if tagEditErrors.doc}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">ID (*)</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="doc" name="doc" type="text">
+							<span class="help-block">{{tagEditErrors.doc}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Incertain</label>
+						<div class="col-sm-9">
+						  <input type="checkbox" id="unreliableLink" name="unreliableLink">
+						</div>
+					</div>
+				{{/if}}				
+
+				{{#if (hlp_eq tagEditMode "INFO_HIST")}}
+					<div class="form-group {{#if tagEditErrors.info_hist}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">Vers point d'histoire ID (*)</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="info_hist" name="info_hist" type="text">
+							<span class="help-block">{{tagEditErrors.info_hist}}</span>
+						</div>
+					</div>
+				{{/if}}
+				
+				{{#if (hlp_eq tagEditMode "INFO_DOC")}}
+					<div class="form-group {{#if tagEditErrors.info_doc}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">Vers document ID (*)</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="info_doc" name="info_doc" type="text">
+							<span class="help-block">{{tagEditErrors.info_doc}}</span>
+						</div>
+					</div>
+				{{/if}}
+			
+				{{#if (hlp_eq tagEditMode "PERS_TRANSCRIPT")}}
+					<div class="form-group {{#if tagEditErrors.pers}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">Personne(*)</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="pers" name="pers" type="hidden">
+							<input class="form-control intitule" id="pers_intitule" name="pers.pers_intitule" type="text" value="">
+							<span class="help-block">{{tagEditErrors.pers}}</span>
+						</div>
+					</div>
+					<div class="form-group {{#if tagEditErrors.status}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">Status (*)</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="status">
+								{{> LibOptionsFromCommonParms parm="texteXmlStatus" selected="" firstOptionLabel="- Choisir le status de la personne"}}
+							</select>
+							<span class="help-block">{{tagEditErrors.status}}</span>
+						</div>
+					</div>
+					<div class="form-group {{#if tagEditErrors.role}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">Rôle (*)</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="role">
+								{{> LibOptionsFromCommonParms parm="texteXmlRole" selected="" firstOptionLabel="- Choisir le rôle de la personne"}}
+							</select>
+							<span class="help-block">{{tagEditErrors.role}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Age</label>
+						<div class="col-sm-6">
+							<input class="form-control" id="age" type="text" value="">
+							<span class="help-block"></span>
+						</div>
+						<div class="col-sm-3">
+								<select id="uniteAge" class="form-control">
+									<option value="ANNEE">an(s)</option>
+									<option value="MOIS">mois</option>
+									<option value="SEMAINE">semaine(s)</option>
+									<option value="JOUR">jour(s)</option>
+								</select>
+							</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Profession</label>
+						<div class="col-sm-6">
+							<select class="form-control" id="prof">
+								<option value="">- Choisir la profession</option>
+								{{#each profs}}
+									<option value="{{_id}}">{{> ProfLabel prof=. sexe="NONCONNU"}}</option>
+								{{/each}}
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<button title="Ajouter une profession" type="button" id="addProf" class="btn btn-primary pull-right">{{> LibIcone "iconeAjouter"}}</button>
+						</div>
+					</div>
+					<div class="form-group {{#if tagEditErrors.signe}}has-error{{/if}}">
+						<label class="col-sm-3 control-label">Signe (*)</label>
+						<div class="col-sm-9">
+							<select class="form-control" id="signe">
+								{{> LibOptionsFromCommonParms parm="texteXmlSigne" selected="" firstOptionLabel="- Choisir le niveau de signature"}}
+							</select>
+							<span class="help-block">{{tagEditErrors.signe}}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Habite</label>
+						<div class="col-sm-9">
+							<input class="form-control" id="lieu" name="lieu" type="hidden">
+							<input class="form-control intitule" id="lieu_intitule"  name="lieu.lieu_intitule" type="text" value="">
+							<span class="help-block"></span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-3 control-label">Incertain</label>
+						<div class="col-sm-9">
+						  <input type="checkbox" id="unreliableLink" name="unreliableLink">
+						</div>
+					</div>
+				{{/if}}
+				
+				<button type="submit" class="btn btn-primary">Ajouter le tag</button>
+				<button type="button" id="annulerTag" class="btn btn-default pull-right">Annuler</button>
+			</form>
+		</div>
+		{{/if}}
+		<!-- Content========================== -->
+		<div id="editionZone" contentEditable="true">{{copyOfOriginalText}}</div>
+		<div id="previewZone">{{{gh_transformTextXml preview}}}</div>
+
+	{{else}}
+		<!-- Content========================== -->
+		<div>
+			{{#if gh_isAdminOrOwner}}
+				<div id="editButton" class="pull-right">{{> LibButton action="UPDATE" title="Modifier ce texte"}}</div>
+			{{/if}}
+			{{{gh_transformTextXml textXml}}}
+		</div>
+	{{/if}}
+</template>

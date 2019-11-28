@@ -1,0 +1,14 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuAjouter                                                       -->
+<!-- ===================================== -->
+<template name="LieuAjouter">
+	{{#autoForm collection="Lieux" id="addLieuForm" type="insert"}}
+		{{> LieuFormulaire}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Ajouter</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

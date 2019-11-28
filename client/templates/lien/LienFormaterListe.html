@@ -1,0 +1,42 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienFormaterListe            -->
+<!-- ===================================== -->
+<template name="LienFormaterListe">
+	{{gh_cursorCount .}} lien{{#if gh_moreThanOneInCursor .}}s{{/if}} connu{{#if gh_moreThanOneInCursor .}}s{{/if}}
+	{{#if gh_cursorIsNotEmpty .}}
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>De objet</th>
+					<th>Vers objet</th>
+					<th>Type de zone</th>
+					<th>Commentaire</th>
+					<th>id</th>
+					<th>Modifier</th>
+					<th>Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each .}}
+					<tr>
+						<td>
+							{{#with pour}}
+								{{> LibTitreObjetLien .}}<br/>
+							{{/with}}
+						</td>
+						<td>
+							{{#with vers}}
+								{{> LibTitreObjetLien .}}<br/>
+							{{/with}}
+						</td>
+						<td>{{zone}}</td>
+						<td>{{comment}}</td>
+						<td>{{> LibClipId}}</td>
+						<td>{{> LienBoutonModifier}}</td>
+						<td>{{> lienBoutonSupprimer}}</td>
+					</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	{{/if}}
+</template>

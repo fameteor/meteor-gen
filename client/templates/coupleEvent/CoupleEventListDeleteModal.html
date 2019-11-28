@@ -1,0 +1,43 @@
+<!-- ===================================== -->
+<!-- TEMPLATE CoupleEventListDeleteModal   -->
+<!-- ===================================== -->
+<template name="CoupleEventListDeleteModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ========== -->
+					<div class="modal-header modal-delete">
+							{{> LibIcone "iconePers"}} Modification des parents
+					</div>
+					<!-- BODY ======== -->
+					<div class="modal-body row">
+						<div class="col-sm-12">
+								<center>
+									<h4>Les parents de la personne actuelle ont été modifiés.</h4>
+									<br/>
+									<h4>Les parents précédents n'ont plus aucun enfant dans la base.</h4>
+									<h4 class="text-danger">{{> LibIcone "warning"}} Les évènements conjugaux des parents précédents sont-ils toujours justifiés ?<br/>
+									En voici la liste, supprimer les si c'est une erreur.</h4>
+									<br/>
+									{{#with gh_coupleEventsByPersId pere mere}}
+										<table class="table" style="width:80%">
+											<tbody>
+												{{#each .}}
+													<tr>
+														<td>{{> CoupleEventTitle coupleEvent=.}}</td>
+														<td>{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="CoupleEventEditModal" title="Supprimer cet évènement conjugal" coupleEvent=.}}</td>
+													</tr>
+												{{/each}}
+											</tbody>
+										</table>
+									{{/with}}
+									<br/>
+
+									<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+								</center>
+						</div>
+					</div>
+			</div>
+		</div>
+    </div>
+</template>

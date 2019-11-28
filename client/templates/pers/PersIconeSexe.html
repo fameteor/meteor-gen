@@ -1,0 +1,14 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersIconeSexe                -->
+<!-- ===================================== -->
+<template name="PersIconeSexe">
+	{{#if (hlp_eq sexe "M")}}
+		{{> LibIcone "iconeSexeM"}}
+	{{/if}}
+	{{#if (hlp_eq sexe "F")}}
+		{{> LibIcone "iconeSexeF"}}
+	{{/if}}
+	{{#if (hlp_eq sexe "NONCONNU")}}
+		{{> LibIcone "sexeInconnu"}}
+	{{/if}}
+</template>

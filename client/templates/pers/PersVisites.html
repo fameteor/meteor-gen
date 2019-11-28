@@ -1,0 +1,12 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersVisites                  -->
+<!-- ===================================== -->
+<template name="PersVisites">
+	{{#with gh_visitedObjects}}
+		<ul>
+		{{#each PERS}}
+			{{#with gh_persById .}} <li>{{> PersCompletAvecLien}}<br/>{{> LibClipId}}</li>{{/with}}
+		{{/each}}
+		</ul>
+	{{/with}}
+</template>

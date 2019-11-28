@@ -1,0 +1,53 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibDisplayPointingObjectList -->
+<!-- ===================================== -->
+<template name="LibDisplayPointingObjectList">
+	{{#with list}}
+		
+		<!-- Listes de PERS pointant vers cet objet -->
+		{{#each PERS}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="PERS" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		<!-- Listes de Couple events pointant vers cet objet -->
+		{{#each COUPLE_EVENT}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				<ul>
+				{{#each list}}
+					<li>{{typeCoupleEvent}} entre {{#with gh_persById persA}}{{> PersCompletAvecLien}}{{/with}} et {{#with gh_persById persB}}{{> PersCompletAvecLien}}{{/with}}</li>
+				{{/each}}
+				</ul>
+		{{/each}}
+		<!-- Listes de LIEU pointant vers cet objet -->
+		{{#each LIEU}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="LIEU" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		<!-- Listes de HIST pointant vers cet objet -->
+		{{#each HIST}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="HIST" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		<!-- Listes de DOC pointant vers cet objet -->
+		{{#each DOC}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="DOC" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		<!-- Listes de DOC pointant vers cet objet -->
+		{{#each LIEN}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="LIEN" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		<!-- Listes de DOC pointant vers cet objet -->
+		{{#each REGISTRE}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="REGISTRE" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		<!-- Listes de DOC pointant vers cet objet -->
+		{{#each ACTE_ARCHIVES}}
+			<h5>- {{intitule}} ({{hlp_count list}}) :</h5>
+				{{> LibPaginateGenObjectsList list=list objectType="ACTE_ARCHIVES" nbElemPerPage=10 nbPagesMax=9}}
+		{{/each}}
+		
+	{{/with}}
+</template>

@@ -1,0 +1,31 @@
+<!-- ===================================== -->
+<!-- TEMPLATE OutilsAnniversaires          -->
+<!-- ===================================== -->
+<template name="OutilsAnniversaires">
+	<table class="table" style="width:400px;">
+		{{#with listeAnniversairesProchainsJours}}
+			{{#if hlp_neq nbTotalAnniversaires 0 }}
+				{{#each .}}
+					{{#if hlp_neq (hlp_count pers) 0 }}
+						<tr>
+							<td>
+								<h2><small>{{dateFromTs TS}}</small></h2>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								{{#each pers}}
+										<span class="badge">{{age}}</span>
+										{{> PersCompletAvecLien}}
+										<br/>
+								{{/each}}
+							</td>
+						</tr>
+					{{/if}}
+				{{/each}}
+			{{else}}
+				<h2><small>{{> LibIcone "warning"}} Aucun anniversaire dans la semaine !</small></h2>
+			{{/if}}
+		{{/with}}
+	</table>
+</template>

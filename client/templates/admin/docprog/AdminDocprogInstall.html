@@ -1,0 +1,2700 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogInstall          -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogInstall">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur l'installation</h2>
+		<ul>
+			<li><a href="#versions">1) Versions</a></li>
+			<li><a href="#sauvegarde">2) Sauvegarde de la base</a></li>
+			<li><a href="#chargerDump">3) Rechargement d'un dump JSON</a></li>
+		</ul>
+		
+<h3><a id="versions"></a>1) Versions</h3>
+<!-- ===================================== -->
+<h3>Version 1.20</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>26/10/2018 21:32:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.5</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre></pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre></pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre></pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_20.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				<ul>
+					<li>Pas de modification.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout de l'IHM pour changer l'ordre des registres : modification du template <code>RegistreOrdonner</code></li>
+					<li>Ajout de la gestion des liens incertains vers PERS, LIEU, HIST et DOC dans les transcriptions TextXML (attribut TextXML <code>incertain="incertain"</code>).</li>
+					<li>Ajout des types de lieux italiens.</li>
+					<li>Passage des credential Google Maps dans <code>settings.JSON</code>, fichier ajouter dans <code>.gitignore</code>.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li></li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ===================================== -->
+<h3>Version 1.19</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>26/10/2018 21:32:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.5</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.1.0             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.18                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.3                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.8.0              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.6
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.3
+stylus@2.513.9
+ian:accounts-ui-bootstrap-3
+less@2.7.9
+dynamic-import
+aldeed:autoform
+aldeed:collection2-core
+dburles:google-maps</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre>accounts-base@1.3.0
+accounts-password@1.3.7
+aldeed:autoform@6.2.0
+aldeed:collection2-core@2.0.1
+allow-deny@1.0.9
+anti:i18n@0.4.3
+autoupdate@1.3.12
+babel-compiler@6.19.3
+babel-runtime@1.0.1
+base64@1.0.10
+binary-heap@1.0.10
+blaze@2.3.2
+blaze-html-templates@1.1.2
+blaze-tools@1.0.10
+boilerplate-generator@1.1.1
+caching-compiler@1.1.9
+caching-html-compiler@1.1.2
+callback-hook@1.0.10
+check@1.2.5
+chrismbeckett:toastr@2.1.2_1
+danimal:userpresence@1.0.1
+dburles:google-maps@1.1.5
+ddp@1.2.5
+ddp-client@1.3.4
+ddp-common@1.2.8
+ddp-rate-limiter@1.0.7
+ddp-server@1.3.14
+deps@1.0.12
+diff-sequence@1.0.7
+dynamic-import@0.1.1
+ecmascript@0.8.1
+ecmascript-runtime@0.4.1
+ecmascript-runtime-client@0.4.2
+ecmascript-runtime-server@0.4.1
+ejson@1.0.13
+email@1.2.3
+es5-shim@4.6.15
+fameteor:lang@1.2.0
+fameteor:svg@0.0.1
+fameteor:useful-helpers@1.0.3
+fastclick@1.0.13
+fortawesome:fontawesome@4.7.0
+geojson-utils@1.0.10
+hot-code-push@1.0.4
+html-tools@1.0.11
+htmljs@1.0.11
+http@1.2.12
+ian:accounts-ui-bootstrap-3@1.2.89
+id-map@1.0.9
+iron:controller@1.0.12
+iron:core@1.0.11
+iron:dynamic-template@1.0.12
+iron:layout@1.0.12
+iron:location@1.0.11
+iron:middleware-stack@1.1.0
+iron:router@1.1.2
+iron:url@1.1.0
+jquery@1.11.10
+launch-screen@1.1.1
+less@2.7.9
+livedata@1.0.18
+localstorage@1.1.0
+logging@1.1.17
+meteor@1.6.1
+meteor-base@1.1.0
+minifier-css@1.2.16
+minifier-js@2.1.0
+minimongo@1.2.1
+mobile-experience@1.0.4
+mobile-status-bar@1.0.14
+modules@0.9.2
+modules-runtime@0.8.0
+momentjs:moment@2.10.6
+mongo@1.1.18
+mongo-id@1.0.6
+npm-bcrypt@0.9.3
+npm-mongo@2.2.24
+observe-sequence@1.0.16
+ordered-dict@1.0.9
+peppelg:bootstrap-3-modal@1.0.4
+pfafman:filesaver@1.3.2
+promise@0.8.9
+raix:eventemitter@0.1.3
+random@1.0.10
+rate-limit@1.0.8
+reactive-dict@1.1.9
+reactive-var@1.0.11
+reload@1.1.11
+retry@1.0.9
+routepolicy@1.0.12
+service-configuration@1.0.11
+session@1.1.7
+sha@1.0.9
+shell-server@0.2.3
+spacebars@1.0.15
+spacebars-compiler@1.1.2
+srp@1.0.10
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+stylus@2.513.9
+templating@1.3.2
+templating-compiler@1.3.2
+templating-runtime@1.3.2
+templating-tools@1.1.2
+tmeasday:check-npm-versions@0.3.1
+tracker@1.1.3
+twbs:bootstrap@3.3.6
+ui@1.0.13
+underscore@1.0.10
+url@1.1.0
+webapp@1.3.16
+webapp-hashing@1.0.9</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2",
+    "simpl-schema": "^0.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_19.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				<ul>
+					<li>Collection <code>Lieux</code> : ajout de la propriété facultative <code>complement</code> pour afficher une infomation complémentaire discriminante en cas d'homonymes.</li>
+					<li>Collection <code>Pers</code> : ajout des propriétés facultatives <code>pereIncertain</code> et <code>mereIncertain</code>.</li>
+					<li>Collection <code>Docs</code> : ajout du type <code>CADASTRE</code>, du codage <code>GEO_REF</code> et des propriétés spécifiques <code>GEO_REF_coordPoint1</code> et <code>GEO_REF_coordPoint2</code>.</li>
+					<li>Collection <code>Liens</code> : ajout du type de zone <code>LAT_LNG</code>.</li>
+					<li>Ajout de la collection <code>Tags</code>.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout de flags <code>pereIncertain</code> et <code>mereIncertain</code>. Modification du template <code>PersInfosFiche</code>, ajout du template <code>PersIncertainCompletAvecLien</code>. Modification du schéma <code>pers</code>. Modification de <code>PersFormBirth</code> et de <code>PersFormDeath</code>.</li>
+					<li>Ajout des cadastres dans les documents :
+						<ul>
+							<li>Ajout du type (<code>typesDocs</code>) <code>CADASTRE</code> et du codage (<code>codagesDocs</code>) <code>GEO_REF</code> dans <code>/common/commonParms.js</code> et du type de zone <code>LAT_LNG</code>(liens).</li>
+							<li><code>/common/schemas.js</code> : ajout du schéma spécifique "GEO_REF" dans <code>SCHEMA._specifiqueCodageDoc</code> et modification de la valeur par défaut de <code>urlDocument</code> et <code>urlIcone</code> dans <code>SCHEMA.doc</code>.</li>
+							<li>Ajout du codage par défault <code>GEO_REF</code> pour le type <code>CADASTRE</code> dans <code>clientParms.js : codageSelonTypeDoc</code>.</li>
+							<li>Import du cadastre du Perrier et génération de liens vers le Perrier de chacun de ces documents.</li>
+							<li>Ajout de la librairie <code>dburles:google-maps</code>.</li>
+							<li>Suppression de la librairie Google Maps de <code>root.html</code>.</li>
+							<li>Modification du CSS pour gérer le slider d'opacité.</li>
+							<li>Modification du template <code>DocFormMain</code>.</li>
+							<li>Ajout des templates <code>DocInfosGEO_REF</code> et <code>GoogleMap</code>.</li>
+							<li>Suppression des templates <code>LieuInfosGoogleMap</code> et <code>LieuModifierLatLng</code>.</li>
+						</ul>					
+					</li>
+					<li>Ajout de la gestion des tags :
+						<ul>
+							<li>Modification du <code>/common/schemas.js</code>) et de <code>/common/commonParms.js</code> pour ajouter le schema <code>tag</code>.</li>
+							<li>Ajout de la collection <code>Tags</code>, des publications associées, attachement du schéma et gestion des droits d'accès à la collection.</li>
+							<li>Ajout des templates <code>TagsFormMainEditModal</code>, <code>TagFormMain</code> et <code>TagManagement</code>.</li>
+							<li>Modification en conséquence du template <code>RouterNav</code> et de <code>/client/routes.js</code></li>
+							<li>Ajouts de la propriété Array optionnelle <code>tags</code> aux schémas <code>PERS, LIEU, HIST, DOC</code>.</li>
+							<li>Modification des template <code>LibTitreInfos</code>, <code>PersFormMain</code>, <code>LieuFormulaire</code>, <code>HistFormulaire</code> et <code>DocFormMain</code>.</li>
+							<li>Modification de <code>/common.js/gf_thereIsNoPointingObject</code> et de <code>parms_liens.js</code> pour prendre en compte les tags dans la vérification des liens avant suppression de tag.</li>
+						</ul>					
+					</li>
+					<li>Gestion des lieux :
+						<ul>
+							<li>Ajout d'une information complémentaire discriminante en cas d'homonymie : modification du schéma avec l'ajout de la propriété facultative <code>complement</code>, modification des templates <code>LieuFormulaire</code>, <code>LibTitreInfos</code>, <code>LieuChoisirModal</code>, <code>LieuFormaterListe</code> et <code>LibPaginateGenObjectsList</code>.</li>
+						</ul>					
+					</li>
+					<li>Ajout des icones pers, lieu, pt hist et doc dans l'onglet "liens" des fiches PERS, LIEU, HIST et DOC :
+						<ul>
+							<li>Modification des templates <code>LibTabs.html</code> (un code HTML peut maintenant être renvoyé dans "label"), <code>PersInfos.js</code>, <code>LieuInfos.js</code>, <code>HistInfos.js</code> et <code>DocInfos.js</code>.</li>
+						</ul>					
+					</li>
+					<li>Ajout d'une popup de saisie des dates républicaines :
+						<ul>
+							<li>Modification du template <code>DateFormulaire</code> et ajout du template <code>DateRepModalChoice</code>.</li>
+						</ul>					
+					</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Modification de <code>SCHEMA._googleMap</code> pour permettre la saisie d'un nombre décimal avec un point (et non pas une virgule sur machine française).</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ===================================== -->
+<h3>Version 1.18</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>03/03/2018 16:50:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.5</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.1.0             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.18                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.3                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.8.0              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.6
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.3
+stylus@2.513.9
+ian:accounts-ui-bootstrap-3
+less@2.7.9
+dynamic-import
+aldeed:autoform
+aldeed:collection2-core</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre>accounts-base@1.3.0
+accounts-password@1.3.7
+aldeed:autoform@6.2.0
+aldeed:collection2-core@2.0.1
+allow-deny@1.0.9
+anti:i18n@0.4.3
+autoupdate@1.3.12
+babel-compiler@6.19.3
+babel-runtime@1.0.1
+base64@1.0.10
+binary-heap@1.0.10
+blaze@2.3.2
+blaze-html-templates@1.1.2
+blaze-tools@1.0.10
+boilerplate-generator@1.1.1
+caching-compiler@1.1.9
+caching-html-compiler@1.1.2
+callback-hook@1.0.10
+check@1.2.5
+chrismbeckett:toastr@2.1.2_1
+danimal:userpresence@1.0.1
+ddp@1.2.5
+ddp-client@1.3.4
+ddp-common@1.2.8
+ddp-rate-limiter@1.0.7
+ddp-server@1.3.14
+deps@1.0.12
+diff-sequence@1.0.7
+dynamic-import@0.1.1
+ecmascript@0.8.1
+ecmascript-runtime@0.4.1
+ecmascript-runtime-client@0.4.2
+ecmascript-runtime-server@0.4.1
+ejson@1.0.13
+email@1.2.3
+es5-shim@4.6.15
+fameteor:lang@1.2.0
+fameteor:svg@0.0.1
+fameteor:useful-helpers@1.0.3
+fastclick@1.0.13
+fortawesome:fontawesome@4.7.0
+geojson-utils@1.0.10
+hot-code-push@1.0.4
+html-tools@1.0.11
+htmljs@1.0.11
+http@1.2.12
+ian:accounts-ui-bootstrap-3@1.2.89
+id-map@1.0.9
+iron:controller@1.0.12
+iron:core@1.0.11
+iron:dynamic-template@1.0.12
+iron:layout@1.0.12
+iron:location@1.0.11
+iron:middleware-stack@1.1.0
+iron:router@1.1.2
+iron:url@1.1.0
+jquery@1.11.10
+launch-screen@1.1.1
+less@2.7.9
+livedata@1.0.18
+localstorage@1.1.0
+logging@1.1.17
+meteor@1.6.1
+meteor-base@1.1.0
+minifier-css@1.2.16
+minifier-js@2.1.0
+minimongo@1.2.1
+mobile-experience@1.0.4
+mobile-status-bar@1.0.14
+modules@0.9.2
+modules-runtime@0.8.0
+momentjs:moment@2.10.6
+mongo@1.1.18
+mongo-id@1.0.6
+npm-bcrypt@0.9.3
+npm-mongo@2.2.24
+observe-sequence@1.0.16
+ordered-dict@1.0.9
+peppelg:bootstrap-3-modal@1.0.4
+pfafman:filesaver@1.3.2
+promise@0.8.9
+raix:eventemitter@0.1.3
+random@1.0.10
+rate-limit@1.0.8
+reactive-dict@1.1.9
+reactive-var@1.0.11
+reload@1.1.11
+retry@1.0.9
+routepolicy@1.0.12
+service-configuration@1.0.11
+session@1.1.7
+sha@1.0.9
+shell-server@0.2.3
+spacebars@1.0.15
+spacebars-compiler@1.1.2
+srp@1.0.10
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+stylus@2.513.9
+templating@1.3.2
+templating-compiler@1.3.2
+templating-runtime@1.3.2
+templating-tools@1.1.2
+tmeasday:check-npm-versions@0.3.1
+tracker@1.1.3
+twbs:bootstrap@3.3.6
+ui@1.0.13
+underscore@1.0.10
+url@1.1.0
+webapp@1.3.16
+webapp-hashing@1.0.9</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2",
+    "simpl-schema": "^0.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_18.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Aucune.</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout des templates, tootbar et router pour <code>outils/faitsMarquants</code> et <code>outils/gestionDesNoms</code>.</li>
+					<li>Mofification du template <code>OutilsCalendrierRepublicain</code> : passage du formulaire de conversion en tête de page et modifications de mise en page.</li>
+					<li>Remise en service du menu Ajouter pour tous les utilisateurs.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Modification de <code>LibDocAnalysis</code> : ajout d'un tri par sous ordre "mois", "jour".</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ===================================== -->
+<h3>Version 1.17</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>05/10/2017 20:25:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.5</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.1.0             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.18                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.3                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.8.0              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.6
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.3
+stylus@2.513.9
+ian:accounts-ui-bootstrap-3
+less@2.7.9
+dynamic-import
+aldeed:autoform
+aldeed:collection2-core</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre>accounts-base@1.3.0
+accounts-password@1.3.7
+aldeed:autoform@6.2.0
+aldeed:collection2-core@2.0.1
+allow-deny@1.0.9
+anti:i18n@0.4.3
+autoupdate@1.3.12
+babel-compiler@6.19.3
+babel-runtime@1.0.1
+base64@1.0.10
+binary-heap@1.0.10
+blaze@2.3.2
+blaze-html-templates@1.1.2
+blaze-tools@1.0.10
+boilerplate-generator@1.1.1
+caching-compiler@1.1.9
+caching-html-compiler@1.1.2
+callback-hook@1.0.10
+check@1.2.5
+chrismbeckett:toastr@2.1.2_1
+danimal:userpresence@1.0.1
+ddp@1.2.5
+ddp-client@1.3.4
+ddp-common@1.2.8
+ddp-rate-limiter@1.0.7
+ddp-server@1.3.14
+deps@1.0.12
+diff-sequence@1.0.7
+dynamic-import@0.1.1
+ecmascript@0.8.1
+ecmascript-runtime@0.4.1
+ecmascript-runtime-client@0.4.2
+ecmascript-runtime-server@0.4.1
+ejson@1.0.13
+email@1.2.3
+es5-shim@4.6.15
+fameteor:lang@1.2.0
+fameteor:svg@0.0.1
+fameteor:useful-helpers@1.0.3
+fastclick@1.0.13
+fortawesome:fontawesome@4.7.0
+geojson-utils@1.0.10
+hot-code-push@1.0.4
+html-tools@1.0.11
+htmljs@1.0.11
+http@1.2.12
+ian:accounts-ui-bootstrap-3@1.2.89
+id-map@1.0.9
+iron:controller@1.0.12
+iron:core@1.0.11
+iron:dynamic-template@1.0.12
+iron:layout@1.0.12
+iron:location@1.0.11
+iron:middleware-stack@1.1.0
+iron:router@1.1.2
+iron:url@1.1.0
+jquery@1.11.10
+launch-screen@1.1.1
+less@2.7.9
+livedata@1.0.18
+localstorage@1.1.0
+logging@1.1.17
+meteor@1.6.1
+meteor-base@1.1.0
+minifier-css@1.2.16
+minifier-js@2.1.0
+minimongo@1.2.1
+mobile-experience@1.0.4
+mobile-status-bar@1.0.14
+modules@0.9.2
+modules-runtime@0.8.0
+momentjs:moment@2.10.6
+mongo@1.1.18
+mongo-id@1.0.6
+npm-bcrypt@0.9.3
+npm-mongo@2.2.24
+observe-sequence@1.0.16
+ordered-dict@1.0.9
+peppelg:bootstrap-3-modal@1.0.4
+pfafman:filesaver@1.3.2
+promise@0.8.9
+raix:eventemitter@0.1.3
+random@1.0.10
+rate-limit@1.0.8
+reactive-dict@1.1.9
+reactive-var@1.0.11
+reload@1.1.11
+retry@1.0.9
+routepolicy@1.0.12
+service-configuration@1.0.11
+session@1.1.7
+sha@1.0.9
+shell-server@0.2.3
+spacebars@1.0.15
+spacebars-compiler@1.1.2
+srp@1.0.10
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+stylus@2.513.9
+templating@1.3.2
+templating-compiler@1.3.2
+templating-runtime@1.3.2
+templating-tools@1.1.2
+tmeasday:check-npm-versions@0.3.1
+tracker@1.1.3
+twbs:bootstrap@3.3.6
+ui@1.0.13
+underscore@1.0.10
+url@1.1.0
+webapp@1.3.16
+webapp-hashing@1.0.9</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2",
+    "simpl-schema": "^0.3.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_17.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Aucune.</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout du patch sécurité : meteor update allow-deny  (version 1.0.9)</li>
+					<li>Passage à Autoform V6 et à Node Simple-Schema.</li>
+					<li>En conséquence modification de <code>/common/schemas.js</code>, suppression des templates <code>AdminDocprogSchema</code> et <code>AdminDocprogDonnees</code>, ajout des templates <code>admin/docprog/schema/*</code> pour afficher le dictionnaire de données développable, ajout des templates <code>/admin/schemaCheck/*</code> pour vérifier les schemas des données de la base, ajout de la méthode serveur <code>schemasDataCheck</code> et modification de <code>RouterNav</code> et <code>/client/routes.js</code>.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Correction du pb d'alignement des icones de la liste d'enfants : modification des templates <code>LibIcone</code> et <code>PersArbreDescExplorableRecursif</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ===================================== -->
+<h3>Version 1.16</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>02/10/2017 22:50:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.5</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.1.0             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.18                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.3                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.8.0              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.6
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.3
+stylus@2.513.9
+ian:accounts-ui-bootstrap-3
+less@2.7.9
+dynamic-import</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre>accounts-base@1.3.0
+accounts-password@1.3.7
+aldeed:autoform@5.8.1
+aldeed:collection2@2.10.0
+aldeed:collection2-core@1.2.0
+aldeed:schema-deny@1.1.0
+aldeed:schema-index@1.1.1
+aldeed:simple-schema@1.5.3
+allow-deny@1.0.5
+anti:i18n@0.4.3
+autoupdate@1.3.12
+babel-compiler@6.19.3
+babel-runtime@1.0.1
+base64@1.0.10
+binary-heap@1.0.10
+blaze@2.3.2
+blaze-html-templates@1.1.2
+blaze-tools@1.0.10
+boilerplate-generator@1.1.1
+caching-compiler@1.1.9
+caching-html-compiler@1.1.2
+callback-hook@1.0.10
+check@1.2.5
+chrismbeckett:toastr@2.1.2_1
+danimal:userpresence@1.0.1
+ddp@1.2.5
+ddp-client@1.3.4
+ddp-common@1.2.8
+ddp-rate-limiter@1.0.7
+ddp-server@1.3.14
+deps@1.0.12
+diff-sequence@1.0.7
+dynamic-import@0.1.1
+ecmascript@0.8.1
+ecmascript-runtime@0.4.1
+ecmascript-runtime-client@0.4.2
+ecmascript-runtime-server@0.4.1
+ejson@1.0.13
+email@1.2.3
+es5-shim@4.6.15
+fameteor:lang@1.2.0
+fameteor:svg@0.0.1
+fameteor:useful-helpers@1.0.3
+fastclick@1.0.13
+fortawesome:fontawesome@4.7.0
+geojson-utils@1.0.10
+hot-code-push@1.0.4
+html-tools@1.0.11
+htmljs@1.0.11
+http@1.2.12
+ian:accounts-ui-bootstrap-3@1.2.89
+id-map@1.0.9
+iron:controller@1.0.12
+iron:core@1.0.11
+iron:dynamic-template@1.0.12
+iron:layout@1.0.12
+iron:location@1.0.11
+iron:middleware-stack@1.1.0
+iron:router@1.1.2
+iron:url@1.1.0
+jquery@1.11.10
+launch-screen@1.1.1
+less@2.7.9
+livedata@1.0.18
+localstorage@1.1.0
+logging@1.1.17
+mdg:validation-error@0.2.0
+meteor@1.6.1
+meteor-base@1.1.0
+minifier-css@1.2.16
+minifier-js@2.1.0
+minimongo@1.2.1
+mobile-experience@1.0.4
+mobile-status-bar@1.0.14
+modules@0.9.2
+modules-runtime@0.8.0
+momentjs:moment@2.10.6
+mongo@1.1.18
+mongo-id@1.0.6
+npm-bcrypt@0.9.3
+npm-mongo@2.2.24
+observe-sequence@1.0.16
+ordered-dict@1.0.9
+peppelg:bootstrap-3-modal@1.0.4
+pfafman:filesaver@1.3.2
+promise@0.8.9
+raix:eventemitter@0.1.3
+random@1.0.10
+rate-limit@1.0.8
+reactive-dict@1.1.9
+reactive-var@1.0.11
+reload@1.1.11
+retry@1.0.9
+routepolicy@1.0.12
+service-configuration@1.0.11
+session@1.1.7
+sha@1.0.9
+shell-server@0.2.3
+spacebars@1.0.15
+spacebars-compiler@1.1.2
+srp@1.0.10
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+stylus@2.513.9
+templating@1.3.2
+templating-compiler@1.3.2
+templating-runtime@1.3.2
+templating-tools@1.1.2
+tracker@1.1.3
+twbs:bootstrap@3.3.6
+ui@1.0.13
+underscore@1.0.10
+url@1.1.0
+webapp@1.3.16
+webapp-hashing@1.0.9</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_16.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Ajout de la collection <code>Profs</code>.</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout de l'analyse des données des actes : ajout du template <code>LibDocAnalysis</code>. Modification des templates <code>PersInfosFiche</code>et <code>AdminDocprogTexteXml</code>. Modification du template <code>textXmlEditor</code> pour ajouter le tag "age". Modification de <code>/common/commonParms.js</code> pour ajouter les listes des valeurs possibles des tags texteMXL.</li>
+					<li>Ajout du global helper/fonction  <code>gf/gh_getCommonParmLabel</code>.</li>
+					<li>Ajout de la collection <code>Profs</code> : modification de <code>/common/schemas.js</code>, <code>/common/common.js</code>, <code>/client/main.js</code>, <code>/client/routes.js</code> et <code>/server/server.js</code>. Ajout de <code>templates/profs/*</code> et de <code>routerNav.html</code> pour ajouter le template de liste de toutes les professions.</li>
+					<li>Ajout template <code>LibOptionsFromCommonParms</code>.</li>
+					<li>Ajout des gf/gh <code>gf/gh_profById</code> et <code>gf_getCommonParmLabel</code>.</li>
+					<li>Modification des templates <code>textXmlEditor</code> et <code>textXmlEditorVoiceReco</code>.</li>
+					<li>Ajout de la fonction <code>gf_durationNiceFormat</code>.</li>
+					<li>Modification des <code>css.css</code> et <code>less.css</code>.</li>
+					<li>Ajout du drapeau d'état des recherches sur la personne, modification des templates <code>PersCompletSansLien</code> et <code>PersCompletAvecLien</code>.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Suppression du blanc dans le lien sur le document : modification des templates <code>DocMiniatureSansLien</code>, <code>LibIcone</code> et <code>DocMiniatureAvecLien</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Version 1.15</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>14/09/2017 09:20:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.5</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.1.0             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.18                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.3                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.8.0              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.6
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.3
+stylus@2.513.9
+ian:accounts-ui-bootstrap-3
+less@2.7.9
+dynamic-import</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre>accounts-base@1.3.0
+accounts-password@1.3.7
+aldeed:autoform@5.8.1
+aldeed:collection2@2.10.0
+aldeed:collection2-core@1.2.0
+aldeed:schema-deny@1.1.0
+aldeed:schema-index@1.1.1
+aldeed:simple-schema@1.5.3
+allow-deny@1.0.5
+anti:i18n@0.4.3
+autoupdate@1.3.12
+babel-compiler@6.19.3
+babel-runtime@1.0.1
+base64@1.0.10
+binary-heap@1.0.10
+blaze@2.3.2
+blaze-html-templates@1.1.2
+blaze-tools@1.0.10
+boilerplate-generator@1.1.1
+caching-compiler@1.1.9
+caching-html-compiler@1.1.2
+callback-hook@1.0.10
+check@1.2.5
+chrismbeckett:toastr@2.1.2_1
+danimal:userpresence@1.0.1
+ddp@1.2.5
+ddp-client@1.3.4
+ddp-common@1.2.8
+ddp-rate-limiter@1.0.7
+ddp-server@1.3.14
+deps@1.0.12
+diff-sequence@1.0.7
+dynamic-import@0.1.1
+ecmascript@0.8.1
+ecmascript-runtime@0.4.1
+ecmascript-runtime-client@0.4.2
+ecmascript-runtime-server@0.4.1
+ejson@1.0.13
+email@1.2.3
+es5-shim@4.6.15
+fameteor:lang@1.2.0
+fameteor:svg@0.0.1
+fameteor:useful-helpers@1.0.3
+fastclick@1.0.13
+fortawesome:fontawesome@4.7.0
+geojson-utils@1.0.10
+hot-code-push@1.0.4
+html-tools@1.0.11
+htmljs@1.0.11
+http@1.2.12
+ian:accounts-ui-bootstrap-3@1.2.89
+id-map@1.0.9
+iron:controller@1.0.12
+iron:core@1.0.11
+iron:dynamic-template@1.0.12
+iron:layout@1.0.12
+iron:location@1.0.11
+iron:middleware-stack@1.1.0
+iron:router@1.1.2
+iron:url@1.1.0
+jquery@1.11.10
+launch-screen@1.1.1
+less@2.7.9
+livedata@1.0.18
+localstorage@1.1.0
+logging@1.1.17
+mdg:validation-error@0.2.0
+meteor@1.6.1
+meteor-base@1.1.0
+minifier-css@1.2.16
+minifier-js@2.1.0
+minimongo@1.2.1
+mobile-experience@1.0.4
+mobile-status-bar@1.0.14
+modules@0.9.2
+modules-runtime@0.8.0
+momentjs:moment@2.10.6
+mongo@1.1.18
+mongo-id@1.0.6
+npm-bcrypt@0.9.3
+npm-mongo@2.2.24
+observe-sequence@1.0.16
+ordered-dict@1.0.9
+peppelg:bootstrap-3-modal@1.0.4
+pfafman:filesaver@1.3.2
+promise@0.8.9
+raix:eventemitter@0.1.3
+random@1.0.10
+rate-limit@1.0.8
+reactive-dict@1.1.9
+reactive-var@1.0.11
+reload@1.1.11
+retry@1.0.9
+routepolicy@1.0.12
+service-configuration@1.0.11
+session@1.1.7
+sha@1.0.9
+shell-server@0.2.3
+spacebars@1.0.15
+spacebars-compiler@1.1.2
+srp@1.0.10
+standard-minifier-css@1.3.4
+standard-minifier-js@2.1.0
+stylus@2.513.9
+templating@1.3.2
+templating-compiler@1.3.2
+templating-runtime@1.3.2
+templating-tools@1.1.2
+tracker@1.1.3
+twbs:bootstrap@3.3.6
+ui@1.0.13
+underscore@1.0.10
+url@1.1.0
+webapp@1.3.16
+webapp-hashing@1.0.9</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_15.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Ajout de la collection <code>CoupleEvents</code>.<br/>
+			Dans la collection <code>pers</code> : 
+				<ul>
+					<li>suppression de la propriété <code>mariages</code>.</li>
+					<li>suppression de la propriété <code>etatRechEnfants</code>.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Passage à METEOR 1.5</li>
+					<li>Limitation de la hauteur du contenu à la place restant sous le titre avec ascenseur dans le contenu seulement. Modification de <code>css.css</code> et des templates de layout : <code>RouterLayoutApplication</code>, <code>RouterLayoutAjouter</code>, <code>RouterLayoutModifier</code> et <code>RouterLayoutChercher</code></li>
+					<li>Ajout du template <code>LibSearchProgressStatus</code> et modification des templates <code>PersInfosFiche</code> et <code>LibTitreInfos</code> en conséquence. Suppression du template <code>PersEtatRecherche</code>.</li>
+					<li>Ajout dans la BD de coupleEvents :
+						<ul>
+							 <li>Ajout du schéma coupleEvent dans <code>/common/schemas.js</code>.</li>
+        					 <li>Ajout des types de coupleEvent dans <code>/common/commonParms.js</code>.</li>
+        					 <li>Ajout de la collection CoupleEvents dans <code>/common/common.js</code>.</li>
+        					 <li>Ajout de la publication de la collection CoupleEvents dans <code>/server/server.js</code>.</li>
+        					 <li>Ajout de la souscription de la collection CoupleEvents dans <code>/client/routes.js</code>.</li>
+        					 <li>Ajout de l'attachement de la collection CoupleEvents à son schéma dans <code>/client/main.js</code> et <code>/server/server.js</code>.</li>
+        					 <li>Chargement des données dans la collection <code>CoupleEvents</code>.</li>
+        					 <li>Ajout dans <code>/client/main.js</code> des gf/gh <code>gh/gf_coupleEventsByPersId</code> et <code>gh/gf_coupleEventsByDocId</code>.</li>
+        					 <li>Ajout dans <code>/client/main.js</code> des actions "onSuccess" et "onError" pour les formulaires Autoform <code>addCoupleEventForm</code> et <code>updateCoupleEventForm</code>.</li>
+        					 <li>Ajout des dans <code>/server/server.js</code> droits d'accès CoupleEvents.allow({...}).</li>
+        					 <li>Modification du template <code>PersInfosFiche</code> HTML et JS.</li>
+        					 <li>Ajout des templates <code>CoupleEventTitle</code>, <code>CoupleEventEditModal</code>, <code>CoupleEventFormulaireAeditable</code> et <code>CoupleEventFormulaireBeditable</code>.</li>
+        					 <li>Ajout des styles <code>.modal-update</code> et <code>.modal-insert</code> dans <code>css.less</code>.</li>
+        					 <li>Ajout des coupleEvents dans <code>/common/parms_liens.js</code>.</li>
+        					 <li>Modification de <code>gf_thereIsNoPointingObject</code> et <code>gf_getPointingObjects</code> dans <code>/common/common.js</code></li>
+        					 <li>Modification du template <code>LibDisplayPointingObjectList</code>.</li>
+							 <li>Suppression :
+								<ul>
+									<li>de la structure "mariages"  du template <code>PersInfosFiche</code>.</li>
+									<li>de <code>gh_classIncertainForMariage</code> dans <code>/client/main.js</code>.</li>
+									<li>de la structure "mariages" de la collection <code>Pers</code> dans MongoDB.</li>
+									<li>de <code>SCHEMA._acteMariage</code> et <code>SCHEMA.pers.mariages</code> dans <code>/common/schema.js</code>.</li>
+									<li>de la structure "mariages" du template <code>PersFormulaire</code>.</li>
+									<li>de la structure mariage de <code>/common/parms_liens.js</code>.</li>
+								</ul>
+							</li>							
+							<li>Modification de <code>gf_listeEnfants</code> qui renvoie maintenant un Array au lieu d'un Cursor. Modification en conséquence de <code>LibChrono.js</code> et <code>PersChronologie.js</code>.</li>
+							<li>Modification pour la partie mariage des templates <code>arbreDescExplorableRecursif</code>, <code>PersArbreAscDessinerPers</code>, <code>DocTitreAvecLienPers</code>, <code>DocTitreSansLien</code>.</li>
+						</ul>
+       				</li>
+					<li>Modification de l'IHM d'édition des données "personne" : Ajout du template <code>LibEditButton</code> et des templates <code>/pers/form/*</code>. Modification des templates <code>RouterNav</code>, <code>PersInfosFiche</code> et <code>LibTitreInfos</code>. Suppression du template <code>PersAjouter</code> et de la route associée dans <code>/client/route.js</code>. Suppression des templates <code>PersListeFormatCourt</code>, <code>PersBoutonModifier</code>,	<code>PersBoutonSupprimer</code> et <code>PersListetout</code>.</li>
+					<li>Modification de l'IHM d'édition des données "doc" : Ajout des templates <code>/doc/form/*</code>. Ajout de <code>codageSelonTypeDoc</code> dans <code>/client/clientParms.js</code>. Modification du template <code>routeur</code> et du <code>/common/schema.js</code> pour les valeurs par défaut de <code>urlDocument</code>, <code>urlIcone</code> et <code>SCHEMA</code>. Modification de <code>/client/main.js</code> pour les callbacks de retour des formulaires. Modification du template <code>LibTitreInfos.html</code> pour les documents. Suppression des templates <code>DocFormulaire</code>, <code>DocAjouter</code>, <code>DocBoutonModifier</code>, <code>DocBoutonSupprimer</code>.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Modification du template <code>PersInfosFiche</code> : affichage des communes, lieudits et âge améliorés pour les cas d'information incomplète. </li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h3>Version 1.14</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>07/07/2017 07:45:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.4.2.3</code></td>
+		</tr>
+		<tr>
+			<th>Fichier packages METEOR</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.14                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.1                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.3
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.1
+stylus@2.513.8
+ian:accounts-ui-bootstrap-3
+less</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier versions METEOR</th>
+			<td>
+				Fichier <code>.meteor/versions</code> : <br/>
+				<pre>accounts-base@1.2.14
+accounts-password@1.3.3
+aldeed:autoform@5.8.1
+aldeed:collection2@2.10.0
+aldeed:collection2-core@1.2.0
+aldeed:schema-deny@1.1.0
+aldeed:schema-index@1.1.1
+aldeed:simple-schema@1.5.3
+allow-deny@1.0.5
+anti:i18n@0.4.3
+autoupdate@1.2.11
+babel-compiler@6.13.0
+babel-runtime@1.0.1
+base64@1.0.10
+binary-heap@1.0.10
+blaze@2.1.9
+blaze-html-templates@1.0.5
+blaze-tools@1.0.10
+boilerplate-generator@1.0.11
+caching-compiler@1.1.9
+caching-html-compiler@1.0.7
+callback-hook@1.0.10
+check@1.2.4
+chrismbeckett:toastr@2.1.2_1
+danimal:userpresence@1.0.1
+ddp@1.2.5
+ddp-client@1.2.9
+ddp-common@1.2.8
+ddp-rate-limiter@1.0.6
+ddp-server@1.2.10
+deps@1.0.12
+diff-sequence@1.0.7
+ecmascript@0.6.1
+ecmascript-runtime@0.3.15
+ejson@1.0.13
+email@1.1.18
+es5-shim@4.6.15
+fameteor:lang@1.2.0
+fameteor:svg@0.0.1
+fameteor:useful-helpers@1.0.3
+fastclick@1.0.13
+fortawesome:fontawesome@4.7.0
+geojson-utils@1.0.10
+hot-code-push@1.0.4
+html-tools@1.0.11
+htmljs@1.0.11
+http@1.1.8
+ian:accounts-ui-bootstrap-3@1.2.89
+id-map@1.0.9
+iron:controller@1.0.12
+iron:core@1.0.11
+iron:dynamic-template@1.0.12
+iron:layout@1.0.12
+iron:location@1.0.11
+iron:middleware-stack@1.1.0
+iron:router@1.0.13
+iron:url@1.0.11
+jquery@1.11.10
+launch-screen@1.0.12
+less@2.7.9
+livedata@1.0.18
+localstorage@1.0.12
+logging@1.1.16
+mdg:validation-error@0.2.0
+meteor@1.6.0
+meteor-base@1.0.4
+minifier-css@1.2.15
+minifier-js@1.2.15
+minimongo@1.0.18
+mobile-experience@1.0.4
+mobile-status-bar@1.0.13
+modules@0.7.7
+modules-runtime@0.7.7
+momentjs:moment@2.10.6
+mongo@1.1.14
+mongo-id@1.0.6
+npm-bcrypt@0.9.2
+npm-mongo@2.2.11_2
+observe-sequence@1.0.14
+ordered-dict@1.0.9
+peppelg:bootstrap-3-modal@1.0.4
+pfafman:filesaver@1.3.2
+promise@0.8.8
+raix:eventemitter@0.1.3
+random@1.0.10
+rate-limit@1.0.6
+reactive-dict@1.1.8
+reactive-var@1.0.11
+reload@1.1.11
+retry@1.0.9
+routepolicy@1.0.12
+service-configuration@1.0.11
+session@1.1.7
+sha@1.0.9
+shell-server@0.2.1
+spacebars@1.0.13
+spacebars-compiler@1.0.13
+srp@1.0.10
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+stylus@2.513.8
+templating@1.2.15
+templating-compiler@1.2.15
+templating-runtime@1.2.15
+templating-tools@1.0.5
+tracker@1.1.1
+twbs:bootstrap@3.3.6
+ui@1.0.12
+underscore@1.0.10
+url@1.0.11
+webapp@1.3.12
+webapp-hashing@1.0.9</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Fichier packages NODE</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^1.0.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_14.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Aucune.</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout du type de document : "Document communal".</li>
+					<li>Ajout de "chrono" V2 aux infos des points d'histoire :
+						<ul>
+							<li>Ajouts de mois courts à <code>/client/clientParms.js</code>.</li>
+							<li>Modification du template <code>LibTitreInfos.html</code> et ajout de <code>LibTitreInfos.js</code>.</li>
+							<li>Modification du template <code>HistInfosFiche</code>.</li>
+							<li>Modification de <code>/client/main.js</code> : ajout du helper <code>gh_dateToTimestamp</code> et fonction globale <code>gf_dateToTimestamp</code>.</li>
+							<li>Ajout du module <code>/lib/chrono/*</code></li>
+							<li>Modification de <code>PersInfos.js</code> pour afficher l'onglet "Chronologie V2".</li>
+						</ul>
+					
+					</li>
+					<li>Modification des points d'histoire :
+						<ul>
+							<li>Ajout de <code>scopesHist</code> dans <code>/common/commonParms.js</code>.</li>
+							<li>Ajout de l'attribut <code>scope</code> obligatoire dans le schéma des points d'histoire.</li>
+							<li>Passage de l'attribut <code>zones</code> en facultatif dans le schéma des points d'histoire.</li>
+							<li>Dans <code>HistFormulaire</code> remplacement de l'attribut <code>zones</code> par <code>scope</code>.</li>
+							<li>Ajoute de <code>scope</code> dans <code>LibTitreInfos</code> et <code>HistFormaterListe</code>.</li>
+							<li>Modification des <code>themesHist</code> dans <code>/common/commonParms.js</code>. Modification des entrées de la base concernées.</li>
+						</ul>
+					
+					
+					</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Correction du pluriel (et du féminin pour les lieux) quand 1 seul objet sélectionné, modification des templates <code>LieuChoisirModal</code> et <code>PersChoisirModal</code>.</li>
+					<li>Suppression du paramètre <code>id</code> dans le helpers globaux <code>gh_isSosa</code>, <code>gh_isMultipleSosas</code> et <code>gh_sosasList</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.13</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>14/02/2017 22:30:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.4.2.3</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+			<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.14                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.1                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.6.1              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.3
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+iron:middleware-stack
+danimal:userpresence
+shell-server@0.2.1
+stylus@2.513.8
+ian:accounts-ui-bootstrap-3</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_13.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Aucune.</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Modification du template <code>LibTabs</code> : présentation des tabs verticaux sur N colonnes (2 par défaut) et contenu dans 12-N colonnes, passage possible de contextes différents à chaque tab, tab Bootstrap pur (modification du <code>/client/css.css</code>). Modification des templates d'affichage des objets gen et des sous-templates appelés par <code>LibTabs</code>. Modification des docs AUTO en conséquence.</li>
+					<li>Modification du template <code>AdminDocprogTemplatesAuto</code> pour utiliser le template <code>LibTabs</code> modifié.</li>
+					<li>Modification de <code>LibIcone</code> pour avoir la doc AUTO. Suppression de la doc dans <code>AdminDocprogTemplates</code>. Ajout des icones "com", "chat", "phone", "visio", "hangup". Passage des icones de la variable <code>clientParms</code> à la variable <code>clientParms.iconsList</code>. Modification en conséquence du template <code>LibIcone</code>.</li>
+					<li>Passage du menu "Prefs" dans le menu "Outils".</li>
+					<li>Ajout de <code>gf_userById</code> et <code>gh_userById</code> dans <code>/client/main.js</code>. Modification du template <code>UserPresence</code>, du template <code>AdminUsers</code> et ajout des templates <code>UserNameWithLink</code> et <code>UserJoignability</code>.</li>
+					<li>Ajout de la variable de session <code>callState</code>.</li>
+					<li>Ajout du template <code>ComCallControl</code> et insertion de ce template dans <code>/client/root.html</code>. Modification du css pour ce template.</li>
+					<li>Modification du template <code>PersInfosFiche</code> : ajout pour le mariage du terme "habitant à".</li>
+					<li>Modification des templates <code>DocTitreSansLien</code> et <code>DocTitreAvecLienPers</code> : Affichage de "- NOUVEAU -" quand un acte n'est pas rattaché à une personne.</li>
+					<li>Ajout des types "document militaire" et "acte de justice" dans les types d'actes (<code>common/commonParms.js</code>).</li>
+					<li>Suppression des containers pour rester dans la largeur de page pour les templates <code>DocInfosIMAGE</code>, <code>DocInfosACTE</code>, <code>DocInfosVIDEO</code>, <code>DocInfosPDF</code>, <code>DocInfosCARTE</code> et <code>DocViewerCarte</code>.</li>
+					<li>Modification de la liste des points d'histoire pour afficher les infos complètes, modification templates <code>HistFormaterListe</code> et <code>HistListetout</code>.</li>
+					<li>Ajout des points d'histoire dans la chronologie : tous les templates impliqués modifiés.</li>
+					<li>Modification des .bat de démarrage (<code>gen_start</code> et <code>gen_start_pro</code>) pour forcer la réponse "Y" au delete de fichiers temporaires.</li>
+					<li>Ajout du template <code>LibPrintThisSvgButton</code>. modification des templates <code>PersChronologie</code> et <code>PersArbreAsc</code>.</li>
+					<li>Modification du code <code>/server/serveur.js</code> méthode <code>svgToPngDownload</code> : augmentation de la mémoire de la machine virtuelle JAVA.</li>
+					<li>Suppression du package <code>meteorhacks:kadira</code>, modification du code <code>/server/serveur.js</code>.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Template <code>RegistreIndexerSvgInfosRegistre</code> : le tooltip donnant la page et la date de l'acte ne s'affiche pas : passage de l'attribut <code>title</code> en élément HTML fils. Testé sur Chrome et FF.</li>
+					<li>Iden avec le template <code>DocInfosIMAGE</code> pour afficher les commentaires sur l'image en tooltip.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.12</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>13/12/2016 06:50:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.4.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.14                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.1                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.5.9              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.2
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+meteorhacks:kadira
+iron:middleware-stack
+danimal:userpresence
+shell-server
+stylus
+ian:accounts-ui-bootstrap-3</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_12.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Dans la collection <code>Hists</code> :
+				<ul>
+					<li>suppression de la propriété <code>pers</code> (transformation en liens).</li>
+					<li>suppression de la propriété <code>lieux</code> (transformation en liens).</li>
+					<li>suppression de la propriété <code>hists</code> (transformation en liens).</li>
+					<li>suppression de la propriété <code>docs</code> (transformation en liens).</li>
+				</ul>
+				Dans la collection <code>Liens</code> :
+				<ul>
+					<li>Passage de la propriété <code>vers</code> d'un type <code>[SCHEMA._objetGen]</code> à un type <code>SCHEMA._objetGen</code>. Transformation en liens multiples.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Ajout d'un affichage par tabs (avec calcul uniquement du template du tab actif) pour les afficher les infos des différents objets :
+						<ul>
+							<li>Ajout du template de gestion des tabs <code>LibTabs</code>.</li>
+							<li>Modification du <code>css</code> en conséquence.</li>
+							<li>Modification du template <code>PersInfos</code> qui ne sert plus qu'à faire un appel à <code>LibTabs</code> et donc à appeler les nouveaux templates suivants : <code>PersInfosFiche</code>, <code>PersInfosChronologie</code>, <code>PersInfosArbreAsc</code>, <code>PersInfosArbreDesc</code>, <code>PersInfosObjetsLies</code>.</li>
+							<li>Modification du template <code>LieuInfos</code> qui ne sert plus qu'à faire un appel à <code>LibTabs</code> et donc à appeler les nouveaux templates suivants : <code>LieuInfosFiche</code>, <code>LieuInfosCartes</code>, <code>LieuInfosGoogleMap</code>, <code>LieuInfosSousLieux</code>, <code>LieuInfosObjetsLies</code>.</li>
+							<li>Modification du template <code>HistInfos</code> qui ne sert plus qu'à faire un appel à <code>LibTabs</code> et donc à appeler les nouveaux templates suivants : <code>HistInfosFiche</code>, <code>HistInfosObjetsLies</code>.</li>
+							<li>Modification du template <code>DocInfos</code> qui ne sert plus qu'à faire un appel à <code>LibTabs</code> et donc à appeler les nouveaux templates suivants : <code>DocInfosFiche</code>, <code>DocInfosObjetsLies</code>.</li>
+							<li>Modification du titre du template <code>DocViewerCarte</code>.</li>
+							<li>Modification du template <code>AdminDocprogTemplatesAuto</code> pour mettre en évidence le template choisi.</li>
+						</ul>
+					</li>
+					<li>Suppression des pointeurs des points d'histoire, remplacement par des pointeurs LIENs :
+						<ul>
+							<li>Modification de la BD : collection <code>Hists</code>.</li>
+							<li>Dédoublonnage des points d'histoire.</li>
+							<li>Modification du schéma en conséquence.</li>
+						</ul>
+					</li>
+					<li>Transformation des LIENs : la propriété <code>vers</code> devient un objet pointant vers un seul objet, au lieu d'un array d'objets pouvant pointer vers plusieurs objets :
+						<ul>
+							<li>Modification de la BD : collection <code>Liens</code>.</li>
+							<li>Modification du schéma en conséquence.</li>
+							<li>Modification des templates <code>LienFormaterListe.html</code>, <code>LienListeObjetsDedoublonnes</code>, <code>LienListePour</code>, <code>LienListeVers</code>, <code>LienAjouterModal</code>, <code>DocInfosIMAGE</code>, <code>LienBoutonModifier</code>, du ficher<code>parms_liens.js</code> et de la fonction globale <code>gf_getPointingObjects</code>.</li>
+						</ul>
+					</li>
+					<li>Modification du template <code>LienListe</code> : ajout de la possibilité de le développer/réduire.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Modification du fichier <code>/client/routes.js</code> pour que l'ordre des liens soit correct dans le template <code>LienListetout</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.11</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>1/12/2016 21:50:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.4.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.14                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.1                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.5.9              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.2
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+meteorhacks:kadira
+iron:middleware-stack
+danimal:userpresence
+shell-server
+stylus
+ian:accounts-ui-bootstrap-3</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>
+				Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_11.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Dans la collection <code>Pers</code> :
+				<ul>
+					<li>remplacement de la propriété <code>naissance.acte ::String</code> par <code>naissance.docs ::[String]</code>.</li>
+					<li>remplacement de la propriété <code>mariages.$.acte ::String</code> par <code>mariages.$.docs ::[String]</code>.</li>
+					<li>remplacement de la propriété <code>deces.acte ::String</code> par <code>deces.docs ::[String]</code>.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Evolutions :
+				<ul>
+					<li>Modification du titre du template <code>RouterHome.html</code> : suppression de la version du site. Même titre pour le template <code>RouterLogin</code>.</li>
+					<li>Ajouter des commentaires, remarques de recherche et commentaires de toponymie dans le template <code>LieuInfos</code>. Remise en forme responsive du template. Modification du template <code>LieuFormulaire.html</code>. Modification du template <code>DocListeObjetsLies</code> pour un affichage paginé.</li>
+					<li>Affichage des icônes des documents dans la liste paginée des doc (template <code>LibPaginateGenObjectsList </code>). Modification du template <code>LibPaginateGenObjectsList_docsDisplay</code>.</li>
+					<li>Affichage paginé dans la recherche de documents (template <code>DocChercher</code>).</li>
+					<li>Refonte complète de la recherche de pointeurs  (<code>common.js</code> : <code>gf_getPointingObjects()</code> et <code>gf_thereIsNoPointingObject()</code> et template <code>LibDisplayPointingObjectList</code>). Mise à jour de la doc : template <code>AdminDocprogPointersCheck</code>. Paramétrage par le fichier <code>parms_liens.js</code>.</li>
+					<li>Modification du template <code>DocLienversdoc</code> pour afficher "Voir cet acte", Voir ce film" ...etc au lieu de "Voir ce document".</li>
+					<li>Ajout du module de doc automatique <code>AdminDocprogTemplatesAuto</code>.</li>
+					<li>Suppression du template <code>LieuCarrousel</code>. Modification en conséquence du template <code>LibTitreInfos</code>.</li>
+					<li>Ajout du template <code>LibObjectIconByType</code>.</li>
+					<li>Ajout du template <code>LienListeObjetsDedoublonnes</code>. Création d'un template générique <code>DocInfo</code>. Modification en conséquence de <code>/client/router.js</code> <code>DocInfosVIDEO</code>, <code>DocInfosACTE</code>, <code>DocInfosCARTE</code>, <code>DocInfosDOC</code>, <code>DocInfosGROUPE</code>, <code>DocInfosIMAGE</code>, <code>DocInfosPDF</code>, <code>DocInfosTEXTE_XML</code>.</li>
+					<li>Suppression des templates <code>PersListeObjetsLies</code>, <code>LieuListeObjetsLies</code>, <code>HistListeObjetsLies</code>, <code>DocListeObjetsLies</code>.</li>
+					<li>Modification des templates <code>LienListe</code>, <code>LienListePour</code>, <code>LienListeVers</code>, <code>LienBoutonAjouterVers</code> et suppression des templates <code>LienFormaterListePour</code> et <code>LienFormaterListeVers</code>.</li>
+					<li>En cas de suppression de lien, on ne reviens pas à la page précédente dans l'history : modification de <code>LibGenObjectDeleteModal.js</code>.</li>
+					<li>Modification de <code>fr.js</code>.</li>
+					<li>Ajout de <code>gf_objectById</code> et de <code>gh_objectById</code>.</li>
+					<li>Documents multiples possibles par acte :
+						<ul>
+							<li>Modification du <code>/common/schema.js</code>.</li>
+							<li>Modification de la base de données.</li>
+							<li>Modification du template <code>PersInfos</code>.</li>
+							<li>Modification du template <code>DocTitreAvecLienPers</code>.</li>
+							<li>Modification de <code>DocTitreSansLien.js</code>.</li>
+							<li>Modification de <code>LibGenObjectDeleteModal.html</code></li>
+							<li>Modification du template <code>PersFormulaire</code></li>
+						</ul>
+					</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Correction du problème de l'API Key Google (<code>/client/root.html</code>) et détection du chargement de l'API Google Map.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.10</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>14/11/2016 07:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.4.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Fichier <code>.meteor/packages</code> : <br/>
+				<pre># Meteor packages used by this project, one per line.
+# Check this file (and the other files in this directory) into your repository.
+#
+# 'meteor add' and 'meteor remove' will edit this file for you,
+# but you can also edit it by hand.
+
+meteor-base@1.0.4             # Packages every Meteor app needs to have
+mobile-experience@1.0.4       # Packages for a great mobile UX
+mongo@1.1.14                   # The database Meteor supports right now
+blaze-html-templates    # Compile .html files into Meteor Blaze views
+session@1.1.7                 # Client-side reactive dictionary for your app
+jquery@1.11.10                  # Helpful client-side library
+tracker@1.1.1                 # Meteor's client-side reactive programming library
+
+es5-shim@4.6.15                # ECMAScript 5 compatibility for older browsers.
+ecmascript@0.5.9              # Enable ECMAScript2015+ syntax in app code
+
+accounts-password@1.3.2
+aldeed:collection2
+aldeed:autoform
+chrismbeckett:toastr
+fameteor:lang
+fameteor:useful-helpers
+fortawesome:fontawesome
+iron:router
+reactive-var@1.0.11
+twbs:bootstrap
+peppelg:bootstrap-3-modal
+underscore@1.0.10
+fameteor:svg
+pfafman:filesaver
+standard-minifier-css@1.3.2
+standard-minifier-js@1.2.1
+meteorhacks:kadira
+iron:middleware-stack
+danimal:userpresence
+shell-server
+stylus
+ian:accounts-ui-bootstrap-3</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>
+			Fichier <code>package.json</code> : <br/>
+			<pre>{
+  "name": "gen",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "babel-runtime": "^6.18.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_10.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>Aucune modification des données, mais passage à <code>MongoDB 3.2.10</code>.
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Passage à Meteor V1.4.2.1 :
+				<ul>
+					<li>Modification de <code>gen_start.bat</code> pour prendre en compte la nouvelle directory de dev <code>D:/gen</code>.</li>
+					<li>Installation de MongoDB 3.2.10 sur le PC de dev.</li>
+					<li>Modification pour la production de MongoDB 3.2.10 dans les fichiers <code>/data/batches/mongoInitialize.sh</code> et <code>/data/compose/docker-compose.yml</code></li>
+					<li>Utilisation en production de l'image Docker <code>kadirahq/meteord:base</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.09</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>11/11/2016 16:30:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.3.5.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				<pre>accounts-password            1.1.13* Password support for accounts
+aldeed:autoform              5.8.1  Easily create forms with automatic i...
+aldeed:collection2           2.9.1* Automatic validation of insert and u...
+blaze-html-templates         1.0.4* Compile HTML templates into reactive...
+chrismbeckett:toastr         2.1.2_1  Gnome / Growl type non-blocking no...
+danimal:userpresence         1.0.1  Track user online status across mult...
+ecmascript                   0.4.8* Compiler plugin that supports ES2015...
+es5-shim                     4.5.13* Shims and polyfills to improve ECMA...
+fameteor:lang                1.2.0  Multilanguage management package
+fameteor:svg                 0.0.1+ Tools for interactive embedded SVG
+fameteor:useful-helpers      1.0.3  Useful global helpers
+fortawesome:fontawesome      4.5.0* Font Awesome (official): 500+ scalab...
+ian:accounts-ui-bootstrap-3  1.2.89  Bootstrap-styled accounts-ui with m...
+iron:middleware-stack        1.1.0  Client and server middleware support...
+iron:router                  1.0.13  Routing specifically designed for M...
+jquery                       1.11.9* Manipulate the DOM using CSS selectors
+meteor-base                  1.0.4  Packages that every Meteor app needs
+meteorhacks:kadira           2.30.0* Performance Monitoring for Meteor
+mobile-experience            1.0.4  Packages for a great mobile user exp...
+mongo                        1.1.9_1* Adaptor for using MongoDB and Mini...
+peppelg:bootstrap-3-modal    1.0.4  Simple usage of bootstrap 3 modals.
+pfafman:filesaver            0.2.3_2* filesaver.js packaged for use in M...
+reactive-var                 1.0.10* Reactive variable
+session                      1.1.6* Session variable
+standard-minifier-css        1.0.8* Standard css minifier used with Mete...
+standard-minifier-js         1.0.8* Standard javascript minifiers used w...
+tracker                      1.0.15* Dependency tracker to allow reactiv...
+twbs:bootstrap               3.3.6  The most popular front-end framework...
+underscore                   1.0.9* Collection of small helpers: _.map, ...
+
+
+* New versions of these packages are available!</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_09.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				Ajout de la gestion de présence :
+				<ul>
+					<li>Suppression de <code>profile.lastLogin</code> dans la collection <code>user</code>.</li>
+					<li>Ajout de la propriété <code>presence</code> dans la collection <code>user</code> (cf doc module <code>danimal:userpresence</code>).</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Ajout de la gestion de présence :
+				<ul>
+					<li><code>meteor add danimal:userpresence</code></li>
+					<li>Ajout des icones de présence.</li>
+					<li>Création du template <code>user/UserPresence</code>.</li>
+					<li>Modification du template <code>AdminUsers</code>.</li>
+					<li>Suppression de <code>profile.lastLogin</code> à la création du user, au login et dans les utilisateurs déjà créés dans la BD.</li>
+					<li>Ajout de la documentation sur le template <code>user/UserPresence</code>.</li>
+				</ul>
+				Correction de bugs :
+				<ul>
+					<li>Classement des users par par date de création.</li>
+
+				</ul>		
+				Evolutions :
+				<ul>
+					<li>Passage en rouge de l'icone de déconnexion si déconnexion.</li>
+					<li>Popup anniversaire (template <code>OutilsAnniversairesModal</code>) : bouton "fermer" au lieu de "annuler".</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.08</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>21/10/2016 10:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.3.3.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				<pre>accounts-password            1.1.11* Password support for accounts
+aldeed:autoform              5.8.1  Easily create forms with automatic i...
+aldeed:collection2           2.9.1* Automatic validation of insert and u...
+blaze-html-templates         1.0.4* Compile HTML templates into reactive...
+chrismbeckett:toastr         2.1.2_1  Gnome / Growl type non-blocking no...
+ecmascript                   0.4.5* Compiler plugin that supports ES2015...
+es5-shim                     4.5.12* Shims and polyfills to improve ECMA...
+fameteor:lang                1.2.0  Multilanguage management package
+fameteor:svg                 0.0.1+ Tools for interactive embedded SVG
+fameteor:useful-helpers      1.0.3  Useful global helpers
+fortawesome:fontawesome      4.5.0* Font Awesome (official): 500+ scalab...
+ian:accounts-ui-bootstrap-3  1.2.89  Bootstrap-styled accounts-ui with m...
+iron:middleware-stack        1.1.0  Client and server middleware support...
+iron:router                  1.0.13  Routing specifically designed for M...
+jquery                       1.11.9  Manipulate the DOM using CSS selectors
+meteor-base                  1.0.4  Packages that every Meteor app needs
+meteorhacks:kadira           2.30.0  Performance Monitoring for Meteor
+mobile-experience            1.0.4  Packages for a great mobile user exp...
+mongo                        1.1.9* Adaptor for using MongoDB and Minimo...
+peppelg:bootstrap-3-modal    1.0.4  Simple usage of bootstrap 3 modals.
+pfafman:filesaver            0.2.3_2* filesaver.js packaged for use in M...
+reactive-var                 1.0.10  Reactive variable
+session                      1.1.6  Session variable
+standard-minifier-css        1.0.7* Standard css minifier used with Mete...
+standard-minifier-js         1.0.7* Standard javascript minifiers used w...
+tracker                      1.0.14* Dependency tracker to allow reactiv...
+twbs:bootstrap               3.3.6  The most popular front-end framework...
+underscore                   1.0.9  Collection of small helpers: _.map, ...
+
+
+* New versions of these packages are available</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_08.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Hors code du build :
+				<ul>
+					<li>Modification du <code>/data/compose/docker-compose.yml</code> en prod : attacher pour <code>meteorGen</code> le disque <code>/data/mongo/dumps</code> pour éviter l'erreur lors de la requête à la liste des dumps au démarrage.</li>
+				</ul>
+				Ajout du support Kadira :
+				<ul>
+					<li>Modification du <code>server.js</code>.</li>
+					<li>Ajout du module Kadira <code>meteor add meteorhacks:kadira</code>.</li>
+				</ul>	
+				Correction de bugs :
+				<ul>
+					<li>Correction du bug Chrome Iron Router : Handler with name 'route' already exists : <code>meteor add iron:middleware-stack</code>, <code>meteor update iron:middleware-stack</code></li>
+					<li>Correction du bug : affichage de l'âge au mariage même si aucun lieu n'est précisé (comme cela a été fait pour l'acte de décès).</li>
+					<li>Correction du bug de <code>PersArbreAscDessinerPers.js</code> : messages d'erreur si pas de mariages.</li>
+					<li>Correction du bug lors de l'insertion d'une nouvelle personne au nom composé à partir de l'IHM "chercher" modal. Seuls le nom formaté et le premier prénom formaté sont affichés.</li>
+					<li>Correction du bug timer <code>PersChoisirModal.js</code> : création d'un timer pour la saisie du nom et d'un autre pour le prénom.</li>
+				</ul>		
+				Ajout de la dictée vocale pour saisir des commentaires, transcriptions... :
+				<ul>
+					<li>Modification de <code>clientParms.js</code> et de <code>AdminDocprogTemplates.html</code> pour ajouter les nouvelles icônes.</li>
+					<li>Modification du template <code>RouterNav</code> pour afficher la capacité et l'état de la reco et du fichier <code>css.css</code>.</li>
+					<li>Ajout de variables de session (<code>isAudioTranscriptCapable</code> et <code>audioTranscriptIsOn</code>) et de fonctions et helpers globaux (<code>gf_isAudioTranscriptCapable</code>, <code>gh_isAudioTranscriptCapable</code>, <code>gf_audioTranscriptIsOn</code>, <code>gh_audioTranscriptIsOn</code>) dans <code>main.js</code>.</li>
+					<li>Ajout du template <code>textXmlEditorVoiceReco</code> qui affiche le bouton de reco vocale.</li>
+					<li>Ajout du bouton reco dans <code>textXmlEditor</code>.</li>
+				</ul>
+				Autre :
+				<ul>
+					<li>Modification du code <code>server.js</code> et du template <code>AdminDump</code> pour faire les dumps dans /data/mongo/dumps sous windows.</li>
+					<li>Modification du code <code>gen_mongoRestore.bat</code> pour recharcher à partir de <code>/data/mongo/initial</code>.</li>
+					<li>Ajout du favicon.</li>
+				</ul>
+				
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.07</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>04/08/2016 22:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.3.3.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_07.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				Passage à un reverse proxy NGINX modif config OS) :
+				<ul>
+					<li>Utilisation en développement de NGINX avec proxy port 80 -> 3000, <code>server_name marais.mooo.com;</code> (PROD) ou <code>server_name marais.dev.com;</code> (DEV) et serveur statique sur <code>/marais</code>.</li>
+					<li>Ajout en développement de <code>127.0.0.1 marais.dev.com</code> dans le fichier <code>hosts</code>.</li>
+					<li>Création de la directory <code>c:/data/static/</code> contenant toutes les données de <code>/marais</code></li>
+				</ul>
+				Passage à un reverse proxy NGINX (modifs codemeteorGen), gestion des paths documents :
+				<ul>
+					<li>Modification de <code>gen_start.bat</code> pour ajouter la variable d'environnement <code>set ROOT_URL=http://marais.dev.com</code> et pour démarrer NGINX.</li>
+					<li>Ajout de <code>gen_start_pro.bat</code> pour gérer les directories différentes du PC bureau.</li>
+					<li>Ajouter dans <code>/server/server.js</code> et <code>/client/main.js</code> une impression console au démarrage de ROOT_URL.</li>
+					<li>Suppression de la propriété <code>parametresClient.urlFileServer</code> du fichier <code>/client/clientParms.js</code></li>
+					<li>Modification de <code>/client/main.js</code> global helper <code>gh_urlDocument</code>, remplacer par <code>return Meteor.absoluteUrl() + "marais" + this.urlDocument;</code>. Ajout d'un global helper <code>gh_urlIconeDocument</code>.</li>
+					<li>Modification aussi du path vers les documents dans les modules <code>DocMiniatureSansLien, PersPhoto, DocInfosPDF, DocInfosCARTE, tpls_doc, DocInfosIMAGE, xsltForTexteXml.js, LieuCarrousel</code></li>
+					<li>Suppression de <code>DocIconeAvecLien</code> inutilisé.</li>
+				</ul>
+				Modification du template <code>RouterNav</code> :
+				<ul>
+					<li>Séparation des groupes "gestion des users" et "gestion du serveur" dans le menu "admin".</li>
+					<li>Suppression du groupe "Meteor et modules", suppression des templates associés et modification du routage en conséquence.</li>
+					<li>Passage du groupe "gestion des bugs et évolution" dans menu "doc".</li>
+					<li>Option ajoutée de création d'un login pour une personne de la base, vivante et n'ayant pas encore de login.</li>
+					<li>Menu "ajouter" réservé aux administrateurs.</li>
+				</ul>
+				Autres modifications pour la gestion des users :
+				<ul>
+					<li>Suppression de la possibilité de se créer soi-même un login (<code>/common/common.js</code>).</li>
+					<li>Mise en commentaire de <code>Accounts.onCreateUser</code> et ajout de la méthode <code>createLogin</code> dans <code>/server/server.js</code>.</li>
+					<li>Ajout du template <code>AdminUsersCreate</code></li>
+					<li>Ajouter la route correspondante dans <code>/client/routes.js</code>.</li>
+					<li>Modification de <code>AdminUsers</code> pour faire apparaitre le lien vers la personne GEN associée aux utilisateurs si elle existe.</li>
+				</ul>
+				Autres modifications :
+				<ul>
+					<li>Modification de <code>/client/main.js</code> pour tester si la date est bien une date dans les helpers <code>gh_formatDate, gh_formatTime</code>. Ajout des fonctions globales associées à ces helpers.</li>
+					<li>Ajout du déplacement sur le viewer carte, appelé maintenant <code>DocViewerCarte</code>, et utilisation de ce template pour affichage des cartes dans le template <code>LieuInfos</code> et dans le template <code>DocInfosCARTE</code>. Ajout de la documentation associée.</li>
+					<li>Nettoyage des templates aux noms non standards dans <code>/client/templates/doc</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.06</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>26/07/2016 22:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.3.3.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_06.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				<ul>
+					<li>Correction de bug : dans <code>RegistreModifier.html</code>, le bouton est renommé "Modifier" au lieu de "Ajouter".</li>
+					<li>Correction de bug : dates mal formatées, ex : (1762-). Modification de <code>PersDatesFormatCourt.html</code>. Modification de <code>PersArbreAscDessinerPers.js</code> pour éviter les "undefined?" dans les arbres ascendants circulaires.</li>
+					<li>Correction de bug : problème de polices lors de l'impression de l'arbre ascendant circulaire suite à modification pour traiter les données incertaines en V1.05. Ajout d'un fichier CSS pour la conversion raster BATIK <code>/public/arbre.css</code> et de <code>PersArbreAsc.js</code>.</li>
+					<li>Modification de <code>OutilsAnniversaires.html</code> et <code>OutilsAnniversaires.js</code> pour afficher "Aucun anniversaire" au lieu d'un blanc quand il n'y a pas d'anniversaire dans la semaine à venir.</li>
+					<li>La recherche des objets se fait maintenant après un timeout après la dernière saisie : ajout d'un paramètre <code>clientParms.inputTimerValue</code> et modification des fichiers <code>PersChoisirModal.js</code> et <code>LieuChoisirModal.js</code>.</li>
+					
+					
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.05</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>22/06/2016 22:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.3.3.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				<pre>accounts-password            1.1.11  Password support for accounts
+aldeed:autoform              5.8.1  Easily create forms with automatic i...
+aldeed:collection2           2.9.1  Automatic validation of insert and u...
+blaze-html-templates         1.0.4  Compile HTML templates into reactive...
+chrismbeckett:toastr         2.1.2_1  Gnome / Growl type non-blocking no...
+ecmascript                   0.4.5  Compiler plugin that supports ES2015...
+es5-shim                     4.5.12  Shims and polyfills to improve ECMA...
+fameteor:lang                1.2.0  Multilanguage management package
+fameteor:svg                 0.0.1+ Tools for interactive embedded SVG
+fameteor:useful-helpers      1.0.3  Useful global helpers
+fortawesome:fontawesome      4.5.0  Font Awesome (official): 500+ scalab...
+ian:accounts-ui-bootstrap-3  1.2.89  Bootstrap-styled accounts-ui with m...
+iron:router                  1.0.13  Routing specifically designed for M...
+jquery                       1.11.9  Manipulate the DOM using CSS selectors
+meteor-base                  1.0.4  Packages that every Meteor app needs
+mobile-experience            1.0.4  Packages for a great mobile user exp...
+mongo                        1.1.9  Adaptor for using MongoDB and Minimo...
+peppelg:bootstrap-3-modal    1.0.4  Simple usage of bootstrap 3 modals.
+pfafman:filesaver            0.2.3_2* filesaver.js packaged for use in M...
+reactive-var                 1.0.10  Reactive variable
+session                      1.1.6  Session variable
+standard-minifier-css        1.0.7  Standard css minifier used with Mete...
+standard-minifier-js         1.0.7  Standard javascript minifiers used w...
+tracker                      1.0.14  Dependency tracker to allow reactiv...
+twbs:bootstrap               3.3.6  The most popular front-end framework...
+underscore                   1.0.9  Collection of small helpers: _.map, ...</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_05.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				<ul>
+					<li>Ajout du champ optionnel <code>incertain</code> pour les actes des PERS.</li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				<ul>
+					<li>Ajout de la documentation sur l'objet <code>Date</code> cible (réflexion en cours non implémentée).</li>
+					<li>Ajout du traitement des données incertaines par acte : naissance, mariage, décès. Modification du schéma <code>SCHEMA._acte</code>, des templates <code>PersFormulaire</code>, <code>PersInfos</code>, <code>PersArbreAscDessinerPers</code> et <code>PersDatesFormatCourt</code> et du CSS. Ajout des helpers globaux : <code>gh_classIncertainForNaissance</code>,<code>gh_classIncertainForMariage</code> et <code>gh_classIncertainForDeces</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.04</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>31/05/2016 22:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_04.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+			<ul>
+				<li>
+				Suppression des champs <code>rep1</code> et <code>rep2</code> des champs <code>date</code> (objets GEN : <code>pers.deces</code>, <code>pers.mariages</code>, <code>pers.naissance</code>, <code>hist</code>, <code>doc</code>, <code>acteArchives</code>.)
+				</li>
+			</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				<ul>
+					<li>Correction du bug : pb début mars pour les années bisextiles de la conversion calendrier Grégorien -&gt; Républicain.</li>
+					<li>Suppression du template de test de la conversion calendrier Grégorien &lt;-&gt; Républicain (<code>AdminTestDatesRepublicaines.html</code> et <code>AdminTestDatesRepublicaines.js</code>) et de l'entrée correspondante dans les menu admin.</li>
+					<li>Suppression (BD et schémas) des champs <code>rep1</code> et <code>rep2</code> des champs <code>date</code> (objets GEN : <code>pers.deces</code>, <code>pers.mariages</code>, <code>pers.naissance</code>, <code>hist</code>, <code>doc</code>, <code>acteArchives</code>.)</li>
+					<li>Suppression des propriétés <code>rep1</code> et <code>rep2</code> dans le formulaire <code>DateFormulaire</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.03</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>26/04/2016 20:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_03.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				<ul>
+					<li>Modification du "title" HTML : "Marais" sans version.</li>
+					<li>Ajout de la popup et du menu d'affichage des anniversaires de la semaine.</li>
+					<li>Correction du bug : création PERS dans "chercher pers" : ajout des nouveaux champs obligatoire par défaut : <code>etatRechActes</code> et <code>etatRechEnfants</code> à <code>"INCOMPLET_A_COMPLETER"</code>.</li>
+					<li>Correction du bug : batch de démarrage <code>gen_start.bat</code>.</li>
+					<li>Suppression du § "installation" de la doc d'installation.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.02</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>18/04/2016 20:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td>
+				Ajout de <code>pfafman:filesaver</code><br/>
+				<pre>accounts-password            1.1.4* Password support for accounts
+aldeed:autoform              5.8.1  Easily create forms with automatic i...
+aldeed:collection2           2.8.0* Automatic validation of insert and u...
+blaze-html-templates         1.0.1* Compile HTML templates into reactive...
+chrismbeckett:toastr         2.1.2_1  Gnome / Growl type non-blocking no...
+ecmascript                   0.1.6* Compiler plugin that supports ES2015...
+es5-shim                     4.1.14* Shims and polyfills to improve ECMA...
+fameteor:lang                1.2.0  Multilanguage management package
+fameteor:svg                 0.0.1+ Tools for interactive embedded SVG
+fameteor:useful-helpers      1.0.3  Useful global helpers
+fortawesome:fontawesome      4.5.0  Font Awesome (official): 500+ scalab...
+ian:accounts-ui-bootstrap-3  1.2.84* Bootstrap-styled accounts-ui with m...
+iron:router                  1.0.12  Routing specifically designed for M...
+jquery                       1.11.4* Manipulate the DOM using CSS selectors
+meteor-base                  1.0.1* Packages that every Meteor app needs
+mobile-experience            1.0.1* Packages for a great mobile user exp...
+mongo                        1.1.3* Adaptor for using MongoDB and Minimo...
+peppelg:bootstrap-3-modal    1.0.4  Simple usage of bootstrap 3 modals.
+pfafman:filesaver            0.2.3_2  filesaver.js packaged for use in M...
+reactive-var                 1.0.6* Reactive variable
+session                      1.1.1* Session variable
+standard-minifiers           1.0.2* Standard minifiers used with Meteor ...
+tracker                      1.0.9* Dependency tracker to allow reactive...
+twbs:bootstrap               3.3.6  The most popular front-end framework...
+underscore                   1.0.4* Collection of small helpers: _.map, ...</pre>
+			</td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_02.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				Aucune modification
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				<ul>
+					<li>Conversion SVG -> PNG et download des fichiers images.</li>
+					<li>Ajout du batch <code>gen_start.bat</code> pour démarrage du serveur de DEV sous Windows avec suppression des fichiers TEMP au démarrage.</li>
+					<li>Ajout du template <code>DateformatLongSansCalRep</code>.</li>
+					<li>Suppression des dates républicaines de l'arbre descendant circulaire.</li>
+					<li>Ajout du numéro de sosa modifiable (1 par défaut) sur l'arbre descendant circulaire.</li>
+					<li>Ajout d'un bouton "supprimer" et mise en forme standard du template <code>DocChoisirModal</code></li>
+					<li>Modification du router <code>routerHooks.js</code> pour ne pas afficher le début de la page pour les routes "Modifier" et "Ajouter".</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<h3>Version 1.01</h3>
+<table class="table">
+	<tbody>
+		<tr>
+			<th>Date mise en service sur ASUS</th>
+			<td>12/04/2016 20:00:00</td>
+		</tr>
+		<tr>
+			<th>Version Meteor</th>
+			<td><code>V1.2.1</code></td>
+		</tr>
+		<tr>
+			<th>Versions modules ATHMOSPHERE</th>
+			<td><pre>accounts-password            1.1.4* Password support for accounts
+aldeed:autoform              5.8.1  Easily create forms with automatic i...
+aldeed:collection2           2.8.0* Automatic validation of insert and u...
+blaze-html-templates         1.0.1* Compile HTML templates into reactive...
+chrismbeckett:toastr         2.1.2_1  Gnome / Growl type non-blocking no...
+ecmascript                   0.1.6* Compiler plugin that supports ES2015...
+es5-shim                     4.1.14* Shims and polyfills to improve ECMA...
+fameteor:lang                1.2.0  Multilanguage management package
+fameteor:svg                 0.0.1+ Tools for interactive embedded SVG
+fameteor:useful-helpers      1.0.3  Useful global helpers
+fortawesome:fontawesome      4.5.0  Font Awesome (official): 500+ scalab...
+ian:accounts-ui-bootstrap-3  1.2.84* Bootstrap-styled accounts-ui with m...
+iron:router                  1.0.12  Routing specifically designed for M...
+jquery                       1.11.4* Manipulate the DOM using CSS selectors
+meteor-base                  1.0.1* Packages that every Meteor app needs
+mobile-experience            1.0.1* Packages for a great mobile user exp...
+mongo                        1.1.3* Adaptor for using MongoDB and Minimo...
+peppelg:bootstrap-3-modal    1.0.4  Simple usage of bootstrap 3 modals.
+reactive-var                 1.0.6* Reactive variable
+session                      1.1.1* Session variable
+standard-minifiers           1.0.2* Standard minifiers used with Meteor ...
+tracker                      1.0.9* Dependency tracker to allow reactive...
+twbs:bootstrap               3.3.6  The most popular front-end framework...
+underscore                   1.0.4* Collection of small helpers: _.map, ...</pre></td>
+		</tr>
+		<tr>
+			<th>Versions modules NPM</th>
+			<td>N/A</td>
+		</tr>
+		<tr>
+			<th>Build</th>
+			<td>
+				<code>gen_V1_01.tar.gz</code>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications BD</th>
+			<td>
+				<ul>
+					<li>Ajouts pour tous les enregistrements du champ <code>etatRechActes</code> de la collection <code>Pers</code></li>
+					<li>Ajouts pour tous les enregistrements du champ <code>etatRechEnfants</code> de la collection <code>Pers</code></li>
+				</ul>
+			</td>
+		</tr>
+		<tr>
+			<th>Modifications Fonctionnelles</th>
+			<td>
+				<ul>
+					<li>Gestion de l'état de la recherche des actes et des enfants pour les objets "PERS" : modification schéma et formulaire PERS, ajout d'un nouveau template <code>PersEtatRecherche</code>.</li>
+					<li>Modification associée de l'arbre ascendant : possibilité de choisir couleur selon : commune de naissance, commune de décès, état de la recherche des actes, état de la recherche des enfants. Modification associée de la légende des couleurs.</li>
+					<li>Ajouts des batches <code>gen_mongoRestore.bat</code>, <code>gen_build.bat</code>, <code>gen_listPackages.bat</code>, <code>gen_setProxy.bat</code>,</li>
+					<li>Suppression des fichiers DATA initiaux de chargement de la base et du script serveur <code>initialiser.js</code> associé et du code resté en commentaire dans <code>server.js</code>.</li>
+				</ul>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+
+
+
+
+<h3><a id="sauvegarde"></a>2) Sauvegarde de la base</h3>
+<!-- ===================================== -->
+<h4>Installer la bonne version de MongoDB pour avoir <code>mongodump</code> et <code>mongorestore</code></h4>
+Lancer <code>meteor</code>. Dans une autre fenêtre DOS, se placer dans la directory applicative <code>c:/gen</code> et lancer <code>meteor mongo</code>.<br/>
+On obtient alors la version de mongoDB, ex : <code>MongoDB shell version: 2.6.7</code> et l'adresse IP/port d'écoute de MongoDB, ex : <code>connection to: 127.0.0.1/3001/meteor</code>.<br/>
+On installe alors une version proche de MongoDB (ex :  <code>2.6.11</code>) pour utiliser <code>mongodump.exe</code> et <code>mongorestore.exe</code><br/>
+On rajoute dans le PATH système : <code>;c:\mongodb\bin\</code><br/>
+<h4>Faire le dump</h4>
+Lancer la commance <code>mongodump -h 127.0.0.1 --port 3001 -d meteor</code><br/>
+Ajouter <code>--out path</code> pour spécifier le path de la directory du dump, par défaut, le résultat du dump se situe dans la directory <code>c:\mongodb\bin\dump\meteor</code><br/>
+
+<h3><a id="chargerDump"></a>3) Rechargement d'un dump de la base</h3>
+<!-- ===================================== -->
+Lancer la commance <code>mongorestore -h 127.0.0.1 --port 3001 -d meteor dump/meteor</code> pour recharger la base avec un dump contenu dans la directory <code>c:\mongodb\bin\dump\meteor</code><br/>
+	
+
+	</div>
+</template>

@@ -1,0 +1,179 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogPaginationListe  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogPaginationListe">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur le template de pagination d'une liste (Cursor ou Array) d'objet GEN</h2>
+		<ul>
+			<li><a href="#general">1) Fonctionnement général</a></li>
+			<li><a href="#utilisation">2) Exemples d'utilisation</a></li>
+			<li><a href="#ameliorations">3) Améliorations</a></li>
+		</ul>
+	
+<!-- ===================================== -->
+<h3><a id="general"></a>1) Fonctionnement général</h3>
+<p>Le template <code>LibPaginateGenObjectsList</code> permet d'afficher une liste d'objets GEN avec pagination. Des flèches de navigation permettent d'afficher les objets page par page (s'il y a plus d'un page). On peut préciser le nombre maximum de page affichées ainsi que le nombres d'objets par page.</p>
+<p>On appelle le template avec les paramètres suivants :</p>
+
+<pre>{
+	// OBLIGATOIRE :
+	list :			::Meteor.cursor	ou ::[GEN object]					// Liste à paginer,
+	objectType:	 	::["PERS","LIEU","HIST","DOC","LIEN","REGISTRE","ACTE_ARCHIVES"]	// Type d'objet dans la liste,
+	nbElemPerPage: 		::Integer								// Nombre d'objets à afficher par page,
+	nbPagesMax :		::Integer								// Nombre de pages max à afficher à la fois
+	
+	// OPTIONNEL :
+	title:		::String 	// Si on veut afficher une info bulle au survol, par défaut : "voir cette personne", "voir ce lieu"... etc... selon les objets.
+	class:		::String 	// Si on veut spécifier une class particulière, vide par défaut
+	href:		::String 	// Si on veut préciser un lien particulier (# par défaut)
+}</pre>
+
+<!-- ===================================== -->
+<h3><a id="utilisation"></a>2) Exemples d'utilisation</h3>
+
+<h4>- Si on souhaite afficher la liste des Artus :</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList
+	list=listeTousLesArtus objectType="PERS" nbElemPerPage=10 nbPagesMax=4}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList list=listeTousLesArtus objectType="PERS" nbElemPerPage=10 nbPagesMax=4}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>- Si on souhaite afficher tous les lieux dits du Perrier :</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList
+	list=listeLieuxDitLePerrier objectType="LIEU" nbElemPerPage=10 nbPagesMax=4}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList list=listeLieuxDitLePerrier objectType="LIEU" nbElemPerPage=10 nbPagesMax=4}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>- Si on souhaite afficher tous les points d'histoire :</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList
+	list=listePointsHistoire objectType="HIST" nbElemPerPage=10 nbPagesMax=4}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList list=listePointsHistoire objectType="HIST" nbElemPerPage=10 nbPagesMax=4}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>- Si on souhaite afficher tous les actes :</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList
+	list=listeActes objectType="DOC" nbElemPerPage=10 nbPagesMax=4}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList list=listeActes objectType="DOC" nbElemPerPage=10 nbPagesMax=4}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<h4>- Si la liste est vide, une message d'information est affiché : </h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList
+	list=listeHistVide objectType="HIST" nbElemPerPage=10 nbPagesMax=5}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList list=listeHistVide objectType="HIST" nbElemPerPage=10 nbPagesMax=5}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+Nb: Ce message n'est pas customisable, mais le template appelant peut toujours tester en amont (en utilisant le helper <code>hlp_count</code>) si le curseur est vide et afficher un autre message si l'on souhaite.
+
+<h4>- En cas d'absence ou d'erreur de un ou plusieurs paramètres, un message d'erreur est affiché :</h4>
+<table class="table">
+	<thead>
+		<tr>
+			<th>Code</th>
+			<th>Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList}}
+			</td>
+		</tr>
+		<tr>
+			<td>
+<pre>{{|> LibPaginateGenObjectsList 
+	list=anything objectType="BIDON" nbElemPerPage="a" nbPagesMax=1.25 class=3 href=2 title=1}}</pre>
+			</td>
+			<td>
+				{{> LibPaginateGenObjectsList list=anything objectType="BIDON" nbElemPerPage="a" nbPagesMax=1.25 class=3 href=2 title=1}}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- ===================================== -->
+<h3><a id="ameliorations"></a>3) Améliorations</h3>
+<p>On pourrait ajouter les propriétés optionnelles de contexte :</p>
+<ul>
+	<li>Afficher comme title  quand bouton next/previous page disabled : "c'est la dernière page" et "c'est la première page"</li>
+	<li>Mieux gérer le centrage de la page courante au delà du premier bloc de pages</li>
+</ul>
+
+	</div>
+</template>

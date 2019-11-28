@@ -1,0 +1,20 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersListeEnfants             -->
+<!-- CONTEXTE 							   -->
+<!-- parentA::pers                         -->
+<!-- parentB::pers                         -->
+<!-- focus::pers                           -->
+<!-- ===================================== -->
+<template name="PersListeEnfants">
+		{{#with listeEnfants}}
+			{{#each .}}
+				{{#if estPersonneFocus ../../focus/_id}}
+					{{> PersArbreDescExplorableRecursif pers=. generation=1 focus=true}}
+				{{else}}
+					{{> PersArbreDescExplorableRecursif pers=. generation=1}}
+				{{/if}}
+			{{/each }}
+		{{else}}
+			- pas d'enfant connu.
+		{{/with}}
+</template>

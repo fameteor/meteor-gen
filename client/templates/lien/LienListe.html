@@ -1,0 +1,127 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienListe                    -->
+<!-- ===================================== -->
+<template name="LienListe">
+	<h4>
+		{{#if isDevelopped}}
+				<img src="/moins.gif" title="Réduire"/>
+		{{else}}		
+				<img src="/plus.gif" title="Développer"/>
+		{{/if}}
+		Détail des liens
+	</h4>
+	{{#if isDevelopped}}
+		{{> LienListePour  obj=obj type=type}}
+		{{> LienListeVers  obj=obj type=type}}
+	{{/if}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LienListe_DOCAUTO                     -->
+<!-- ===================================== -->
+<template name="LienListe_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>obj</code></td>
+		<td><code>::genObject</code></td>
+	</tr>
+	<tr>
+		<td><code>type</code></td>
+		<td><code>::["PERS","LIEU","HIST","DOC"]</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LienListePour</code><br/>
+<code>LienListeVers</code><br/>
+
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les liens "depuis" et les liens "vers" (de la collection <code>Liens</code>) l'objet passé en paramètre <code>obj</code> et dont le type est passé en paramètre <code>type</code>, et précédés d'un titre indiquant combien de liens existent. Possibilité d'ajouter un liens vers un autre objet, supprimer ou modifier un lien.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Pas de mise en forme Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|#with souvenirBanquet}}
+	{{|> LienListe obj=. type="DOC"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{#with souvenirBanquet}}
+	{{> LienListe obj=. type="DOC"}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+		</tbody>
+	</table>
+
+<h4>Améliorations</h4>
+<div class="bg-warning">
+<!-- Améliorations ======================== -->
+A compléter.
+<!-- ===================================== -->	
+</div>
+</template>

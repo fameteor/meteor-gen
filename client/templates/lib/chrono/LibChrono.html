@@ -1,0 +1,229 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibChrono                    -->
+<!-- ===================================== -->
+<template name="LibChrono">
+		{{#with relativesList=prepareForPers hist=prepareForHist}}
+		<svg id="chrono" version="1.1" viewBox="0 0 1000 {{svgHeight}}" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg">
+			<!-- Librairie des symboles  -->
+			{{> LibChronoSymbols}}
+			
+			<!-- GraphZone -->
+			<svg 	id="graphZone" 
+					x="{{labelZoneWidth}}" 
+					y="0" 
+					width="{{hlp_sum svgWidth (hlp_neg labelZoneWidth)}}" 
+					viewBox=   "{{hlp_mux startTs pxPerTsUnit}}
+								0 
+								{{hlp_sum svgWidth (hlp_neg labelZoneWidth)}}
+								{{svgHeight}}">
+				
+				<!-- History periods generation -->
+				{{#each historyPeriods}}
+					<rect 	x="{{hlp_mux (gh_dateToTimestamp date false) pxPerTsUnit}}" 
+							y="{{yOffset_horizontalLegendAxis}}" 
+							width="{{hlp_mux (hlp_sum (gh_dateToTimestamp date true) (hlp_neg (gh_dateToTimestamp date false))) pxPerTsUnit}}" 
+							height="{{histPeriodsheight ../relativesList}}"
+							class="{{histPeriodClass}}"/>
+					<text 	x="{{hlp_mux (gh_dateToTimestamp date false) pxPerTsUnit}}" 
+							dx="{{xOffset_histPeriodText}}"
+							y="{{yHistPeriods}}" 
+							class="chrono_histPeriod">{{label}}</text>
+				{{/each}}
+				
+				<!-- X time axis adaptative legend generation -->
+				<line x1="{{hlp_mux startTs pxPerTsUnit}}" y1="{{yOffset_horizontalLegendAxis}}" x2="{{hlp_mux stopTs pxPerTsUnit}}" y2="{{yOffset_horizontalLegendAxis}}" class="chrono_xLegend" />
+				{{#each xGraduations}}
+					<line 	x1="{{hlp_mux ts pxPerTsUnit}}" 
+							y1="{{yOffset_horizontalLegendAxis}}" 
+							x2="{{hlp_mux ts pxPerTsUnit}}" 
+							y2="2950" 
+							class="{{lineClass}}" />
+					{{#if label}}
+						<text 	x="{{hlp_mux ts pxPerTsUnit}}" 
+								y="{{yOffset_legendText}}" 
+								class="{{labelClass}}">{{label}}</text>
+					{{/if}}
+				{{/each}}
+				
+				<!-- General history points generation -->
+				{{#each generalHistPoints}}
+					<use 	class="chrono_linkHistPt chrono_ptHist{{#if hlp_eq _id ../hist._id}}Selected{{/if}}"
+							x="{{hlp_mux histTs pxPerTsUnit}}"
+							y="{{yOffset_generalHistPoints}}"
+							xlink:href="#{{typeTemplate}}">
+						<title>{{date.j1}}/{{date.m1}}/{{date.a1}} : {{titre}}</title>
+					</use>
+				{{/each}}
+				
+				<!-- Local history points generation -->
+				{{#each local2HistPoints}}
+					<use 	class="chrono_linkHistPt chrono_ptHist{{#if hlp_eq _id ../hist._id}}Selected{{/if}}"
+							x="{{hlp_mux histTs pxPerTsUnit}}"
+							y="{{yOffset_local2HistPoints}}"
+							xlink:href="#{{typeTemplate}}">
+						<title>{{date.j1}}/{{date.m1}}/{{date.a1}} : {{titre}}</title>
+					</use>
+				{{/each}}
+				
+				<!-- National history points generation -->
+				{{#each nationalHistPoints}}
+					<use 	class="chrono_linkHistPt chrono_ptHist{{#if hlp_eq _id ../hist._id}}Selected{{else}}{{#if impacteAncetres}}AncestorImpact{{/if}}{{/if}}"
+							x="{{hlp_mux histTs pxPerTsUnit}}"
+							y="{{yOffset_nationalHistPoints}}"
+							xlink:href="#{{typeTemplate}}">
+						<title>{{date.j1}}/{{date.m1}}/{{date.a1}} : {{titre}}</title>
+					</use>
+				{{/each}}
+				
+				<!-- Regional history points generation -->
+				{{#each regionalHistPoints}}
+					<use 	class="chrono_linkHistPt chrono_ptHist{{#if hlp_eq _id ../hist._id}}Selected{{else}}{{#if impacteAncetres}}AncestorImpact{{/if}}{{/if}}"
+							x="{{hlp_mux histTs pxPerTsUnit}}"
+							y="{{yOffset_regionalHistPoints}}"
+							xlink:href="#{{typeTemplate}}">
+						<title>{{date.j1}}/{{date.m1}}/{{date.a1}} : {{titre}}</title>
+					</use>
+				{{/each}}
+				
+				<!-- Local history points generation -->
+				{{#each localHistPoints}}
+					<use 	class="chrono_linkHistPt chrono_ptHist{{#if hlp_eq _id ../hist._id}}Selected{{else}}{{#if impacteAncetres}}AncestorImpact{{/if}}{{/if}}"
+							x="{{hlp_mux histTs pxPerTsUnit}}"
+							y="{{yOffset_localHistPoints}}"
+							xlink:href="#{{typeTemplate}}">
+						<title>{{date.j1}}/{{date.m1}}/{{date.a1}} : {{titre}}</title>
+					</use>
+				{{/each}}
+				
+				<!-- Persons chronology -->
+				{{#with relativesList}}
+					{{#each .}}
+						{{#if pers.naissance.date}}
+							{{#if pers.estVivant}}
+								<rect 	x="{{hlp_mux (gh_dateToTimestamp pers.naissance.date false) pxPerTsUnit}}" 
+										y="{{hlp_sum yOffset_persLabel (hlp_mux index pxPerPersLine)}}"
+										width="{{hlp_mux (hlp_sum  (hlp_neg (gh_dateToTimestamp pers.naissance.date false)) todayTs) pxPerTsUnit}}"
+										height="10"
+										class="chrono_{{type}}"/>
+							{{else}}
+								{{#if pers.deces.date}}
+									<rect 	x="{{hlp_mux (gh_dateToTimestamp pers.naissance.date false) pxPerTsUnit}}" 
+											y="{{hlp_sum yOffset_persLabel (hlp_mux index pxPerPersLine)}}"
+											width="{{hlp_mux (hlp_sum (gh_dateToTimestamp pers.deces.date false) (hlp_neg (gh_dateToTimestamp pers.naissance.date false))) pxPerTsUnit}}"
+											height="10"
+											class="chrono_{{type}}"/>
+								{{/if}}
+							{{/if}}
+						{{/if}}
+						<!-- Spouse line -->
+						{{#if spouseIndex}}
+							<!-- line 	x1="{{xMariage}}"
+									y1="{{hlp_sum ../yConjoint 47}}"
+									x2="{{xMariage}}"
+									y2="{{hlp_sum ../y 2}}"
+									class="chrono_spouseLine_{{type}}" /-->
+						{{/if}}
+					{{/each}}
+				{{/with}}
+				
+				<!-- Cursor generation -->
+				{{#if cursorIsOn}}
+					<line 	x1="{{hlp_mux cursorTs pxPerTsUnit}}" 
+							y1="{{yOffset_horizontalLegendAxis}}" 
+							x2="{{hlp_mux cursorTs pxPerTsUnit}}" 
+							y2="2950" 
+							class="chrono_cursor" />
+					<text 	x="{{hlp_mux cursorTs pxPerTsUnit}}" 
+							y="{{yOffset_cursorText}}" 
+							class="chrono_cursor">{{tsToDate cursorTs}}</text>
+					<!-- Persons age info on cursor -->
+					{{#unless hist}}
+						{{#with relativesList}}
+							{{#each .}}
+								<text 	x="{{hlp_mux cursorTs pxPerTsUnit}}" 
+										dx="3"
+										y="{{hlp_sum yOffset_persLabel (hlp_mux index pxPerPersLine)}}" 
+										dy="-3"
+										class="chrono_cursor_age_{{type}}">{{#with age}}{{.}}{{/with}}</text>
+							{{/each}}
+						{{/with}}
+					{{/unless}}
+				{{/if}}
+				
+			</svg>
+			
+			<!-- LabelZone -->
+			<!-- Icons -->
+			<g id="zoomOut">
+				<rect x="5" y="5" rx="5" ry="5" width="40" height="40" class="chrono_button"/>
+				<use  x="10" y="10" xlink:href="#zoomOut" class="button"/>
+				<title>Dé-zoomer</title>
+			</g>
+			{{#unless hist}}
+			<g id="zoomAuto">
+				<rect x="50" y="5" rx="5" ry="5" width="40" height="40" class="chrono_button"/>
+				<use x="55" y="10" xlink:href="#zoomAuto" class="button"/>
+				<title>Zoom optimisé</title>
+			</g>
+			{{/unless}}
+			<g id="zoomIn">
+				<rect x="95" y="5" rx="5" ry="5" width="40" height="40" class="chrono_button"/>
+				<use x="100" y="10" xlink:href="#zoomIn" class="button"/>
+				<title>Zoomer</title>
+			</g>
+			
+			<!-- General and local history points labels -->
+			
+			<text 	x="{{xOffset_histLabel}}" 
+					y="{{yOffset_histPeriodLabel}}" 
+					dy="-10"
+					class="cursor_labelHistPoints">Périodes d'histoire</text>
+			<text 	x="{{xOffset_histLabel}}" 
+					y="{{yOffset_generalHistPoints}}" 
+					dy="5"
+					class="cursor_labelHistPoints">Histoire générale ({{hlp_count generalHistPoints}})</text>
+			<text 	x="{{xOffset_histLabel}}" 
+					y="{{yOffset_local2HistPoints}}" 
+					dy="5"
+					class="cursor_labelHistPoints">Histoire locale 2 ({{hlp_count local2HistPoints}})</text>
+			
+			
+			<text 	x="{{xOffset_histLabel}}" 
+					y="{{yOffset_nationalHistPoints}}" 
+					dy="5"
+					class="cursor_labelHistPoints">Histoire nationale</text>
+			<text 	x="{{xOffset_histLabel}}" 
+					y="{{yOffset_regionalHistPoints}}" 
+					dy="5"
+					class="cursor_labelHistPoints">Histoire régionale</text>
+			<text 	x="{{xOffset_histLabel}}" 
+					y="{{yOffset_localHistPoints}}" 
+					dy="5"
+					class="cursor_labelHistPoints">Histoire locale</text>
+			
+			<!-- Persons labels -->
+			{{#with relativesList}}
+				{{#each .}}
+					{{#with pers}}
+						{{#if gh_isSosa}}
+							<use 	x="0"
+									y="{{hlp_sum yOffset_persLabel (hlp_mux ../index pxPerPersLine)}}"
+									xlink:href="#sosa"
+									transform="translate({{hlp_sum 3 (typeOffset ../type)}},-3)"
+									class="chrono_{{#if gh_isMultipleSosas}}multiple_{{/if}}sosa">
+									<title>Sosa{{#if gh_isMultipleSosas}}s{{/if}} n°{{gh_sosasList}}</title>
+							</use>
+						{{/if}}
+					{{/with}}
+					<text 	x="20"
+							dx="{{hlp_sum (typeOffset type) xOffset_pers}}"
+							dy="10"
+							y="{{hlp_sum yOffset_persLabel (hlp_mux index pxPerPersLine)}}"
+							class="chrono_linkPers chrono_persLabel_{{type}}">{{#with pers}}{{> PersNomPrenomsSansLien}}{{/with}}</text>
+				{{/each}}
+			{{/with}}
+		</svg>
+		{{/with}}
+		
+		{{> LibPrintThisSvgButton label="Exporter en .png" svgTemplate=svgTemplate fileName=fileName cssFile="LibChrono.css" }}
+</template>

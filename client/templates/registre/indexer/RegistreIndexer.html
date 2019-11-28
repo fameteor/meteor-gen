@@ -1,0 +1,68 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreIndexer              -->
+<!-- ===================================== -->
+<template name="RegistreIndexer">
+	<div class="container">
+		<div class="row">
+			<div class="col-xl-4" >
+				<!-- 1) CHOIX commune ============ -->
+				<h4>1) Choisir une commune</h4>
+				<form class="form-inline">
+					<div class="form-group">
+						<input type="hidden" id="commune" name="commune" value="{{communeChoisie_registreIndexer}}"/>
+						<input class="form-control intitule" id="commune_intitule" name="commune_intitule" type="text" value="{{commune_intitule}}" placeholder="commune">
+					</div>
+				</form>
+				{{#if communeChoisie_registreIndexer}}
+					<!-- 2) Choix Registre ======= -->
+					<h4>2) Choisir un registre</h4>
+					<div class="depouillementRegistre_listeRegistre">
+						<table id="depouillementRegistre_listeRegistre" class="table table-hover">
+							<tbody>
+								{{#each listeRegistres}}
+									<tr class="registre {{selected}}">
+										<td>{{#with gh_lieuById commune}}{{> LieuNomLienArticle}}{{/with}}</td>
+										<td>{{type}} {{contenu}} {{periode}}</td>
+										<td>{{nbPages}} pages</td>
+										<td><button type="button" class="btn btn-warning modifier">modifier</button></td>
+									</tr>
+								{{/each}}
+							</tbody>
+						</table>
+					</div>
+				{{/if}}
+			</div>
+			<div class="col-xl-8" >
+				{{#if communeChoisie_registreIndexer}}
+					{{#if registreChoisi_registreIndexer}}
+						<h4>Liste des actes de : {{registre_intitule}}</h4>
+						{{#with listeActesDeCeRegistre}}
+							{{> LibPaginateGenObjectsList list=. objectType="DOC" nbElemPerPage=15 nbPagesMax=9}}
+						{{/with}}						
+						<h4>Informations sur : {{registre_intitule}}</h4>
+						{{#with gh_registreById registreChoisi_registreIndexer}}
+							{{#if nbPages}}
+							
+								<!-- 3) Infos registre ======= -->
+								{{> RegistreIndexerSvgInfosRegistre}}
+								
+								<!-- 4) Actes indexés par page ======== -->
+								<h4>Actes indexés par page</h4>
+								{{> RegistreIndexerActesIndexesParPage}}
+								
+								<!-- 5) Outils indexation ======== -->
+								<h4>Dépouiller (par page entière !)</h4>
+
+								<hr/>
+								{{> RegistreIndexerActeArchives}}
+							{{else}}
+								<p>Nb : <span class="bg-danger"><i class="fa fa-exclamation-triangle"></i> Définir le nombre de pages du registre avant d'aller plus loin.</span></p>
+							{{/if}}
+						{{/with}}
+					{{/if}}
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</template>
+	

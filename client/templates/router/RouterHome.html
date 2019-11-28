@@ -1,0 +1,62 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RouterHome                   -->
+<!-- ===================================== -->
+<template name="RouterHome">
+	<div class="container">
+		<div class="surligne">
+			<div class="row">
+				<div class="col-sm-12">
+					<center>
+						<h2>Bienvenue sur le site de généalogie, d'histoire et géographie du Marais Breton</h2>
+					</center>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-7">
+					<center>
+						<img class="img-responsive" src="/intro.gif"/>
+					</center>
+				</div>
+				<div class="col-sm-1">
+				</div>
+				<div class="col-sm-4">
+					<table class="table">
+						<tr>
+							<td><span class="badge">{{nbPers}}</span></td>
+							<td>personnes</td>
+						</tr>
+						<tr>
+							<td><span class="badge">{{nbLieux}}</span></td>
+							<td>lieux</td>
+						</tr>
+						<tr>
+							<td><span class="badge">{{nbHist}}</span></td>
+							<td>points d'histoire</td>
+						</tr>
+						{{#each typeDoc}}
+						<tr>
+							<td><span class="badge">{{nbDocs valeur}}</span></td>
+							<td>documents "{{valeur}}"</td>
+						</tr>
+						{{/each}}
+						<tr>
+							<td><span class="badge">{{nbRegistres}}</span></td>
+							<td>références de registres d'état civil</td>
+						</tr>
+						<tr>
+							<td><span class="badge">{{nbActesArchives}}</span></td>
+							<td>actes des archives indexés</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-12">
+					<center>
+						<p><a class="btn btn-primary btn-lg" href="#" role="button">Pour débuter</a></p>
+					</center>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

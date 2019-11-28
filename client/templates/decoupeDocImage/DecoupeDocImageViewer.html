@@ -1,0 +1,10 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DecoupeDocImageViewer        -->
+<!-- ===================================== -->
+<template name="DecoupeDocImageViewer">
+	<svg version="1.1" viewBox="{{x}} {{y}} {{width}} {{height}}" width="{{targetWidth}}" height="{{targetHeight}}" xmlns="http://www.w3.org/2000/svg">
+		{{#with (gh_docById docId)}}
+		<image xmlns:xlink="http://www.w3.org/1999/xlink" x="0" y="0" width="{{specif.IMAGE_px}}" height="{{specif.IMAGE_py}}" xlink:href="{{gh_urlDocument}}"/>
+		{{/with}}
+	</svg>
+</template>

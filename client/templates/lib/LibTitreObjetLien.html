@@ -1,0 +1,35 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibTitreObjetLien            -->
+<!-- Contexte {                            -->
+<!-- 		id ::ID                        -->
+<!-- }                                     -->
+<!-- ===================================== -->
+<template name="LibTitreObjetLien">
+	{{#with objet}}
+		{{#if hlp_eq type "PERS"}}
+			{{> LibIcone "iconePers"}}
+			{{#with obj}}
+				{{> PersCompletAvecLien}}
+			{{/with}}
+		{{/if}}
+		{{#if hlp_eq type "LIEU"}}
+			{{> LibIcone "iconeLieu"}}
+			{{#with obj}}
+				{{> LieuNature}} {{> LieuNomLienDe}}
+			{{/with}}
+		{{/if}}
+		{{#if hlp_eq type "HIST"}}
+			{{> LibIcone "iconeHist"}}
+			{{#with obj}}
+				{{> HistTitreLien}}
+			{{/with}}
+		{{/if}}
+		{{#if hlp_eq type "DOC"}}
+			{{> LibIcone "iconeDoc"}}
+			{{#with obj}}
+				{{> DocTitreAvecLien}}
+			{{/with}}
+		{{/if}}
+	{{/with}}
+</template>
+

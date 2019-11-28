@@ -1,0 +1,96 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogCalRep           -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogCalRep">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur l'objet CalendrierRepublicain</h2>
+		<ul>
+			<li><a href="#general">1) Présentation générale</a></li>
+			<li><a href="#codage">2) Codage des dates républicaines</a></li>
+			<li><a href="#methodes">3) Méthodes</a></li>
+			<li><a href="#ameliorations">4) Améliorations</a></li>
+		</ul>
+	
+<!-- ===================================== -->
+<h3><a id="general"></a>1) Fonctionnement général</h3>
+<p>L'objet singleton <code>CalendrierRepublicain</code> décrit dans le fichier <code>/common/calendrierRepublicain.js</code> gère tout ce qui concerne les conversions entre dates grégoriennes et date républicaines.</p>
+
+
+<!-- ===================================== -->
+<h3><a id="codage"></a>2) Codage des dates républicaines</h3>
+<p>Pour les méthodes ci-dessous, les dates républicaines sont codées comme suit :</p>
+<p>1) Les jours sont numérotés de 1 à 30. Les jours complémentaires sont numérotés de 31 (1er jour complémentaire) à 36 (6ième jour complémentaire) du pseudo mois 12 (les jours Sans-culottides) de l'année considérée. Le jour 36 n'existe que pour les années sextiles.</p>
+<p>2) Les mois sont numérotés de 1 à 12 de Vendémiaire à Fructidor. Un pseudo mois 12 est utilisés pour les Sans-culottides :</p>
+<ul>
+<li>1 : Vendémiaire</li>
+<li>2 : Brumaire</li>
+<li>3 : Frimaire</li>
+<li>4 : Nivôse</li>
+<li>5 : Pluviôse</li>
+<li>6 : Ventôse</li>
+<li>7 : Germinal</li>
+<li>8 : Floréal</li>
+<li>9 : Prairial</li>
+<li>10 : Messidor</li>
+<li>11 : Thermidor</li>
+<li>12 : Fructidor</li>
+<li><b>12</b> : pseudo mois des jours complémentaires ou Sans-culottides</li>
+</ul>
+<p>3) Les années républicaines sont numérotées de 1 à 14 (de l'An I à l'An XIV).</p>
+
+<!-- ===================================== -->
+<h3><a id="methodes"></a>3) Méthodes</h3>
+<p>Les méthodes disponibles sont les suivantes :</p>
+
+<table class="table">
+	<tbody>
+		<tr>
+			<td><code>estBissextile(anneeGregorienne)</code></td>
+			<td>Indique si une année grégorienne est bissextile (renvoie <code>true</code>) ou non (renvoie <code>false</code>)</td>
+		</tr>
+		<tr>
+			<td><code>estJourRepublicain(jourGregorien, moisGregorien, anneeGregoriennne)</code></td>
+			<td>Indique si un jour grégorien donné est dans la période de conversion en date républicaine (renvoie <code>true</code>) ou non (renvoie <code>false</code>). La période de conversion en date républicaine se situe entre le 22 septembre 1792 compris et avant le 1er janvier 1806 exclus.</td>
+		</tr>
+		<tr>
+			<td><code>nbJourMois(moisGregorien, anneeGregorienne)</code></td>
+			<td>Renvoie le nombre de jour d'un mois grégorien pour une année donnée.</td>
+		</tr>
+		<tr>
+			<td><code>repToGreg(jourRepublicain, moisRepublicain, anneeRepublicaine)</code></td>
+			<td>
+				Convertit une date républicaine en date grégorienne.<br/>
+				Le resultat renvoyé est un objet composé comme suit :<br/>
+<pre>{
+	'jour':jourGregorien 	::Integer,
+	'mois':moisGregorien 	::Integer,
+	'annee':anneeGregorien 	::Integer
+}</pre>
+			</td>
+		</tr>
+		<tr>
+			<td><code>gregToRep(jourGregorien,moisGregorien,anneeGregorienne)</code></td>
+			<td>
+				Convertit une date grégorienne en date républicaine. Si la date grégorienne n'est pas dans la période de conversion en date républicaine, <code>false</code> est renvoyé.<br/>
+				Dans les autres cas, le resultat renvoyé est un objet composé comme suit :<br/>
+<pre>{
+	'jour':jourRepublicain 		::Integer,
+	'mois':moisRepublicain 		::Integer,
+	'annee':anneeRepublicaine 	::Integer,
+	'text':dateRepublicaine 	::String 	// La date républicaine en chaine de caractères
+							// Par exemple : "12 Germinal An VIII"
+}</pre>
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- ===================================== -->
+<h3><a id="ameliorations"></a>4) Améliorations</h3>
+<ul>
+	<li>Le codage pourrait-être amélioré pour rendre certains paramètres privés.</li>
+	<li>Le contrôle de validité des paramètres pourrait-être amélioré.</li>
+</ul>
+	</div>
+</template>

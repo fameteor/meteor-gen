@@ -1,0 +1,132 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibPrintThisSvgButton        -->
+<!-- ===================================== -->
+<template name="LibPrintThisSvgButton">
+	<button id="printButton" type="button" class="btn btn-primary pull-right">{{label}}</button>
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibPrintThisSvgButton_DOCAUTO         -->
+<!-- ===================================== -->
+<template name="LibPrintThisSvgButton_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>label</code></td>
+		<td><code>::String</code></td>
+	</tr>
+	<tr>
+		<td><code>svgTemplate</code></td>
+		<td><code>::BlazeTemplate</code></td>
+	</tr>
+	<tr>
+		<td><code>fileName</code></td>
+		<td><code>::String</code></td>
+	</tr>
+	<tr>
+		<td><code>cssFile</code></td>
+		<td><code>::String</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>toastr</code> côté client, méthode <code>svgToPngDownload</code> coté serveur.<br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche un bouton dont l'étiquette correspond au paramètre <code>label</code>. Quand on clique sur ce bouton, on lance la conversion en .JPG du SVG contenu dans le template passsé dans le paramètre <code>svgTemplate</code> en utilisant le fichier CSS passé dans le paramètre <code>cssFile</code>. Ce fichier CSS doit être situé sous la directory <code>/public</code>. L'impression est récupérée dans un fichier downloadé automatiquement par le navigateur sous le nom précisé dans le paramètre <code>fileName</code>. <span class="bg-danger">Attention, ce paramètre ne doit pas contenir l'extension <code>.png</code> !</span>
+
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Bouton formaté Bootstrap aligné à droite.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>&lt;svg version="1.1" viewBox="0 0 100 75" width="100" height="75" xmlns="http://www.w3.org/2000/svg"&gt;
+	&lt;rect x="10" y="10" width="80" height="55" style="fill:red;"/&gt;
+&lt;/svg&gt;
+
+{{|> LibPrintThisSvgButton label="Exporter en .png" svgTemplate=thisTemplate fileName="impression" cssFile="PersChrono.css" }}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+<svg version="1.1" viewBox="0 0 100 75" width="100" height="75" xmlns="http://www.w3.org/2000/svg">
+	<rect x="10" y="10" width="80" height="55" style="fill:red;"/>
+</svg>
+{{> LibPrintThisSvgButton label="Exporter en .png" svgTemplate=svgTemplate fileName="impression" cssFile="PersChrono.css" }}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Permettre de choisir avec des paramètres supplémentaires :
+<ul>
+	<li>le type de fichier généré (<code>.jpg</code>, <code>.png</code> ...) en ajoutant au paramètre <code>fileName</code> l'extension souhaitée.</li>
+	<li>la définition de l'image générée (en nb de pixel bitmap par unité SVG).</li>
+	<li>optionnellement, un selector du SVG s'il y a plusieurs SVG dans la page.</li>
+</ul>
+<!-- ===================================== -->	
+	</div>
+</template>

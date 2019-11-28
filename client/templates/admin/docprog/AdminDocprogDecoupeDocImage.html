@@ -1,0 +1,103 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogDecoupeDocImage  -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogDecoupeDocImage">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Outil de découpage de document IMAGE</h2>
+		<ul>
+			<li><a href="#general">1) Fonctionnement général</a></li>
+			<li><a href="#editor">2) Template éditeur</a></li>
+			<li><a href="#viewer">3) Template viewer</a></li>
+		</ul>
+		
+		
+<h3><a id="general"></a>1) Fonctionnement général</h3>
+<!-- ===================================== -->
+<p>L'objectif est de permettre à un utilisateur de "découper" un document de type image pour en afficher un extrait : par exemple une photo "d'identité" à partir d'une photo de groupe, ou présenter une partie d'un document pour étayer un commentaire, etc...</p>
+<p>Un template "éditeur" et un template "viewer" sont disponibles pour ce faire.</p>
+<p>Le template "éditeur" génère un objet appelé "découpe" qui est utilisée par le template "viewer" pour afficher l'image découpée. Cet objet est définit comme suit :</p>
+<pre>{
+	'docId' : 			::ID,		// ID du document à découper
+	'docPage' : 			::Integer,	// Page à découper
+	'ratioWidthOverHeight' : 	::Number,	// Facteur de forme de la découpe (largeur/hauteur)
+	'targetWidth' : 		::Number,	// Largeur de l'image affichée
+	'x': 				::Number,	// Coordonnée X du début de la découpe sur la page du document
+	'y' :				::Number,	// Coordonnée Y du début de la découpe sur la page du document
+	'width' :			::Number,	// Largeur de la découpe sur la page du document
+}</pre>
+
+<h3><a id="editor"></a>2) Template éditeur</h3>
+<!-- ===================================== -->
+<p>Le template <code>DecoupeImageDocEditor</code> affiche le document de codage IMAGE que l'on souhaite découper, permet de choisir la page voulue (si document multipage) et de définir la zone à découper.</p>
+<ul>
+	<li>L'éditeur est toujours appelé avec l'<code>ID</code> du document que l'utilisateur souhaite découper.</li>
+	<li>L'éditeur peut-être appelé en passant dans le contexte la page à découper du document (si document multipage).</li>
+	<li>L'éditeur peut-être appelé en passant dans le contexte une découpe existante afin de l'afficher pour la modifier.</li>
+	<li>L'éditeur peut-être appelé avec un facteur de forme (rapport larguer/hauteur) fixe, l'utilisateur ne peut alors que définir l'échelle et la postion de la découpe.</li>
+</ul>
+<p>Le contexte d'appel est défini comme suit :</p>
+<pre>{
+	'docId' : 			::ID,		// ID du document à découper
+	['docPage' : 			::Number,]	// Page à découper (optionnel, page 1 par défaut)
+	['ratioWidthOverHeight' : 	::Number,	// Facteur de forme de la découpe (largeur/hauteur) (optionnel, découpe libre par défaut)
+	['gabarit' : 		 	::String,]]	// Nom du gabarit à afficher (optionnel, uniquement dans de cas de facteur de forme fixe, pas de gabarit par défaut)
+}</pre>
+
+<h3><a id="viewer"></a>3) Template viewer</h3>
+<!-- ===================================== -->
+<p>Le template <code>DecoupeImageDocViewer</code> affiche l'extrait d'un document IMAGE découpé selon les indications de l'objet "découpe" passé en contexte.</p>
+<p>Si le document n'est pas de codage IMAGE, ou tout autre cas d'erreur (page inexistente...), rien n'est affiché.</p>
+<p>Exemple :</p>
+<table class="table">
+	<thead>
+		<tr>
+			<th class="text-center">Code</th>
+			<th class="text-center">Résultat</th>
+		</tr>
+	</thead>
+	<tbody>
+	<tr>
+		<td>
+		<pre>{{|#with docId="RPf3qgcXTYEK3smZX" 
+	docPage=1 
+	ratioWidthOverHeight=0.8 
+	targetWidth=100 
+	x=240 
+	y=180 
+	width=225
+}}
+	{{|> DecoupeDocImageViewer}}
+{{|/width}}</pre>
+		</td>
+		<td class="text-center">
+		{{#with 	docId="RPf3qgcXTYEK3smZX" 
+					docPage=1 
+					ratioWidthOverHeight=0.8 
+					targetWidth=100 
+					x=240 
+					y=180 
+					width=225}}
+			{{> DecoupeDocImageViewer}}
+		{{/with}}
+		</td>	
+	</tr>
+	</tbody>
+</table>
+
+<h3><a id="viewer"></a>4) A FAIRE</h3>
+<!-- ===================================== -->
+<ul>
+	<li class="bg-danger">Packager en templates</li>
+	<li class="bg-danger">Gérer les pages du document</li>
+	<li class="bg-danger">Gérer les différentes erreurs possibles</li>
+	<li class="bg-danger">Permettre de choisir des images aux différents âges pour un carousel (ou pour un carousel sur les lieux)</li>
+	<li class="bg-danger">Mettre un profil de personne pour avoir toujours le même cadrage</li>
+	<li class="bg-danger">Gérer la découpe libre</li>
+	<li class="bg-danger">Pouvoir voir le document d'ou vient la découpe ou pouvoir éditer la découpe</li>
+	<li class="bg-danger">En cas de changement de personne, ne pas voir une découpe fausse en attendant le chargement de la nouvelle image.</li>
+
+</ul>
+
+	</div>
+</template>

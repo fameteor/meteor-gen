@@ -1,0 +1,112 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersNomPrenomUsuelAvecLien   -->
+<!-- ===================================== -->
+<template name="PersNomPrenomUsuelAvecLien">
+	{{#with pers}}
+		<a href="/pers/infos/{{_id}}">{{nom}} {{> PersPrenomUsuel}}</a>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersNomPrenomUsuelAvecLien_DOCAUTO    -->
+<!-- ===================================== -->
+<template name="PersNomPrenomUsuelAvecLien_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>PersPrenomUsuel</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche le nom et le prénom usuel de la personne passée dans le paramètre <code>pers</code> avec un lien hypertexte vers sa fiche.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Aucun tag Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with pers=benjaminArtus}}
+	{{|> PersNomPrenomUsuelAvecLien}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with pers=benjaminArtus}}
+	{{> PersNomPrenomUsuelAvecLien}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

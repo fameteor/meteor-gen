@@ -1,0 +1,10 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistBoutonSupprimer                                         -->
+<!-- ===================================== -->
+<template name="HistBoutonSupprimer">
+	{{#if gh_isAdminOrOwner}}
+	<button type="button" class="btn btn-danger supprimer" title="Supprimer ce point d'histoire">
+		{{> LibIcone "iconeSupprimer"}}
+	</button>
+	{{/if}}
+</template>

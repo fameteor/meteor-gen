@@ -1,0 +1,83 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersChronologieLignePers     -->
+<!-- Trace la ligne de vie de la personne  -->
+<!-- en contexte						   -->
+<!-- ===================================== -->
+<template name="PersChronologieLignePers">
+	{{#if pers}}
+		<!-- Dans tous les cas, on affiche les noms, prénoms  (au niveau du bas de la ligne) -->
+		<g transform="translate(0,5)">
+			<text x="{{xNom}}" y="{{y}}" class="nom {{classe}}">{{pers.nom}} {{prenoms}}</text>
+		</g>
+		<!-- Si la date de naissance existe -->
+		{{#if dateNaissanceExiste}}
+			<!-- Si la date de décès existe -->
+			{{#if dateDecesExiste}}
+				<!-- On trace la ligne de de vie -->
+				<g transform="translate(0,{{y}})">
+					<rect x="{{xNaissance}}" y="-5" width="{{width}}" height="10" class="{{classe}}"/>
+				</g>
+				<!-- On trace la ligne verticale de naissance et texte -->
+				{{> PersChronologieMarqueDate date=pers.naissance.date y=y type="NAISSANCE" classe=classe}}
+				<!-- On trace les lignes verticales des mariages et texte -->
+				{{#each mariages}}
+					{{#if dateMariageExiste}}
+						<!-- Ligne verticale de mariage et texte -->
+						{{> PersChronologieMarqueDate date=date y=../y type="MARIAGE" classe=../classe}}
+						<!-- Ligne verticale reliant les conjoints -->
+						{{#if estLeConjoint ..}}
+							<line x1="{{xMariage}}" y1="{{hlp_sum ../yConjoint 47}}" x2="{{xMariage}}" y2="{{hlp_sum ../y 2}}" class="lienConjoints_pers_parent" />
+						{{/if}}
+					{{/if}}
+				{{/each}}
+				<!-- On trace la ligne verticale de deces et texte -->
+				{{> PersChronologieMarqueDate date=pers.deces.date y=y type="DECES" classe=classe}}
+			{{else}}
+				<!-- Si la date de décès n'existe pas -->
+				<!-- Si la personne est toujours vivante -->
+				{{#if pers.estVivant}}
+					<!-- On trace la ligne de de vie jusqu'à aujourd'hui avec une icone de continuation -->
+					<g transform="translate(0,{{y}})">
+						<rect x="{{xNaissance}}" y="-5" width="{{widthUntilNow}}" height="10" class="{{classe}}"/>
+						<use x="{{xMaintenant}}" y="0" xlink:href="#marqueVivant_{{classe}}"/>
+					</g>
+				{{/if}}
+				<!-- On trace ligne verticale de naissance et texte -->
+				{{> PersChronologieMarqueDate date=pers.naissance.date y=y type="NAISSANCE" classe=classe}}
+				<!-- On trace les lignes verticales des mariages et texte -->
+				{{#each mariages}}
+					{{#if dateMariageExiste}}
+						<!-- Ligne verticale de mariage et texte -->
+						{{> PersChronologieMarqueDate date=date y=../y type="MARIAGE" classe=../classe}}
+						<!-- Ligne verticale reliant les conjoints -->
+						{{#if estLeConjoint ..}}
+							<line x1="{{xMariage}}" y1="{{hlp_sum ../yConjoint 47}}" x2="{{xMariage}}" y2="{{hlp_sum ../y 2}}" class="lienConjoints_pers_parent" />
+						{{/if}}
+					{{/if}}
+				{{/each}}
+			{{/if}}
+		{{else}}
+			<!--  Si la date de naissance n'existe pas -->
+			<!-- On trace les lignes verticales des mariages et texte -->
+			{{#each mariages}}
+				{{#if dateMariageExiste}}
+					<!-- Ligne verticale de mariage et texte -->
+					{{> PersChronologieMarqueDate date=date y=../y type="MARIAGE" classe=../classe}}
+					<!-- Ligne verticale reliant les conjoints -->
+					{{#if estLeConjoint ..}}
+						<line x1="{{xMariage}}" y1="{{hlp_sum ../yConjoint 47}}" x2="{{xMariage}}" y2="{{hlp_sum ../y 2}}" class="lienConjoints_pers_parent" />
+					{{/if}}
+				{{/if}}
+			{{/each}}
+			<!-- On trace la ligne verticale de deces et texte si la date existe-->
+			{{#if dateDecesExiste}}
+				{{> PersChronologieMarqueDate date=pers.deces.date y=y type="DECES" classe=classe}}
+			{{/if}}
+		{{/if}}
+	{{else}}
+		<!--  Si la personne est inconnue -->
+		<g transform="translate(0,5)">
+			<text x="{{xNom}}" y="{{y}}" class="pers_inconnue">Personne inconnue</text>
+		</g>
+	{{/if}}
+</template>

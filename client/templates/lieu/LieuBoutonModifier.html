@@ -1,0 +1,10 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuBoutonModifier                                            -->
+<!-- ===================================== -->
+<template name="LieuBoutonModifier">
+	{{#if gh_isAdminOrOwner}}
+	<button type="button" class="btn btn-warning modifier" title="Modifier ce lieu">
+		{{> LibIcone "iconeModifier"}}
+	</button>
+	{{/if}}
+</template>

@@ -1,0 +1,44 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreChercherModal        -->
+<!-- ===================================== -->
+<template name="RegistreChercherModal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- HEADER ============== -->
+				{{#with registresSelectionnes}}
+				<div class="modal-header">
+					Choisir un registre
+				</div>
+				<!-- BODY ================ -->
+					{{#if (hlp_neq (gh_cursorCount .) 0)}}
+						<div class="modal-body row">
+							<div class="col-sm-12 modal-search-result ">
+								<!-- Zone de résultats =================== -->
+								<table class="table table-striped">
+									<tbody>
+									{{#each .}}
+										<tr>
+											<td><a href="#" title="Choisir ce lieu">{{contenu}} {{periode}}</a></td>
+										</tr>
+									{{/each}}
+									</tbody>
+								</table>
+							</div>
+						</div>
+					{{else}}
+						<div class="modal-body row">
+							<div class="col-sm-12">
+							Aucun registre n'existe dans la base pour cette commune.
+							</div>
+						</div>
+					{{/if}}
+				{{/with}}
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

@@ -1,0 +1,38 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersArbreAscLegendeCouleurEtatRechActesModal            -->
+<!-- ===================================== -->
+<template name="PersArbreAscLegendeCouleurEtatRechActesModal">
+	<div class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<!-- HEADER ============== -->
+				<div class="modal-header">
+					Couleurs selon l'état de la recherche des actes
+				</div>
+				<!-- BODY ================ -->
+				<div class="modal-body text-center">
+					<table class="table">
+						<thead>
+							<tr>
+								<th class="text-center">Couleur</th>
+								<th class="text-center">Actes</th>
+							</tr>
+						</thead>
+						<tbody>
+							{{#each etats}}
+								<tr>
+									<td style="width:100px;background-color:{{couleur}};"></td>
+									<td>{{intitule.FR}}</td>
+								</tr>
+							{{/each}}
+						</tbody>
+					</table>					
+				</div>
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Fermer</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

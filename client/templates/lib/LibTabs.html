@@ -1,0 +1,172 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibTabs                      -->
+<!-- ===================================== -->
+<template name="LibTabs">
+	{{#with indexedList}}
+		<div class="row">
+			<div class="col-md-{{cols}}">
+				<ul class="nav nav-pills nav-stacked">
+					{{#each .}}
+						<li role="presentation" class="{{isActiveTab tabIndex}}"><a class="tab" href="#">{{{label}}}</a></li>
+					{{/each}}
+				</ul>
+			</div>
+			<div class="col-md-{{colsComplement}}">
+				{{#each .}}
+					{{#if hlp_eq activeTab tabIndex}}
+						{{> Template.dynamic template=templateName data=. }}
+					{{/if}}
+				{{/each}}
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibTabs_DOCAUTO                       -->
+<!-- ===================================== -->
+<template name="LibTabs_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>tabsList</code></td>
+		<td><code>::Array[{"label"::HTML,"templateName"::String}]</code></td>
+	</tr>
+	<tr>
+		<td colspan="2">Facultatif :</td>
+	</tr>
+	<tr>
+		<td><code>selectedTab</code></td>
+		<td><code>::Integer</code></td>
+	</tr>
+	<tr>
+		<td><code>cols</code></td>
+		<td><code>::Integer</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+Aucune<br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+<p>Affiche un menu tabulé selon les données passées dans le paramètre <code>tabsList</code>.</p>
+<p>Le paramètre facultatif <code>selectedTab</code> permet de choisir le tab actif initialement. Si aucun paramètre <code>selectedTab</code> n'est fourni, le tab <code>0</code> est sélectionné par défault.</p>
+<p>Si le paramètre <code>cols</code> est spécifié, le menu des tabs est affiché sur autant de colonnes. Par défault, l'affichage du menu se fait sur 2 colonnes.</p>
+<p>Le paramètre <code>tabsList</code> est un array d'objets décrivant chaque tab. Un objet "tab" doit au moins contenir une propriété <code>label</code> (utilisé comme étiquette du tab et pouvant contenir un code HTML de présentation) et une propriété <code>templateName</code> donnant le nom du template à lancer dans ce tab. La propriété <code>tabIndex</code> qui précise l'index du tab est ajouté automatiquement à l'objet "tab". Tout autre propriété peut-être ajoutée à l'objet "tab" pour utilisation par un ou plusieurs templates de tab.</p>
+<p>Le template du tab actif est lancé avec comme contexte l'objet "tab" de cet onglet avec la propriété <code>tabIndex"</code> ajoutée pour donner le numéro du tab correspondant. Voici un exemple de <code>tabsList</code> : <pre>[
+	{label:"Accueil",			templateName:"RouterHome"},
+	{label:"Documentation des templates",	templateName:"AdminDocprogTemplatesAuto"},
+]</pre></p>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une <code>row</code> Bootstrap de deux <code>cols</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Avec <code>tabsList</code> défini comme suit :
+<pre>tabsList = [
+	{label:"Accueil",			templateName:"RouterHome"},
+	{label:"Documentation des templates",	templateName:"AdminDocprogTemplatesAuto"},
+]</pre>
+on peut appeler l'affichage des tabs suivant :
+<pre>{{|> LibTabs tabsList=tabsList}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibTabs tabsList=tabsList}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+			
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Avec <code>tabsList</code> défini comme suit :
+<pre>tabsList = [
+	{label:"Accueil",			templateName:"RouterHome"},
+	{label:"Documentation des templates",	templateName:"AdminDocprogTemplatesAuto"},
+]</pre>
+on peut appeler l'affichage des tabs suivant :
+<pre>{{|> LibTabs tabsList=tabsList selectedTab=1 cols=3}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibTabs tabsList=tabsList selectedTab=1 cols=3}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+<ul>
+	<li>Gérer le tab affiché initialement si autre que le tab 0.</li>
+</ul>
+<!-- ===================================== -->	
+	</div>
+</template>

@@ -1,0 +1,170 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibTitreInfos                -->
+<!-- type:"PERS", "LIEU"...                -->
+<!-- context: GEN object                   -->
+<!-- ===================================== -->
+<template name="LibTitreInfos">
+	<div class="titre">
+		<div class="container">
+			{{#with context}}
+			<div class="row">
+				
+				<!-- ===================== -->
+				<!--       COLONNE 1       -->
+				<!-- ===================== -->
+				
+				<div class="col-sm-2 text-center">
+					<!-- PERS ============ -->
+					{{#if (hlp_eq ../type "PERS")}}
+						{{> PersPhoto}}		
+					{{/if}}
+					<!-- LIEU ============ -->
+					{{#if (hlp_eq ../type "LIEU")}}
+						<h2>{{> LibIcone "iconeLieu"}}</h2>
+					{{/if}}
+					<!-- HIST ============ -->
+					{{#if (hlp_eq ../type "HIST")}}
+						<h2>{{> LibIcone "iconeHist"}}</h2>
+						<small>
+							{{{listeThemes}}}<br/>
+							{{ancetresConcernes}}<br/>
+							{{scope}}
+						</small>
+					{{/if}}
+					<!-- DOC ============= -->
+					{{#if (hlp_eq ../type "DOC")}}
+						<h2>{{> LibIcone "iconeDoc"}}</h2>
+					{{/if}}
+				</div>
+				
+				<!-- ===================== -->
+				<!--       COLONNE 2       -->
+				<!-- ===================== -->
+				
+				<div class="col-sm-8 text-center">
+						<h3>
+							<!-- PERS ==== -->
+							{{#if (hlp_eq ../type "PERS")}}
+								{{> LibSearchProgressStatus value=etatRechActes type="RECORDS"}}
+								{{nom}} {{> PersPrenoms}}
+							{{/if}}
+							<!-- LIEU ==== -->
+							{{#if (hlp_eq ../type "LIEU")}}
+								{{> LieuNature}} {{> LieuNomSansLienDe}}{{> LieuCode}}
+								{{#if complement}}
+									<small>({{complement}})</small>
+								{{/if}}
+							{{/if}}
+							<!-- HIST ==== -->
+							{{#if (hlp_eq ../type "HIST")}}
+								{{titre}}
+							{{/if}}
+							<!-- DOC ===== -->
+							{{#if (hlp_eq ../type "DOC")}}
+								{{> DocTitreAvecLienPers}}
+							{{/if}}
+						</h3>
+						<h4>
+							<!-- PERS ==== -->
+							{{#if (hlp_eq ../type "PERS")}}
+								{{> PersDatesFormatCourt}}
+							{{/if}}
+							<!-- LIEU ==== -->
+							{{#if (hlp_eq ../type "LIEU")}}
+								{{#with gh_lieuById inclusDans}}{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}}{{/with}}	
+							{{/if}}
+							<!-- HIST ==== -->
+							{{#if (hlp_eq ../type "HIST")}}
+								{{> DateformatLong date}}
+							{{/if}}
+							<!-- DOC ===== -->
+							{{#if (hlp_eq ../type "DOC")}}
+								{{#if (hlp_eq type "ACTE")}}
+									{{#with date}}{{> DateformatLong}}{{/with}}, 
+									{{#with gh_lieuById specif.ACTE_commune}}
+										{{> LieuNature}} {{> LieuNomLienDe}}
+									{{/with}}
+								{{else}}
+									{{#with date}}{{> DateformatLong}}{{/with}}
+								{{/if}}
+							{{/if}}
+						</h4>
+						<!-- PERS ======== -->
+						{{#if (hlp_eq ../type "PERS")}}
+							{{> PersSosas}}<br/>
+						{{/if}}
+						<!-- LIEU ======== -->
+						{{#if (hlp_eq ../type "LIEU")}}
+							
+						{{/if}}
+						<!-- HIST ======== -->
+						{{#if (hlp_eq ../type "HIST")}}
+							<em>Source</em> : {{{source}}}<br/>
+						{{/if}}
+						<!-- DOC ========= -->
+						{{#if (hlp_eq ../type "DOC")}}
+							<em>Source</em> : 
+							{{#if (hlp_eq type "ACTE")}}
+								{{source.intitule}}{{#if specif.ACTE_registre}}, registre : {{#with gh_registreById specif.ACTE_registre}}{{type}}, {{contenu}}, {{periode}}{{/with}}{{/if}}
+								{{#if specif.ACTE_page}}, page {{specif.ACTE_page}}{{/if}}
+							{{else}}
+								{{source.intitule}}
+							{{/if}}
+							<br/>
+						{{/if}}
+						
+						<!-- ================================ -->
+						<!-- TAGS Management                  -->
+						<!-- ================================ -->
+						{{#each tags}}
+							{{#with gh_tagById .}}
+								{{> TagAvecLien tag=.}}
+							{{/with}}
+						{{/each}}
+				</div>
+				
+				<!-- ===================== -->
+				<!--       COLONNE 3       -->
+				<!-- ===================== -->
+				
+				<div class="col-sm-2 text-center">
+					<!-- PERS ============ -->
+					{{#if (hlp_eq ../type "PERS")}}
+						<br/>
+						{{> LibClipId}}
+						<br/>
+						{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="PersFormMainEditModal" title="Modifier cette personne" pers=. }}
+						{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="PersFormMainEditModal" title="Supprimer cette personne" pers=. }}
+					{{/if}}
+					<!-- LIEU ============ -->
+					{{#if (hlp_eq ../type "LIEU")}}
+						{{> LieuBoutonModifier}}
+						{{> LieuBoutonSupprimer}}
+						<br/>
+						{{> LibClipId}}<br/>
+						<small>{{id}}</small>
+					{{/if}}
+					<!-- HIST ============ -->
+					{{#if (hlp_eq ../type "HIST")}}
+						{{> LienBoutonAjouterVers obj=. type="HIST"}}
+						{{> HistBoutonModifier}}
+						{{> HistBoutonSupprimer}}
+						<br/>
+						{{> LibClipId}}<br/>
+						<small>{{id}}</small>
+					{{/if}}
+					<!-- DOC ============= -->
+					{{#if (hlp_eq ../type "DOC")}}
+						<br/>
+						{{> LibClipId}}
+						<br/>
+						{{> LienBoutonAjouterVers obj=. type="DOC"}}
+						{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="DocFormMainEditModal" title="Modifier ce document" doc=. }}
+						{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="DocFormMainEditModal" title="Supprimer ce document" doc=. }}
+					{{/if}}
+				</div>
+			</div>
+			{{/with}}			
+		</div>
+	</div>
+</template>

@@ -1,0 +1,76 @@
+<!-- ===================================== -->
+<!-- TEMPLATE ComCallControl               -->
+<!-- ===================================== -->
+<template name="ComCallControl">
+	{{#unless hlp_eq (gh_sessionVar "callState") "DISCONNECTED"}}
+	<div class="callControl bg-danger" style="left:{{left}}px;width:{{callControlWidth}}px;">
+		<center>
+			{{callStateMessage}} <button id="hangup" class="btn btn-danger">{{> LibIcone "hangup"}} raccrocher</button>
+		</center>
+	</div>
+	{{/unless}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- ComCallControl_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="ComCallControl_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche l'ihm de contrôle d'un appel (suivi établissement, raccroché...).
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage au centre sous la navbar Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

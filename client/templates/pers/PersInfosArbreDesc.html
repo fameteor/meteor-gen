@@ -1,0 +1,86 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersInfosArbreDesc           -->
+<!-- ===================================== -->
+<template name="PersInfosArbreDesc">
+	{{#with pers}}
+	<div class="row">
+		<div class="col-md-12" >
+			{{> PersArbreDescExplorableRecursif pers=. generation=1}}
+			<div class="row margin-top noprint">
+				<div class="col-md-12">
+					<button type="button" class="btn btn-primary pull-right" title="Imprimer l'arbre descendant">imprimer</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersInfosArbreDesc_DOCAUTO            -->
+<!-- ===================================== -->
+<template name="PersInfosArbreDesc_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>PersArbreDescExplorableRecursif</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche l'arbre généalogique descendant explorable de la personne passée en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Peut-être doublon avec <code>PersArbreDescExplorableRecursif</code> : seul le formatage Bootstrap et l'ajout du bouton imprimer différe. A vérifier.
+<!-- ===================================== -->	
+	</div>
+</template>

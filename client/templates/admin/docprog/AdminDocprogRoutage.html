@@ -1,0 +1,33 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogRoutage                                      -->
+<!-- ===================================== -->
+<template name="AdminDocprogRoutage">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Routage client</h2>
+		
+<!-- ===================================== -->
+Les routes clients sont dans le fichiers <code>/client/routes.js</code>.<br/>
+Le nom des routes est généré à partir du path en remplaçant les "/" par du camel case et en remplaçant la première lettre par une majuscule.<br/>
+Le nom des templates est généré par "tpl_" suivi du nom de la route s'il en existe une.<br/>
+
+<h3>Liste des routes</h3> 
+
+<table class="table">
+	<thead>
+		<tr>
+			<th>Nom de la route</th>
+			<th>Path</th>
+		</tr>
+	</thead>
+	<tbody>
+		{{#each listeDesRoutes}}
+		<tr>
+			<td><code>{{name}}</code></td>
+			<td><code>{{path}}</code></td>
+		</tr>
+		{{/each}}
+	</tbody>
+</table>
+<!-- ===================================== -->
+	</div>
+</template>

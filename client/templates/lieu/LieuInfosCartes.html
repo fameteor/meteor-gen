@@ -1,0 +1,88 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuInfosCartes              -->
+<!-- ===================================== -->
+<template name="LieuInfosCartes">
+	<div class="row">
+		<div class="col-md-12" >
+			{{#with lieu}}
+				{{#with cartes}}
+					{{#each .}}
+						{{> DocViewerCarte}}
+						<hr/>
+					{{/each}}
+				{{else}}
+					<h4>Aucune carte disponible pour ce lieu.</h4>
+				{{/with}}
+			{{/with}}
+		</div>
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LieuInfosCartes_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="LieuInfosCartes_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>lieu</code></td>
+		<td><code>::LIEU</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>DocViewerCarte</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les cartes mentionnant le lieu passé en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

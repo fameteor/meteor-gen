@@ -1,0 +1,123 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienBoutonAjouterVers        -->
+<!-- Context :                             -->
+<!-- obj : objet pour lequel on veut ajouter un lien vers     -->
+<!-- type : type de l'objet pour lequel on veut ajouter vers  ("PERS","LIEU","HIST","DOC")  -->
+<!-- ===================================== -->
+<template name="LienBoutonAjouterVers">
+	<button type="button" class="btn btn-primary ajouter" title="Ajouter un lien vers">
+		{{> LibIcone "iconeLien"}}
+	</button>
+</template>
+
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LienBoutonAjouterVers_DOCAUTO         -->
+<!-- ===================================== -->
+<template name="LienBoutonAjouterVers_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>obj</code></td>
+		<td><code>::genObject</code></td>
+	</tr>
+	<tr>
+		<td><code>type</code></td>
+		<td><code>::["PERS","LIEU","HIST","DOC"]</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code><br/>
+<code>LienAjouterModal</code><br/>
+
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Ajoute un lien (dans la collection <code>Liens</code>) pour l'objet passé en paramètre <code>obj</code> et dont le type est passé en paramètre <code>type</code> vers un autre objet.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage un <code>button</code> Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|#with souvenirBanquet}}
+	{{|> LienBoutonAjouterVers obj=. type="DOC"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{#with souvenirBanquet}}
+	{{> LienBoutonAjouterVers obj=. type="DOC"}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+		</tbody>
+	</table>
+
+<h4>Améliorations</h4>
+<div class="bg-warning">
+<!-- Améliorations ======================== -->
+A compléter.
+<!-- ===================================== -->	
+</div>
+</template>

@@ -1,0 +1,15 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienModifier                                                       -->
+<!-- ===================================== -->
+<template name="LienModifier">
+	{{#autoForm collection="Liens" doc=this id="updateLienForm" type="update"}}
+		{{> LienFormulaire}}
+		{{> LibFormulaireChampsCachesSansId}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

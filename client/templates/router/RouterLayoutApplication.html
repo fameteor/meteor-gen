@@ -1,0 +1,13 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RouterLayoutApplication      -->
+<!-- ===================================== -->
+<template name="RouterLayoutApplication">
+	<header>
+		{{> RouterNav}}
+	</header>
+	<article class="navBarRemainingHeight">
+		<div class="container-fluid scrollable">
+			{{> yield}}
+		</div>
+	</article>
+</template>

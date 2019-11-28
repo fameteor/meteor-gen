@@ -1,0 +1,53 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE OutilsGestionDesNoms         -->
+<!-- ===================================== -->
+<template name="OutilsGestionDesNoms">
+	<div class="container">
+		{{#with listeDesNomsDedoublonnes}}
+			<h2>Gestion de l'orthographe des noms <small>({{hlp_count .}} noms différents)</small></h2>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>
+							Nom
+						</th>
+						<th>
+							Nombre d'occurence dans la base
+						</th>
+						<th>
+							Doublon(s) possible(s)
+						</th>
+						<th>
+							Corriger
+						</th>
+					</tr>
+				</thead>
+				<tbody>
+						{{#each .}}
+						<tr>
+							<td>
+								<a href="#" title="Voir les personnes ayant ce nom">{{nom}}</a>
+							</td>
+							<td>
+								{{nbOccurences}}
+							</td>
+							<td>
+							</td>
+							<td>
+								<form class="form-inline">
+									<div class="form-group">
+										<input type="text" class="form-control" id="{{nom}}" placeholder="Nouveau nom">
+									</div>
+									<button type="submit" class="btn btn-primary">Corriger</button>
+								</form>
+							</td>
+						</tr>
+						{{/each}}
+				</tbody>
+			</table>
+		{{else}}
+			<h2>Gestion de l'orthographe des noms (0 nom)</h2>
+			<p class="text-danger">Aucun nom n'est disponible dans la base.</p>
+		{{/with}}
+	</div>
+</template>

@@ -1,0 +1,346 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersInfosFiche               -->
+<!-- ===================================== -->
+<template name="PersInfosFiche">
+	{{#with pers}}
+	<div class="row">
+		<div class="col-xl-8" >
+			<div class="row">
+				<!-- Parents ==================== -->
+				<div class="col-md-6" >
+					<h4>Naissance - Parents</h4>
+					<div class="surligne {{gh_classIncertainForNaissance}}">
+						{{#each naissance.docs}}
+							<span class="h4">{{> DocLienversdoc .}}</span>
+						{{/each}}
+						Né{{#if sexeFeminin}}e{{/if}}
+						{{#if naissance}}
+							{{#with naissance.date}}
+								<strong>{{> DateformatLong}}</strong>
+							{{else}}
+								<strong>à une date inconnue</strong>
+							{{/with}}
+							{{#if naissance.commune}}
+								{{#if naissance.lieudit}}
+									{{#with gh_lieuById naissance.lieudit}}{{> LieuNomLienA}}{{/with}}
+									({{#with gh_lieuById naissance.commune}}{{> LieuNature}} {{> LieuNomLienDe}}{{/with}})
+								{{else}}
+									{{#with gh_lieuById naissance.commune}}{{> LieuNomLienA}}{{/with}}
+								{{/if}}
+							{{/if}}
+							de l'union de :
+						{{else}}
+							<strong>à une date inconnue</strong> de l'union de : 
+						{{/if}}	
+						<div class="pull-right">
+							{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="PersFormBirthEditModal" title="Modifier les informations de naissance" pers=.}}
+						</div>
+					</div>
+					<div style="margin-left:28px;">
+						{{#if pere}}
+							{{#with gh_persById pere}}
+								{{#if ../pereIncertain}}
+									{{> PersIncertainCompletAvecLien}}
+								{{else}}
+									{{> PersCompletAvecLien}}
+								{{/if}}
+								{{#if (hlp_and naissance.date naissance.date.a1 ../naissance.date ../naissance.date.a1)}} agé de <strong>{{age naissance.date ../naissance.date}}</strong> ans (calculé){{/if}}<br/>
+							{{/with}}
+						{{else}}
+							{{> LibIcone "iconeSexeM"}} <em>père inconnu</em> <br/>
+						{{/if}}
+						{{#if mere}}
+							{{#with gh_persById mere}}
+								{{#if ../mereIncertain}}
+									{{> PersIncertainCompletAvecLien}}
+								{{else}}
+									{{> PersCompletAvecLien}}
+								{{/if}}
+								{{#if (hlp_and naissance.date naissance.date.a1 ../naissance.date ../naissance.date.a1)}} agée de <strong>{{age naissance.date ../naissance.date}}</strong> ans (calculé){{/if}}<br/>
+							{{/with}}
+						{{else}}
+							{{> LibIcone "iconeSexeF"}} <em>mère inconnu</em>
+						{{/if}}
+					</div>
+				</div>
+				<!-- Frères et soeurs ============== -->
+				<div class="col-md-6" >
+					<div class="hidden-md hidden-lg hidden-xl hidden-xxl"><hr/></div>
+					<div style="margin-left:28px;">
+						{{#if (hlp_and pere mere)}}
+							<h4>Fratrie <span class="addSibling">{{> LibButton action="INSERT" title="Ajouter un frère ou une soeur"}}</span></h4>
+							{{> PersListeEnfants parentA = h_pere parentB = h_mere focus = .}}
+						{{/if}}
+						
+						{{#with listeEnfantsMemePere}}
+							{{#if (hlp_gt (hlp_count .) 0 )}}
+								<h4>Même père, autre(s) mère(s)</h4>
+								{{#each .}}
+									{{> PersArbreDescExplorableRecursif pers=. generation=1}}
+								{{/each }}
+							{{/if}}
+						{{/with}}
+
+						{{#with listeEnfantsMemeMere}}
+							{{#if (hlp_gt (hlp_count .) 0 )}}
+								<h4>Même mère, autre(s) père(s)</h4>
+								{{#each .}}
+									{{> PersArbreDescExplorableRecursif pers=. generation=1}}
+								{{/each }}
+							{{/if}}
+						{{/with}}
+					</div>
+				</div>
+			</div>
+			
+			{{#if estCelibataire}}
+				<div class="row">
+					<!-- Célibataire ================== -->
+					<div class="col-md-12" >
+						<hr/>
+						<h4>Célibataire {{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="PersFormMainEditModal" title="Modifier cette personne" pers=. }}</h4>
+						<hr/>
+					</div>
+				</div>
+			{{else}}
+				<div class="row">
+					<!-- Conjoint ==================== -->
+					<div class="col-md-12" >
+						<hr/>
+					</div>
+				</div>
+				<div class="row">
+						<div class="col-md-6" >
+							<h4>
+								Vie conjugale
+								{{>LibEditButton action="INSERT" accessRightCheckObj=. modalTemplate="CoupleEventEditModal" title="Ajouter un évènement conjugal" pers=.}}
+							</h4>
+						</div>
+				</div>
+				{{#with gh_coupleEventsByPersId _id}}
+					{{#each .}}
+						<div class="row">
+							<!-- Conjoint ==================== -->
+							<div class="col-md-6" >
+								<div class="surligne {{classIncertainForMariage ../..}}">
+									{{#each docs}}
+										<span class="h4">{{> DocLienversdoc .}}</span>
+									{{/each}}
+									{{#if (hlp_eq ./type "UNION-LIBRE")}}Union libre{{else}}{{#if (hlp_eq ./type "MARIAGE")}}Marié{{/if}}{{#if (hlp_eq ./type "PACS")}}Pacsé{{/if}}{{#if (hlp_eq ./type "DIVORCE")}}Divorcé{{/if}}{{#if (hlp_eq ../../sexe "F")}}e{{/if}}{{/if}}
+									{{#if date}}
+									<strong>{{#with date}}{{> DateformatLong}}{{/with}}</strong>
+									{{else}}
+										<strong>à une date inconnue</strong>
+									{{/if}}
+									{{#if hlp_eq ../../_id persA }}
+										{{#if communeA}}
+											{{#if lieuditA}}
+												{{#with gh_lieuById lieuditA}}habitant {{> LieuNomLienA}}{{/with}}
+												({{#with gh_lieuById communeA}}{{> LieuNature}} {{> LieuNomLienDe}}{{/with}}){{{ageMariage date}}} avec :
+											{{else}}
+												{{#with gh_lieuById communeA}}habitant {{> LieuNomLienA}}{{/with}}{{{ageMariage date}}} avec :
+											{{/if}}
+										{{else}}
+											{{{ageMariage date}}}
+										{{/if}}
+									{{else}}
+										{{#if communeB}}
+											{{#if lieuditB}}
+												{{#with gh_lieuById lieuditB}}habitant {{> LieuNomLienA}}{{/with}}
+												({{#with gh_lieuById communeB}}{{> LieuNature}} {{> LieuNomLienDe}}{{/with}}){{{ageMariage date}}} avec :
+											{{else}}
+												{{#with gh_lieuById communeB}}habitant {{> LieuNomLienA}}{{/with}}{{{ageMariage date}}} avec :
+											{{/if}}
+										{{else}}
+											{{{ageMariage date}}}
+										{{/if}}
+									{{/if}}
+									<div class="pull-right">
+										{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="CoupleEventEditModal" title="Modifier cet évènement conjugal" coupleEvent=. pers=../.. }}
+										{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="CoupleEventEditModal" title="Supprimer cet évènement conjugal" coupleEvent=. pers=../.. }}
+									</div>
+								</div>
+								<div style="margin-left:28px;">
+									{{#if hlp_eq ../../_id persA }}
+										{{#with gh_persById persB}}{{> PersCompletAvecLien}}{{/with}}
+									{{else}}
+										{{#with gh_persById persA}}{{> PersCompletAvecLien}}{{/with}}
+									{{/if}}
+								</div>
+								<div style="margin-left:28px;">
+									<div>
+										<hr/>
+										<strong>Commentaires communs au couple</strong>
+										{{> textXmlEditor collection=CoupleEvents id=_id field="comment"}}
+									</div>
+									<div>
+										<hr/>
+										<strong>Remarques de recherche communes au couple</strong>
+										{{> textXmlEditor collection=CoupleEvents id=_id field="recherche"}}
+									</div>
+								</div>
+							</div>
+							<!-- Enfants avec ce conjoint ========== -->
+							<div class="col-md-6" >
+								<div style="margin-left:28px;">
+									<hr class="hidden-md hidden-lg hidden-xl hidden-xxl"/>
+									{{#unless (hlp_eq ./type "DIVORCE")}}
+										<h4>{{> LibSearchProgressStatus value=etatRechEnfants type="CHILDS"}} Enfant(s) <span class="addChild">{{> LibButton action="INSERT" title="Ajouter un enfant"}}</span></h4>
+										{{#if hlp_eq ../../_id persA }}
+											{{> PersListeEnfants parentA = ../.. parentB = h_conjointB focus = ../..}}
+										{{else}}
+											{{> PersListeEnfants parentA = ../.. parentB = h_conjointA focus = ../..}}
+										{{/if}}
+									{{/unless}}
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-12" >
+								<hr/>
+							</div>
+						</div>
+					{{/each}}
+				{{else}}
+					<div class="row">
+						<div class="col-md-12" style="margin-left:28px;">
+							Aucun mariage connu.
+							<hr/>
+						</div>
+					</div>
+				{{/with}}
+			{{/if}}
+			<!-- DECES ==================== -->
+			{{#unless estVivant}}
+			<div class="row">
+				<div class="col-md-6" >
+					<h4>Décès</h4>
+					<div class="surligne {{gh_classIncertainForDeces}}">
+						{{#each deces.docs}}
+							<span class="h4">{{> DocLienversdoc .}}</span>
+						{{/each}}
+						Décédé{{#if sexeFeminin}}e{{/if}}
+						{{#if deces.date}}
+						<strong>{{#with deces.date}}{{> DateformatLong}}{{/with}}</strong>
+						{{else}}
+							<strong>à une date inconnue</strong>
+						{{/if}}
+						{{#if deces.commune}}
+							{{#if deces.lieudit}}
+								{{#with gh_lieuById deces.lieudit}}{{> LieuNomLienA}}{{/with}}
+								({{#with gh_lieuById deces.commune}}{{> LieuNature}} {{> LieuNomLienDe}}{{/with}}){{{ageDeces}}}
+							{{else}}
+								{{#with gh_lieuById deces.commune}}{{> LieuNomLienA}}{{/with}}{{{ageDeces}}}
+							{{/if}}
+						{{else}}
+							{{{ageDeces}}}
+						{{/if}}
+						<div class="pull-right">
+							{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="PersFormDeathEditModal" title="Modifier les informations de décès" pers=.}}
+						</div>
+					</div>
+					<hr/>
+				</div>
+			</div>
+			{{/unless}}
+		</div>
+		<div class="col-xl-4" >
+			<!-- Commentaires ====================== -->
+			<h4>Commentaires</h4>
+			{{> textXmlEditor collection=Pers id=_id field="comment"}}
+			<!-- Recherche ====================== -->
+			<hr/>
+			<h4>Remarques de recherche</h4>
+			{{> textXmlEditor collection=Pers id=_id field="recherche"}}
+			<hr/>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-xl-12" >
+			<h4>Informations dans les actes</h4>
+			{{> LibDocAnalysis obj=. objType="PERS"}}
+			<!-- Recherche ====================== -->
+			<hr/>
+		</div>
+	</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersInfosFiche_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="PersInfosFiche_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>DocLienversdoc</code><br/>
+<code>LienListe</code><br/>
+<code>DateformatLong</code><br/>
+<code>LieuNomLienA</code><br/>
+<code>LieuNature</code><br/>
+<code>LieuNomLienDe</code><br/>
+<code>PersCompletAvecLien</code><br/>
+<code>LibIcone</code><br/>
+<code>PersListeEnfants</code><br/>
+<code>PersArbreDescExplorableRecursif</code><br/>
+<code>textXmlEditor</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche la fiche d'information sur la personne passée en contexte : parents, frère(s), soeur(s), conjoint(s), enfant(s).
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A optimiser pour diminuer le temps d'affichage.
+<!-- ===================================== -->	
+	</div>
+</template>

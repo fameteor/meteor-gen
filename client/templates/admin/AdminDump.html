@@ -1,0 +1,46 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDump                    -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDump">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6" >
+				<h2>{{> LibIcone "iconeAdmin"}} Dump/restore MongoDB</h2>
+				<h3>Effectuer un dump <button id="dump" type="button" class="btn btn-primary">dump</button></h3>
+				<h3>Liste des dumps</h3>
+				<p>(sur <code>/data/mongo/dumps</code>)</p>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>Directory</th>
+							<th>Date</th>
+							<th class="center">Recharger</th>
+							<th class="center">Supprimer</th>
+						</tr>
+					</thead>
+					<tbody>
+						{{#each listeDumps}}
+						<tr>
+							<td><code>{{.}}</code></td>
+							<td>{{affichageDate}}</td>
+							<td><button type="button" class="btn btn-warning restore disabled" title="Restorer ce dump">restore</button></td>
+							<td>
+								<button type="button" class="btn btn-danger supprimer" title="Supprimer ce dump">
+									{{> LibIcone "iconeSupprimer"}}
+								</button>
+							</td>
+						</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+			<div class="col-md-6" >
+				<h2>Console</h2>
+				<div>
+					<pre id="console" style="height:600px;overflow-y:scroll;">{{{consoleDumps}}}</pre>
+				</div>
+			</div>
+		</div>
+	</div>
+</template>

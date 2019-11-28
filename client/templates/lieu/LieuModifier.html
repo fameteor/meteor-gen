@@ -1,0 +1,15 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuModifier                                                      -->
+<!-- ===================================== -->
+<template name="LieuModifier">
+	{{#autoForm collection="Lieux" doc=this id="updateLieuForm" type="update"}}
+		{{> LieuFormulaire}}
+		{{> LibFormulaireChampsCaches}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

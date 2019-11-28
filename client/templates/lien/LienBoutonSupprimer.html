@@ -1,0 +1,10 @@
+<!-- ===================================== -->
+<!-- TEMPLATE lienBoutonSupprimer                                        -->
+<!-- ===================================== -->
+<template name="lienBoutonSupprimer">
+	{{#if gh_isAdminOrOwner}}
+	<button type="button" class="btn btn-danger supprimer" title="Supprimer ce lien">
+		{{> LibIcone "iconeSupprimer"}}
+	</button>
+	{{/if}}
+</template>

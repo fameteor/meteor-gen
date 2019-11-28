@@ -1,0 +1,150 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminSchemaCheck             -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminSchemaCheck">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12" >
+				<h2>{{> LibIcone "iconeAdmin"}} Vérification des schémas</h2>
+				{{#with listeChecks}}
+					<center>
+						{{#if errorsAreDisplayed}}
+							<button id="displayErrors" class="btn btn-primary" type="submit">Ne pas afficher les erreurs</button>
+						{{else}}
+							<button id="displayErrors" class="btn btn-primary" type="submit">Afficher les erreurs</button>
+						{{/if}}
+					</center>
+					<br/>
+					<table class="table table-striped">
+						<thead>
+							{{#each .}}
+								{{#with value}}
+									<tr>
+										<td>
+											<h4>
+												{{#if hlp_eq ../label "Pers"}}
+													{{> LibIcone "iconePers"}}
+												{{/if}}
+												{{#if hlp_eq ../label "Lieux"}}
+													{{> LibIcone "iconeLieu"}}
+												{{/if}}
+												{{#if hlp_eq ../label "Hists"}}
+													{{> LibIcone "iconeHist"}}
+												{{/if}}
+												{{#if hlp_eq ../label "Docs"}}
+													{{> LibIcone "iconeDoc"}}
+												{{/if}}
+												{{#if hlp_eq ../label "Liens"}}
+													{{> LibIcone "iconeLien"}}
+												{{/if}}
+												{{../label}}
+											</h4>
+										</td>
+										<td>
+											<span class="h4 red">{{hlp_count .}} erreurs</span><br/>
+											{{#if errorsAreDisplayed}}
+												<hr/>
+												{{#each .}}
+													{{#if hlp_eq ../../label "Pers"}}
+														{{#with gh_persById id}}
+															{{> PersCompletAvecLien}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+														{{/with}}
+													{{/if}}
+													{{#if hlp_eq ../../label "CoupleEvents"}}
+														{{id}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+													{{/if}}
+													{{#if hlp_eq ../../label "Lieux"}}
+														{{#with gh_lieuById id}}
+															{{> LieuNomLienArticle}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+														{{/with}}
+													{{/if}}
+													{{#if hlp_eq ../../label "Hists"}}
+														{{#with gh_histById id}}
+															{{> HistTitreLien}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+														{{/with}}
+													{{/if}}
+													{{#if hlp_eq ../../label "Docs"}}
+														{{#with gh_docById id}}
+															{{> DocTitreAvecLien}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+														{{/with}}
+													{{/if}}
+													{{#if hlp_eq ../../label "Profs"}}
+														{{#with gh_profById id}}
+															{{> ProfLabel prof=. sexe="NONCONNU"}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+														{{/with}}
+													{{/if}}
+													{{#if hlp_eq ../../label "Liens"}}
+														{{id}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+													{{/if}}
+													{{#if hlp_eq ../../label "Registres"}}
+														{{id}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+													{{/if}}
+													{{#if hlp_eq ../../label "ActesArchives"}}
+														{{id}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+													{{/if}}
+													{{#if hlp_eq ../../label "Bugs"}}
+														{{id}} : {{> AdminSchemaCheckListerrors errorsList=../errors}}<br/>
+													{{/if}}
+												{{/each}}
+											{{/if}}
+										</td>
+									</tr>
+								{{else}}
+									<tr>
+										<td>
+											<h4>
+												{{#if hlp_eq label "Pers"}}
+													{{> LibIcone "iconePers"}}
+												{{/if}}
+												{{#if hlp_eq label "Lieux"}}
+													{{> LibIcone "iconeLieu"}}
+												{{/if}}
+												{{#if hlp_eq label "Hists"}}
+													{{> LibIcone "iconeHist"}}
+												{{/if}}
+												{{#if hlp_eq label "Docs"}}
+													{{> LibIcone "iconeDoc"}}
+												{{/if}}
+												{{#if hlp_eq label "Liens"}}
+													{{> LibIcone "iconeLien"}}
+												{{/if}}
+												{{label}}
+											</h4>
+										</td>
+										<td>
+											<span class="h4 green">0 erreur</span>
+										</td>
+									</tr>
+								{{/with}}
+							{{/each}}
+						</thead>
+					</table>
+				{{else}}
+					<div class="container text-center">
+						<div class="container bg-info messageRouter">
+							<h3>Vérification en cours</h3>
+							<h1><i class="fa fa-spinner fa-pulse" title="connexion en cours"></i></h1>
+						</div>
+					</div>
+				{{/with}}
+			</div>
+		</div>
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminSchemaCheckListerrors   -->
+<!-- Contexte : aucun		      		   -->
+<!-- Paramètres :                          -->
+<!-- - errorsList ::Array                  -->
+<!-- ===================================== -->
+<template name="AdminSchemaCheckListerrors">
+	<ul>
+	{{#each errorsList}}
+		{{#unless (hlp_and (hlp_eq name "_id") (hlp_eq type "keyNotInSchema"))}}
+			<li>Erreur propriété <code>{{name}}</code>, type d'erreur : <code>{{type}}</code> {{#if value}}(Valeur : {{value}}){{/if}}</li>
+		{{/unless}}
+	{{/each}}
+	</ul>
+</template>

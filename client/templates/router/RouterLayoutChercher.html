@@ -1,0 +1,23 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RouterLayoutChercher         -->
+<!-- Contexte : aucun          			   -->
+<!-- ===================================== -->
+<template name="RouterLayoutChercher">
+	<header>
+		{{> RouterNav}}
+	</header>
+	<article  class="navBarRemainingHeight">
+		 <div class="container-fluid scrollable">
+			<div class="row">
+				<div class="col-sm-8">
+					<h2>{{> yield "icone"}} Chercher</h2>
+					{{> yield}}
+				</div>
+				<div class="col-sm-4">
+					<h4>créé, modifié ou vu récemment</h4>
+					{{> yield "visitedObjects"}}
+				</div>
+			</div>
+		</div>
+	</article>
+</template>

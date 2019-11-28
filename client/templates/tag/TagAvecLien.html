@@ -1,0 +1,9 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE TagAvecLien                  -->
+<!-- For create or update                  -->
+<!-- ===================================== -->
+<template name="TagAvecLien">
+	{{#with tag}}
+		<a href="/tag/infos/{{_id}}"><span class="label label-info" title="{{title}}">{{label}}</span></a>
+	{{/with}}
+</template>

@@ -1,0 +1,21 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersPhoto                    -->
+<!-- ===================================== -->
+<template name="PersPhoto">
+	{{#if photo}}
+		{{#with photo}}
+			<div id="persPhoto">
+				{{> DecoupeDocImageViewer}}
+			</div>
+			<!-- A REVOIR  ???????????????? -->
+			<ul id="menu" class="dropdown-menu">
+				<li><a href="/doc/infos/{{docId}}">voir le document complet</a></li>
+				<li><a href="/pers/decouperPhoto/{{../_id}}">choisir une autre photo</a></li>
+				<li><a id="enleverPhoto" href="#">enlever la photo</a></li>
+			</ul>
+			<!-- A REVOIR  ???????????????? -->
+		{{/with}}
+	{{else}}
+		<a href="/pers/decouperPhoto/{{_id}}" title="Découper une photo à partir d'un document"><img class="iconePhoto" src="{{urlIcone}}"/></a>
+	{{/if}}
+</template>

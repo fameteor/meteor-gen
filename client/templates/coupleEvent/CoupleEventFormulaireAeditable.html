@@ -1,0 +1,80 @@
+<!-- ===================================== -->
+<!-- TEMPLATE CoupleEventFormulaireAeditable pour Ajouter ou Modifier              -->
+<!-- ===================================== -->
+<template name="CoupleEventFormulaireAeditable">
+	<fieldset>
+		<div class="row">
+			<div class="col-sm-3">
+				{{> afQuickField name='type'}}
+				{{> DateFormulaire name="date"}}
+			</div>
+			<div class="col-sm-3">
+			
+				<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+				<!-- Inversion des champs des colonne 2 et 3                             -->
+				<!-- pour que la colonne de la personne non éditable  soit toujours la 1 -->
+				<!-- Et changement des libellé "entre" "et"                              -->
+				<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+				
+				{{> afQuickField name='persB' type='hidden'}}
+				<!-- Pour gérer la saisie et l'affichage de la personne -->
+				<div class="form-group">
+					<label class="control-label" for="persB.pers_intitule">Entre</label>
+					
+					<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					<!-- Spécificité A editable                                    -->
+					<!-- PersB n'est pas éditable : readonly onfocus="this.blur()" -->
+					<!-- !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+					
+					<input class="form-control intitule" id="persB.pers_intitule" name="persB.pers_intitule" type="text" value="" readonly onfocus="this.blur()">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='communeB' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="communeB.commune_intitule">Habitant commune</label>
+					<input class="form-control intitule" id="communeB.commune_intitule" name="communeB.commune_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='lieuditB' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="lieuditB.lieudit_intitule">Habitant lieu-dit</label>
+					<input class="form-control intitule" id="lieuditB.lieudit_intitule" name="lieuditB.lieudit_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='incertainB'}}
+				
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='persA' type='hidden'}}
+				<!-- Pour gérer la saisie et l'affichage de la personne -->
+				<div class="form-group {{#if afFieldIsInvalid name="persA"}}has-error{{/if}}">
+					<label class="control-label" for="persA.pers_intitule">Et</label>
+					<input class="form-control intitule" id="persA.pers_intitule" name="persA.pers_intitule" type="text" value="">
+					<span class="help-block">{{{afFieldMessage name="persA"}}}</span>
+				</div>
+				{{> afQuickField name='communeA' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="communeA.commune_intitule">Habitant commune</label>
+					<input class="form-control intitule" id="communeA.commune_intitule" name="communeA.commune_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='lieuditA' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="lieuditA.lieudit_intitule">Habitant lieu-dit</label>
+					<input class="form-control intitule" id="lieuditA.lieudit_intitule" name="lieuditA.lieudit_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='incertainA'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='etatRechEnfants'}}
+				{{> afQuickField name='docs'}}
+			</div>
+			
+		</div>
+	</fieldset>
+</template>

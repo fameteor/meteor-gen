@@ -1,0 +1,31 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocListeFormatCourt                                          -->
+<!-- ===================================== -->
+<template name="DocListeFormatCourt">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Miniature</th>
+				<th>Titre</th>
+				<th class="center">Type{{#if gh_isAdmin}}<br/><small>(codage)</small>{{/if}}</th>
+				<th class="center">Date</th>
+				{{#if gh_isAdmin}}<th class="center">IDs</th>{{/if}}
+				<th class="center">Modifier</th>
+				<th class="center">Supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each .}}
+			<tr>
+				<td class="center">{{> DocMiniatureAvecLien}}</td>
+				<td>{{> DocTitreAvecLien}}</td>
+				<td class="center">{{type}}{{#if gh_isAdmin}}<br/><small>({{codage}})</small>{{/if}}</td>
+				<td class="center">{{#with date}}{{> DateformatLong}}{{/with}}</td>
+				{{#if gh_isAdmin}}<td class="center">{{> LibClipId}}<br/><small>{{id}}</small></td>{{/if}}
+				<td class="center"></td>
+				<td class="center"></td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+</template>

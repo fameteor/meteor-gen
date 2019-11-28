@@ -1,0 +1,124 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistChercher                                                     -->
+<!-- ===================================== -->
+<template name="HistChercher">
+	<!-- Formulaire ======================= -->
+	<div class="row fondLayoutChercher">
+		<form>
+				<div class="col-sm-4">
+					<div class="form-group">
+						<label for="choix_hist_titre">dont le titre contient</label>
+						<input	type="text" 
+								class="form-control" 
+								id="choix_hist_titre" 
+								autocomplete="off" 
+								placeholder="Saisir une partie du titre" 
+								value="{{choix_hist_titre}}">
+					</div>
+					<div class="form-group">
+						<label for="choix_hist_anneeDebut">qui s'est passé entre l'année (comprise)</label>
+						<input	type="number" 
+								class="form-control" 
+								id="choix_hist_anneeDebut" 
+								autocomplete="off" 
+								value="{{choix_hist_anneeDebut}}">
+					</div>
+					<div class="form-group">
+						<label for="choix_hist_anneeFin">et l'année (comprise)</label>
+						<input	type="number" 
+								class="form-control" 
+								id="choix_hist_anneeFin" 
+								autocomplete="off" 
+								value="{{choix_hist_anneeFin}}">
+					</div>
+					<div class="checkbox">
+						<label>
+							<input id="impact" class="theme" type="checkbox" {{impactChecked}}>
+							et ayant impacté mes ancêtres
+						</label>
+					</div>
+					<div class="checkbox">
+						<label>
+							<input id="pasImpact" class="theme" type="checkbox" {{pasImpactChecked}}>
+							et n'ayant pas impacté mes ancêtres
+						</label>
+					</div>
+				</div>
+				<div class="col-sm-3">
+					<div class="form-group">
+						<label for="choix_hist_zones">dans la ou les zone(s)</label>
+						{{#each zones}}
+							<div class="checkbox">
+								<label>
+									<input class="zone" type="checkbox" value="{{valeur}}" {{zoneChecked}}>
+									{{nomZone}}
+								</label>
+							</div>
+						{{/each}}
+					</div>
+				</div>
+				<div class="col-sm-5">
+					<div class="form-group">
+						<div class="row">
+							<div class="col-sm-12">
+								<label for="choix_hist_themes">et concernant le ou les thème(s)</label>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-sm-6">
+								{{#each premiersThemes}}
+									<div class="checkbox">
+										<label>
+											<input class="theme" type="checkbox" value="{{valeur}}" {{themeChecked}}>
+											{{nomTheme}}
+										</label>
+									</div>
+								{{/each}}
+							</div>
+							<div class="col-sm-6">
+								{{#each derniersThemes}}
+									<div class="checkbox">
+										<label>
+											<input class="theme" type="checkbox" value="{{valeur}}" {{themeChecked}}>
+											{{nomTheme}}
+										</label>
+									</div>
+								{{/each}}
+							</div>
+						</div>
+					</div>
+				</div>
+		</form>
+	</div>
+	<div class="row fondLayoutChercher">
+		<div class="col-sm-4">
+		</div>
+		<div class="col-sm-3">
+			<a id="boutonToutesZones" class="btn btn-primary" href="#" role="button" title="Tout sélectionner">tous <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+			<a id="boutonAucuneZone" class="btn btn-primary" href="#" role="button" title="Tout désélectionner">aucun</a>
+		</div>
+		<div class="col-sm-5">
+			<a id="boutonTousThemes" class="btn btn-primary" href="#" role="button" title="Tout sélectionner">tous <span class="glyphicon glyphicon-ok" aria-hidden="true"></span></a>
+			<a id="boutonAucunTheme" class="btn btn-primary" href="#" role="button" title="Tout désélectionner">aucun</a>
+		</div>
+	</div>
+	<!-- Resultat ======================= -->
+	<hr/>
+	<div class="row">
+		<div class="col-sm-12">
+			{{#if saisieValide}}
+				{{#with histsSelectionnes}}
+					<h4>{{gh_cursorCount .}} point{{#if gh_moreThanOneInCursor .}}s{{/if}} d'histoire sélectionné{{#if gh_moreThanOneInCursor .}}s{{/if}}</h4>
+					{{#if gh_cursorIsNotEmpty .}}
+						{{> HistListeFormatCourt}}
+					{{/if}}
+				{{/with}}
+			{{else}}
+				<p class="text-danger">
+					<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+					La saisie est valide dans tous les cas pour ce formulaire (pour l'instant).
+				</p>
+			{{/if}}
+		</div>
+	</div>
+</template>

@@ -1,0 +1,44 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersArbreAsc                 -->
+<!-- ===================================== -->
+<template name="PersArbreAsc">
+	<svg version="1.1" viewBox="{{viewbox}}" width="100%" height="100%" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+		{{> PersArbreAscDefs}}
+		<g class="zoomable">
+			{{> PersArbreAscDessinerPers pers=. fils=0 sosa=sosa gen=0 rotation=0 nbGenMax=nbGenMax couleurs=couleurs}}
+		</g>
+	</svg>
+	<div class="row margin-top noprint">
+		<div class="col-md-12">
+			<form class="form-inline">
+				<div class="form-group">
+					<label for="choix_nbGenArbre">Nb de générations</label>
+					<select class="form-control" id="choix_nbGenArbre">
+						{{#each choixNbGenerations}}
+							<option value="{{.}}" selected="{{isSelected}}">{{.}}</option>
+						{{/each}}
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="choix_couleurs">Couleurs</label>
+					<select class="form-control" id="choix_couleurs">
+						<option value="COMMUNE_NAISSANCE" selected="{{couleurIsSelected 'COMMUNE_NAISSANCE'}}">commune de naissance</option>
+						<option value="COMMUNE_DECES" selected="{{couleurIsSelected 'COMMUNE_DECES'}}">commune de décès</option>
+						<option value="ETAT_RECH_ACTES" selected="{{couleurIsSelected 'ETAT_RECH_ACTES'}}">état de recherche des actes</option>
+						<option value="ETAT_RECH_ENFANTS" selected="{{couleurIsSelected 'ETAT_RECH_ENFANTS'}}">état de recherche des enfants</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="choix_sosa">Numéro personne racine</label>
+					<input type="number" class="form-control" id="choix_sosa" style="width:50px;" value="1">
+				</div>
+				<div class="form-group">
+					<label for="choix_zoomArbre">Zoom</label>
+					<input type="number" class="form-control" id="choix_zoomArbre" style="width:50px;"  value="{{zoomLevel}}"> %
+				</div>
+				{{> LibPrintThisSvgButton label="Exporter en .png" svgTemplate=svgTemplate fileName=fileName cssFile="arbre.css"}}
+				<button id="legendeCouleursCommunes" type="button" class="btn btn-default pull-right margeDroite">légende des couleurs</button>
+			</form>
+		</div>
+	</div>
+</template>

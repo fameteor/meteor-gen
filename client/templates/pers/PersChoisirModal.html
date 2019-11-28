@@ -1,0 +1,95 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersChoisirModal             -->
+<!-- ===================================== -->
+<template name="PersChoisirModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+				<!-- HEADER ============== -->
+				{{#with persSelectionnees}}
+				<div class="modal-header">
+					{{> LibIcone "iconePers"}} {{title}} {{#if ../clearButton}}<button id="boutonEffacer" type="button" class="btn btn-danger pull-right">Effacer le champ du formulaire</button>{{/if}}
+				</div>
+				<!-- BODY ================ -->
+				<div class="modal-body row">
+					<form class="form-inline">
+						<div class="col-sm-12">
+							<!-- Genre ================ -->
+							<div class="form-group">
+								<label class="control-label">Filtrer </label>
+								<select class="form-control" id="choix_sexe" {{isLocked "sexe"}}>
+									<option value="" {{selectedSexe}}>- tous les sexes</option>
+									{{#each listeSexes}}
+										<option value="{{value}}" {{selectedSexe}}>{{label}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<!-- Nom ================ -->
+							<div class="form-group">
+								<input type="text" class="form-control" id="choix_nom" placeholder="partie du nom" autocomplete='off' value="{{selectedNom}}" {{isLocked "nom"}}>
+							</div>
+							<!-- Prénom ================ -->
+							<div class="form-group">
+								<input type="text" class="form-control" id="choix_prenom" placeholder="partie du prénom" autocomplete='off' value="{{selectedPrenom}}" {{isLocked "prenom"}}>
+							</div>
+							<!-- Submit ================ -->
+							{{#if ../addButton}}<button type="submit" class="btn btn-warning pull-right">Ajouter cette personne à la base</button>{{/if}}
+						</div>
+					</form>
+					<div class="col-sm-12 modal-search-result margin-top">
+						<div class="row">
+						<div class="col-sm-6">
+							<!-- Résultats 1 : personnes récemment utilisées =================== -->
+							{{#with gh_visitedObjects}}
+								{{#with persFiltrees}}
+									<p class="chercherModalTitre separation text-center"><strong>{{count}} personne{{#if (hlp_gt count 1)}}s{{/if}}</strong> récemment utilisée{{#unless (hlp_eq count 1)}}s{{/unless}}</p>
+									{{#if (hlp_eq count 0)}}
+											<p class="text-danger text-center">
+												<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+												Aucune personne trouvée dans les personnes récemment utilisées pour ces critères de filtre.
+											</p>
+									{{else}}
+										{{#with pers}}
+											{{#each .}}
+												{{#with (gh_persById .)}}
+													{{> PersIconeSexe}}
+													<a class="choixModal" href="#" title="Choisir cette personne">{{> PersNomPrenomsSansLien}}</a>
+													{{> PersDatesFormatCourt}} {{> PersSosas}}<br/>
+												{{/with}}
+											{{/each}}
+										{{/with}}
+									{{/if}}
+								{{/with}}
+							{{/with}}
+						</div>
+						<div class="col-sm-6">
+							<!-- Résultats 2 : Lieux dans la base=================== -->
+							<p class="chercherModalTitre separation text-center"><strong>{{hlp_count .}} personne{{#if (hlp_gt count 1)}}s{{/if}}</strong> dans la base</p>
+							{{#if (hlp_eq (hlp_count .) 0)}}
+								{{#if saisieValide}}
+									<p class="text-danger text-center">
+										<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+										Aucune personne trouvée dans la base pour ces critères de filtre.
+									</p>
+								{{else}}
+									<p class="text-danger text-center">
+										<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+										Saisir au moins 2 lettres pour le nom et/ou le prenom de la personne.
+									</p>
+								{{/if}}
+							{{else}}
+								{{> LibPaginateGenObjectsList list=. objectType="PERS" nbElemPerPage=15 nbPagesMax=9 class="choixModal" href="#" title="Choisir cette personne"}}
+							{{/if}}
+						</div>
+						</div>
+					</div>
+				</div>
+				{{/with}}
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

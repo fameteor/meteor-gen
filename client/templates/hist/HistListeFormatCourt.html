@@ -1,0 +1,31 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistListeFormatCourt                                         -->
+<!-- ===================================== -->
+<template name="HistListeFormatCourt">
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Date</th>
+				<th>Zones</th>
+				<th>Thèmes</th>
+				<th>Titre</th>
+				{{#if gh_isAdmin}}<th class="center">IDs</th>{{/if}}
+				<th>Modifier</th>
+				<th>Supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each .}}
+			<tr>
+				<td><strong>{{#with date}}{{> DateformatLong}}{{/with}}</strong></td>
+				<td>{{#each zones}}{{zoneFormatee}}<br/>{{/each}}</td>
+				<td>{{#each themes}}{{themeFormate}}<br/>{{/each}}</td>
+				<td>{{> HistTitreLien}}</td>
+				{{#if gh_isAdmin}}<td class="center">{{> LibClipId}}<br/><small>{{id}}</small></td>{{/if}}
+				<td class="center">{{> HistBoutonModifier}}</td>
+				<td class="center">{{> HistBoutonSupprimer}}</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+</template>

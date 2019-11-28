@@ -1,0 +1,32 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocFormaterListe                                              -->
+<!-- ===================================== -->
+<template name="DocFormaterListe">
+	<h4>{{nombre}} document{{#if pluriel}}s{{/if}} connu{{#if pluriel}}s{{/if}}</h4>
+	{{#if nombre}}
+		<ul>
+			<table  class="table table-striped">
+				<thead>
+					<tr>
+						<th>Titre</th>
+						<th class="center">Date</th>
+						<th class="center">Type<br/>Codage</th>
+						<th class="center">Id<br/>(Ancien id)</th>
+						<th class="center">Miniature</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each this}}
+						<tr>
+							<td>{{> DocTitreAvecLien}}</td>
+							<td class="center">{{#with date}}{{> DateformatLong}}{{/with}}</td>
+							<td class="center">{{type}}<br/>{{codage}}</td>
+							<td class="center">(<small>{{_id}}</small>)<br/>(<small>{{id}}</small>)</td>
+							<td class="center">{{> DocMiniatureAvecLien}}</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		</ul>
+	{{/if}}
+</template>

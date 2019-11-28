@@ -1,0 +1,10 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistBoutonModifier                                            -->
+<!-- ===================================== -->
+<template name="HistBoutonModifier">
+	{{#if gh_isAdminOrOwner}}
+	<button type="button" class="btn btn-warning modifier" title="Modifier ce point d'histoire">
+		{{> LibIcone "iconeModifier"}}
+	</button>
+	{{/if}}
+</template>

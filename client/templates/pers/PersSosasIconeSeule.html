@@ -1,0 +1,13 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersSosasIconeSeule		                            -->
+<!-- Contexte ::pers          				    		           -->
+<!-- ===================================== -->
+<template name="PersSosasIconeSeule">
+	{{#if gh_isSosa}}
+		{{#if gh_isMultipleSosas}}
+			<span class="text-danger" title="Sosas n° {{gh_sosasList}}">{{> LibIcone "iconeSosa"}}</span>		
+		{{else}}
+			<span title="Sosa n° {{gh_sosasList}}">{{> LibIcone "iconeSosa"}}</span>		
+		{{/if}}
+	{{/if}} 
+</template>

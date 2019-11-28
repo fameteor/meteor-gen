@@ -1,0 +1,18 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersChronologieMarqueDateTexte    -->
+<!-- Marque d'une date                     -->
+<!-- Contexte    						   -->
+<!-- type ::["NAISSANCE","MARIAGE","DECES"]    -->
+<!-- classe ::String                       -->
+<!-- ===================================== -->
+<template name="PersChronologieMarqueDateTexte">
+	{{#if (hlp_eq type "NAISSANCE")}}
+			<text x="-12" y="-8" class="{{classe}}">N</text>
+		{{/if}}
+		{{#if (hlp_eq type "MARIAGE")}}
+			<text x="-6" y="-8" class="{{classe}}">M</text>
+		{{/if}}
+		{{#if (hlp_eq type "DECES")}}
+			<text x="1" y="-8" class="{{classe}}">D</text>
+		{{/if}}
+</template>

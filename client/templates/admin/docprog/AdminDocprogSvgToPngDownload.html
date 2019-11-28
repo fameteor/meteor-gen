@@ -1,0 +1,50 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogSvgToPngDownload -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogSvgToPngDownload">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Module de conversion SVG -> PNG et de download</h2>
+		<ul>
+			<li><a href="#fonctionnement">1) Environnement et fonctionnement</a></li>
+			<li><a href="#pb">2) Problèmes à résoudre</a></li>
+		</ul>
+		
+		
+<h3><a id="fonctionnement"></a>1) Environnement et fonctionnement</h3>
+<!-- ===================================== -->
+<h4>Pré-requis</h4>
+	<ul>
+		<li>Installer sur la machine JAVA (http://www.java.com/fr/download/windows_xpi.jsp)</li>
+		<li>Le fichier <code>batik-rasterizer.jar</code> et la directory <code>lib</code> associée doivent être disponibles dans une directory sur la machine.</li>
+		<li>On configure la variable javascript <code>env.OS.pathToBatik</code> définie dans le fichier <code>/server/server.js</code> pour décrire le path vers le fichier <code>batik-rasterizer.jar</code>.</li>
+		<li>On configure la variable javascript <code>env.OS.UriPathToCssFile</code> définie dans le fichier <code>/server/server.js</code> pour décrire le path URI vers les éventuels fichiers CSS pour la conversion SVG -> PNG (positionné dans la directory <code>/public</code>. <span class="bg-danger">Ce path est celui du serveur. A modifier quand on aura mis une variable d'env correspondant à l'URI serveur.</span></li>
+		<li>Les fichiers CSS utilisés pour la conversions doivent-être filtrés de certains paramètres qui posent problème à Batik, comme <code>:hover</code>.</li>
+	</ul>
+	
+<h4>Fonctionnement</h4>
+<p>
+La méthode serveur <code>svgToPngDownload</code> est définie dans le fichier <code>/server/server.js</code>. Elle reçoit les paramètres suivants :
+	<ul>
+		<li><code>svgCode</code> : code svg (<code>::String</code>).</li>
+		<li><code>width</code> : hauteur du SVG (<code>::Integer</code>).</li>
+		<li><code>height</code> : largeur du SVG (<code>::Integer</code>).</li>
+		<li><code>cssFileName</code> : <span class="bg-success">[optionnel]</span> nom (sans le path) du fichier CSS à utiliser pour la conversion (<code>::String</code>).</li>
+	</ul>
+Cette méthode serveur renvoie le fichier converti en <code>.png</code> par <code>batik-rasterizer.jar</code> et codé en <code>Base64</code>.
+</p>
+<p>La partie client appelle cette méthode serveur, récupère le fichier codé en <code>Base64</code>, le convertit en <code>Blob</code> et utilise le module <code>pfafman:filesaver </code> pour l'enregistrer au niveau du navigateur.</p>
+
+<h3><a id="pb"></a>2) Problèmes à résoudre</h3>
+<!-- ===================================== -->
+	<ul>
+		<li>Bug Batik : ne gère pas le selector CSS <code>:nth_child()</code> mais le code du module <code>chronologie</code> a été modifié pour ne pas l'utiliser.</li>
+		<li>Gérer les fichiers CSS correctement pour que ce soient les mêmes pour la conversion par Batik et en mode interactif : certain tag comme :hover posant problème doivent-être supprimés pour la conversion.</li>
+		<li>Pouvoir créer un template "bouton de conversion download" permettant d'imprimer n'importe quel svg du document : un problème est de mettre un évènement sur un élément du DOM généré par un autre template, l'autre pb est de de disposer du contexte Pers pour pouvoir génerer le nom du fichier à downloader.</li>
+		<li>A mettre ultérieurement éventuellement sous forme de package</li>
+		<li>Problème de taille mémoire JAVA pour 7 générations (avec un multiplicateur de 5 en pixels par rapport à la taille SVG, cf méthode serveur <code>svgToPngDownload</code>).</li>
+		<li>Fichier vide si arbre circulaire de 8 générations.</li>
+	</ul>
+
+	</div>
+</template>

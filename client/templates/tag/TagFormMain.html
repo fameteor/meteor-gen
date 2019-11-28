@@ -1,0 +1,24 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE TagFormMain                  -->
+<!-- For create or update                  -->
+<!-- ===================================== -->
+<template name="TagFormMain">
+	<fieldset>
+		<div class="row">
+			<div class="col-md-6">
+				{{> afQuickField name='label' autocomplete='off'}}
+			</div>
+			<div class="col-md-6">
+				{{> afQuickField name='objTypes'}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-6">
+				{{> afQuickField name='summary' autocomplete='off' rows=3}}
+			</div>
+			<div class="col-md-6">
+				{{> afQuickField name='imgFileName' autocomplete='off'}}
+			</div>
+		</div>
+	</fieldset>
+</template>

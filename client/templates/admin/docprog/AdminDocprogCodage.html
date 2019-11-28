@@ -1,0 +1,512 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogCodage                                        -->
+<!-- Contexte : aucun		      					           -->
+<!-- ===================================== -->
+<template name="AdminDocprogCodage">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur le codage</h2>
+		<ul>
+			<li><a href="#popup">1) Popup d'info temporisée</a></li>
+			<li><a href="#bootstrap">2) Navigation BOOTSTRAP</a></li>
+			<li><a href="#coderoot">3) Fonctions de <code>/client/root.js</code></a></li>
+			<li><a href="#formulaires">4) Gestion des formulaires de recherche</a></li>
+			<li><a href="#gh">5) Documentation sur les helpers globaux et fonctions associées</a></li>
+			<li><a href="#gf">6) Documentation sur les fonctions globales non associées à un helper</a></li>
+			<li><a href="#sosas">7) Gestion des sosas</a></li>
+			<li><a href="#parms">8) Gestion du paramétrage</a></li>
+			<li><a href="#layout">9) Gestion des layout</a></li>
+			<li><a href="#accessrights">10) Gestion des droits d'accès</a></li>
+			<li><a href="#objetsVisites">11) Gestion des objets créés, modifiés ou vus récemment</a></li>
+			<li><a href="#popupSaisieId">12) Gestion des popups de saisie des IDs</a></li>
+		</ul>
+	
+<!-- ===================================== -->
+<h3><a id="popup"></a>1) Popup d'info temporisée</h3>
+<h4>Fonctionnement</h4>
+<p>Le package <code>chrismbeckett:toastr</code> est utilisé.</p>
+<pre>  // Display a warning toast, with no title
+  toastr.warning(msg);
+
+  // Display a success toast, with a title
+  toastr.success(msg, title);
+
+  // Display an error toast, with a title
+  toastr.error(msg, title);</pre>
+
+<!-- ===================================== -->
+<h3><a id="bootstrap"></a>2) Navigation BOOTSTRAP</h3>
+Le menu de navigation BOOTSTRAP est défini dans le fichier <code>/client/templates/router/RouterNav.html</code> et <code>/client/templates/router/RouterNav.js</code>.<br/>
+Deux <strong>helpers</strong> sont définis pour renvoyer la classe <code>active</code> ou rien en fonction de la route active en utilisant le code <code>{{| activeIfRouteIs 'nomDeLaRoute' }}</code> ou pour le titre général des menus déroulants  <code>{{| activeIfRouteContains 'partieDuNomDeLaRoute' }}</code>.<br/>
+
+<!-- ===================================== -->
+<h3><a id="coderoot"></a>3) Fonctions de <code>/client/root.js</code></h3>
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Paramètres</th>
+			<th>Utilité</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td><code>mettreFocusFinTexte(selector)</code></td>
+			<td></td>
+			<td>Met le focus sur le champ input dont on fournit le sélector, en mettant le curseur à la fin du champ s'il est déjà rempli.</td>
+		</tr>
+		<tr>
+			<td><code>numberToXx(nombre)</code></td>
+			<td></td>
+			<td>Converti "3" en "03", "11" reste "11".</td>
+		</tr>
+		<tr>
+			<td><code>isInRange(min,nombre,max)</code></td>
+			<td></td>
+			<td>Renvoie <code>true</code> si <code>nombre</code> est bien un nombre et que <code>min</code> &lt;= <code>nombre</code> &lt;= <code>max</code>. Renvoie <code>false</code> dans les autres cas.</td>
+		</tr>
+	</tbody>
+</table>
+
+<!-- ===================================== -->
+<h3><a id="formulaires"></a>4) Gestion des formulaires de recherche</h3>
+	<h4>Principe de fonctionnement</h4>
+	Le template de recherche synchronise les champs input du formulaire avec les variables sessions pour toute saisie. <strong>Les id des champs input du formulaire correspondent au nom des variables de sessions</strong> (cf noms ci-dessous).<br/>
+	Si le local helper <code>saisieValide</code> est <code>true</code>, le template de recherche affiche dans la partie basse la liste des objets trouvés, formatés selon le template de formatage de liste de chaque objet.<br/>
+	<p class="bg-info">
+		<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+		Un local helper <code>debug</code> existe qui liste sous forme JSON.stringifiée le contenu des variables de sessions du formulaire.
+	</p>
+	<h4>Variables de sessions utilisées</h4>
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Nom du template</th>
+				<th>pour chercher objet</th>
+				<th>Nom des variables de sessions synchronisées avec les champs input</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>PersChercher</code></td>
+				<td>::PERS</td>
+				<td>
+					<code>Session.get('choix_pers_nom')</code><br/>
+					<code>Session.get('choix_pers_prenom')</code><br/>
+					<code>Session.get('choix_pers_sexe')</code>
+				</td>
+			</tr>
+			<tr>
+				<td><code>LieuChercher</code></td>
+				<td>::LIEU</td>
+				<td>
+					<code>Session.get('choix_lieu_nom')</code><br/>
+					<code>Session.get('choix_lieu_nature')</code>
+				</td>
+			</tr>
+			<tr>
+				<td><code>HistChercher</code></td>
+				<td>::HIST</td>
+				<td>
+					<code>Session.get('choix_hist_titre')</code><br/>
+					<code>Session.get('choix_hist_anneeDebut')</code><br/>
+					<code>Session.get('choix_hist_anneeFin')</code><br/>
+					<code>Session.get('choix_hist_zones')</code><br/>
+					<code>Session.get('choix_hist_themes')</code><br/>
+					<code>Session.get('choix_hist_impact')</code><br/>
+					<code>Session.get('choix_hist_pasImpact')</code>
+				</td>
+			</tr>
+			<tr>
+				<td><code>DocChercher</code></td>
+				<td>::DOC</td>
+				<td>
+					<code>Session.get('choix_doc_titre')</code><br/>
+					<code>Session.get('choix_doc_types')</code><br/>
+					<code>Session.get('choix_doc_anneeDebut')</code><br/>
+					<code>Session.get('choix_doc_anneeFin')</code><br/>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+<!-- ===================================== -->
+<h3><a id="gh"></a>5) Documentation sur les helpers globaux et fonctions associées</h3>
+	Les helpers globaux sont préfixés par <code>gh_</code>.<br/>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Nom</th>
+				<th>Paramètres</th>
+				<th>Objet contexte</th>
+				<th>Utilité</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td><code>gh_urlDocument</code></td>
+				<td>Aucun</td>
+				<td>::DOC</td>
+				<td>Renvoie l'url complète du document (avec le path serveur selon la variable d'environnement <code>ROOT_URL</code>).</td>
+			</tr>
+			<tr>
+				<td><code>gh_urlIconeDocument</code></td>
+				<td>Aucun</td>
+				<td>::DOC</td>
+				<td>Renvoie l'url complète de l'icône du document (avec le path serveur selon la variable d'environnement <code>ROOT_URL</code>).</td>
+			</tr>
+			<tr>
+				<td><code>gh_persById</code></td>
+				<td><code>_id</code> de la personne recherchée.</td>
+				<td>Aucun</td>
+				<td>Renvoie l'objet PERS correspond à cet <code>_id</code>.</td>
+			</tr>
+			<tr>
+				<td><code>gh_lieuById</code></td>
+				<td><code>_id</code> du lieu recherché.</td>
+				<td>Aucun</td>
+				<td>Renvoie l'objet LIEU correspond à cet <code>_id</code>.</td>
+			</tr>
+			<tr>
+				<td><code>gh_docById</code></td>
+				<td><code>_id</code> du doc recherché.</td>
+				<td>Aucun</td>
+				<td>Renvoie l'objet DEC correspond à cet <code>_id</code>.</td>
+			</tr>
+			<tr>
+				<td><code>gh_histById</code></td>
+				<td><code>_id</code> du point d'histoire recherché.</td>
+				<td>Aucun</td>
+				<td>Renvoie l'objet HIST correspond à cet <code>_id</code>.</td>
+			</tr>
+			<tr>
+				<td><code>gh_registreById</code></td>
+				<td><code>_id</code> du registre recherché.</td>
+				<td>Aucun</td>
+				<td>Renvoie l'objet REGISTRE correspond à cet <code>_id</code>.</td>
+			</tr>
+			<tr>
+				<td><code>gh_cursorCount</code></td>
+				<td><code>cursor</code> d'une collection.</td>
+				<td>Aucun</td>
+				<td>Renvoie le nombre de documents contenus dans le <code>cursor</code>.</td>
+			</tr>
+			<tr>
+				<td><code>gh_moreThanOneInCursor</code></td>
+				<td><code>cursor</code> d'une collection.</td>
+				<td>Aucun</td>
+				<td>
+					Renvoie <code>true</code> si il y a plusieurs documents contenus dans le <code>cursor</code>.<br/>
+					Renvoie <code>false</code> si il y a 0 ou 1 seul document contenu dans le <code>cursor</code>.
+				</td>
+			</tr>
+			<tr>
+				<td><code>gh_cursorIsNotEmpty</code></td>
+				<td><code>cursor</code> d'une collection.</td>
+				<td>Aucun</td>
+				<td>
+					Renvoie <code>true</code> si il au moins 1 document contenu dans le <code>cursor</code>.<br/>
+					Renvoie <code>false</code> si il y a 0 document contenu dans le <code>cursor</code>.
+				</td>
+			</tr>
+			<tr>
+				<td><code>gh_isSuperAdmin</code></td>
+				<td>Aucun</td>
+				<td>Aucun</td>
+				<td>Renvoie <code>true</code> si l'utilisateur logué est un SUPERADMIN, <code>false</code> dans le cas contraire ou si l'utilisateur n'est pas logué.</td>
+			</tr>
+			<tr>
+				<td><code>gh_isAdmin</code></td>
+				<td>Aucun</td>
+				<td>Aucun</td>
+				<td>Renvoie <code>true</code> si l'utilisateur logué est un ADMIN, <code>false</code> dans le cas contraire ou si l'utilisateur n'est pas logué.</td>
+			</tr>
+			<tr>
+				<td><code>gh_isOwner</code></td>
+				<td>Aucun</td>
+				<td>::OBJET</td>
+				<td>Renvoie <code>true</code> si l'utilisateur logué est owner de l'objet passé en contexte, <code>false</code> dans le cas contraire ou si l'utilisateur n'est pas logué.</td>
+			</tr>
+			<tr>
+				<td><code>gh_isAdminOrOwner</code></td>
+				<td>Aucun</td>
+				<td>::OBJET</td>
+				<td>Renvoie <code>true</code> si l'utilisateur logué est un ADMIN ou est owner de l'objet passé en contexte, <code>false</code> dans le cas contraire ou si l'utilisateur n'est pas logué.</td>
+			</tr>
+			<tr>
+				<td><code>gh_accountJustCreated</code></td>
+				<td>Aucun</td>
+				<td>Aucun</td>
+				<td>Renvoie <code>true</code> si l'utilisateur vient de créer son compte et qu'il n'a pas encore saisi les données le concernant, <code>false</code> si l'initialisation du compte a été effectuée.</td>
+			</tr>
+			<tr>
+				<td><code>gh_formatDate</code></td>
+				<td><code>::Date</code> à formater</td>
+				<td>Aucun</td>
+				<td>Formate en JJ/MM/AAAA la date passée en paramètre.</td>
+			</tr>
+			<tr>
+				<td><code>gh_formatTime</code></td>
+				<td><code>::Date</code> à formater</td>
+				<td>Aucun</td>
+				<td>Formate en HH:MM:SS l'heure de la date passée en paramètre.</td>
+			</tr>
+			<tr>
+				<td><code>gh_isSosa</code></td>
+				<td>Aucun</td>
+				<td><code>::PERS</code></td>
+				<td>Renvoie <code>true</code> si la personne en contexte correspond à un des ancêtres de la personne en référence des sosas (<code>Session.get('refSosa1')</code>). <code>false</code> est renvoyé dans le cas contraire.</td>
+			</tr>
+			<tr>
+				<td><code>gh_isMultipleSosas</code></td>
+				<td>Aucun</td>
+				<td><code>::PERS</code></td>
+				<td>Renvoie <code>true</code> si la personne en contexte correspond à 2 ou plusieurs (implexe) des ancêtres de la personne en référence des sosas (<code>Session.get('refSosa1')</code>). <code>false</code> est renvoyé dans le cas contraire.</td>
+			</tr>
+			<tr>
+				<td><code>gh_sosasList</code></td>
+				<td>Aucun</td>
+				<td><code>::PERS</code></td>
+				<td>Renvoie  la liste des n° de sosas de la personne en contexte, séparés par une virgule.</td>
+			</tr>
+			<tr>
+				<td>
+					helper : <code>gh_transformTextXml</code><br/>
+					fonction : <code>gf_transformTextXml</code>				
+				</td>
+				<td><code>::String</code> texte XML à mettre en forme</td>
+				<td>Aucun</td>
+				<td>Renvoie le code HTML (<code>::String</code>) correspondant au texte XML mis en forme.</td>
+			</tr>
+		</tbody>
+	</table>
+<!-- ===================================== -->
+<h3><a id="gf"></a>6) Documentation sur les fonctions globales non associées à un helper</h3>
+<p>Les fonctions globales sont préfixées par <code>gf_</code> et sont définies dans les fichiers <code>main.js</code> du client, <code>common.js</code> ou <code>server.js</code>. <span class="bg-danger">A vérifier et documenter</span></p>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Nom</th>
+			<th>Paramètres</th>
+			<th>Utilité</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td> <code>gf_calculerSosas()</code></td>
+			<td>Aucun</td>
+			<td> Cette fonction crée dans la variable de session <code>Session.get('sosas')</code> un objet décrivant la liste des sosas de la personne dont l'<code>_id</code> est contenu dans la variable de session <code>Session.get('refSosa1')</code>.  <a href="#sosas">Cf § gestion des sosas</a>.</td>
+		</tr>
+		<tr>
+			<td> <code>gf_arrayValeurs(arrayParametre)</code></td>
+			<td><code>::Array</code> parametre contenant des objets ayant une propriété "valeur"</td>
+			<td> Cette fonction renvoie un array des valeurs extraites de l'<code>arrayParametre</code>.</td>
+		</tr>
+	</tbody>
+</table>
+	
+<!-- ===================================== -->
+<h3><a id="sosas"></a>7) Gestion de sosas</h3>
+<p>La fonction globale <code>gf_calculerSosas()</code> crée dans la variable de session <code>Session.get('sosas')</code> un objet décrivant la liste des sosas de la personne dont l'<code>_id</code> est contenu dans la variable de session <code>Session.get('refSosa1')</code>. Cet objet contient, comme propriétés, les <code>_id</code> de chacun des sosas de cette personne (y compris elle même : sosa n°1). A cet <code>_id</code> est associé un array contenant normalement un seul numéro de sosa et éventuellement plusieurs numéros de sosa de cette personne en cas d'implexe.</p> <p>Exemple du contenu de <code>Session.get('sosas')</code>: </p>
+<pre>{
+  "sAgsLJHdxj4swR7vu" : [1],
+  "2pz7kE7wYqaC2NfK6" : [2],
+  "Yswq69FKdiR2uBbLY" : [3],
+  ...
+  "GFEhEne83jGDEjrHp" : [230,260],
+  ...
+}</pre>
+<p>Au login de l'utilisateur, la variable de session <code>Session.get('refSosa1')</code> est initialisée avec la valeur contenue dans le profile de l'utilisateur <code>Meteor.user().profile._id</code>. Une fois loggué,  la variable de session <code>Session.get('refSosa1')</code> peut-être modifiée par le menu "préférences" (template <code>PrefsChangerSosasRef</code>) pour afficher les sosas par rapport à une autre personne que soi.</p>
+<p>La fonction <code>gf_calculerSosas()</code> est appelée par Iron Router à chaque appel d'une route contenant <code>"pers"</code>. <span class="bg-danger">Optimisation à faire pour appeler au login seulement et à chaque fois qu'un pointeur de père ou de mère est modifié !</span> La variable de session <code>Session.get('sosas')</code> est initialisée à <code>{}</code> au démarrage ou si la personne <code>Session.get('refSosa1')</code> n'est pas connue.</p>
+
+<!-- ===================================== -->
+<h3><a id="parms"></a>8) Gestion du paramétrage</h3>
+Le paramétrage de l'application se fait dans 3 endroit :
+<ul>
+  <li>Les paramètres utilisés <strong>côté serveur et côté client</strong> sont définis dans le fichier <code>/common/commonParms.js</code> et définit comme propriétés de la variable Javascript <code>commonParms</code>.</li>
+  <li>Les paramètres utilisés <strong>seulement côté client et non paramétrables par l'utilisateur</strong> sont définis dans le fichier <code>/client/clientParms.js</code> et définit comme propriétés de la variable Javascript <code>clientParms</code>.</li>
+  <li>Les préférences utilisées <strong>seulement côté client et paramétrables par l'utilisateur</strong> : les valeurs par défaut de ces paramètres sont définis dans le fichier <code>/common/usersDefaultPrefs.js</code> et définis comme propriétés de la variable Javascript <code>usersDefaultPrefs</code>. Cette variable est utilisée à la création du compte utilisateur (module <code>/server/serveur.js</code>) pour initialiser la propriété : <code>profile.prefs</code> de l'utilisateur dans la collection USERS.<br/>
+
+<span class="bg-danger">Attention : une fois chargé dans la base USERS, il faut prévoir un mécanisme pour mettre à jour ces paramètres en cas de modification des paramètres par défauts (de type extend évoluée). A faire !!!</span></li>
+</ul>
+
+<!-- ===================================== -->
+<h3><a id="layout"></a>9) Gestion des layout</h3>
+<p>Les template "layouts" utilisés par Iron-Router sont définis dans la directory <code>/client/templates/router</code>. Les layouts utilisés sont :</p>
+<ul>
+	<li><code>RouterLayoutApplication</code></li>
+	<li><code>RouterLayoutChercher</code></li>
+	<li><code>RouterLayoutAjouter</code></li>
+	<li><code>RouterLayoutModifier</code></li>
+</ul>
+
+
+<!-- ===================================== -->
+<h3><a id="accessrights"></a>10) Gestion des droits d'accès</h3>
+<p>Les droits d'accès sont définis par : </p>
+<ul>
+	<li>les capacités de l'utilisateur  (soit <code>"SUPERADMIN"</code>, <code>"ADMIN"</code> ou <code>"USER"</code>),</li>
+	<li>et selon que l'utilisateur est propriétaire ou non d'un objet PERS, LIEU, HIST, DOC ou autre.</li>
+</ul>
+<h4>Capacités</h4>
+<p>La capacité d'un utilisateur  (soit <code>"SUPERADMIN"</code>, <code>"ADMIN"</code> ou <code>"USER"</code>) est défini dans la propriété <code>profile.role</code> du document "utilisateur" dans la collection <code>Meteor.user</code>. Un <code>"SUPERADMIN"</code> peut faire tout ce que peut faire un <code>"ADMIN"</code> qui peut faire tout ce que faire un <code>"USER"</code>. Seul le <code>"SUPERADMIN"</code> peut nommer les <code>"ADMIN"</code>. Seuls les <code>"SUPERADMIN"</code> et <code>"ADMIN"</code> ont la possibilité de modifier et supprimer tous les objets. Le  <code>"USER"</code> ne peut modifer et supprimer que les objets dont il est propriétaire.</p>
+
+<p>Primitives SERVEUR pour vérifier les capacités : </p>
+<ul>
+	<li><code> Meteor.user().profile && Meteor.user().profile.role === "SUPERADMIN"</code> ou quand cette fonction n'est pas disponible <code>isSuperAdmin(userId)</code></li>
+	<li><code> Meteor.user().profile && Meteor.user().profile.role === "ADMIN"</code> ou quand cette fonction n'est pas disponible <code>isAdmin(userId)</code></li>
+</ul>
+<p>Global helpers CLIENT pour vérifier les capacités (dans <code>/client/main.js</code>) : </p>
+<ul>
+	<li><code>gh_isSuperAdmin</code></li>
+	<li><code>gh_isAdmin</code></li>
+</ul>
+
+<h4>Droits d'accès</h4>
+<p>Global helpers CLIENT pour vérifier les droits de propriété : </p>
+<ul>
+	<li><code>gh_isOwner</code></li>
+	<li><code>gh_isAdminOrOwner</code></li>
+</ul>
+
+<!-- ===================================== -->
+<h3><a id="objetsVisites"></a>11) Gestion des objets créés, modifiés ou vus récemment</h3>
+<p>La gestion des objets créés, modifiés ou vus récemment se fait de la façon suivante :
+<ul>
+	<li>Les informations sont stoquées dans la propriété <code>profile.visitedObjects</code> de la collection <code>Users</code> sous la forme de l'objet suivant :
+<pre>{
+	"PERS":[::id],
+	"LIEU":[::id],
+	"HIST":[::id],
+	"DOC":[::id]
+}</pre></li>
+	<li>Le nombre d'élément maximum (N) de chaque Array ("PERS", "LIEU", "HIST", "DOC") est défini dans <code>parametreCommuns.visitedObjectsListMaxLength</code>.</li>
+	<li>Pour ajouter un objet visité dans chaque Array, on utilise la fonction javascript globale : <code>gf_addVisitedObject(type,objectId)</code>, par exemple : <code>gf_addVisitedObject("PERS",this.id);</code>. Cette fonction vérifie si l'id existe ou pas dans l'Array, le (re)positionne en premier et limite la liste au N objets les plus récents.</li>
+	<li>Cet ajout se fait lors le routage (fichier <code>/client/route.js</code>) pour les objets vus et dans les callbacks Autoform <code>/client/main.js</code> pour les objets modifiés ou crées.</li>
+	<li>L'affichage des objets visités se fait par le routage (fichier <code>/client/route.js</code>), dans les routes "chercher" en utilisant le layout <code>RouterLayoutChercher</code>. Les templates d'affichage appelés par objet sont :
+		<ul>
+			<li><code>PersVisites</code></li>
+			<li><code>LieuVisites</code></li>
+			<li><code>HistVisites</code></li>
+			<li><code>DocVisites</code></li>
+		</ul>
+	</li>
+</ul>
+</p>
+
+<!-- ===================================== -->
+<h3><a id="popupSaisieId"></a>12) Gestion des popups de saisie des IDs</h3>
+<p>Plusieurs templates de popup modale de saisie des ID sont disponibles :
+	<ul>
+		<li><code>PersChercherModal</code></li>
+		<li><code>LieuChercherModal</code></li>
+		<li><code>HistChercherModal</code></li>
+		<li><code>DocChercherModal</code></li>
+		<li><code>RegistreChercherModal</code></li>
+	</ul>
+</p>
+<p>Ces templates peuvent être appelés selon 2 modes :
+	<ul>
+		<li>soit en cliquant sur un champ "ID" d'un formulaire (par exemple <code>PersFormulaire</code>),</li>
+		<li>soit en cliquant un champ rajouté au formulaire AUTOFORM, appelé "INTITULE" qui contient un texte décrivant l'objet sélectionné. Le champ "ID" du formulaire est alors caché.</li>
+	</ul>
+</p>
+
+<h4>Mode "ID"</h4>
+Les étapes sont les suivantes : 
+<ol>
+	<li>
+		On gère un évènement au "CLICK" sur le champ considéré du formulaire :
+<pre>Template.PersFormulaire.events({
+	// Saisie de la commune de naissance
+	'focus input[name="naissance.commune"]': function(e,tpl){
+		// On arrête la propagation de l'evt au navigateur
+		e.preventDefault();
+		// On enlève le focus de ce champs
+		e.target.blur();
+		// On appelle la fenêtre modale avec ses paramètres
+		gf_openLieuChercherModal(e.target,null,"COMMUNE");
+	},
+});</pre>
+	La fonction <code>gf_openLieuChercherModal(e.target,null,"COMMUNE");</code> gère l'ouverture et la fermeture de la popup
+	</li>
+</ol>
+
+<h4>Mode "INTITULE"</h4>
+<p class="bg-danger">
+	N'est implémenté pour l'instant que dans le formulaire "DOC/ACTE" pour la partie "COMMUNE" et "REGISTRE". Attention : pose problème car dans le formulaire les champs "ACTE" ne sont affichés que si le type "ACTE" est choisi.
+En cas de changement de type, le contenu des champs "INTITULE" n'est pas affiché !	
+</p>
+Les étapes sont les suivantes : 
+<ol>
+	<li>
+		Mettre le champ à "hidden" dans le schéma :<br/>
+<pre>"ACTE_commune": {
+	type:	 	String,
+	label: 	"ACTE : Commune de l'acte",
+	optional: 	true,
+	
+	// Ajouter ceci :
+	autoform: {
+		type: "hidden",		// Champ "intitule" affcihe par popup de saisie
+		label: false
+	}
+}</pre>
+	</li>
+	<li>
+		Ajouter le champ d'intitulé suivant dans le formulaire, juste derrière le champ "autoform" considéré :<br/>
+<pre>&lt;!-- Derrière le champ contenant l'ID               --&gt;
+{{|> afQuickField name='specif.ACTE_commune'}}
+
+&lt;!-- Ajouter pour affichage du l'intitulé du lieu : --&gt;
+&lt;div class="form-group"&gt;
+	&lt;label class="control-label" for="specif.ACTE_commune_intitule"&gt;ACTE : Commune de l'acte&lt;/label&gt;
+	&lt;input class="form-control" id="specif.ACTE_commune_intitule" name="specif.ACTE_commune_intitule" type="text" value=""&gt;
+	&lt;span class="help-block"&gt;&lt;/span&gt;
+&lt;/div&gt;
+&lt;!-- ==================================== --&gt;</pre>
+	</li>
+	<li>
+		Mettre un event sur le champ "intitule" qui passe les deux champs : "id" et "intitule" comme paramètre à <code>gf_openLieuChercherModal(idObject,intituleObject,type [,idSurlieu])</code> : <br/>
+<pre>Template.DocFormulaire.events({
+	'focus input[name="specif.ACTE_commune_intitule"]': function(e,tpl){
+		// On arrête la propagation de l'evt au navigateur
+		e.preventDefault();
+		// On enlève le focus de ce champs
+		e.target.blur();
+		// On appelle la fenêtre modale avec ses paramètres
+		gf_openLieuChercherModal(tpl.find('input[name="specif.ACTE_commune"]'),e.target,"COMMUNE");
+	}
+});</pre>
+	</li>
+	<li>
+		Si le champ "intitulé" (et le champ "id" caché) est affiché sur conditions dans le template, il faut l'afficher lors du "onRendered" et sur autre condition <span class="bg-danger">(à creuser)</span>. Par exemple :
+<pre>Template.PersFormulaire.onRendered (function () {
+	// On charge les valeurs dans les intitulés
+	// Commune de naissance
+	gf_lieuSetIntituleFromId(Template.instance(),'input[name="naissance.commune_intitule"]','input[name="naissance.commune"]');
+});</pre>
+	</li>
+</ol>
+
+<h4>Fonctionnement de la popup <code>LieuChercherModal</code></h4>
+<p>Les paramètres de la fonction <code>gf_openLieuChercherModal(idObject,intituleObject,type [,idSurlieu]) </code> sont :<br/>
+<ul>
+	<li><code>idObject</code> (obligatoire) : objet DOM du formulaire (champ "input") qui doit contenir au final l'ID du lieu sélectionné.</li>
+	<li><code>intituleObject</code> (obligatoire ou <code>null</code>) : objet DOM du formulaire (champ "input") qui doit contenir au final l'INTITULE du lieu sélectionné.</li>
+	<li><code>type</code> (obligatoire) : type de lieu recherché, par exemple : <code>"COMMUNE</code> ou <code>"LIEUDIT"</code>.</li>
+	<li><code>idSurlieu</code> (optionnel) : id du lieu dans lequel le lieu recherché est contenu.</li>
+</ul>
+<br/>
+Une fonction <code>gf_saveAndCloseLieuChercherModal(id)</code> permet d'enregistrer l'id du lieu saisi dans le bon champ input, de fermer la popup et de réactualiser les variables globales utilisées par la popup de saisie :<br/>
+<ul>
+	<li><code>lieuChercherModal_type</code></li>
+	<li><code>lieuChercherModal_idObject</code></li>
+	<li><code>lieuChercherModal_intituleObject</code></li>
+	<li><code>lieuChercherModal_idSurlieu</code></li>
+</ul>
+Une fonction <code>gf_lieuSetIntituleFromId(tpl,intituleSelector,idSelector)</code> permet de lire l'ID du lieu contenu dans l'input donné par <code>idSelector</code> et d'afficher son intitulé dans l'input <code>intituleSelector</code> pour le template <code>tpl</code> considéré.
+</p>
+
+	</div>
+</template>

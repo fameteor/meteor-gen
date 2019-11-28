@@ -1,0 +1,19 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistVisites                  -->
+<!-- ===================================== -->
+<template name="HistVisites">
+	{{#with gh_visitedObjects}}
+		<table>
+			{{#each HIST}}
+			<ul>
+				{{#with gh_histById .}}
+				<li>
+					{{> HistTitreLien}}<br/>
+					{{> LibClipId}} 
+				</li>
+				{{/with}}
+			</ul>
+			{{/each}}
+		</table>
+	{{/with}}
+</template>

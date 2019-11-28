@@ -1,0 +1,15 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocModifier                                                       -->
+<!-- ===================================== -->
+<template name="DocModifier">
+	{{#autoForm collection="Docs" doc=this id="updateDocForm" type="update"}}
+		{{> DocFormulaire}}
+		{{> LibFormulaireChampsCaches}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

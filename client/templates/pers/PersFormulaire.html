@@ -1,0 +1,145 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersFormulaire pour Ajouter ou Modifier              -->
+<!-- ===================================== -->
+<template name="PersFormulaire">
+	<fieldset>
+		<div class="row fondLayoutModifier">
+			<div class="col-sm-3">
+				{{> afQuickField name='nom' autocomplete='off'}}
+				<hr/>
+				{{> afQuickField name='sexe'}}
+				{{> afQuickField name='estVivant'}}
+				{{> afQuickField name='estCelibataire'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afArrayField name='prenoms' template='prenoms'}}
+				
+			</div>
+			<div class="col-sm-3">
+				{{! > afQuickField name='comment' rows=6 autocomplete='off'}}
+				{{! > afQuickField name='recherche' rows=6 autocomplete='off'}}
+				
+				
+				{{> afQuickField name='prenomUsuel'}}
+				<hr/>
+				{{> afQuickField name='prenomUsuelEstNonOfficiel'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='pere' type='hidden'}}
+				<!-- Pour gérer la saisie et l'affichage du père -->
+				<div class="form-group">
+					<label class="control-label" for="pere_intitule">Père</label>
+					<input class="form-control intitule" id="pere_intitule" name="pere_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='mere' type='hidden'}}
+				<!-- Pour gérer la saisie et l'affichage de la mère -->
+				<div class="form-group">
+					<label class="control-label" for="mere_intitule">Mère</label>
+					<input class="form-control intitule" id="mere_intitule" name="mere_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				<!-- Pour gérer l'état de recherche des actes -->
+				{{> afQuickField name='etatRechActes'}}
+				<!-- Pour gérer l'état de recherche des enfants -->
+				{{> afQuickField name='etatRechEnfants'}}
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Naissance</h3>
+					</div>
+					<div class="panel-body">
+						{{> afQuickField name='naissance.incertain'}}
+						{{> DateFormulaire name="naissance.date"}}
+						{{> afQuickField name='naissance.commune' type='hidden'}}
+						<!-- Pour affichage du l'intitulé du lieu -->
+						<div class="form-group">
+							<label class="control-label" for="naissance.commune_intitule">Commune d'habitation</label>
+							<input class="form-control intitule" id="naissance.commune_intitule" name="naissance.commune_intitule" type="text" value="">
+							<span class="help-block"></span>
+						</div>
+						{{> afQuickField name='naissance.lieudit' type='hidden'}}
+						<!-- Pour affichage du l'intitulé du lieu -->
+						<div class="form-group">
+							<label class="control-label" for="naissance.lieudit_intitule">Lieu-dit d'habitation</label>
+							<input class="form-control intitule" id="naissance.lieudit_intitule" name="naissance.lieudit_intitule" type="text" value="">
+							<span class="help-block"></span>
+						</div>
+						<!-- Pour gérer la saisie et l'affichage de la référence de l'acte -->
+						{{> afQuickField name='naissance.docs'}}
+					</div>
+				</div>
+			</div>
+			<div class="col-sm-4">
+
+			</div>
+			<div class="col-sm-4">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<h3 class="panel-title">Décès</h3>
+					</div>
+					<div class="panel-body">
+						{{> afQuickField name='deces.incertain'}}
+						{{> DateFormulaire name="deces.date"}}
+						{{> afQuickField name='deces.commune' type='hidden'}}
+						<!-- Pour affichage du l'intitulé du lieu -->
+						<div class="form-group">
+							<label class="control-label" for="deces.commune_intitule">Commune d'habitation</label>
+							<input class="form-control intitule" id="deces.commune_intitule" name="deces.commune_intitule" type="text" value="">
+							<span class="help-block"></span>
+						</div>
+						{{> afQuickField name='deces.lieudit' type='hidden'}}
+						<!-- Pour affichage du l'intitulé du lieu -->
+						<div class="form-group">
+							<label class="control-label" for="deces.lieudit_intitule">Lieu-dit d'habitation</label>
+							<input class="form-control intitule" id="deces.lieudit_intitule" name="deces.lieudit_intitule" type="text" value="">
+							<span class="help-block"></span>
+						</div>
+						{{> afQuickField name='deces.docs'}}
+					</div>
+				</div>
+			</div>
+		</div>
+	</fieldset>
+</template>
+
+
+
+<template name="afArrayField_prenoms">
+	<label class="control-label">{{afFieldLabelText name=this.atts.name}}</label>
+	<div id="panelPrenom" class="panel panel-default">
+	<fieldset>
+		{{#if afFieldIsInvalid name=this.atts.name}}
+			<div class="panel-body has-error">
+				<span class="help-block">{{{afFieldMessage name=this.atts.name}}}</span>
+			</div>    
+		{{/if}}
+		<ul id="listePrenoms" class="list-group">
+			{{#afEachArrayItem name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+				<li class="list-group-item autoform-array-item">
+				
+					<div>
+						<div class="autoform-remove-item-wrap">
+							{{#if afArrayFieldHasMoreThanMinimum name=../atts.name minCount=../atts.minCount maxCount=../atts.maxCount}}
+								<button type="button" title="Supprimer ce prénom" class="btn btn-danger autoform-remove-item">{{> LibIcone "iconeSupprimer"}}</button>  
+							{{/if}}          
+						</div>
+						<div class="autoform-array-item-body">
+							{{> afQuickField name=this.name label=false template="bootstrap3"}}
+						</div>
+					</div>
+				</li>
+			{{/afEachArrayItem}}
+		</ul>
+		{{#if afArrayFieldHasLessThanMaximum name=this.atts.name minCount=this.atts.minCount maxCount=this.atts.maxCount}}
+			<li class="list-group-item">
+				<button type="button" title="Ajouter un prénom" class="btn btn-primary autoform-add-item" data-autoform-field="{{this.atts.name}}" data-autoform-minCount="{{this.atts.minCount}}" data-autoform-maxCount="{{this.atts.maxCount}}"><span class="glyphicon glyphicon-plus"></span></button>
+			</li>
+		{{/if}}
+	</fieldset>
+	</div>
+</template>

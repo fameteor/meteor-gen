@@ -1,0 +1,95 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersInfosObjetsLies          -->
+<!-- ===================================== -->
+<template name="PersInfosObjetsLies">
+	{{#with pers}}
+		{{#with gh_getPointingObjects . "PERS"}}
+			<div class="row">
+				<div class="col-md-12" >
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="PERS" typeCible="PERS"}}
+					<hr/>
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="PERS" typeCible="LIEU"}}
+					<hr/>
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="PERS" typeCible="HIST"}}
+					<hr/>
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="PERS" typeCible="DOC"}}
+				</div>
+			</div>
+		{{/with}}
+		<div class="row">
+			<div class="col-md-12" >
+				{{> LienListe obj=. type="PERS"}}
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersInfosObjetsLies_DOCAUTO           -->
+<!-- ===================================== -->
+<template name="PersInfosObjetsLies_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LienListeObjetsDedoublonnes</code><br/>
+<code>LienListe</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les objets <code>::genObject</code> liés à la personne passée en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

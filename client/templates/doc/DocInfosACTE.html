@@ -1,0 +1,14 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocInfosACTE                 -->
+<!-- ===================================== -->
+<template name="DocInfosACTE">
+	<div class="row">
+		<div class="col-xl-7">
+			<img class="img-responsive" src="{{gh_urlDocument}}"/>
+		</div>
+		<div class="col-xl-5">
+			<h4>Transcription :</h4>
+			{{> textXmlEditor collection=Docs id=_id field="specif.ACTE_transcription" mode="TRANSCRIPT"}}
+		</div>
+	</div>
+</template>

@@ -1,0 +1,79 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersInfos                    -->
+<!-- ===================================== -->
+<template name="PersInfos">
+	{{> LibTitreInfos type="PERS" context=.}}
+	<div class="container-fluid">
+		{{> LibTabs tabsList=listeTabs}}
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersInfos_DOCAUTO                     -->
+<!-- ===================================== -->
+<template name="PersInfos_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>::PERS</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibTitreInfos</code><br/>
+<code>LibTabs</code><br/>
+<code>PersInfosFiche</code><br/>
+<code>PersInfosChronologie</code><br/>
+<code>PersInfosArbreAsc</code><br/>
+<code>PersInfosArbreDesc</code><br/>
+<code>PersInfosObjetsLies</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les informations sur la personne passée en contexte en appelant le template <code>LibTabs</code> qui appelle les autres templates d'affichage des infos sur cette personne : fiche, chronologie, arbre ascendant, arbre descendant, liens.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Pas de formatage propre. Les templates utilisés renvoient des suites de <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

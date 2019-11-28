@@ -1,0 +1,18 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibOptionsFromCommonParms    -->
+<!-- parm ::String nom du paramètre de commonParms.js -->
+<!-- selected ::String valeur du paramètre sélectionné ( "" pour sélectionner le message en tête ) -->
+<!-- firstOptionLabel ::String message en tête de la liste de choix -->
+<!-- ===================================== -->
+<template name="LibOptionsFromCommonParms">
+	{{#if firstOptionLabel}}
+		<option value="">{{firstOptionLabel}}</option>
+	{{/if}}
+	{{#with liste}}
+		{{#each .}}
+			<option value="{{valeur}}">{{label}}</option>
+		{{/each}}
+	{{/with}}
+
+</template>
+

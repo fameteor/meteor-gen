@@ -1,0 +1,207 @@
+<!-- ===================================== -->
+<!-- TEMPLATE CoupleEventEditModal         -->
+<!-- ===================================== -->
+<template name="CoupleEventEditModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ========== -->
+					<div class="modal-header {{modalPopupHeaderClass}}">
+						{{#if hlp_eq action "INSERT"}}
+							{{> LibIcone "iconePers"}} Ajout d'un évènement de la vie conjugale
+						{{/if}}
+						{{#if hlp_eq action "UPDATE"}}
+							{{> LibIcone "iconePers"}} Modification d'un évènement de la vie conjugale
+						{{/if}}
+						{{#if hlp_eq action "DELETE"}}
+							{{> LibIcone "iconePers"}} Suppression d'un évènement de la vie conjugale
+						{{/if}}
+					</div>
+					<!-- BODY ======== -->
+					<div class="modal-body row">
+						<div class="col-sm-12">
+							{{#if hlp_eq action "INSERT"}}
+								{{#with pers}}
+									{{#autoForm collection="CoupleEvents" doc=prefiledDoc id="addCoupleEventForm" type="insert"}}
+										{{> CoupleEventFormulaireBeditable}}
+										<br/>
+										<div class="row">
+											<div class="col-sm-12 text-center">
+												<button type="submit" class="btn btn-primary">Ajouter</button>
+												<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+											</div>
+										</div>
+									{{/autoForm}}
+								{{/with}}
+							{{/if}}
+							{{#if hlp_eq action "UPDATE"}}
+								{{#if hlp_eq pers._id  coupleEvent.persA}}
+									<!-- C'est la personne B qui est éditable -->
+									{{#with coupleEvent}}
+										{{#autoForm collection="CoupleEvents" doc=. id="updateCoupleEventForm" type="update"}}
+											{{> CoupleEventFormulaireBeditable}}
+											<br/>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button type="submit" class="btn btn-warning">Modifier</button>
+													<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+												</div>
+											</div>
+										{{/autoForm}}
+									{{/with}}
+								{{else}}
+									<!-- C'est la personne A qui est éditable -->
+									{{#with coupleEvent}}
+										{{#autoForm collection="CoupleEvents" doc=. id="updateCoupleEventForm" type="update"}}
+											{{> CoupleEventFormulaireAeditable}}
+											<br/>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button type="submit" class="btn btn-warning">Modifier</button>
+													<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+												</div>
+											</div>
+										{{/autoForm}}
+									{{/with}}
+								{{/if}}
+										
+								
+							{{/if}}
+							{{#if hlp_eq action "DELETE"}}
+								<center>
+									<h4 class="text-danger">{{> LibIcone "warning"}} Attention : Vous allez supprimer définitivement des données !</h4>
+									<br/>
+									<p>Les données du {{> CoupleEventTitle coupleEvent=coupleEvent}}, y compris la date, les éventuels communes et lieudits d'habitation et les éventuels liens vers les documents seront définitivement supprimés.</p>
+									<p>Cependant, les personnes, lieux et documents éventuellement mentionnés ne seront pas supprimés.</p>
+									<br/>
+									<button type="button" class="btn btn-danger boutonSupprimer">Supprimer</button>
+									<button type="button" class="btn btn-default pull-right" data-dismiss="modal">Annuler</button>
+								</center>
+							{{/if}}
+						</div>
+					</div>
+			</div>
+		</div>
+    </div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- CoupleEventEditModal_DOCAUTO          -->
+<!-- ===================================== -->
+<template name="CoupleEventEditModal_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>action::{"INSERT","UPDATE","DELETE"}</code></td>
+			<td>Type de formulaire demandé.</td>
+		</tr>
+		<tr>
+			<td><code>coupleEvent::COUPLEEVENT</code></td>
+			<td><code>coupleEvent</code> à insérer, modifier ou supprimer.</td>
+		</tr>
+		<tr>
+			<td><code>pers::PERS</code></td>
+			<td>La personne contexte pour laquelle on souhaite insérer, modifier ou supprimer un évènement conjugal.</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibIcone</code><br/>
+<code>CoupleEventFormulaireAeditable</code><br/>
+<code>CoupleEventFormulaireBeditable</code><br/>
+<code>CoupleEventTitle</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Fenêtre modale d'édition des évènements conjugaux. S'appuie sur les formulaires <code>CoupleEventFormulaireAeditable</code> ou <code>CoupleEventFormulaireBeditable</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une popup Bootstrap qui lui transmet les paramètres.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Appel uniquement par code Javascript, ex : <pre>Modal.show(
+	"CoupleEventEditModal",
+	{
+		action:"INSERT",
+		coupleEvent:unCoupleEvent,
+		pers:unePersonne
+	},
+	{backdrop:'static',keyboard:false}
+);</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

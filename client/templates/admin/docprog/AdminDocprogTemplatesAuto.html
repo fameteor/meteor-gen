@@ -1,0 +1,50 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogTemplatesAuto    -->
+<!-- ===================================== -->
+<template name="AdminDocprogTemplatesAuto">
+	<div class="container">
+		<div class="row">
+			<h4>{{> LibIcone "iconeAdmin"}} Index des templates</h4>
+			{{> LibTabs tabsList=tabsList cols=3}}
+		</div>
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogTemplatesAuto_DOCAUTO              -->
+<!-- ===================================== -->
+<template name="AdminDocprogTemplatesAuto_DOCAUTO">
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+<!-- Contexte ============================= -->
+				<td><code>::String</code> selectedTemplateName</td>
+				<!-- Paramètres ===== -->
+				<td>Aucun</td>
+<!-- Dépendances ========================== -->
+				<td>Aucune</td>
+<!-- Explication ========================== -->
+				<td>Affiche automatiquement la documentation disponible sur les templates en surlignant le template sélectionné dont le nom est passé dans le contexte. Pour un template appelé <code>TemplateExemple</code>, le nom du template de documentation automatique doit-être <code>TemplateExemple_DOCAUTO</code>. Le template de documentation doit-être situé dans le même fichier que le template qu'il documente.</td>
+<!-- Responsive =========================== -->
+				<td>Affichage dans une <code>div</code> de classe <code>container</code>.</td>
+			</tr>
+		</tbody>
+	</table>
+	
+<h4>Améliorations</h4>
+<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Classer dans l'index les templates par famille : Pers, Lieu, Hist, Doc, Lien ...etc
+<!-- ===================================== -->
+</div>
+</template>

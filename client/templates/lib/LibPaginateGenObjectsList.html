@@ -1,0 +1,236 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList">
+	{{#if parmsOk}}
+		{{#if (hlp_gt (hlp_count list) 0)}}
+			{{#if (hlp_gt nbPages 1)}}
+				<!-- Si plus d'une page-->
+				<!-- Affichage de la barre de pagination -->
+				<nav class="text-center">
+					<ul class="pagination">
+						<li class="{{boutonPreviousDisabled}}">
+							<a id="boutonFirst" href="#" title="première page" aria-label="First">{{> LibIcone "first"}}</a>
+						</li>
+						<li class="{{boutonPreviousDisabled}}">
+							<a id="boutonPrevious" href="#" title="page précédente" aria-label="Previous">{{> LibIcone "previous"}}</a>
+						</li>
+						{{resetCurrentPageOnCursorChanges}}
+						{{#each listePages}}
+							<li class="{{isPageActive .}}"><a class="boutonPage" href="#">{{.}}</a></li>
+						{{/each}}
+						<li class="{{boutonNextDisabled}}">
+							<a id="boutonNext" href="#" title="page suivante" aria-label="Next">{{> LibIcone "next"}}</a>
+						</li>
+						<li class="{{boutonNextDisabled}}">
+							<a id="boutonLast" href="#" title="dernière page" aria-label="Last">{{> LibIcone "last"}}</a>
+						</li>
+					</ul>
+				</nav>
+				<!-- Affichage de la liste des objets de la page courante -->
+				{{#with currentPageObjectsList}}
+					<!-- Pour les PERS -->
+					{{#if (hlp_eq ../objectType "PERS")}}
+						{{> LibPaginateGenObjectsList_PersDisplay}}
+					{{/if}}
+					<!-- Pour les LIEUX -->
+					{{#if (hlp_eq ../objectType "LIEU")}}
+						{{> LibPaginateGenObjectsList_lieuxDisplay}}
+					{{/if}}
+					<!-- Pour les HISTS -->
+					{{#if (hlp_eq ../objectType "HIST")}}
+						{{> LibPaginateGenObjectsList_histsDisplay}}
+					{{/if}}
+					<!-- Pour les DOCS -->
+					{{#if (hlp_eq ../objectType "DOC")}}
+						{{> LibPaginateGenObjectsList_docsDisplay}}
+					{{/if}}
+					<!-- Pour les LIENS -->
+					{{#if (hlp_eq ../objectType "LIEN")}}
+						{{> LibPaginateGenObjectsList_liensDisplay}}
+					{{/if}}
+					<!-- Pour les REGISTRES -->
+					{{#if (hlp_eq ../objectType "REGISTRE")}}
+						{{> LibPaginateGenObjectsList_registresDisplay}}
+					{{/if}}
+					<!-- Pour les ACTESARCHIVES -->
+					{{#if (hlp_eq ../objectType "ACTE_ARCHIVES")}}
+						{{> LibPaginateGenObjectsList_actesArchivesDisplay}}
+					{{/if}}
+				{{/with}}
+			{{else}}
+				<!-- Une seule page, on affiche directement les objets pour éviter bug si on change de pages avant 1 seule page -->
+				{{#with list}}
+					<!-- Pour les PERS -->
+					{{#if (hlp_eq ../objectType "PERS")}}
+						{{> LibPaginateGenObjectsList_PersDisplay}}
+					{{/if}}
+					<!-- Pour les LIEUX -->
+					{{#if (hlp_eq ../objectType "LIEU")}}
+						{{> LibPaginateGenObjectsList_lieuxDisplay}}
+					{{/if}}
+					<!-- Pour les HISTS -->
+					{{#if (hlp_eq ../objectType "HIST")}}
+						{{> LibPaginateGenObjectsList_histsDisplay}}
+					{{/if}}
+					<!-- Pour les DOCS -->
+					{{#if (hlp_eq ../objectType "DOC")}}
+						{{> LibPaginateGenObjectsList_docsDisplay}}
+					{{/if}}
+					<!-- Pour les LIENS -->
+					{{#if (hlp_eq ../objectType "LIEN")}}
+						{{> LibPaginateGenObjectsList_liensDisplay}}
+					{{/if}}
+					<!-- Pour les REGISTRES -->
+					{{#if (hlp_eq ../objectType "REGISTRE")}}
+						{{> LibPaginateGenObjectsList_registresDisplay}}
+					{{/if}}
+					<!-- Pour les ACTESARCHIVES -->
+					{{#if (hlp_eq ../objectType "ACTE_ARCHIVES")}}
+						{{> LibPaginateGenObjectsList_actesArchivesDisplay}}
+					{{/if}}
+				{{/with}}
+			{{/if}}
+		{{else}}
+			<!-- Pour les PERS -->
+			{{#if (hlp_eq objectType "PERS")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucune personne</p>
+			{{/if}}
+			<!-- Pour les LIEUX -->
+			{{#if (hlp_eq objectType "LIEU")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucun lieu</p>
+			{{/if}}
+			<!-- Pour les HIST -->
+			{{#if (hlp_eq objectType "HIST")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucun point d'histoire</p>
+			{{/if}}
+			<!-- Pour les DOC -->
+			{{#if (hlp_eq objectType "DOC")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucun document</p>
+			{{/if}}
+			<!-- Pour les LIENS -->
+			{{#if (hlp_eq ../objectType "LIEN")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucun lien</p>
+			{{/if}}
+			<!-- Pour les REGISTRES -->
+			{{#if (hlp_eq ../objectType "REGISTRE")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucun registre</p>
+			{{/if}}
+			<!-- Pour les ACTESARCHIVES -->
+			{{#if (hlp_eq ../objectType "ACTE_ARCHIVES")}}
+				<p class="text-danger">{{> LibIcone "info"}} Aucun acte d'archive dépouillé</p>
+			{{/if}}
+		{{/if}}
+	{{else}}
+	<h3 class="text-danger">{{> LibIcone "warning"}} Erreur template "LibPaginateGenObjectsList" :</h3>
+		{{{parmsValidationError}}}
+		(Voir la <a href="/admin/docprog/paginationListe">documentation</a>)
+	{{/if}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_PersDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_PersDisplay">
+		{{#each .}}
+			{{> PersIconeSexe}}
+			{{# LibPaginateGenObjectsList_layoutLien}}{{> PersNomPrenomsSansLien}}{{/ LibPaginateGenObjectsList_layoutLien}}
+			{{> PersDatesFormatCourt}} {{> PersSosas}}<br/>
+		{{/each}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_lieuxDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_lieuxDisplay">
+	<ul>
+		{{#each .}}
+			<li>
+				{{> LieuNature}}
+				{{# LibPaginateGenObjectsList_layoutLien}}{{> LieuNomSansLienDe}}{{/ LibPaginateGenObjectsList_layoutLien}}{{> LieuCode}}{{#if complement}} <small>({{complement}})</small>{{/if}},
+				{{#with gh_lieuById inclusDans}}{{> LieuNature}} {{> LieuNomSansLienDe}}{{> LieuCode}}{{/with}}
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_histsDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_histsDisplay">
+	<ul>
+		{{#each .}}
+			<li>
+				{{# LibPaginateGenObjectsList_layoutLien}}{{> HistTitreLien}}{{/ LibPaginateGenObjectsList_layoutLien}}
+				({{#with date}}{{> DateformatCourt}}{{/with}})
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_docsDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_docsDisplay">
+	<table class="table table-striped">
+		<tbody>
+		{{#each .}}
+			<tr>
+				<td class="center">{{> DocMiniatureAvecLien}}</td>
+				<td>{{# LibPaginateGenObjectsList_layoutLien}}{{> DocTitreSansLien}}{{/ LibPaginateGenObjectsList_layoutLien}}</td>
+				<td>({{#with date}}{{> DateformatLong}}{{/with}})</td>
+				<td>{{> LibClipId}}</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_liensDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_liensDisplay">
+	<ul>
+		{{#each .}}
+			<li>
+				{{# LibPaginateGenObjectsList_layoutLien}}lien {{_id}}{{/ LibPaginateGenObjectsList_layoutLien}}
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_registresDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_registresDisplay">
+	<ul>
+		{{#each .}}
+			<li>
+				{{# LibPaginateGenObjectsList_layoutLien}}{{type}} {{contenu}} {{periode}}{{/ LibPaginateGenObjectsList_layoutLien}}
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_actesArchivesDisplay    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_actesArchivesDisplay">
+	<ul>
+		{{#each .}}
+			<li>
+				{{# LibPaginateGenObjectsList_layoutLien}}acte dépouillé {{_id}}{{/ LibPaginateGenObjectsList_layoutLien}}
+			</li>
+		{{/each}}
+	</ul>
+</template>
+
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE LibPaginateGenObjectsList_layoutLien    -->
+<!-- ===================================== -->
+<template name="LibPaginateGenObjectsList_layoutLien">
+	<a class="{{../../class}}" href="{{href}}" title="{{title}}">{{> Template.contentBlock}}</a>
+</template>
+

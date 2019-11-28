@@ -1,0 +1,152 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibSearchProgressStatus      -->
+<!-- value :: see possible states : commonParms.typeEtatRechActes and commonParms.typeEtatRechEnfants -->
+<!-- type ::{"RECORDS","CHILDS"}           -->
+<!-- ===================================== -->
+<template name="LibSearchProgressStatus">
+	<span title="{{title}}" style="color:{{color}}">{{> LibIcone "flag"}}</span>
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibSearchProgressStatus_DOCAUTO       -->
+<!-- ===================================== -->
+<template name="LibSearchProgressStatus_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>value::{"INCOMPLET_A_COMPLETER", "INCOMPLET_RECH_FINIE", "COMPLET_A_VERIFIER", "COMPLET_VERIFIE"}</code></td>
+			<td>Valeur du champ <code>pers.etatRechActes</code> ou <code>coupleEvent.etatRechEnfants</code>.</td>
+		</tr>
+		<tr>
+			<td><code>type ::{"RECORDS","CHILDS"} </code></td>
+			<td>Indique si on regarde la complétude des actes (valeur <code>RECORDS</code>) ou des enfants (valeur <code>CHILDS</code>).</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>A voir</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche un flag (sous forme d'un tag <code>&lt;span&gt;</code> dont la couleur est fonction de la complétude de recherche des actes (pour une personne, paramètre <code>type=RECORDS</code>) ou des enfants (pour un couple, paramètre <code>type=CHILDS</code>). L'information de complétude est transmise dans le paramètre <code>value</code>. Au survol de ce flag un message d'explication est affiché, différent selon qu'on regarde la complétude des actes ou des enfants.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une <code>div</code> de classe <code>container</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with benjaminARTUS}}
+	{{|> LibSearchProgressStatus 
+		value=etatRechActes 
+		type="RECORDS"
+	}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with benjaminARTUS}}
+	{{> LibSearchProgressStatus value=etatRechActes type="RECORDS"}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with mariagesPierreBIRON}}
+	{{|#each .}}
+		{{|> CoupleEventTitle coupleEvent=.}} : 	
+		{{|> LibSearchProgressStatus 
+			value=etatRechEnfants 
+			type="CHILDS"
+		}}
+	{{|/each}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with mariagesPierreBIRON}}
+	{{#each .}}
+		{{> CoupleEventTitle coupleEvent=.}} : 	{{> LibSearchProgressStatus value=etatRechEnfants type="CHILDS"}}
+	{{/each}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

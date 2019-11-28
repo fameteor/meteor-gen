@@ -1,0 +1,34 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersChronologieMarqueDate    -->
+<!-- Marque d'une date                     -->
+<!-- Contexte    						   -->
+<!-- date : ::DATE                         -->
+<!-- type ::["NAISSANCE","MARIAGE","DECES"]    -->
+<!-- classe ::String                       -->
+<!-- ===================================== -->
+<template name="PersChronologieMarqueDate">
+	<g transform="translate({{x}},{{y}})" title="Date et incertitude à afficher">
+		{{#if (hlp_eq date.type "LE")}}
+			<line x1="0" y1="-5" x2="0" y2="5" class="{{classe}}"/>
+			{{> PersChronologieMarqueDateTexte type=type classe=classe}}
+		{{/if}}
+		{{#if (hlp_eq date.type "VERS")}}
+			<use x="0" y="0" xlink:href="#marqueVers" />
+			{{> PersChronologieMarqueDateTexte type=type classe="marqueDateIncertaine"}}
+		{{/if}}
+		{{#if (hlp_eq date.type "AVANT")}}
+			<use x="0" y="0" xlink:href="#marqueAvant" />
+			{{> PersChronologieMarqueDateTexte type=type classe="marqueDateIncertaine"}}
+		{{/if}}
+		{{#if (hlp_eq date.type "APRES")}}
+			<use x="0" y="0" xlink:href="#marqueApres" />
+			{{> PersChronologieMarqueDateTexte type=type classe="marqueDateIncertaine"}}
+		{{/if}}
+		{{#if (hlp_eq date.type "ENTRE")}}
+			<use x="0" y="0" xlink:href="#marqueEntre" />
+			<use x="{{dureeEntre}}" y="0" xlink:href="#marqueEt" />
+			<line x1="0" y1="0" x2="{{dureeEntre}}" y2="0" class="marquePointilles"/>
+			{{> PersChronologieMarqueDateTexte type=type classe="marqueDateIncertaine"}}
+		{{/if}}
+	</g>
+</template>

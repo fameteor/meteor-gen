@@ -1,0 +1,14 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuFormaterListe            -->
+<!-- ===================================== -->
+<template name="LieuFormaterListe">
+	<h4>{{gh_cursorCount .}} lieu{{#if gh_moreThanOneInCursor .}}x{{/if}} connu{{#if gh_moreThanOneInCursor .}}s{{/if}}</h4>
+	<ul>
+		{{#each lieux}}
+		<li>{{#if isGeoLocalised}}
+			<span title="géo-localisé">{{> LibIcone "geoLocalised"}}</span> ({{nbLiensLatLng}})
+		{{/if}}
+		{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}}{{#if complement}} <small>({{complement}})</small>{{/if}}, {{#with surlieu}}{{> LieuNature}} {{> LieuNomLienDe}} {{> LieuCode}}{{/with}}</li>
+		{{/each}}
+	</ul>
+</template>

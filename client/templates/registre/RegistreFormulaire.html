@@ -1,0 +1,46 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreFormulaire pour Ajouter ou Modifier        -->
+<!-- ===================================== -->
+<template name="RegistreFormulaire">
+	<fieldset>
+		<div class="row formEnTete">
+			<div class="col-sm-6">
+				{{> afQuickField name='type'}}
+				{{> afQuickField name='contenu' autocomplete='off'}}
+			</div>
+			<div class="col-sm-6">
+				{{> afQuickField name='commune' type='hidden' autocomplete='off'}}
+				<!-- Pour gérer l'affichage de l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="commune_intitule">Intitulé commune</label>
+					<input class="form-control intitule" id="commune_intitule" name="commune_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='periode' autocomplete='off'}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-sm-6">
+				{{> afQuickField name='nbPages' autocomplete='off'}}
+			</div>
+			<div class="col-sm-6">
+				{{> afQuickField name='ordreParCommune' autocomplete='off'}}
+			</div>
+		</div>
+		<div class="row formNonModifiable">
+			<div class="col-sm-3">
+				{{> afQuickField name='id' disabled='true'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='createdBy' disabled='true'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='createdAt' disabled='true'}}
+			</div>
+			<div class="col-sm-3">
+				{{> afQuickField name='lastUpdateAt' disabled='true'}}
+			</div>
+		</div>
+		<br/>
+	</fieldset>
+</template>

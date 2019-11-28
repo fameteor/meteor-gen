@@ -1,0 +1,9 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibListeOptionsDontTous                                    -->
+<!-- ===================================== -->
+<template name="LibListeOptionsDontTous">
+	<option value="">{{intituleGenerique}}</option>
+	{{#each options}}
+	<option value="{{valeur}}" selected="{{isSelected}}">{{intitule}}</option>
+	{{/each}}
+</template>

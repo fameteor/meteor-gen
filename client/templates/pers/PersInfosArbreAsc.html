@@ -1,0 +1,81 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersInfosArbreAsc            -->
+<!-- ===================================== -->
+<template name="PersInfosArbreAsc">
+	{{#with pers}}
+	<div class="row">
+		<div class="col-md-12" >
+			{{> PersArbreAsc}}
+		</div>
+	</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersInfosArbreAsc_DOCAUTO             -->
+<!-- ===================================== -->
+<template name="PersInfosArbreAsc_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>PersArbreAsc</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche l'arbre généalogique ascendant de la personne passée en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Peut-être doublon avec <code>PersArbreAsc</code> : seul le formatage Bootstrap doit différer. A vérifier.
+<!-- ===================================== -->	
+	</div>
+</template>

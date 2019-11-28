@@ -1,0 +1,32 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersFormDeath                -->
+<!-- ===================================== -->
+<template name="PersFormDeath">
+	<fieldset>
+		<div class="row">
+			<div class="col-md-4">
+				{{> DateFormulaire name="deces.date"}}
+			</div>
+			<div class="col-md-4">
+				{{> afQuickField name='deces.commune' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="deces.commune_intitule">Commune d'habitation</label>
+					<input class="form-control intitule" id="deces.commune_intitule" name="deces.commune_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='deces.lieudit' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="deces.lieudit_intitule">Lieu-dit d'habitation</label>
+					<input class="form-control intitule" id="deces.lieudit_intitule" name="deces.lieudit_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="col-md-4">
+				{{> afQuickField name='deces.docs'}}
+				{{> afQuickField name='deces.incertain'}}
+			</div>
+		</div>
+	</fieldset>
+</template>

@@ -1,0 +1,50 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersFormBirth                -->
+<!-- ===================================== -->
+<template name="PersFormBirth">
+	<fieldset>
+		<div class="row">
+			<div class="col-md-3">
+				{{> DateFormulaire name="naissance.date"}}
+			</div>
+			<div class="col-md-3">
+				{{> afQuickField name='pere' type='hidden'}}
+				<!-- Pour gérer la saisie et l'affichage du père -->
+				<div class="form-group">
+					<label class="control-label" for="pere_intitule">Père</label>
+					<input class="form-control intitule" id="pere_intitule" name="pere_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='pereIncertain'}}
+				{{> afQuickField name='mere' type='hidden'}}
+				<!-- Pour gérer la saisie et l'affichage de la mère -->
+				<div class="form-group">
+					<label class="control-label" for="mere_intitule">Mère</label>
+					<input class="form-control intitule" id="mere_intitule" name="mere_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='mereIncertain'}}
+			</div>
+			<div class="col-md-3">
+				{{> afQuickField name='naissance.commune' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="naissance.commune_intitule">Commune d'habitation</label>
+					<input class="form-control intitule" id="naissance.commune_intitule" name="naissance.commune_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+				{{> afQuickField name='naissance.lieudit' type='hidden'}}
+				<!-- Pour affichage du l'intitulé du lieu -->
+				<div class="form-group">
+					<label class="control-label" for="naissance.lieudit_intitule">Lieu-dit d'habitation</label>
+					<input class="form-control intitule" id="naissance.lieudit_intitule" name="naissance.lieudit_intitule" type="text" value="">
+					<span class="help-block"></span>
+				</div>
+			</div>
+			<div class="col-md-3">
+				{{> afQuickField name='naissance.docs'}}
+				{{> afQuickField name='naissance.incertain'}}
+			</div>
+		</div>
+	</fieldset>
+</template>

@@ -1,0 +1,115 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogPointersCheck    -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogPointersCheck">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Gestion des liens</h2>
+		<ul>
+			<li><a href="#parametrage">1) Fichier de paramétrage des liens</a></li>
+			<li><a href="#general">2) Fonctionnement général</a></li>
+			<li><a href="#utilisation">3) Exemples d'utilisation</a></li>
+			<li><a href="#ameliorations">4) Améliorations</a></li>
+		</ul>
+	
+<!-- ===================================== -->
+<h3><a id="parametrage"></a>1) Fichier de paramétrage des liens</h3>
+<p>Les pointeurs existants sont définis dans un fichier de paramétrage des liens (fichier <code>/common/parms_liens.js</code> contenant la variable Javascript <code>parms_liens</code>).</p>
+<p>Ce fichier indique, dans les propriétés de chaque type d'objet, les pointeurs vers tous les types cibles d'objet, en indiquant pour chaque pointeur :
+<ul>
+	<li>le <code>matchType</code>, qui indique le type de pointeur (et donc le type de requête à faire dans la base) :
+		<ul>
+			<li><code>"id"</code> : on recherche <code>_id</code> comme valeur du champ ou comme valeur dans un champ Array,</li>
+			<li><code>"containId"</code> : on recherche <code>_id</code> comme texte contenu dans le champ,</li>
+			<li><code>"containOldId"</code> : on recherche l'ancien ID (<code>id</code>) comme texte contenu dans le champ,</li>
+			<li><code>"lienPour"</code> : (UNIQUEMENT pour les LIENS et UNIQUEMENT avec <code>"prop":"pour.id"</code>) on recherche un lien pour cet objet,</li>
+			<li><code>"lienVers"</code> : (UNIQUEMENT pour les LIENS et UNIQUEMENT avec <code>"prop":"vers.id"</code>) on recherche un lien vers cet objet.</li>
+		</ul>
+	</li>
+	<li>l'<code>intitule</code>, affiché apre le template <code>LibDisplaypointingObjects </code>,</li>
+	<li>savoir si il faut ou pas <code>afficherInfos</code> pour le template <code>LienListeObjetsDedoublonnes</code>.</li>
+</ul>
+
+
+</p>
+
+<!-- ===================================== -->
+<h3><a id="general"></a>2) Fonctionnement général</h3>
+<p>La fonction javascript (commune CLIENT et SERVEUR : dans le fichier <code>/common/common.js</code>) <code>gf_getPointingObjects(obj,type)</code> ou le global helper <code>gh_getPointingObjects obj type</code> permettent d'obtenir les objets ayant au moins un pointeur visant l'objet passé en premier paramètre et dont le <code>type</code> est passé en second paramètre. L'appel se fait de la façon suivante :</p>
+<pre>gf_getPointingObjects(obj,type)
+	// Avec :
+	// obj ::genObject
+	// type ::{"LIEU","COUPLE_EVENT","HIST","DOC","LIEN","REGISTRE","ACTE_ARCHIVES"}</pre>
+<p>La réponse obtenue, appelée <code>pointingObjects</code>, est un objet contenant les différents objets pointant vers cet objet et structuré comme suit :</p>
+<pre>{
+	// Objets de type PERS, listés par propriétés pointant vers l'objet passé en paramètre.
+	PERS: [
+		{
+			"prop":			"mariages.conjoint",
+			"matchType":		"id",
+			"afficherInfos" : 	false,
+			"intitule": 		{"FR":"Personne(s) ayant pour père cette personne"},	// Intitulé dans les différentes langues
+			"list" : 		[::PERS]						// Liste des personnes ayant un pointeur "pere" vers l'objet passé en paramètre
+		},
+		{
+			"prop":			"comment",
+			"matchType":		"containId",
+			"afficherInfos" : 	true,
+			"intitule": 		{"FR":"Personne(s) ayant dans ses commentaires un pointeur vers cette personne"}},	// Intitulé dans les différentes langues
+			"list" : 		[::PERS]						// Liste des personnes ayant un pointeur "pere" vers l'objet passé en paramètre
+		}...
+	],
+	// Objets de type COUPLE_EVENT, listés par propriétés pointant vers l'objet passé en paramètre.
+	COUPLE_EVENT: [
+		idem...
+	],
+	// Objets de type LIEU, listés par propriétés pointant vers l'objet passé en paramètre.
+	LIEU: [
+		idem...
+	],
+	// Objets de type HIST, listés par propriétés pointant vers l'objet passé en paramètre.
+	HIST: [
+		idem...
+	],
+	// Objets de type DOC, listés par propriétés pointant vers l'objet passé en paramètre.
+	DOC: [
+		idem...
+	],
+	// Objets de type LIEN, listés par propriétés pointant vers l'objet passé en paramètre.
+	LIEN: [
+		idem...
+	],
+	// Objets de type REGISTRE, listés par propriétés pointant vers l'objet passé en paramètre.
+	REGISTRE: [
+		idem...
+	],
+	// Objets de type ACTE_ARCHIVES, listés par propriétés pointant vers l'objet passé en paramètre.
+	ACTE_ARCHIVES: [
+		idem...
+	]
+}</pre>
+<p>Les <code>matchType</code> décrivent le type de lien qui est recherché (et donc le type de requête MongoDB). Les <code>matchType</code> possibles sont :<br/>
+<ul>
+	<li><code>id</code> : on recherche <code>_id</code> comme valeur du champ ou comme valeur dans un champ Array,</li>
+	<li><code>containId</code> : on recherche <code>_id</code> comme texte contenu dans le champ,</li>
+	<li><code>containOldId</code> : on recherche l'ancien ID (<code>id</code>) comme texte contenu dans le champ,</li>
+	<li><code>lienPour</code> : (UNIQUEMENT pour les LIENS et UNIQUEMENT avec <code>"prop":"pour.id"</code>) on recherche un lien pour cet objet,</li>
+	<li><code>lienVers</code> : (UNIQUEMENT pour les LIENS et UNIQUEMENT avec <code>"prop":"vers"</code>) on recherche un lien vers cet objet.</li>
+</ul>
+
+
+
+
+</p>
+<p>Pour vérifier si la réponse ne contient aucun pointeur, on peut utiliser la fonction javascript (commune CLIENT et SERVEUR) <code>gf_thereIsNoPointingObject(pointingObjects)</code> ou le global helper <code>gh_thereIsNoPointingObject pointingObjects</code>.</p>
+<p>Un template est disponible pour mettre en forme cette liste de pointeurs pour un affichage à l'utilisateur : <code>{{|> LibDisplaypointingObjects list=pointingObjects}}</code></p>
+
+<!-- ===================================== -->
+<h3><a id="utilisation"></a>3) Exemples d'utilisation</h3>
+
+
+<!-- ===================================== -->
+<h3><a id="ameliorations"></a>4) Améliorations</h3>
+
+	</div>
+</template>

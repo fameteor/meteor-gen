@@ -1,0 +1,7 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersIncertainCompletAvecLien -->
+<!-- CONTEXTE ::pers                       -->
+<!-- ===================================== -->
+<template name="PersIncertainCompletAvecLien">
+	{{> PersIconeSexe}} <small>{{> LibSearchProgressStatus value=etatRechActes type="RECORDS"}}</small> <span class="incertain" title="Personne incertaine"><a href="/pers/infos/{{_id}}">{{> PersNomPrenomsSansLien}}</a></span> {{> PersDatesFormatCourt}} {{> PersSosasIconeSeule}}
+</template>

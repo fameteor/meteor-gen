@@ -1,0 +1,15 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersModifier                                                      -->
+<!-- ===================================== -->
+<template name="PersModifier">
+	{{#autoForm collection="Pers" doc=this id="updatePersForm" type="update"}}
+		{{> PersFormulaire}}
+		{{> LibFormulaireChampsCaches}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

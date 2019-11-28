@@ -1,0 +1,82 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocChoisirModal              -->
+<!-- ===================================== -->
+<template name="DocChoisirModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+					<!-- HEADER ============== -->
+					{{#with docSelectionnees}}
+						<div class="modal-header">
+							{{> LibIcone "iconeDoc"}} {{title}} {{#if ../clearButton}}<button id="boutonEffacer" type="button" class="btn btn-danger pull-right">Effacer le champ du formulaire</button>{{/if}}
+						</div>
+						<!-- BODY ================ -->
+						<div class="modal-body row">
+							<!-- FORMULAIRE ================ -->
+							<form class="form-horizontal">
+								<div class="col-sm-12">
+									<div class="form-group">
+										
+									</div>
+								</div>
+								<!-- SUBMIT ================ -->
+								<div class="col-sm-12 separation">
+									<p>Choisir un document dans les listes ci-dessous </p>
+								</div>
+							</form>
+							
+							<div class="col-sm-12 modal-search-result">
+								<div class="row">
+								<div class="col-sm-6">
+									<!-- RECEMMENT UTILISES =================== -->
+									<p class="chercherModalTitre separation text-center"><strong>Documents</strong> récemment utilisées</p>
+									{{#with gh_visitedObjects}}
+										{{#each DOC}}
+											{{#with (gh_docById .)}}
+												{{#if filterCriteriasOk}}
+													<a class="choixDocChoisirModal" href="#" title="Choisir ce document">{{> LibIcone "iconeDoc"}} {{> DocTitreSansLien}}</a><br/>
+												{{/if}}
+											{{/with}}
+										{{/each}}
+									{{/with}}
+								</div>
+								<div class="col-sm-6">
+									<!-- FILTRAGE DE LA BASE =================== -->
+									<p class="chercherModalTitre separation text-center"><strong>{{hlp_count .}} documents{{#if (hlp_gt (hlp_count .) 1)}}s{{/if}}</strong> dans la base</p>
+									{{#if saisieValide}}
+										<form>
+											<div class="form-group">
+												<select class="form-control" id="choix_classement">
+													<option value="">Ordre par nom, prénoms, ordre BD</option>
+													<option value="">Ordre par nom, prénoms, date</option>
+													<option value="">Ordre par selon date, nom, prénoms</option>
+												</select>
+											</div>
+										</form>
+										<div class="row">
+											<div class="col-sm-12">
+											{{#each .}}
+												<a class="choix" href="#" title="Choisir ce document">{{> LibIcone "iconeDoc"}} {{> DocTitreSansLien}}</a><br/>
+											{{/each}}
+											</div>
+										</div>
+									{{else}}
+										<p class="text-danger">
+											<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+											Non encore implémenté.
+										</p>
+									{{/if}}
+								</div>
+								</div>
+							</div>
+						</div>
+					{{/with}}
+				
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

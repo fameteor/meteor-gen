@@ -1,0 +1,112 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuChoisirModal             -->
+<!-- ===================================== -->
+<template name="LieuChoisirModal">
+	<div class="modal fade">
+		<div class="modal-dialog std-modal">
+			<div class="modal-content">
+				<!-- HEADER ============== -->
+				{{#with lieuxSelectionnes}}
+				<div class="modal-header">
+					{{> LibIcone "iconeLieu"}} {{title}} {{#if ../clearButton}}<button id="boutonEffacer" type="button" class="btn btn-danger pull-right">Effacer le champ du formulaire</button>{{/if}}
+				</div>
+				<!-- BODY ================ -->
+				<div class="modal-body row">
+					<form class="form-inline">
+						<div class="col-sm-12">
+							<!-- Genre ================ -->
+							<div class="form-group">
+								<label class="control-label">Filtrer </label>
+								<select class="form-control" id="choix_genre" {{isLocked "genre"}}>
+									<option value="" {{selectedGenre}}>- tous les genres</option>
+									{{#each listeGenres}}
+										<option value="{{value}}" {{selectedGenre}}>{{label}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<!-- Nom du lieu ================ -->
+							<div class="form-group">
+								<input type="text" class="form-control" id="choix_nom" placeholder="partie du nom sans article" autocomplete='off' value="{{selectedNom}}" {{isLocked "nom"}}>
+							</div>
+							<!-- Type du lieu ================ -->
+							<div class="form-group">
+								<select class="form-control" id="choix_nature" {{isLocked "nature"}}>
+									<option value="" {{selectedNature}}>- toutes les natures</option>
+									{{#each listeNatures}}
+										<option value="{{value}}" {{selectedNature}}>{{label}}</option>
+									{{/each}}
+								</select>
+							</div>
+							<!-- Inclus dans ID================ -->
+							<div class="form-group">
+								<input type="hidden" class="form-control" id="choix_inclusDans" placeholder="ID du sur-lieu" value="{{selectedInclusDans}}" {{isLocked "inclusDans"}}>
+							</div>
+							<!-- Inclus_dans intitulé ================ -->
+							<div class="form-group">
+								<label class="control-label">inclus dans </label>
+								<input type="text" class="form-control intitule" id="choix_inclusDans_intitule" placeholder="Sur-lieu" autocomplete='off' value="{{selectedSurlieu_intitule}}" {{isLocked "inclusDans"}}>
+							</div>
+							<!-- Submit ================ -->
+							{{#if ../addButton}}<button type="submit" class="btn btn-warning pull-right">Ajouter ce lieu à la base</button>{{/if}}
+						</div>
+					</form>
+					<div class="col-sm-12 modal-search-result margin-top">
+						<div class="row">
+						<div class="col-sm-6">
+							<!-- Résultats 1 : lieux récemment utilisés =================== -->
+							{{#with gh_visitedObjects}}
+								{{#with lieuxFiltres}}
+									<p class="chercherModalTitre separation text-center"><strong>{{count}} lieu{{#if (hlp_gt count 1)}}x{{/if}}</strong> récemment utilisé{{#unless (hlp_eq count 1)}}s{{/unless}}</p>
+									{{#if (hlp_eq count 0)}}
+											<p class="text-danger text-center">
+												<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+												Aucun lieu trouvé dans les lieux récemment utilisés pour ces critères de filtre.
+											</p>
+									{{else}}
+										{{#with lieux}}
+											<ul>
+												{{#each .}}
+													{{#with (gh_lieuById .)}}
+														<li>
+															{{> LieuNature}} <a class="choixModal" href="#" title="Choisir ce lieu">{{> LieuNomSansLienDe}}</a>{{> LieuCode}}{{#if complement}} <small>({{complement}})</small>{{/if}}, 
+															{{#with gh_lieuById inclusDans}}{{> LieuNature}} {{> LieuNomSansLienDe}}{{> LieuCode}}{{/with}}
+														</li>
+													{{/with}}
+												{{/each}}
+											</ul>
+										{{/with}}
+									{{/if}}
+								{{/with}}
+							{{/with}}
+						</div>
+						<div class="col-sm-6">
+							<!-- Résultats 2 : Lieux dans la base=================== -->
+							<p class="chercherModalTitre separation text-center"><strong>{{hlp_count .}} lieu{{#if (hlp_gt count 1)}}x{{/if}}</strong> dans la base</p>
+							{{#if (hlp_eq (hlp_count .) 0)}}
+								{{#if saisieValide}}
+									<p class="text-danger text-center">
+										<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+										Aucun lieu trouvée dans la base pour ces critères de filtre.
+									</p>
+								{{else}}
+									<p class="text-danger text-center">
+										<span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>
+										Saisir au moins 2 lettres pour le nom du lieu.
+									</p>
+								{{/if}}
+							{{else}}
+								{{> LibPaginateGenObjectsList list=. objectType="LIEU" nbElemPerPage=15 nbPagesMax=9 class="choixModal" href="#" title="Choisir ce lieu"}}
+							{{/if}}
+						</div>
+						</div>
+					</div>
+				</div>
+				{{/with}}
+				<!-- FOOTER ============== -->
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+				</div>
+			</div>
+		</div>
+    </div>
+</template>

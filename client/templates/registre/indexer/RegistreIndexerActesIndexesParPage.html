@@ -1,0 +1,32 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreIndexerActesIndexesParPage         -->
+<!-- ===================================== -->
+<template name="RegistreIndexerActesIndexesParPage">
+	<form class="form-inline">
+		<div class="form-group">
+			<input class="form-control" id="page" name="page" type="text" value="{{pageChoisie_registreIndexer}}" placeholder="tapez la page"/>
+			<button type="submit" class="btn btn-primary">Afficher</button>
+		</div>
+	</form>
+	{{#with listeActesIndexesPourCettePage}}
+		{{#if gh_cursorIsNotEmpty .}}
+			<div>
+				<table class="table table-hover">
+					<tbody>
+						{{#each .}}
+							<tr class="registre {{selected}}">
+								<td>page {{page}}</td>
+								<td>{{#with date}}{{> DateformatLong}}{{/with}}</td>
+								<td>{{type}}</td>
+								<td>{{pers_prenom}} {{pers_nom}}</td>
+								<td><button type="button" class="btn btn-warning modifier">modifier</button></td>
+							</tr>
+						{{/each}}
+					</tbody>
+				</table>
+			</div>
+		{{else}}
+			<p class="bg-danger">Il n'y a aucun acte indexé sur la page {{pageChoisie_registreIndexer}}.</p>
+		{{/if}}
+	{{/with}}
+</template>

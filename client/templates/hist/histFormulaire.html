@@ -1,0 +1,33 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistFormulaire         	   -->
+<!-- ===================================== -->
+<template name="HistFormulaire">
+	<fieldset>
+		<div class="row fondLayoutModifier">
+			<div class="col-sm-4">
+				{{> afQuickField name='titre' rows=2 autocomplete='off'}}
+				{{> afQuickField name='source' rows=2 autocomplete='off'}}
+				{{> afQuickField name='impacteAncetres'}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='comment' rows=6 autocomplete='off'}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='recherche' rows=6 autocomplete='off'}}
+			</div>
+		</div>
+		<br/>
+		<div class="row">
+			<div class="col-sm-4">
+				{{> DateFormulaire name="date"}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='scope'}}
+				{{> afQuickField name='tags'}}
+			</div>
+			<div class="col-sm-4">
+				{{> afQuickField name='themes'  style="height:190px;"}}
+			</div>
+		</div>
+	</fieldset>
+</template>

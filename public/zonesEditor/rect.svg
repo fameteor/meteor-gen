@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd"> 
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 -8 32 32">
+	<g>
+		<rect x1="1" y1="8" width="30" height="16" stroke="black"  stroke-width="1" fill="yellow"/>
+	</g>
+</svg>

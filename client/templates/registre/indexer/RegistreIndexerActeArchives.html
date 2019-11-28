@@ -1,0 +1,42 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreIndexerActeArchives  -->
+<!-- ===================================== -->
+<template name="RegistreIndexerActeArchives">
+	{{#autoForm collection="ActesArchives" id="addActeArchivesForm" type="insert"}}
+		<fieldset>
+			<div class="row fondLayoutModifier">
+				<div class="col-md-3">
+					{{> afQuickField name='commune' autocomplete='off' value=communeChoisie_registreIndexer}}
+					{{> afQuickField name='registre' autocomplete='off' value=registreChoisi_registreIndexer}}
+					{{> afQuickField name='page' autocomplete='off' value=pageChoisie_registreIndexer}}
+					{{> afQuickField name='type'}}
+					{{> afQuickField name='date'}}
+				</div>
+				<div class="col-md-3">
+					{{> afQuickField name='pers_nom' autocomplete='off'}}
+					{{> afQuickField name='pers_prenoms' autocomplete='off'}}
+					{{> afQuickField name='pers_age' autocomplete='off'}}
+					
+				</div>
+				<div class="col-md-3">
+					{{> afQuickField name='pere_nom' autocomplete='off'}}
+					{{> afQuickField name='pere_prenoms' autocomplete='off'}}
+					{{> afQuickField name='mere_nom' autocomplete='off'}}
+					{{> afQuickField name='mere_prenoms' autocomplete='off'}}
+				</div>
+				<div class="col-md-3">
+					{{> afQuickField name='conjoint_nom' autocomplete='off'}}
+					{{> afQuickField name='conjoint_prenoms' autocomplete='off'}}
+					{{> afQuickField name='lieudit_nom' autocomplete='off'}}
+					{{> afQuickField name='comment' rows=3 autocomplete='off'}}
+				</div>
+			</div>
+		</fieldset>
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Ajouter</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

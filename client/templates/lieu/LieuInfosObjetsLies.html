@@ -1,0 +1,95 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuInfosObjetsLies          -->
+<!-- ===================================== -->
+<template name="LieuInfosObjetsLies">
+	{{#with lieu}}
+		{{#with gh_getPointingObjects . "LIEU"}}
+			<div class="row">
+				<div class="col-md-12" >
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="LIEU" typeCible="PERS"}}
+					<hr/>
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="LIEU" typeCible="LIEU"}}
+					<hr/>
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="LIEU" typeCible="HIST"}}
+					<hr/>
+					{{> LienListeObjetsDedoublonnes obj=.. pointingObjects=. type="LIEU" typeCible="DOC"}}
+				</div>
+			</div>
+		{{/with}}
+		<div class="row">
+			<div class="col-md-12" >
+				{{> LienListe obj=. type="LIEU"}}
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LieuInfosObjetsLies_DOCAUTO           -->
+<!-- ===================================== -->
+<template name="LieuInfosObjetsLies_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>lieu</code></td>
+		<td><code>::LIEU</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LienListeObjetsDedoublonnes</code><br/>
+<code>LienListe</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les objets <code>::genObject</code> liés au lieu passé en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

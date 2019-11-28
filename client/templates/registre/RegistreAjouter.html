@@ -1,0 +1,16 @@
+<!-- ===================================== -->
+<!-- TEMPLATE RegistreAjouter                                                 -->
+<!-- ===================================== -->
+<template name="RegistreAjouter">
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-8">
+				<h2>Ajouter un registre</h2>
+			</div>
+		</div>
+		{{#autoForm collection="Registres" id="addRegistreForm" type="insert"}}
+			{{> RegistreFormulaire}}
+			<button type="submit" class="btn btn-primary">Ajouter</button>
+		{{/autoForm}}
+	</div>
+</template>

@@ -1,0 +1,102 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocInfosFiche                -->
+<!-- ===================================== -->
+<template name="DocInfosFiche">
+	{{#with doc}}
+		<!-- Affichage du doc selon type ==== -->
+		<div class="row">
+			<div class="col-md-12">
+			{{> Template.dynamic template=templateName data=.}}
+			</div>
+		</div>
+		<!-- Commentaires =================== -->
+		<div class="row">
+			<div class="col-md-12">
+				<hr/>
+				<h4>Commentaires</h4>
+				{{> textXmlEditor collection=Docs id=_id field="comment"}}
+				<hr/>
+				<h4>Remarques de recherche</h4>
+				{{> textXmlEditor collection=Docs id=_id field="recherche"}}
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-xl-12" >
+				<hr/>
+				<h4>Informations dans les actes</h4>
+				{{> LibDocAnalysis obj=. objType="DOC"}}
+				<!-- Recherche ====================== -->
+				<hr/>
+			</div>
+		</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- DocInfosFiche_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="DocInfosFiche_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>textXmlEditor</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche la fiche d'information sur le document passé en contexte.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

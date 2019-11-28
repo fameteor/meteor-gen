@@ -1,0 +1,81 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersInfosChronologie         -->
+<!-- ===================================== -->
+<template name="PersInfosChronologie">
+	{{#with pers}}
+	<div class="row">
+		<div class="col-md-12" >
+			{{> PersChronologie}}
+		</div>
+	</div>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- PersInfosChronologie_DOCAUTO          -->
+<!-- ===================================== -->
+<template name="PersInfosChronologie_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>pers</code></td>
+		<td><code>::PERS</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>PersChronologie</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche le schéma chronologique de la personne passée en contexte (avec ses parents, conjoint(s), beaux-parents et enfants).
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Résultat intégré dans <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Doublon éventuel avec <code>PersChronologie</code> : il n'y a que l'intégration dans les <code>div</code> Bootstrap qui diffère. A voir et corriger si nécessaire.
+<!-- ===================================== -->	
+	</div>
+</template>

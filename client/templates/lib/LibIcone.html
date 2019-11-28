@@ -1,0 +1,100 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LibIcone                     -->
+<!-- Contexte : nom Icone                  -->
+<!-- ===================================== -->
+<template name="LibIcone">{{#with icon}}{{#if (hlp_eq type "BOOTSTRAP")}}<i class="{{name}}"></i>{{/if}}{{#if (hlp_eq type "FONTAWESOME")}}<span class="{{name}} fa-fw" aria-hidden="true"></span>{{/if}}{{/with}}</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibIcone_DOCAUTO                      -->
+<!-- ===================================== -->
+<template name="LibIcone_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>::String</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche l'icone "Bootstrap" ou "Fontawesome (selon fichier paramètre <code>/client/clientParms.js</code>).
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Formatage selon icone Bootstrap ou Fontawesome.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Liste des icones/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+	{{#each iconsList}}
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> LibIcone "{{.}}"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibIcone .}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+	{{/each}}
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

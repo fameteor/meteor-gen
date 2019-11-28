@@ -1,0 +1,153 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LienListePour                -->
+<!-- ===================================== -->
+<template name="LienListePour">
+	{{#with listeLiensPourCetObjet}}
+		<h4>{{hlp_count .}} lien{{#if hlp_gt (hlp_count .) 1}}s{{/if}} depuis {{intitule ../type}}</h4>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Vers objet</th>
+						<th>Type de zone</th>
+						<th>Commentaire</th>
+						<th>Modifier</th>
+						<th>Supprimer</th>
+					</tr>
+				</thead>
+				<tbody>
+					{{#each .}}
+						<tr>
+							<td>
+								{{#with vers}}
+									{{> LibTitreObjetLien .}}<br/>
+								{{/with}}
+							</td>
+							<td>{{zone}}</td>
+							<td>{{comment}}</td>
+							<td>{{> LienBoutonModifier}}</td>
+							<td>{{> lienBoutonSupprimer}}</td>
+						</tr>
+					{{/each}}
+					<tr>
+						<td colspan="5">
+							{{> LienBoutonAjouterVers obj=../obj type=../type}}
+						</td>
+					</tr>
+				</tbody>
+			</table>
+	{{else}}
+		<h4>0 lien depuis {{intitule type}}</h4>
+	{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LienListePour_DOCAUTO                 -->
+<!-- ===================================== -->
+<template name="LienListePour_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>obj</code></td>
+		<td><code>::genObject</code></td>
+	</tr>
+	<tr>
+		<td><code>type</code></td>
+		<td><code>::["PERS","LIEU","HIST","DOC"]</code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibTitreObjetLien</code><br/>
+<code>LienBoutonModifier</code><br/>
+<code>lienBoutonSupprimer</code><br/>
+<code>LienBoutonAjouterVers</code><br/>
+
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les liens (de la collection <code>Liens</code>) depuis l'objet passé en paramètre <code>obj</code> et dont le type est passé en paramètre <code>type</code>, précédé d'un titre indiquant combien de liens existent. Possibilité d'ajouter, supprimer ou modifier un lien.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Pas de mise en forme Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST ================ -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================== -->
+<pre>{{|#with souvenirBanquet}}
+	{{|> LienListePour obj=. type="DOC"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu ================================ -->
+{{#with souvenirBanquet}}
+	{{> LienListePour obj=. type="DOC"}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST ============ -->		
+
+		</tbody>
+	</table>
+
+<h4>Améliorations</h4>
+<div class="bg-warning">
+<!-- Améliorations ======================== -->
+A compléter.
+<!-- ===================================== -->	
+</div>
+</template>

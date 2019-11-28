@@ -1,0 +1,64 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminUsers                   -->
+<!-- ===================================== -->
+<template name="AdminUsers">
+	<div class="container-fluid">
+		<h2>Liste des utilisateurs</h2>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th></th>
+					<th>Personne</th>
+					<th>Créée</th>
+					<th>Présence modifiée</th>
+					<th>E-mail</th>
+					<th class="center">Juste créé</th>
+					<th class="center">Vérif E-mail</th>
+					<th class="center">Rôle</th>
+					<th class="center">{{> LibIcone "iconePers"}}</th>
+					<th class="center">{{> LibIcone "iconeLieu"}}</th>
+					<th class="center">{{> LibIcone "iconeHist"}}</th>
+					<th class="center">{{> LibIcone "iconeDoc"}}</th>
+					<th class="center">Modifier</th>
+					<th class="center">Supprimer</th>
+				</tr>
+			</thead>
+			<tbody>
+				{{#each .}}
+				<tr>
+					{{#with user=.}}
+					<td class="center">{{> UserJoignability}}</td>
+					<td>{{> UserNameWithLink}}</td>
+					{{/with}}
+					<td>{{gh_formatDate createdAt}} {{gh_formatTime createdAt}}</td>
+					<td>{{gh_formatDate presence.updatedAt}} {{gh_formatTime presence.updatedAt}}</td>
+					<td>{{email}}</td>
+					<td class="center">{{{justeCree}}}</td>
+					<td class="center">{{{emailVerif}}}</td>
+					<td class="center">{{{role}}}</td>
+					<td class="center">{{nbPersOwner}}</td>
+					<td class="center">{{nbLieuOwner}}</td>
+					<td class="center">{{nbHistOwner}}</td>
+					<td class="center">{{nbDocOwner}}</td>
+					<td class="center">
+						{{#if gh_isAdmin}}
+						<button type="button" class="btn btn-warning modifier" title="Modifier cet utilisateur">
+							{{> LibIcone "iconeModifier"}}
+						</button>
+						{{/if}}
+					</td>
+					<td class="center">
+						{{#if gh_isAdmin}}
+							{{#if notMe}}
+							<button type="button" class="btn btn-danger supprimer" title="Supprimer cet utilisateur">
+								{{> LibIcone "iconeSupprimer"}}
+							</button>
+							{{/if}}
+						{{/if}}
+					</td>
+				</tr>
+				{{/each}}
+			</tbody>
+		</table>
+	</div>
+</template>

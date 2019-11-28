@@ -1,0 +1,79 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuInfos                    -->
+<!-- ===================================== -->
+<template name="LieuInfos">
+	{{> LibTitreInfos type="LIEU" context=.}}
+	<div class="container-fluid">
+		{{> LibTabs tabsList=listeTabs}}
+	</div>
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LieuInfos_DOCAUTO                     -->
+<!-- ===================================== -->
+<template name="LieuInfos_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>::LIEU</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+Aucun
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>LibTitreInfos</code><br/>
+<code>LibTabs</code><br/>
+<code>LieuInfosFiche</code><br/>
+<code>LieuInfosCartes</code><br/>
+<code>LieuInfosGoogleMap</code><br/>
+<code>LieuInfosSousLieux</code><br/>
+<code>LieuInfosObjetsLies</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les informations sur le lieu passé en contexte en appelant le template <code>LibTabs</code> qui appelle les autres templates d'affichage des infos sur ce lieu : fiche, cartes, Google Map, sous-lieux, liens.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Responsive =========================== -->
+Pas de formatage propre. Les templates utilisés renvoient des suites de <code>&lt;div class="row"&gt;</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

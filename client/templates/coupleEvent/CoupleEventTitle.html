@@ -1,0 +1,176 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE CoupleEventTitle             -->
+<!-- Parms :                               -->
+<!-- - coupleEvent ::COUPLE_EVENT          -->
+<!-- - [link] ::Boolean, no link if false  -->
+<!-- ===================================== -->
+<template name="CoupleEventTitle">
+	{{#with coupleEvent}}{{coupleEventType}} de {{#with gh_persById persA}}{{#if noLink ../..}}{{> PersCompletSansLien}}{{else}}{{> PersCompletAvecLien}}{{/if}}{{/with}} avec {{#with gh_persById persB}}{{#if noLink ../..}}{{> PersCompletSansLien}}{{else}}{{> PersCompletAvecLien}}{{/if}}{{/with}}{{/with}}
+</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- CoupleEventTitle_DOCAUTO              -->
+<!-- ===================================== -->
+<template name="CoupleEventTitle_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+Aucun.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>coupleEvent<code>::COUPLE_EVENT</code></code></td>
+		<td>(obligatoire) : évènement conjugal dont on veut afficher le titre.</td>
+	</tr>
+	<tr>
+		<td><code>[link]<code>::Boolean</code></code></td>
+		<td>(facultatif) : si <code>link</code> est <code>false</code>, aucun lien n'est mis sur les personnes.</td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>PersCompletAvecLien</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche le titre d'un évènement conjugal dont l'objet est passé dans le paramètre <code>coupleEvent</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Renvoi un fragment HTML brut.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>&lt;ul&gt;
+	{{|#each coupleEventsDeMarieLaidin}}
+		&lt;li&gt;{{|> CoupleEventTitle coupleEvent=.}}&lt;/li&gt;
+	{{|/each}}
+&lt;/ul&gt;</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+<ul>
+{{#each coupleEventsDeMarieLaidin}}
+	<li>{{> CoupleEventTitle coupleEvent=.}}</li>
+{{/each}}
+</ul>
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>&lt;ul&gt;
+	{{|#each coupleEventsDeMarieLaidin}}
+		&lt;li&gt;{{|> CoupleEventTitle coupleEvent=. link=false}}&lt;/li&gt;
+	{{|/each}}
+&lt;/ul&gt;</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+<ul>
+{{#each coupleEventsDeMarieLaidin}}
+	<li>{{> CoupleEventTitle coupleEvent=. link=false}}</li>
+{{/each}}
+</ul>
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>&lt;ul&gt;
+	{{|#each coupleEventsDeMarieLaidin}}
+		&lt;li&gt;{{|> CoupleEventTitle coupleEvent=. link=true}}&lt;/li&gt;
+	{{|/each}}
+&lt;/ul&gt;</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+<ul>
+{{#each coupleEventsDeMarieLaidin}}
+	<li>{{> CoupleEventTitle coupleEvent=. link=true}}</li>
+{{/each}}
+</ul>
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+<ul>
+	<li>Proposer différents type d'affichage selon un paramètre supplémentaire (1ère lettre en upper case, liens personnes avec ou sans, affichage ou non du sexe, du sosa, des dates...) de façon compatible avec les affichages des personnes.</li>
+	<li>Permettre de faire le lien avec "DE" : "suppression du PACS" mais "suppression de l'union libre"... Et ce de façon cohérente avec le traitement des lieux.</li>
+</ul>
+<!-- ===================================== -->	
+	</div>
+</template>

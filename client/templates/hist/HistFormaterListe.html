@@ -1,0 +1,57 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistFormaterListe            -->
+<!-- ===================================== -->
+<template name="HistFormaterListe">
+	<h4>{{gh_cursorCount .}} point{{#if gh_moreThanOneInCursor .}}s{{/if}} d'histoire connu{{#if gh_moreThanOneInCursor .}}s{{/if}}</h4>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Titre</th>
+				<th>Date</th>
+				<th>Zones</th>
+				<th>Scope</th>
+				<th>Thèmes</th>
+				<th>Liens</th>
+				<th>Ancêtres impactés</th>
+				<th>Ids</th>
+				<th>Modifier</th>
+				<th>Supprimer</th>
+			</tr>
+		</thead>
+		<tbody>
+		{{#each .}}
+			<tr>
+				<td>{{> HistTitreLien}}</td>
+				<td>{{#with date}}{{> DateformatLong}}{{/with}}</td>
+				<td>{{#each zones}}{{zoneFormatee}}<br/>{{/each}}</td>
+				<td>{{scope}}</td>
+				<td>{{#each themes}}{{themeFormate}}<br/>{{/each}}</td>
+				<td>
+					{{#each lien in liens}}
+						{{#if hlp_eq lien.vers.type "PERS"}}
+							{{> LibIcone "iconePers"}} {{#with gh_persById lien.vers.id}}{{> PersCompletAvecLien}}{{/with}}<br/>
+						{{/if}}
+						{{#if hlp_eq lien.vers.type "LIEU"}}
+							{{> LibIcone "iconeLieu"}} {{#with gh_lieuById lien.vers.id}}{{> LieuNomLienArticle}}{{/with}}<br/>
+						{{/if}}
+						{{#if hlp_eq lien.vers.type "HIST"}}
+							{{> LibIcone "iconeHist"}} {{#with gh_histById lien.vers.id}}{{> HistTitreLien}}{{/with}}<br/>
+						{{/if}}
+						{{#if hlp_eq lien.vers.type "DOC"}}
+							{{> LibIcone "iconeDoc"}} {{#with gh_docById lien.vers.id}}{{> DocTitreAvecLien}}{{/with}}<br/>
+						{{/if}}
+					{{/each}}
+				</td>
+				<td>{{impactAncetre}}</td>
+				<td class="center"><small>{{_id}}<br/>{{id}}</small></td>
+				<td class="center">
+					{{> HistBoutonModifier}}
+				</td>
+				<td class="center">
+					{{> HistBoutonSupprimer}}
+				</td>
+			</tr>
+		{{/each}}
+		</tbody>
+	</table>
+</template>

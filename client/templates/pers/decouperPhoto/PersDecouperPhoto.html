@@ -1,0 +1,67 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersDecouperPhoto            -->
+<!-- ===================================== -->
+<template name="PersDecouperPhoto">
+	<div class="container margin-top">
+		<div class="row">
+			<!-- Choix de la photo -->
+			<div class="col-md-3 text-center" >
+				<h4>Découper une photos pour </h4>
+				{{#with gh_persById id}}{{> PersCompletAvecLien}}{{/with}}<br/>
+				<!-- Preview -->
+				{{#if aDocIsSelected}}
+					{{#with decoupe}}
+						{{> DecoupeDocImageViewer}}
+					{{/with}}
+					<br/>
+					<input id="enregistrer" class="btn btn-primary" type="button" value="Enregistrer">
+				{{else}}
+					<img src="/nonConnu.jpg"/>
+				{{/if}}
+				<h4>Choisir une photo</h4>
+				<table class="table table-striped decoupe">
+					<tbody>
+					{{#each listeDocs}}
+						<tr class="doc">
+							<td class="valignMiddle center {{selected}}">{{> DocMiniatureSansLien}}</td>
+							<td class="valignMiddle {{selected}}">
+							{{#with date}}
+								à l'âge de {{age}} ({{> DateformatCourt}})
+							{{/with}}
+							</td>
+						</tr>
+					{{/each}}
+					</tbody>
+				</table>
+			</div>
+			<!-- Outil de découpe -->
+			<div class="col-md-9 text-center" >
+				{{#if aDocIsSelected}}
+					{{#with selectedDoc}}
+						<svg 	
+							version	= "1.1"
+							viewBox	= "{{viewboxCalculee}}" 
+							width	= "800"
+							xmlns	= "http://www.w3.org/2000/svg">
+							
+							<g class="zoomable">
+								<image 
+									xmlns:xlink="http://www.w3.org/1999/xlink" 
+									x="0" 
+									y="0" 
+									width="{{specif.IMAGE_px}}" 
+									height="{{specif.IMAGE_py}}" 
+									xlink:href="{{gh_urlDocument}}"/>
+								<rect id="decoupe" class="decoupe" x="{{x}}" y="{{y}}" width="{{width}}" height="{{height}}"/>
+							</g>
+							
+						</svg>
+					{{/with}}
+					Zoomez/dé-zoomez avec la molette et déplacer en drag and drop sur la zone de sélection.
+				{{else}}
+					
+				{{/if}}
+			</div>
+		</div>
+	</div>
+</template>

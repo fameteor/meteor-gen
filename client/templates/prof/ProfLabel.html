@@ -1,0 +1,282 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE ProfLabel                    -->
+<!-- prof::PROF                            -->
+<!-- sexe::{"M","F","NONCONNU"} 	       -->
+<!-- ===================================== -->
+<template name="ProfLabel">
+	{{#with prof}}
+		{{#if hlp_eq ../sexe "M"}}
+			{{#if M}}
+				{{M}}
+			{{else}}
+				Pas d'intitulé masculin
+				<button title="Modifier la profession" type="button" class="btn btn-warning modifyProf">{{> LibIcone "iconeModifier"}}</button>
+			{{/if}}
+		{{/if}}
+		{{#if hlp_eq ../sexe "F"}}
+			{{#if F}}
+				{{F}}
+			{{else}}
+				Pas d'intitulé féminin
+				<button title="Modifier la profession" type="button" class="btn btn-warning modifyProf">{{> LibIcone "iconeModifier"}}</button>
+			{{/if}}
+		{{/if}}
+		{{#if hlp_eq ../sexe "NONCONNU"}}
+			{{M}} {{#if (hlp_and M F)}}/{{/if}} {{F}}
+		{{/if}}
+	{{/with}}
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- ProfLabel_DOCAUTO                     -->
+<!-- ===================================== -->
+<template name="ProfLabel_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>prof::PROF</code></td>
+			<td>Objet PROF de la profession visée</td>
+		</tr>
+		<tr>
+			<td><code>sexe::["M","F","NONCONNU"]</code></td>
+			<td>Sexe de la personne dont on veut afficher la profession.</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>A voir</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche l'intitulé de la profession passée dans le paramètre <code>prof</code> selon le sexe de la personne passé dans le paramètre <code>sexe</code>. Si le sexe n'est pas connu l'intitulé masculin et féminin sont indiqués séparés par "/". Si un intitulé n'est pas précisé quand le sexe est "M" ou "F", on propose le bouton de modification des intitulés pour tous les utilisateurs.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Texte sans présentation Bootstrap.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profMarchand sexe="M"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profMarchand sexe="M"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profMarchand sexe="F"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profMarchand sexe="F"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->	
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profMarchand sexe="NONCONNU"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profMarchand sexe="NONCONNU"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profCure sexe="M"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profCure sexe="M"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profCure sexe="F"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profCure sexe="F"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->	
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profCure sexe="NONCONNU"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profCure sexe="NONCONNU"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->	
+
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profSageFemme sexe="M"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profSageFemme sexe="M"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profSageFemme sexe="F"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profSageFemme sexe="F"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->	
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|> ProfLabel prof=profSageFemme sexe="NONCONNU"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> ProfLabel prof=profSageFemme sexe="NONCONNU"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>
+

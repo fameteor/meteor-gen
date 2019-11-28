@@ -1,0 +1,70 @@
+/* =============================================================== */
+/*                 BASE                                            */
+/* =============================================================== */
+
+/* COULEURS DE BASE ---------------------------------------------- */
+@red:			#ff0000;
+@green:		  	green;
+@colorInsert: 	#337ab7;
+@colorUpdate: 	#f0ad4e;
+@colorDelete: 	#d9534f;
+
+
+
+
+
+
+
+
+/* =============================================================== */
+/*                 STYLES                                          */
+/* =============================================================== */
+
+/* Général ------------------------------------------------------- */
+.red 					{color:@red;}
+.green 					{color:@green;}
+
+
+/* Pour les popup modales ---------------------------------------- */
+.std-modal 				{width: 98%;}
+.modal-search-result 	{max-height:60vh;overflow:auto;} /* 60% de la fenêtre */
+.modal-header 			{font-size: 18px;font-weight: bold;background-color:#FCF8E3;border-top-left-radius:6px;border-top-right-radius:6px;}
+
+.modal-insert 			{color:white;background-color:@colorInsert;}
+.modal-update 			{color:white;background-color:@colorUpdate;}
+.modal-delete 			{color:white;background-color:@colorDelete;}
+
+.chercherModalTitre		{background-color :#FCF8E3;padding:3px;}
+
+/* Champs intitulés */
+.intitule {color:#888888;font-style: italic;background-color:#FFFFFF;}
+
+/* Pour le TEMPLATE LibButton ------------------------------------ */
+
+/* MODELES */
+.LibButton {
+	cursor:grab;
+	font-size: 14px;
+	margin-left:5px;
+	padding:3px;
+	border:1px solid #DDDDDD;
+	border-radius: 5px;
+	&:hover {
+		border:1px sold #888888;
+		background-color:#DDDDDD;
+	}
+}
+
+/* STYLES */
+.LibButton_insert {
+	color:@colorInsert;
+	.LibButton;
+}
+.LibButton_update {
+	color:@colorUpdate;
+	.LibButton;
+}
+.LibButton_delete {
+	color:@colorDelete;
+	.LibButton;
+}

@@ -1,0 +1,189 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE LibButton                    -->
+<!-- Parameters :                          -->
+<!-- action::{"INSERT"/"UPDATE"/"DELETE"}  -->
+<!-- title::String                         -->
+<!-- ===================================== -->
+<template name="LibButton">{{#if hlp_eq action "INSERT"}}<span title="{{title}}" class="glyphicon glyphicon-plus LibButton_insert" aria-hidden="true"></span>{{/if}}{{#if hlp_eq action "UPDATE"}}<span title="{{title}}" class="glyphicon glyphicon-pencil LibButton_update" aria-hidden="true"></span>{{/if}}{{#if hlp_eq action "DELETE"}}<span title="{{title}}" class="glyphicon glyphicon-remove LibButton_delete" aria-hidden="true"></span>{{/if}}</template>
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibButton_DOCAUTO                     -->
+<!-- ===================================== -->
+<template name="LibButton_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Aucun.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Paramètres =========================== -->
+<table>
+	<tr>
+		<td><code>action</code> : obligatoire</td>
+		<td><code>::{"INSERT"/"UPDATE"/"DELETE"}</code></td>
+	</tr>
+	<tr>
+		<td><code>[title]</code> : facultatif</td>
+		<td><code>::String  </code></td>
+	</tr>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>A voir</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche le bouton correspondant à l'<code>action</code> passée en paramètre et affiche, au survol de la souris, les informations passées dans le paramètre <code>title</code>. Aucune action n'est associée à ce template, il faut alors associer un event à un tag <code>span</code> ou <code>div</code> enveloppant.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Aucun lien avec Bootstrap en dehors des icones utilisées.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|&gt; LibButton action="UPDATE" title="Exemple de bouton de update"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibButton action="INSERT" title="Exemple de bouton de insert"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|&gt; LibButton action="UPDATE" title="Exemple de bouton de update"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibButton action="UPDATE" title="Exemple de bouton de update"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|&gt; LibButton action="DELETE" title="Exemple de bouton de delete"}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{> LibButton action="DELETE" title="Exemple de bouton de delete"}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Exemple avec event attaché à un tag <code>span</code> enveloppant le bouton :<br/>
+<pre>&lt;span id="demoEvent"&gt;
+	{{|&gt; LibButton action="INSERT" title="Cliquer pour une démo d'event"}}
+&lt;/span&gt;</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+<span id="demoEvent">{{> LibButton action="INSERT" title="Cliquer pour une démo d'event"}}</span>
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+Exemple avec alignement à droite en mode bloc :<br/>
+<pre>&lt;div class="pull-right"&gt;
+	{{|&gt; LibButton action="INSERT"}}
+&lt;/div&gt;</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+<div class="pull-right">{{> LibButton action="INSERT"}}</div>
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->	
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+Pouvoir utiliser le template <code>LibIcone</code> en lui passant <code>class</code>, <code>title</code> et l'icone correcpondant à  l'<code>action</code> en paramètre
+<!-- ===================================== -->	
+	</div>
+</template>

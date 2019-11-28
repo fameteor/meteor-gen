@@ -1,0 +1,157 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE TagManagement                -->
+<!-- ===================================== -->
+<template name="TagManagement">
+	<div class="container">
+		{{#with persTags}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les personnes <span class="badge">{{hlp_count .}}</span></h3>
+			{{#each .}}
+				<div class="row tagmanagement-alt-background">
+					<div class="col-md-2" >
+						{{#if imgFileName}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/{{imgFileName}}" style="width:100px;"/></a>
+						{{else}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/tagNoImage.png" style="width:100px;"/></a>
+						{{/if}}
+					</div>
+					<div class="col-md-3" >
+						{{> TagAvecLien tag=.}}
+					</div>
+					<div class="col-md-4" >
+						{{summary}}
+					</div>
+					<div class="col-md-1" >
+						{{#each objTypes}}
+							{{#if hlp_eq . "PERS"}}<span class="badge">{{taggedPersCount ../_id}}  {{> LibIcone "iconePers"}}</span>{{/if}}
+							{{#if hlp_eq . "LIEU"}}<span class="badge">{{taggedLieuCount ../_id}}  {{> LibIcone "iconeLieu"}}</span>{{/if}}
+							{{#if hlp_eq . "HIST"}}<span class="badge">{{taggedDocCount ../_id}}  {{> LibIcone "iconeHist"}}</span>{{/if}}
+							{{#if hlp_eq . "DOC"}}<span class="badge">{{taggedHistCount ../_id}} {{> LibIcone "iconeDoc"}} </span>{{/if}}
+						{{/each}}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Modifier ce tag" tag=. }}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Supprimer ce tag" tag=. }}
+					</div>
+				</div>
+			{{/each}}
+		{{else}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les personnes <span class="badge">0</span></h3>
+		{{/with}}
+		
+		
+		{{#with lieuxTags}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les lieux <span class="badge">{{hlp_count .}}</span></h3>
+			{{#each .}}
+				<div class="row tagmanagement-alt-background">
+					<div class="col-md-2" >
+						{{#if imgFileName}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/{{imgFileName}}" style="width:100px;"/></a>
+						{{else}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/tagNoImage.png" style="width:100px;"/></a>
+						{{/if}}
+					</div>
+					<div class="col-md-3" >
+						{{> TagAvecLien tag=.}}
+					</div>
+					<div class="col-md-4" >
+						{{summary}}
+					</div>
+					<div class="col-md-1" >
+						{{#each objTypes}}
+							{{#if hlp_eq . "PERS"}}<span class="badge">{{taggedPersCount ../_id}}  {{> LibIcone "iconePers"}}</span>{{/if}}
+							{{#if hlp_eq . "LIEU"}}<span class="badge">{{taggedLieuCount ../_id}}  {{> LibIcone "iconeLieu"}}</span>{{/if}}
+							{{#if hlp_eq . "HIST"}}<span class="badge">{{taggedDocCount ../_id}}  {{> LibIcone "iconeHist"}}</span>{{/if}}
+							{{#if hlp_eq . "DOC"}}<span class="badge">{{taggedHistCount ../_id}} {{> LibIcone "iconeDoc"}} </span>{{/if}}
+						{{/each}}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Modifier ce tag" tag=. }}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Supprimer ce tag" tag=. }}
+					</div>
+				</div>
+			{{/each}}
+		{{else}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les lieux <span class="badge">0</span></h3>
+		{{/with}}
+		
+		
+		{{#with histsTags}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les points d'histoire <span class="badge">{{hlp_count .}}</span></h3>
+			{{#each .}}
+				<div class="row tagmanagement-alt-background">
+					<div class="col-md-2" >
+						{{#if imgFileName}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/{{imgFileName}}" style="width:100px;"/></a>
+						{{else}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/tagNoImage.png" style="width:100px;"/></a>
+						{{/if}}
+					</div>
+					<div class="col-md-3" >
+						{{> TagAvecLien tag=.}}
+					</div>
+					<div class="col-md-4" >
+						{{summary}}
+					</div>
+					<div class="col-md-1" >
+						{{#each objTypes}}
+							{{#if hlp_eq . "PERS"}}<span class="badge">{{taggedPersCount ../_id}}  {{> LibIcone "iconePers"}}</span>{{/if}}
+							{{#if hlp_eq . "LIEU"}}<span class="badge">{{taggedLieuCount ../_id}}  {{> LibIcone "iconeLieu"}}</span>{{/if}}
+							{{#if hlp_eq . "HIST"}}<span class="badge">{{taggedDocCount ../_id}}  {{> LibIcone "iconeHist"}}</span>{{/if}}
+							{{#if hlp_eq . "DOC"}}<span class="badge">{{taggedHistCount ../_id}} {{> LibIcone "iconeDoc"}} </span>{{/if}}
+						{{/each}}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Modifier ce tag" tag=. }}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Supprimer ce tag" tag=. }}
+					</div>
+				</div>
+			{{/each}}
+		{{else}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les points d'histoire <span class="badge">0</span></h3>
+		{{/with}}
+		
+		
+		{{#with docsTags}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les documents <span class="badge">{{hlp_count .}}</span></h3>
+			{{#each .}}
+				<div class="row tagmanagement-alt-background">
+					<div class="col-md-2" >
+						{{#if imgFileName}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/{{imgFileName}}" style="width:100px;"/></a>
+						{{else}}
+							<a href="/tag/infos/{{_id}}" title="{{imgTitle}}"><img src="/tagNoImage.png" style="width:100px;"/></a>
+						{{/if}}
+					</div>
+					<div class="col-md-3" >
+						{{> TagAvecLien tag=.}}
+					</div>
+					<div class="col-md-4" >
+						{{summary}}
+					</div>
+					<div class="col-md-1" >
+						{{#each objTypes}}
+							{{#if hlp_eq . "PERS"}}<span class="badge">{{taggedPersCount ../_id}}  {{> LibIcone "iconePers"}}</span>{{/if}}
+							{{#if hlp_eq . "LIEU"}}<span class="badge">{{taggedLieuCount ../_id}}  {{> LibIcone "iconeLieu"}}</span>{{/if}}
+							{{#if hlp_eq . "HIST"}}<span class="badge">{{taggedDocCount ../_id}}  {{> LibIcone "iconeHist"}}</span>{{/if}}
+							{{#if hlp_eq . "DOC"}}<span class="badge">{{taggedHistCount ../_id}} {{> LibIcone "iconeDoc"}} </span>{{/if}}
+						{{/each}}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="UPDATE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Modifier ce tag" tag=. }}
+					</div>
+					<div class="col-md-1" >
+						{{>LibEditButton action="DELETE" accessRightCheckObj=. modalTemplate="TagFormMainEditModal" title="Supprimer ce tag" tag=. }}
+					</div>
+				</div>
+			{{/each}}
+		{{else}}
+			<h3>{{> LibIcone "iconeTag"}} Etiquettes concernant les documents <span class="badge">0</span></h3>
+		{{/with}}
+	</div>
+</template>

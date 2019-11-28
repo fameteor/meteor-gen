@@ -1,0 +1,17 @@
+<!-- ===================================== -->
+<!-- TEMPLATE DocVisites                   -->
+<!-- ===================================== -->
+<template name="DocVisites">
+	{{#with gh_visitedObjects}}
+		<table>
+			{{#each DOC}}
+				{{#with gh_docById .}}
+				<tr>
+					<td class="text-center" style="padding:3px;">{{> DocMiniatureAvecLien}}</td>
+					<td style="padding:3px;">{{> DocTitreAvecLien}}<br/>{{> LibClipId}}</td><br/>
+				</tr>
+				{{/with}}
+			{{/each}}
+		</table>
+	{{/with}}
+</template>

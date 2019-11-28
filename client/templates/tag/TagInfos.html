@@ -1,0 +1,95 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE TagInfos                     -->
+<!-- ===================================== -->
+<template name="TagInfos">
+	<div class="container">
+	<br/>
+	{{#with tag}}
+		<div class="row">
+			<div class="col-md-3" >
+				{{#if imgFileName}}<img src="/{{imgFileName}}" class="img-responsive"/>{{else}}<img src="/tagNoImage.png" class="img-responsive"/>{{/if}}
+			</div>
+			<div class="col-md-9" >
+				<h3><span class="label label-info">{{label}}</span> <small>({{summary}})</small></h3>
+				<hr/>
+				{{#each objTypes}}
+					{{#if hlp_eq . "PERS"}}
+						{{#with persTagged ../_id}}
+							<h4>{{> LibIcone "iconePers"}} Personnes concernées <span class="badge">{{hlp_count .}}</span></h4>
+							{{#each .}}
+								<div class="row taginfo-alt-background">
+									<div class="col-md-4" >
+										{{> PersCompletAvecLien}}
+									</div>
+									<div class="col-md-8 taginfo-comment">
+										{{#if comment}}{{{gh_transformTextXml comment}}}{{/if}}
+									</div>
+								</div>
+							{{/each}}
+						{{else}}
+							<h4>{{> LibIcone "iconePers"}} Personnes concernées <span class="badge">0</span></h4>
+						{{/with}}
+					{{/if}}
+					{{#if hlp_eq . "LIEU"}}
+						{{#with lieuxTagged ../_id}}
+							<h4>{{> LibIcone "iconeLieu"}} Lieux concernés <span class="badge">{{hlp_count .}}</span></h4>
+							{{#each .}}
+								<div class="row taginfo-alt-background">
+									<div class="col-md-4" >
+										{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}}{{#if complement}} <small>({{complement}})</small>{{/if}}, {{#with surlieu}}{{> LieuNature}} {{> LieuNomLienDe}} {{> LieuCode}}{{/with}}
+									</div>
+									<div class="col-md-8 taginfo-comment">
+										{{#if ./comment}}{{{gh_transformTextXml ./comment}}}{{/if}}
+									</div>
+								</div>
+							{{/each}}
+						{{else}}
+							<h4>{{> LibIcone "iconeLieu"}} Lieux concernés <span class="badge">0</span></h4>
+						{{/with}}
+					{{/if}}
+					{{#if hlp_eq . "HIST"}}
+						{{#with histsTagged ../_id}}
+							<h4>{{> LibIcone "iconeHist"}} Points d'histoire concernés <span class="badge">{{hlp_count .}}</span></h4>
+							{{#each .}}
+								<div class="row taginfo-alt-background">
+									<div class="col-md-4" >
+										{{> HistTitreLien}} ({{#with date}}{{> DateformatLong}}{{/with}})
+									</div>
+									<div class="col-md-8 taginfo-comment">
+										{{#if ./comment}}{{{gh_transformTextXml ./comment}}}{{/if}}
+									</div>
+								</div>
+							{{/each}}
+						{{else}}
+							<h4>{{> LibIcone "iconeHist"}} Points d'histoire concernés <span class="badge">0</span></h4>
+						{{/with}}
+					{{/if}}
+					{{#if hlp_eq . "DOC"}}
+						{{#with docsTagged ../_id}}
+							<h4>{{> LibIcone "iconeDoc"}} Documents concernés <span class="badge">{{hlp_count .}}</span></h4>
+							{{#each .}}
+								<div class="row taginfo-alt-background">
+									<div class="col-md-2" >
+										{{> DocMiniatureAvecLien}}
+									</div>
+									<div class="col-md-3" >
+										{{> DocTitreAvecLien}} ({{#with date}}{{> DateformatLong}}{{/with}})
+									</div>
+									<div class="col-md-7 taginfo-comment">
+										{{#if ./comment}}{{{gh_transformTextXml ./comment}}}{{/if}}
+									</div>
+								</div>
+							{{/each}}
+						{{else}}
+							<h4>{{> LibIcone "iconeDoc"}} Documents concernés <span class="badge">0</span></h4>
+						{{/with}}
+					{{/if}}
+					<hr/>
+				{{/each}}
+			</div>
+		</div>
+	{{/with}}
+	</div>
+</template>
+
+

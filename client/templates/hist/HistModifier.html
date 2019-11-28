@@ -1,0 +1,15 @@
+<!-- ===================================== -->
+<!-- TEMPLATE HistModifier                                                      -->
+<!-- ===================================== -->
+<template name="HistModifier">
+	{{#autoForm collection="Hists" doc=this id="updateHistForm" type="update"}}
+		{{> HistFormulaire}}
+		{{> LibFormulaireChampsCaches}}
+		<br/>
+		<div class="row">
+			<div class="col-sm-12 text-center">
+				<button type="submit" class="btn btn-primary">Modifier</button>
+			</div>
+		</div>
+	{{/autoForm}}
+</template>

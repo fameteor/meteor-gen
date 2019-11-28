@@ -1,0 +1,256 @@
+﻿<!-- ===================================== -->
+<!-- TEMPLATE LibDocAnalysis               -->
+<!-- obj::PERS, ::LIEU, ::HIST ou ::DOC    -->
+<!-- objType::{"PERS","LIEU","HIST","DOC"} -->
+<!-- ===================================== -->
+<template name="LibDocAnalysis">
+	<div class="container-fluid">
+		{{#with infosList}}
+			<table class="table table-striped">
+				<thead>
+					<th class="text-center"> Acte</th>
+					<th>Date</th>
+					{{#if (hlp_eq ../objType "PERS")}}
+					<th class="text-center"> Status</th>
+					<th class="text-center"> Age</th>
+					<th class="text-center"> Age calculé</th>
+					<th class="text-center"> Rôle</th>
+					<th class="text-center"> Signe</th>
+					<th class="text-center"> Habite</th>
+					<th class="text-center"> Profession</th>
+					<th class="text-center"> <span class="red">Profession</span></th>
+					{{/if}}
+					<th class="text-center"> Informations</th>
+				</thead>
+				<tbody>
+					{{#each .}}
+						<tr class="{{incertain}}">
+							<td>
+								{{#with doc}}
+									<span class="h4">{{> DocLienversdoc _id}}</span>
+									{{> DocTitreAvecLienPers}}
+								{{/with}}
+							</td>
+							<td>{{#with doc.date}}{{> DateformatLong}}{{/with}}</td>
+							{{#if (hlp_eq ../../objType "PERS")}}
+							<td>
+								{{#if (hlp_eq status "VIVANT")}}
+									<span class="green">{{gh_getCommonParmLabel "texteXmlStatus" status}}</span>
+								{{/if}}
+								{{#if (hlp_eq status "DECEDE")}}
+									<span class="red">{{gh_getCommonParmLabel "texteXmlStatus" status}}</span>
+								{{/if}}
+								{{#if (hlp_eq status "INCONNU")}}
+									<em>{{gh_getCommonParmLabel "texteXmlStatus" status}}</em>
+								{{/if}}
+							</td>
+							<td>{{ageFormate}}</td>
+							<td>
+								{{#unless (hlp_eq status "DECEDE")}}
+									{{ageCalcule ../../obj.naissance.date doc.date}}
+								{{else}}
+									{{#if (hlp_eq role "MORT")}}
+										{{ageCalcule ../../obj.naissance.date doc.date}}
+									{{/if}}
+								{{/unless}}
+							</td>
+							<td>{{gh_getCommonParmLabel "texteXmlRole" role}}</td>
+							<td>
+								{{#if (hlp_eq signe "BIEN")}}
+									<span class="green">{{gh_getCommonParmLabel "texteXmlSigne" signe}}</span>
+								{{/if}}
+								{{#if (hlp_eq signe "MAL")}}
+									<span class="green">{{gh_getCommonParmLabel "texteXmlSigne" signe}}</span>
+								{{/if}}
+								{{#if (hlp_eq signe "NON")}}
+									<span class="red">{{gh_getCommonParmLabel "texteXmlSigne" signe}}</span>
+								{{/if}}
+								{{#if (hlp_eq signe "NONPRECISE")}}
+									<em>{{gh_getCommonParmLabel "texteXmlSigne" signe}}</em>
+								{{/if}}
+								{{#if (hlp_eq signe "N/A")}}
+									<em>{{gh_getCommonParmLabel "texteXmlSigne" signe}}</em>
+								{{/if}}
+							</td>
+							<td>
+								{{#with lieu}}
+									{{> LieuNomLienArticle}}
+								{{/with}}
+							</td>
+							<td>
+								{{#with gh_profById prof}}
+									{{> ProfLabel prof=. sexe=../../../obj.sexe}}
+								{{/with}}
+							</td>
+							<td><span class="red">{{profession}}</span></td>
+							{{/if}}
+							<td>{{infos}}</td>
+						</tr>
+					{{/each}}
+				</tbody>
+			</table>
+		{{else}}
+			<p>
+				Aucun document indexé ne mentionne
+				{{#if (hlp_eq objType "PERS")}}cette personne.{{/if}}
+				{{#if (hlp_eq objType "LIEU")}}ce lieu.{{/if}}
+				{{#if (hlp_eq objType "HIST")}}ce point d'histoire.{{/if}}
+				{{#if (hlp_eq objType "DOC")}}ce document.{{/if}}
+			</p>
+		{{/with}}
+	</div>
+</template>
+
+
+<!-- ===================================== -->
+<!-- TEMPLATE DOCUMENTATION                -->
+<!-- LibDocAnalysis_DOCAUTO                -->
+<!-- ===================================== -->
+<template name="LibDocAnalysis_DOCAUTO">
+	<table class="table">
+		<thead>
+			<tr>
+				<th>Contexte par défaut</th>
+				<th>Paramètres</th>
+				<th>Dépendances</th>
+				<th>Explication</th>
+				<th>Bootstrap</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td>
+				
+<!-- Contexte ============================= -->
+<code>Non utilisé.</code>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+
+<!-- Paramètres =========================== -->
+<table  class="table table-striped">
+	<tbody>
+		<tr>
+			<td><code>obj::genObject</code></td>
+			<td>Objet pour lequel on cherche des informations dans les transcriptions d'actes.</td>
+		</tr>
+		<tr>
+			<td><code>objType::["PERS","LIEU","HIST","DOC"]</code></td>
+			<td>Type de ce objet</td>
+		</tr>
+	</tbody>
+</table>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Dépendances ========================== -->
+<code>A voir</code><br/>
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Explication ========================== -->
+Affiche les informations disponibles dans les transcriptions d'acte pour l'objet passé dans le paramètre <code>obj</code> et dont le type est précisé dans le paramètre <code>type</code>.
+<!-- ====================================== -->
+
+				</td>
+				<td>
+				
+<!-- Responsive =========================== -->
+Affichage dans une <code>div</code> de classe <code>container-fluid</code>.
+<!-- ====================================== -->
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	
+		
+	<table class="table">
+		<thead>
+			<tr>
+				<th colspan="2">Exemples/Tests</th>
+			</tr>
+		</thead>
+		<tbody>
+		
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with jeromeFleury}}
+	{{|> LibDocAnalysis obj=. objType="PERS"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with jeromeFleury}}
+	{{> LibDocAnalysis obj=. objType="PERS"}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<pre>{{|#with lieuTest}}
+	{{|> LibDocAnalysis obj=. objType="LIEU"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+{{#with lieuTest}}
+	{{> LibDocAnalysis obj=. objType="LIEU"}}
+{{/with}}
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->
+<!-- === BLOC EXEMPLE/TEST =============== -->		
+			<tr>
+				<td>
+				
+<!-- Codes tests ========================= -->
+<div class="bg-warning">Faire un exemple pour HIST, DOC pour tests</div>
+<pre>{{|#with histTest}}
+	{{|> LibDocAnalysis obj=. objType="HIST"}}
+{{|/with}}</pre>
+<!-- ===================================== -->	
+
+				</td>
+				<td>
+				
+<!-- Rendu =============================== -->
+
+<!-- ===================================== -->	
+
+				</td>		
+			</tr>
+<!-- === FIN BLOC EXEMPLE/TEST =========== -->	
+
+		</tbody>
+	</table>
+
+	<h4>Améliorations</h4>
+	<div class="bg-warning">
+<!-- Améliorations ======================= -->
+A compléter.
+<!-- ===================================== -->	
+	</div>
+</template>

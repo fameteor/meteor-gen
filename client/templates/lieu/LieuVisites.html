@@ -1,0 +1,18 @@
+<!-- ===================================== -->
+<!-- TEMPLATE LieuVisites                  -->
+<!-- ===================================== -->
+<template name="LieuVisites">
+	{{#with gh_visitedObjects}}
+		<ul>
+		{{#each LIEU}}
+				{{#with gh_lieuById .}}
+					<li>
+					{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}},
+					{{#with gh_lieuById inclusDans}}{{> LieuNature}} {{> LieuNomLienDe}}{{> LieuCode}}{{/with}}<br/>
+					{{> LibClipId}}
+					</li>
+				{{/with}}
+		{{/each}}
+		</ul>
+	{{/with}}
+</template>

@@ -1,0 +1,76 @@
+<!-- ===================================== -->
+<!-- TEMPLATE AdminDocprogPopups           -->
+<!-- Contexte : aucun		      		   -->
+<!-- ===================================== -->
+<template name="AdminDocprogPopups">
+	<div class="container">
+		<h2>{{> LibIcone "iconeAdmin"}} Documentation sur les popups pour créer/chercher et choisir un objet GEN</h2>
+		<ul>
+			<li><a href="#general">1) Fonctionnement général</a></li>
+			<li><a href="#utilisation">2) Exemple d'utilisation</a></li>
+			<li><a href="#contenu">3) Contenu des templates popups</a></li>
+		</ul>
+	
+<!-- ===================================== -->
+<h3><a id="general"></a>1) Fonctionnement général</h3>
+<p>Pour "créer et choisir" ou pour "chercher et choisir" un objet GEN, des TEMPLATES de popups modales sont disponible appelés :</p>
+<ul>
+	<li><code>PersChoisirModal</code></li>
+	<li><code>LieuChoisirModal</code></li>
+	<li><code>HistChoisirModal</code></li>
+	<li><code>DocChoisirModal</code></li>
+</ul>
+
+<p>L'ouverture de la fenêtre modale d'un template est appelée par la fonction : <code>Modal.show('DocChoisirModal' [, parms [, options]]);</code></p>
+
+<p>L'objet <code>parms</code> est optionnel et contient les propriétés suivantes (toutes facultatives) :</p>
+<pre>{
+	title :			::String		// (optionnel) Ce titre est affiché en tête de la popup. Sinon, un titre par défaut est affiché.
+	
+	filter : 		::Object		// (optionnel) Cet objet contient les valeurs initiales des critères de tri et ne contient que 
+								des propriétés propres à l'objet GEN considéré.
+	lockedFields :		::[String]		// (optionnel) Cet array contient le nom des propriétés dont les champs doivent être verrouillés 
+							   (non modifiables par l'utilisateur)
+	idField :		::String ou ::DOM	// (optionnel) Le choix d'un objet GEN déclenche l'écriture de l'ID de l'objet choisi dans 
+							   le champ correspondant à l'élément DOM contenu dans DOM "idField" 
+							   (ou au sélecteur CSS que peut aussi contenir "idField").
+	labelField :		::String ou ::DOM	// (optionnel) Le choix d'un objet GEN déclenche l'écriture de l'intitulé de l'objet choisi 
+							   dans le champ correspondant à l'élément DOM contenu dans DOM "labelField" 
+							   (ou au sélecteur CSS que peut aussi contenir "labelField").
+	callback :		::Function		// (optionnel) Le choix d'un objet GEN déclenche le lancement de cette fonction "callback" qui recoit 
+							   comme paramètre l'ID de l'objet choisi. Puis la popup est fermée.
+	clearButton:		::Boolean		// (optionnel, false par defaut) Si true, le bouton d'effacement du champ est ajouté (idField et labelField doivent aussi être précisés),
+	
+	addButton:		::Boolean		// (optionnel, false par defaut) Si true, le bouton d'ajout d'un nouveau lieu est ajouté,
+}</pre>
+
+<p class="bg-warning">Nb : Si aucune des propriétés <code>idField</code>, <code>labelField</code>, <code>callback</code> de <code>parms</code> n'est fournie ou si <code>parms</code> lui même n'est pas fourni, la fenêtre modale s'ouvre et le choix d'un objet GEN particulier provoque l'ouverture de la fiche info de cet objet GEN.</p>
+
+<p>L'objet <code>options</code> est optionnel et contient les options pour le module <code>peppelg:bootstrap-3-modal</code> utilisé pour la gestion des fenêtre modales selon <code>bootstrap-3</code> :</p>
+<pre>
+// Par exemple, pour éviter que la fenêtre popup modale soit fermée quand on clique en dehors de cette fenêtre, il faut les options :
+
+{
+	backdrop:'static',
+	keyboard:false
+}</pre>
+
+<!-- ===================================== -->
+<h3><a id="utilisation"></a>2) Exemple d'utilisation</h3>
+<p>Problème : Dans le formulaire de saisie d'un personne, on souhaite utiliser la popup modale de choix de document pour mettre l'id d'un acte dans les champs de saisie correspondant à la naissance, mariage et décès.</p>
+<p><b>Nb : tous les champs "input" actes ont un "name" qui se termine par ".acte"</b></p>
+<p>Solution : On modifie le fichier javacript du template du formulaire pour rajouter l'<code>event</code> suivant :</p>
+<pre>'focus input[name$=".acte"]': function(e,tpl){		// Fonction appelée quand on clique sur un champ acte
+	e.preventDefault();				// On arrête la propagation de l'evt au navigateur
+	e.target.blur();				// On enlève le focus du champ pour ne rien y saisir
+	var parms = {					// On prépare les paramètres
+		idField : e.target		// On renvoie le sélector du champ sur lequel on a cliqué
+	}
+	Modal.show('DocChoisirModal',parms);		// On appelle la fenêtre modale avec ses paramètres
+},</pre>
+
+<!-- ===================================== -->
+<h3><a id="contenu"></a>3) Contenu des templates popups</h3>
+<p class="bg-danger">A faire.</p>
+	</div>
+</template>
