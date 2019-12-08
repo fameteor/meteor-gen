@@ -1,0 +1,116 @@
+<!-- ===================================== -->
+<!-- TEMPLATE wmtsViewer                   -->
+<!-- Parameters : 						   -->
+<!-- - targetObj : geo refs object to display -->
+<!-- - type : object type (DOC or LIEU)    -->
+<!-- ===================================== -->
+<template name="wmtsViewer">
+	{{pseudoHelperInit}}
+	<div class="row">
+		{{#with geoRefsDocsList=geoRefsDocsList geoRefsPlacesList=geoRefsPlacesList xTilesList=xTilesList yTilesList=yTilesList}}
+			<div class="col-md-10">
+				<svg 
+					width="{{width}}" 
+					height="{{height}}" 
+					version="1.1" 
+					viewBox = "{{xOffsetPixel}} {{yOffsetPixel}} {{width}} {{height}}"
+					class = "zoomable"
+					id = "map"
+					xmlns="http://www.w3.org/2000/svg" 
+					xmlns:xlink= "http://www.w3.org/1999/xlink">
+					
+					{{> wmtsViewerSvgSymbols}}
+					{{calculateReactiveVars}}
+					<!-- Background layer ==================== -->
+					{{#if backgroundUrlTemplate}}
+						{{#each ./xTilesList}}
+							{{#each ../yTilesList}}
+								<image xlink:href="{{tileUrl ../../targetObj .. . zoom backgroundUrlTemplate}}" x="{{xTile ..}}" y="{{yTile .}}" height="257px" width="257px"/>
+							{{/each}}
+						{{/each}}
+					{{/if}}
+					<!-- DOCs layers ========================= -->
+					{{#each ./geoRefsDocsList}}
+						{{#each ../xTilesList}}
+							{{#each ../../yTilesList}}
+								<image xlink:href="{{docTileUrl ../.. .. . zoom docCroppedIsChecked}}" x="{{xTile ..}}" y="{{yTile .}}" opacity="{{svgDocOpacity ../../_id}}" height="257px" width="257px"/>
+							{{/each}}
+						{{/each}}
+					{{/each}}
+					<!-- LIEUs icons layer =================== -->
+					{{#if placeIconsIsChecked}}
+						{{#each ./geoRefsPlacesList}}
+							{{# if hlp_eq ../../type "DOC"}}
+								<g class="linkedPlace">
+									<use xlink:href="#maisonBleue" x="{{pointCoordinates.x}}" y="{{pointCoordinates.y}}">
+										<title>{{placeName}}</title>
+									</use>
+								</g>
+							{{else}}
+								<use xlink:href="#maisonBleue" x="{{pointCoordinates.x}}" y="{{pointCoordinates.y}}">
+									<title>{{placeName}}</title>
+								</use>
+							{{/if}}
+						{{/each}}
+					{{/if}}
+					<!-- SCALE layer ========================= -->
+					<g transform="translate({{xOffsetPixel}},{{yOffsetPixel}})">
+						<line x1="0" y1="25" x2="0" y2="20" style="stroke:#135A97;stroke-width:3" />
+						<line x1="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y1="25" x2="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y2="20" style="stroke:#135A97;stroke-width:3" />
+						<line x1="0" y1="25" x2="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y2="25" style="stroke:#135A97;stroke-width:3" />
+						<text x="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y="18" style="text-anchor:middle;stroke:#135A97;fill:#135A97">{{#with scale displayCenterGts zoom}}{{distance}}{{/with}}m</text>
+					</g>
+				</svg>
+			</div>
+			<div class="col-md-2">
+				<div class="text-center">
+					<button id="minus" class="btn btn-primary">-</button> 
+					<span class="h4">Zoom</span>
+					<button id="plus" class="btn btn-primary">+</button>
+				</div>
+				<form>
+					<div class="form-group">
+						<h4>Fond</h4>
+						<select id="backgroundLayerSelect" class="form-control">
+							{{#each backgroundLayersList}}
+								<option value="{{./backgroundUrlTemplate}}" {{backgroundLayerSelected}}>{{label}}</option>
+							{{/each}}
+						</select>
+						<h4>Document(s)</h4>
+					</div>
+					<div style="height:195px;overflow:auto;border:1px solid #CCCCCC;padding:3px">
+						{{#each ./geoRefsDocsList}}
+							<div class="form-group">
+								<a href="/doc/infos/{{_id}}">{{titre}}</a>
+								<br/>
+								<input class="opacity_slider" type="range" min="0" max="100" value="{{docOpacity _id}}"/>
+								<label>{{docOpacity _id}}%</label>
+							</div>
+						{{/each}}
+					</div>
+					{{#if hlp_gte (hlp_count  ./geoRefsDocsList) 2}}
+						<br/>
+						<div class="form-group">
+							<input id="globalOpacity_slider" type="range" min="0" max="100" value="{{globalDocOpacity}}"/>
+							<label>{{globalDocOpacity}}%</label>
+							<br/>
+						</div>
+					{{/if}}
+					<div class="form-group">
+						<label>
+							<input id="docCroppedCheckBox" type="checkbox" checked={{docCroppedIsChecked}}> 
+								détourer
+						</label>
+					</div>
+					<div class="checkbox">
+						<h4>Lieu(x)</h4>
+						<label>
+						<input id="placeIconsCheckBox" type="checkbox" checked={{placeIconsIsChecked}}>
+							icônes des lieux
+						</label>
+					</div>
+				</form>
+			</div>
+		{{/with}}
+	</div>
+</template>

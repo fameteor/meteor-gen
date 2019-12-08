@@ -1,0 +1,119 @@
+<!-- ===================================== -->
+<!-- TEMPLATE wmtsViewerSvgSymbols         -->
+<!-- Parameters : 						   -->
+<!-- - doc : layer document                -->
+<!-- ===================================== -->
+<template name="wmtsViewerSvgSymbols">
+
+	<symbol preserveAspectRatio="xMidYMid meet">
+		
+		<!-- == Symbole : CIBLE BLEUE ================================== -->
+		<g id="symb0001" opacity="1">
+			<circle cx="0" cy="0" r="20" style="stroke:blue;stroke-width:0.5;fill-opacity:0.4;fill:blue"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:blue"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:blue"/>
+		</g>
+		
+		<!-- == Symbole : CIBLE rouge ================================== -->
+		<g id="symb0002" opacity="1">
+			<circle cx="0" cy="0" r="20" style="stroke:red;stroke-width:0.5;fill-opacity:0.4;fill:red"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:red"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:red"/>
+		</g>
+		
+		<!-- == Symbole : croix positionnement  ================================= -->
+		<g id="croix" opacity="1">
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+
+		<!-- == Symbole : MAISON  ================================= -->
+		<g id="maison" opacity="1">
+			<path d="M-8,0 L-8,-10 L-10,-10 L0,-20 L4,-16 L4,-18 L6,-18 L6,-14 L10,-10 L8,-10 L8,0 Z" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-10,-10 L0,-20 L10,-10 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : MAISON  BLEUE =========================== -->
+		<g id="maisonBleue" opacity="1">
+			<path d="M-8,0 L-8,-10 L-10,-10 L0,-20 L4,-16 L4,-18 L6,-18 L6,-14 L10,-10 L8,-10 L8,0 Z" style="stroke-width:0.5;stroke:#135A97;fill:none"/>
+			<path d="M-10,-10 L0,-20 L10,-10 Z" style="stroke-width:0.5;stroke:#135A97;fill:#135A97"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#000000"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#000000"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#000000;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : MOULIN ================================= -->
+		<g id="moulin" opacity="1">
+			<path d="M-7,0 L-7,-20 L0,-30 L7,-20 L7,0" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-9,-20 L0,-30 L9,-20 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<g transform="translate(0 -20)">
+				<rect x="-16" y="-2" width="32" height="4" style="stroke-width:0.5;stroke:#03032B;fill:none" transform="rotate(45)"/>
+				<rect x="-16" y="-2" width="32" height="4" style="stroke-width:0.5;stroke:#03032B;fill:none" transform="rotate(135)"/>
+			</g>
+			
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : BOURINE ================================= -->
+		<g id="bourrine" opacity="1">
+			<path d="M-8,0 L-8,-8 L-12,-8 L-8,-15 L8,-15 L12,-8 L8,-8 L8,0 Z" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-12,-8 L-8,-15 L8,-15 L12,-8 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : pont ================================= -->
+		<g id="pont" opacity="1">
+			<path d="M-12,0 L-20,0 L-20,-15 L20,-15 L 20,0 L12,0 C12,0 0,-25 -12,0 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : chateau ================================= -->
+		<g id="chateau" opacity="1">
+			<path d="M-8,0 L-16,0 L-16,-16 L16,-16 L16,0 L8,0" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-8,0 L-8,-16 M8,0 L8,-16" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-16,-16 L-12,-26 L-8,-20 L8,-20 L12,-26 L16,-16 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : abbaye ================================= -->
+		<g id="abbaye" opacity="1">
+			<path d="M-8,0 L-8,-8 L-12,-8 L-8,-15 L8,-15 L12,-8 L8,-8 L8,0 Z" style="stroke-width:0.5;stroke:green;fill:green"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : ecueil ================================= -->
+		<g id="ecueil" opacity="1">
+			<path d="M-13,0 L-3,-20 L5,-7 L11,-12 L15,0" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+		
+		<!-- == Symbole : eglise ================================= -->
+		<g id="eglise" opacity="1">
+			<path d="M-8,0 L-16,0 L-16,-16 L-8,-16 L-8,-12 L16,-12 L16,0 L8,0" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-8,0 L-8,-16" style="stroke-width:0.5;stroke:#03032B;fill:none"/>
+			<path d="M-8,-16 L12,-16 L16,-12 L-8,-12 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<path d="M-16,-16 L-12,-26 L-8,-16 Z" style="stroke-width:0.5;stroke:#03032B;fill:#03032B"/>
+			<line id="ligne_vert" x1="0" y1="-10" x2="0" y2="10" style="stroke-width:0.5;stroke:#03032B"/>
+			<line id="ligne_horiz" x1="-10" y1="0" x2="10" y2="0" style="stroke-width:0.5;stroke:#03032B"/>
+			<circle cx="0" cy="0" r="4" style="stroke:#03032B;stroke-width:0.5;fill:none"/>
+		</g>
+			
+	</symbol>
+	
+</template>
