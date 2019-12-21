@@ -8,10 +8,6 @@ Template.LieuInfos.helpers({
 				{	label:"Carte géo-référencée",
 					templateName:"wmtsViewerTabsAdaptor",
 					doc:{targetObj:this,type:"LIEU"}},
-					
-				{	label:"Google Map",
-					templateName:"GoogleMap",
-					lieuFocus:this},
 
 				{	label:"Cartes",
 					templateName:"LieuInfosCartes",
@@ -32,10 +28,6 @@ Template.LieuInfos.helpers({
 		}
 		else {
 			var listeTabs = [
-				{	label:"Google Map",
-					templateName:"GoogleMap",
-					lieuFocus:this},
-
 				{	label:"Cartes",
 					templateName:"LieuInfosCartes",
 					lieu:this},
