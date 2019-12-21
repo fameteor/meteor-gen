@@ -42,7 +42,7 @@ FUTUR
 // Template PARAMETERS
 // -----------------------------------------------------------------
 var parms = {
-	zoomMin: 			12,
+	zoomMin: 			10,
 	zoomMax: 			17,
 	initialOpacity: 	70,
 	initialWidth:		1000,
@@ -61,6 +61,10 @@ var parms = {
 		{
 			label:'- Cartes IGN',
 			backgroundUrlTemplate:'https://wxs.ign.fr/pratique/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.MAPS&TILEMATRIXSET=PM&TILEMATRIX={{zoom}}&TILECOL={{x}}&TILEROW={{y}}&STYLE=normal&FORMAT=image/jpeg'
+		},
+		{
+			label:'- Carte état major 1848',
+			backgroundUrlTemplate:'/marais/geo_refs/tiled/carteEtatMajor1848/{{zoom}}/{{x}}/{{y}}.png'
 		},
 		{
 			label:'Aucun fond',
@@ -243,31 +247,9 @@ Template.wmtsViewer.onCreated (function () {
 	this.placeIconsIsChecked 		= new ReactiveVar(true);
 	this.docCroppedIsChecked 		= new ReactiveVar(false);
 	this.backgroundUrlTemplate		= new ReactiveVar(parms.backgroundLayersList[0].backgroundUrlTemplate);
-	// Opacity array initialisation -------------
-	var docOpacityObject = {};
-	switch (dataContext.type) {
-		case 'DOC':
-			docOpacityObject[dataContext.targetObj._id] = parms.initialOpacity;
-			break;
-		case 'LIEU':
-			// Find all docs with geoRefs link to this place
-			var linkedDocsIdsList = Liens.find({
-				"pour.type":"DOC",
-				"vers.id":dataContext.targetObj._id,
-				"vers.type":"LIEU"
-			}).fetch().map(function(obj){
-				return obj.pour.id
-			});
-			result = Docs.find({
-				_id:{$in: linkedDocsIdsList},
-				codage:"GEO_REF"
-			}).fetch().map(function(obj) {
-				docOpacityObject[obj._id] = parms.initialOpacity;
-			});
-			break;			
-	}
-	this.docOpacityObject			= new ReactiveVar(docOpacityObject);
-	this.globalDocOpacity			= new ReactiveVar(parms.initialOpacity);
+	// Opacity management -----------------------
+	this.docOpacityObject			= new ReactiveVar({});
+	this.globalDocOpacity			= new ReactiveVar(0);
 	// Get targetObject if ID only provided
 	
 	// Initialisation ---------------------------
@@ -281,6 +263,31 @@ Template.wmtsViewer.onCreated (function () {
 Template.wmtsViewer.helpers({
 	'pseudoHelperInit'() {
 		console.log("init");
+		// Opacity reactive vars initialisation --------------------
+		var docOpacityObject = {};
+		switch (this.type) {
+			case 'DOC':
+				docOpacityObject[this.targetObj._id] = parms.initialOpacity;
+				break;
+			case 'LIEU':
+				// Find all docs with geoRefs link to this place
+				var linkedDocsIdsList = Liens.find({
+					"pour.type":"DOC",
+					"vers.id":this.targetObj._id,
+					"vers.type":"LIEU"
+				}).fetch().map(function(obj){
+					return obj.pour.id
+				});
+				result = Docs.find({
+					_id:{$in: linkedDocsIdsList},
+					codage:"GEO_REF"
+				}).fetch().map(function(obj) {
+					docOpacityObject[obj._id] = parms.initialOpacity;
+				});
+				break;			
+		}
+		Template.instance().docOpacityObject.set(docOpacityObject);
+		Template.instance().globalDocOpacity.set(parms.initialOpacity);
 	},
 	// Reactive variable ------------------------
 	'width'() {
@@ -389,7 +396,7 @@ Template.wmtsViewer.helpers({
 	'docTileUrl'(doc,x,y,zoom,docCroppedIsChecked) {
 		if (docCroppedIsChecked) {
 			var pathSplit = doc.urlDocument.split(".")[0].replace("/brut/","/tiledCropped/");
-			return "/marais" + pathSplit + "_cropped/" + zoom + "/" + x + "/" + y + ".png";
+			return "/marais" + pathSplit + "/" + zoom + "/" + x + "/" + y + ".png";
 		}
 		else {
 			var pathSplit = doc.urlDocument.split(".")[0].replace("/brut/","/tiled/");
@@ -545,7 +552,6 @@ Template.wmtsViewer.events({
 	},
 	'change #backgroundLayerSelect': function(e,tpl){
 		e.preventDefault();
-		console.log(e.target.value);
 		tpl.backgroundUrlTemplate.set(e.target.value);
 	},
 	// Opacity management
