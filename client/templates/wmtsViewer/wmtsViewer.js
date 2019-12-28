@@ -45,8 +45,8 @@ var parms = {
 	zoomMin: 			10,
 	zoomMax: 			17,
 	initialOpacity: 	70,
-	initialWidth:		1000,
-	initialHeight:		495,
+	initialWidth:		1050,
+	initialHeight:		700,
 	
 	backgroundLayersList : [
 		// Use {{zoom}} {{x}} {{y}} in the template URL
@@ -65,6 +65,14 @@ var parms = {
 		{
 			label:'- Carte état major 1848',
 			backgroundUrlTemplate:'/marais/geo_refs/tiled/carteEtatMajor1848/{{zoom}}/{{x}}/{{y}}.png'
+		},
+		{
+			label:'- Cartes IGN (dev)',
+			backgroundUrlTemplate:'/marais/fondCartes/cartes_IGN/{{zoom}}/{{x}}/{{y}}.jpg'
+		},
+		{
+			label:'- Photos IGN (dev)',
+			backgroundUrlTemplate:'/marais/fondCartes/photos_IGN/{{zoom}}/{{x}}/{{y}}.jpg'
 		},
 		{
 			label:'Aucun fond',
@@ -247,6 +255,7 @@ Template.wmtsViewer.onCreated (function () {
 	this.placeIconsIsChecked 		= new ReactiveVar(true);
 	this.docCroppedIsChecked 		= new ReactiveVar(false);
 	this.backgroundUrlTemplate		= new ReactiveVar(parms.backgroundLayersList[0].backgroundUrlTemplate);
+	this.displayTilesCoordinatesIsChecked	= new ReactiveVar(false);
 	// Opacity management -----------------------
 	this.docOpacityObject			= new ReactiveVar({});
 	this.globalDocOpacity			= new ReactiveVar(0);
@@ -317,6 +326,9 @@ Template.wmtsViewer.helpers({
 	},
 	'backgroundLayerSelected'() {
 		return (this.value === Template.instance().backgroundUrlTemplate.get()) ? "selected" : "";
+	},
+	'displayTilesCoordinatesIsChecked'() {
+		return Template.instance().displayTilesCoordinatesIsChecked.get();
 	},
 	// To generate the image tiles --------------
 	'xTilesList'() {
@@ -553,6 +565,10 @@ Template.wmtsViewer.events({
 	'change #backgroundLayerSelect': function(e,tpl){
 		e.preventDefault();
 		tpl.backgroundUrlTemplate.set(e.target.value);
+	},
+	'change #displayTilesCoordinatesCheckBox': function(e,tpl){
+		e.preventDefault();
+		tpl.displayTilesCoordinatesIsChecked.set(e.target.checked);
 	},
 	// Opacity management
 	'input .opacity_slider, change .opacity_slider': function(e,tpl){

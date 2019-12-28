@@ -26,6 +26,10 @@
 						{{#each ./xTilesList}}
 							{{#each ../yTilesList}}
 								<image xlink:href="{{tileUrl ../../targetObj .. . zoom backgroundUrlTemplate}}" x="{{xTile ..}}" y="{{yTile .}}" height="257px" width="257px"/>
+								{{#if displayTilesCoordinatesIsChecked}}
+									<rect x="{{xTile ..}}" y="{{yTile .}}" width="256" height="256" style="fill:none;stroke-width:2;stroke:red" />
+									<text x="{{xTile ..}}" y="{{yTile .}}" dx="3" dy="28" style="font-size:25px;stroke:#0000000;fill:red;">({{..}},{{.}})</text>
+								{{/if}}
 							{{/each}}
 						{{/each}}
 					{{/if}}
@@ -76,6 +80,14 @@
 								<option value="{{./backgroundUrlTemplate}}" {{backgroundLayerSelected}}>{{label}}</option>
 							{{/each}}
 						</select>
+						{{#if gh_isAdmin}}
+							<div class="checkbox">
+								<label>
+								<input id="displayTilesCoordinatesCheckBox" type="checkbox" checked={{displayTilesCoordinatesIsChecked}}>
+									afficher les coordonnées des tuiles
+								</label>
+							</div>
+						{{/if}}
 						<h4>Document(s)</h4>
 					</div>
 					<div style="height:195px;overflow:auto;border:1px solid #CCCCCC;padding:3px">
