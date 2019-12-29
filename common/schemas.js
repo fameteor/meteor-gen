@@ -1453,6 +1453,14 @@ SCHEMA._specifiqueCodageDoc = new SimpleSchema({
 		type: SCHEMA._googleMap,
 		label: 		"Coordonnées géographique point 2",
 		optional: 	true,
+	},
+	"GEO_REF_tilesUrl": {
+		type: String,
+		label: 		"URL des tuiles",
+		autoform: {
+			placeholder:"/marais/fondCartes/cartes_IGN/{z}/{x}/{y}.jpg"
+		},
+		optional: 	true,
 	}
 }, { tracker: Tracker });
 
