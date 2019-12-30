@@ -51,28 +51,28 @@ var parms = {
 	backgroundLayersList : [
 		// Use {z} {x} {y} in the template URL
 		{
-			label:'- Openstreetmap',
-			backgroundUrlTemplate:'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
-		},
-		{
-			label:'- Photos IGN',
-			backgroundUrlTemplate:'https://wxs.ign.fr/pratique/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIXSET=PM&TILEMATRIX={z}&TILECOL={x}&TILEROW={y}&STYLE=normal&FORMAT=image/jpeg'
-		},
-		{
-			label:'- Cartes IGN',
-			backgroundUrlTemplate:'https://wxs.ign.fr/pratique/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.MAPS&TILEMATRIXSET=PM&TILEMATRIX={z}&TILECOL={x}&TILEROW={y}&STYLE=normal&FORMAT=image/jpeg'
-		},
-		{
-			label:'- Carte état major 1848',
-			backgroundUrlTemplate:'/marais/geo_refs/tiled/carteEtatMajor1848/{z}/{x}/{y}.png'
-		},
-		{
-			label:'- Cartes IGN (dev)',
+			label:'- Cartes IGN (local)',
 			backgroundUrlTemplate:'/marais/fondCartes/cartes_IGN/{z}/{x}/{y}.jpg'
 		},
 		{
-			label:'- Photos IGN (dev)',
+			label:'- Photos IGN (local)',
 			backgroundUrlTemplate:'/marais/fondCartes/photos_IGN/{z}/{x}/{y}.jpg'
+		},
+		{
+			label:'- Carte état major 1848 (local)',
+			backgroundUrlTemplate:'/marais/geo_refs/tiled/carteEtatMajor1848/{z}/{x}/{y}.png'
+		},
+		{
+			label:'- Openstreetmap (web)',
+			backgroundUrlTemplate:'https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+		},
+		{
+			label:'- Photos IGN  (web)',
+			backgroundUrlTemplate:'https://wxs.ign.fr/pratique/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=ORTHOIMAGERY.ORTHOPHOTOS&TILEMATRIXSET=PM&TILEMATRIX={z}&TILECOL={x}&TILEROW={y}&STYLE=normal&FORMAT=image/jpeg'
+		},
+		{
+			label:'- Cartes IGN  (web)',
+			backgroundUrlTemplate:'https://wxs.ign.fr/pratique/geoportail/wmts?SERVICE=WMTS&REQUEST=GetTile&VERSION=1.0.0&LAYER=GEOGRAPHICALGRIDSYSTEMS.MAPS&TILEMATRIXSET=PM&TILEMATRIX={z}&TILECOL={x}&TILEROW={y}&STYLE=normal&FORMAT=image/jpeg'
 		},
 		{
 			label:'Aucun fond',
@@ -493,7 +493,7 @@ Template.wmtsViewer.events({
 					var parms = {
 						title:			"Géolocaliser un lieu",
 						filter:			{'nature':"LIEUDIT"},
-						lockedFields:	["nature"],
+						// lockedFields:	["nature"],
 						clearButton:	false,
 						addButton:		true,
 						callback: lieuSelectedCallback(docFocus,latLngCursorPosition)
