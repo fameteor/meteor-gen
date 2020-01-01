@@ -40,6 +40,12 @@
 								<image xlink:href="{{docTileUrl ../.. .. . zoom docCroppedIsChecked}}" x="{{xTile ..}}" y="{{yTile .}}" opacity="{{svgDocOpacity ../../_id}}" height="257px" width="257px"/>
 							{{/each}}
 						{{/each}}
+						<!-- RECT around each doc -->
+						{{#if rectAroundIsChecked}}
+							{{#with docPosition}}
+								<rect class="rect-around-doc" x="{{./x}}" y="{{./y}}" width="{{./width}}" height="{{./height}}"/>
+							{{/with}}
+						{{/if}}
 					{{/each}}
 					<!-- LIEUs icons layer =================== -->
 					{{#if placeIconsIsChecked}}
@@ -112,6 +118,12 @@
 						<label>
 							<input id="docCroppedCheckBox" type="checkbox" checked={{docCroppedIsChecked}}> 
 								détourer
+						</label>
+					</div>
+					<div class="form-group">
+						<label>
+							<input id="rectAroundCheckBox" type="checkbox" checked={{rectAroundIsChecked}}> 
+								rectangle autour
 						</label>
 					</div>
 					<div class="checkbox">

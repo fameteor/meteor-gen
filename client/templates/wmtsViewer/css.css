@@ -1,0 +1,9 @@
+.rect-around-doc {
+	fill:none;
+	stroke-width:4;
+	stroke:blue
+}
+
+.rect-around-doc:hover {
+	stroke:red
+}

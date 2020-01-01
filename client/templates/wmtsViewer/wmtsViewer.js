@@ -286,6 +286,7 @@ Template.wmtsViewer.onCreated (function () {
 	this.docCroppedIsChecked 		= new ReactiveVar(false);
 	this.backgroundUrlTemplate		= new ReactiveVar(parms.backgroundLayersList[0].backgroundUrlTemplate);
 	this.displayTilesCoordinatesIsChecked	= new ReactiveVar(false);
+	this.rectAroundIsChecked		= new ReactiveVar(false);
 	// Opacity management -----------------------
 	this.docOpacityObject			= new ReactiveVar({});
 	this.globalDocOpacity			= new ReactiveVar(0);
@@ -348,6 +349,9 @@ Template.wmtsViewer.helpers({
 	'docCroppedIsChecked'() {
 		return Template.instance().docCroppedIsChecked.get();
 	},
+	'rectAroundIsChecked'() {
+		return Template.instance().rectAroundIsChecked.get();
+	},
 	'backgroundLayersList'() {
 		return parms.backgroundLayersList;
 	},
@@ -387,12 +391,7 @@ Template.wmtsViewer.helpers({
 		switch (this.type) {
 			case 'DOC':
 				// If geo referenced
-				console.log("DOC")
-				if (	isGeoReferenced(this.targetObj)) {
-					console.log("georefs")
-					result.push(this.targetObj);
-				}
-				else console.log("not georefs")
+				if (isGeoReferenced(this.targetObj)) result.push(this.targetObj);
 				break;
 			case 'LIEU':
 				// Find all docs with geoRefs link to this place
@@ -415,6 +414,18 @@ Template.wmtsViewer.helpers({
 				break;			
 		}
 		return result;
+	},
+	'docPosition'() {
+		var southWestPoint = WmtsViewerLib.pixelsFromLatLng(this.specif.GEO_REF_coordPoint1,Template.instance().zoom.get());
+		var northEastPoint = WmtsViewerLib.pixelsFromLatLng(this.specif.GEO_REF_coordPoint2,Template.instance().zoom.get());
+		var result = {
+			x:		southWestPoint.x,
+			y:		northEastPoint.y,
+			width:	northEastPoint.x - southWestPoint.x,
+			height:	southWestPoint.y - northEastPoint.y			
+		};
+		return result;
+
 	},
 	'geoRefsPlacesList'() {
 		var result = [];
@@ -602,6 +613,10 @@ Template.wmtsViewer.events({
 	'change #docCroppedCheckBox': function(e,tpl){
 		e.preventDefault();
 		tpl.docCroppedIsChecked.set(e.target.checked);
+	},
+	'change #rectAroundCheckBox': function(e,tpl){
+		e.preventDefault();
+		tpl.rectAroundIsChecked.set(e.target.checked);
 	},
 	'change #backgroundLayerSelect': function(e,tpl){
 		e.preventDefault();
