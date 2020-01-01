@@ -132,6 +132,23 @@ var zoomMinus = function(tpl) {
 }
 
 // -----------------------------------------------------------------
+// Function to check if a doc is georeferenced
+// -----------------------------------------------------------------
+var isGeoReferenced = function(doc) {
+	if (	doc
+			&& doc.codage === "GEO_REF"
+			&& doc.specif
+			&& doc.specif.GEO_REF_coordPoint1
+			&& doc.specif.GEO_REF_coordPoint1.lat
+			&& doc.specif.GEO_REF_coordPoint1.lng
+			&& doc.specif.GEO_REF_coordPoint2
+			&& doc.specif.GEO_REF_coordPoint2.lat
+			&& doc.specif.GEO_REF_coordPoint2.lng
+			&& doc.specif.GEO_REF_tilesUrl) return true;
+	else return false;
+}
+
+// -----------------------------------------------------------------
 // Initialisation function
 // -----------------------------------------------------------------
 var initialisation = function(dataContext,tpl) {
@@ -140,14 +157,27 @@ var initialisation = function(dataContext,tpl) {
 		// "displayCenterGts" reactive var calculation -------------
 		// For DOC, the display is centered on the center point (means of point1 and point2)
 		case "DOC" :
-			var displayCenterGts = WmtsViewerLib.wmtsFromLatLng(
-					{
-						lat: (dataContext.targetObj.specif.GEO_REF_coordPoint1.lat + dataContext.targetObj.specif.GEO_REF_coordPoint2.lat)/2,
-						lng: (dataContext.targetObj.specif.GEO_REF_coordPoint1.lng + dataContext.targetObj.specif.GEO_REF_coordPoint2.lng)/2,
-					},
-					tpl.zoom.get()
-				);
-			tpl.displayCenterGts.set(displayCenterGts);
+			if (isGeoReferenced(dataContext.targetObj)) {
+				var displayCenterGts = WmtsViewerLib.wmtsFromLatLng(
+						{
+							lat: (dataContext.targetObj.specif.GEO_REF_coordPoint1.lat + dataContext.targetObj.specif.GEO_REF_coordPoint2.lat)/2,
+							lng: (dataContext.targetObj.specif.GEO_REF_coordPoint1.lng + dataContext.targetObj.specif.GEO_REF_coordPoint2.lng)/2,
+						},
+						tpl.zoom.get()
+					);
+				tpl.displayCenterGts.set(displayCenterGts);
+			}
+			else {
+				// Center on Le Perrier
+				var displayCenterGts = WmtsViewerLib.wmtsFromLatLng(
+						{
+							lat: 46.820169,
+							lng: -1.993933,
+						},
+						tpl.zoom.get()
+					);
+				tpl.displayCenterGts.set(displayCenterGts);				
+			}
 			// New tiles limits calculation
 			newTilesLimitsCalculation(tpl);
 			break;
@@ -356,7 +386,13 @@ Template.wmtsViewer.helpers({
 		var result = [];
 		switch (this.type) {
 			case 'DOC':
-				result.push(this.targetObj);
+				// If geo referenced
+				console.log("DOC")
+				if (	isGeoReferenced(this.targetObj)) {
+					console.log("georefs")
+					result.push(this.targetObj);
+				}
+				else console.log("not georefs")
 				break;
 			case 'LIEU':
 				// Find all docs with geoRefs link to this place
@@ -369,7 +405,12 @@ Template.wmtsViewer.helpers({
 				});
 				result = Docs.find({
 					_id:{$in: linkedDocsIdsList},
-					codage:"GEO_REF"
+					codage:"GEO_REF",
+					"specif.GEO_REF_coordPoint1.lat":{"$exists":true},
+					"specif.GEO_REF_coordPoint1.lng":{"$exists":true},
+					"specif.GEO_REF_coordPoint2.lat":{"$exists":true},
+					"specif.GEO_REF_coordPoint2.lng":{"$exists":true},
+					"specif.GEO_REF_tilesUrl":{"$exists":true},
 				}).fetch();
 				break;			
 		}
@@ -472,8 +513,10 @@ Template.wmtsViewer.events({
 			}
 			// Click to add point
 			else {
-				// Only if LIEU type
-				if (Template.currentData().type === "DOC") {
+				// Only if DOC type and georeferenced doc 
+				if (	Template.currentData()
+						&& Template.currentData().type === "DOC" 
+						&& isGeoReferenced(Template.currentData().targetObj)) {
 					// Get directly the GTS position of the cursor (even when spanning and zooming)
 					svg = document.getElementById("map");
 					var pt = svg.createSVGPoint();
@@ -501,7 +544,7 @@ Template.wmtsViewer.events({
 					// On appelle la fenêtre modale avec paramètre et en interdisant la fermeture
 					Modal.show('LieuChoisirModal',parms,{backdrop:'static',keyboard:false});
 				}
-				else toastr.warning("Choisir le document cadastral pour ajouter/modifier une position");
+				else toastr.warning("Choisir un document géo-référencé pour ajouter/modifier une position");
 			}
 		}
 		tpl.dragged.set(false);

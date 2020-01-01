@@ -3,7 +3,15 @@
 // ==============================================
 Template.DocInfos.helpers({
 	listeTabs() {
-		if (this.codage === "GEO_REF") {
+		if (	this.codage === "GEO_REF"
+				&& this.specif
+				&& this.specif.GEO_REF_coordPoint1
+				&& this.specif.GEO_REF_coordPoint1.lat
+				&& this.specif.GEO_REF_coordPoint1.lng
+				&& this.specif.GEO_REF_coordPoint2
+				&& this.specif.GEO_REF_coordPoint2.lat
+				&& this.specif.GEO_REF_coordPoint2.lng
+				&& this.specif.GEO_REF_tilesUrl) {
 			var listeTabs = [
 				{label:"Carte géo-référencée",		templateName:"wmtsViewerTabsAdaptor", 		doc:{targetObj:this,type:"DOC"}},
 				{label:"Fiche",		templateName:"DocInfosFiche", 		doc:this},
