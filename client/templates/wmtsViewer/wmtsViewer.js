@@ -45,8 +45,8 @@ var parms = {
 	zoomMin: 			10,
 	zoomMax: 			17,
 	initialOpacity: 	70,
-	initialWidth:		1050,
-	initialHeight:		700,
+	initialWidth:		1160,
+	initialHeight:		645,
 	
 	backgroundLayersList : [
 		// Use {z} {x} {y} in the template URL
@@ -279,6 +279,8 @@ Template.wmtsViewer.onCreated (function () {
 	this.xMouseInitial 				= new ReactiveVar(null);
 	this.yMouseInitial 				= new ReactiveVar(null);
 	this.displayCenterGtsInitial 	= new ReactiveVar(null);
+	// Menu Management --------------------------
+	this.displayMenu 				= new ReactiveVar(false);
 	// Click without dragging management --------
 	this.dragged 					= new ReactiveVar(false);
 	// Form management --------------------------
@@ -341,6 +343,9 @@ Template.wmtsViewer.helpers({
 	},
 	'displayCenterGts'() {
 		return Template.instance().displayCenterGts.get();
+	},
+	'displayMenu'() {
+		return Template.instance().displayMenu.get();
 	},
 	// Form management
 	'placeIconsIsChecked'() {
@@ -500,6 +505,12 @@ Template.wmtsViewer.helpers({
 // TEMPLATE wmtsViewer EVENTS
 // -----------------------------------------------------------------
 Template.wmtsViewer.events({
+	// Toogle options menu
+	'click #toogleOptions': function(e,tpl){
+		tpl.displayMenu.set(!tpl.displayMenu.get());
+		console.lg(tpl.displayMenu.get());
+		e.stopPropagation();
+	},
 	// Link on cursors --------------------------
 	'click .linkedPlace': function(e,tpl){
 		Router.go('/lieu/infos/' + this._id);

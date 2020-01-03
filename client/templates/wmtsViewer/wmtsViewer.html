@@ -76,68 +76,81 @@
 					</g>
 				</svg>
 			</div>
-			<div class="col-md-2">
+			<div class="col-md-2 wmtsviewer-options-background">
 				<div class="text-center">
 					<button id="minus" class="btn btn-primary">-</button> 
 					<span class="h4">Zoom {{zoom}}</span>
 					<button id="plus" class="btn btn-primary">+</button>
 				</div>
-				<form>
-					<div class="form-group">
-						<h4>Fond</h4>
-						<select id="backgroundLayerSelect" class="form-control">
-							{{#each backgroundLayersList}}
-								<option value="{{./backgroundUrlTemplate}}" {{backgroundLayerSelected}}>{{label}}</option>
+				{{#if displayMenu}}
+					<div class="text-center">
+					<a id="toogleOptions" href="#">
+						<img src="/moins.gif" title="Réduire"/> Options
+					</a>
+					</div>
+					<form>
+						<div class="form-group">
+							<h4>Fond</h4>
+							<select id="backgroundLayerSelect" class="form-control">
+								{{#each backgroundLayersList}}
+									<option value="{{./backgroundUrlTemplate}}" {{backgroundLayerSelected}}>{{label}}</option>
+								{{/each}}
+							</select>
+							{{#if gh_isAdmin}}
+								<div class="checkbox">
+									<label>
+									<input id="displayTilesCoordinatesCheckBox" type="checkbox" checked={{displayTilesCoordinatesIsChecked}}>
+										coordonnées tuiles
+									</label>
+								</div>
+							{{/if}}
+							<h4>Document(s)</h4>
+						</div>
+						<div class="wmtsviewer-doc-list">
+							{{#each ./geoRefsDocsList}}
+								<div class="form-group">
+									<a href="/doc/infos/{{_id}}">{{titre}}</a>
+									<br/>
+									<input class="opacity_slider" type="range" min="0" max="100" value="{{docOpacity _id}}" style="border:none;"/>
+									<label><small>{{docOpacity _id}}%</small></label>
+								</div>
 							{{/each}}
-						</select>
-						{{#if gh_isAdmin}}
-							<div class="checkbox">
-								<label>
-								<input id="displayTilesCoordinatesCheckBox" type="checkbox" checked={{displayTilesCoordinatesIsChecked}}>
-									afficher les coordonnées des tuiles
-								</label>
+						</div>
+						{{#if hlp_gte (hlp_count  ./geoRefsDocsList) 2}}
+							<br/>
+							<div class="form-group">
+								<input id="globalOpacity_slider" type="range" min="0" max="100" value="{{globalDocOpacity}}" style="border:none;"/>
+								<label>{{globalDocOpacity}}%</label>
+								<br/>
 							</div>
 						{{/if}}
-						<h4>Document(s)</h4>
-					</div>
-					<div style="height:195px;overflow:auto;border:1px solid #CCCCCC;padding:3px">
-						{{#each ./geoRefsDocsList}}
-							<div class="form-group">
-								<a href="/doc/infos/{{_id}}">{{titre}}</a>
-								<br/>
-								<input class="opacity_slider" type="range" min="0" max="100" value="{{docOpacity _id}}"/>
-								<label>{{docOpacity _id}}%</label>
-							</div>
-						{{/each}}
-					</div>
-					{{#if hlp_gte (hlp_count  ./geoRefsDocsList) 2}}
-						<br/>
-						<div class="form-group">
-							<input id="globalOpacity_slider" type="range" min="0" max="100" value="{{globalDocOpacity}}"/>
-							<label>{{globalDocOpacity}}%</label>
-							<br/>
+						<div class="checkbox">
+							<label>
+								<input id="docCroppedCheckBox" type="checkbox" checked={{docCroppedIsChecked}}> 
+									détourer
+							</label>
 						</div>
-					{{/if}}
-					<div class="form-group">
-						<label>
-							<input id="docCroppedCheckBox" type="checkbox" checked={{docCroppedIsChecked}}> 
-								détourer
-						</label>
+						<div class="checkbox">
+							<label>
+								<input id="rectAroundCheckBox" type="checkbox" checked={{rectAroundIsChecked}}> 
+									rectangle autour
+							</label>
+						</div>
+						<div class="checkbox">
+							<h4>Lieu(x)</h4>
+							<label>
+							<input id="placeIconsCheckBox" type="checkbox" checked={{placeIconsIsChecked}}>
+								icônes des lieux
+							</label>
+						</div>
+					</form>
+				{{else}}
+					<div class="text-center">
+						<a id="toogleOptions" href="#">
+							<img src="/plus.gif" title="Développer"/> Options
+						</a>
 					</div>
-					<div class="form-group">
-						<label>
-							<input id="rectAroundCheckBox" type="checkbox" checked={{rectAroundIsChecked}}> 
-								rectangle autour
-						</label>
-					</div>
-					<div class="checkbox">
-						<h4>Lieu(x)</h4>
-						<label>
-						<input id="placeIconsCheckBox" type="checkbox" checked={{placeIconsIsChecked}}>
-							icônes des lieux
-						</label>
-					</div>
-				</form>
+				{{/if}}
 			</div>
 		{{/with}}
 	</div>

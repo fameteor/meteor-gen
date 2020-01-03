@@ -23,3 +23,17 @@
 .wmtsviewer-rect-around-doc:hover {
 	stroke:red
 }
+
+/* Options menu -------------------- */
+.wmtsviewer-options-background {
+	background-color:#EEEEEE;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+.wmtsviewer-doc-list {
+	height:195px;
+	overflow:auto;
+	border:1px solid #135A97;
+	padding:3px
+}
