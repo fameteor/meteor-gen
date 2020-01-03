@@ -43,7 +43,7 @@
 						<!-- RECT around each doc -->
 						{{#if rectAroundIsChecked}}
 							{{#with docPosition}}
-								<rect class="rect-around-doc" x="{{./x}}" y="{{./y}}" width="{{./width}}" height="{{./height}}"/>
+								<rect class="wmtsviewer-rect-around-doc" x="{{./x}}" y="{{./y}}" width="{{./width}}" height="{{./height}}"/>
 							{{/with}}
 						{{/if}}
 					{{/each}}
@@ -65,10 +65,14 @@
 					{{/if}}
 					<!-- SCALE layer ========================= -->
 					<g transform="translate({{xOffsetPixel}},{{yOffsetPixel}})">
-						<line x1="0" y1="25" x2="0" y2="20" style="stroke:#135A97;stroke-width:3" />
-						<line x1="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y1="25" x2="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y2="20" style="stroke:#135A97;stroke-width:3" />
-						<line x1="0" y1="25" x2="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y2="25" style="stroke:#135A97;stroke-width:3" />
-						<text x="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y="18" style="text-anchor:middle;stroke:#135A97;fill:#135A97">{{#with scale displayCenterGts zoom}}{{distance}}{{/with}}m</text>
+						<rect x="O" y="0" width="265" height="32" class="wmtsviewer-scale-background"/>
+						<g transform="translate(7,-1)">
+							<line x1="0" y1="25" x2="0" y2="20" class="wmtsviewer-scale-line"/>
+							<line x1="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y1="25" x2="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y2="20" class="wmtsviewer-scale-line"/>
+							<line x1="0" y1="25" x2="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y2="25" class="wmtsviewer-scale-line"/>
+							<text x="0" y="18" class="wmtsviewer-scale-text">0</text>
+							<text x="{{#with scale displayCenterGts zoom}}{{pixels}}{{/with}}" y="18" class="wmtsviewer-scale-text">{{#with scale displayCenterGts zoom}}{{distance}}{{/with}}m</text>
+						</g>						
 					</g>
 				</svg>
 			</div>

@@ -1,9 +1,25 @@
-.rect-around-doc {
+/* Scale --------------------------- */
+.wmtsviewer-scale-background {
+	stroke-width:0;
+	fill:#EEEEEE;	
+}
+.wmtsviewer-scale-line {
+	stroke:#135A97;
+	stroke-width:3;
+}
+.wmtsviewer-scale-text {
+	text-anchor:middle;
+	stroke:#135A97;
+	fill:#135A97;
+}
+
+/* Rectangle around doc ------------ */
+.wmtsviewer-rect-around-doc {
 	fill:none;
 	stroke-width:4;
 	stroke:blue
 }
 
-.rect-around-doc:hover {
+.wmtsviewer-rect-around-doc:hover {
 	stroke:red
 }
