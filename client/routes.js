@@ -436,6 +436,7 @@ Router.route('/outils/anniversairesMain');			// Route vers template OutilsAnnive
 Router.route('/outils/calendrierRepublicain');		// Route vers template OutilsCalendrierRepublicain
 Router.route('/outils/faitsMarquants');
 Router.route('/outils/gestionDesNoms');
+Router.route('/outils/version');
 
 // Routes "Prefs"
 // ==============================================

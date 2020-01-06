@@ -576,6 +576,14 @@ Meteor.methods({
 		}
 		return resultat;
 	},
+	'getVersion'() {
+            try {
+                return JSON.parse(Assets.getText("version.json"));
+            }
+            catch(e) {
+                throw new Meteor.Error(404,"Pas d'information de version disponible.");
+            }
+        },
   });
 
 

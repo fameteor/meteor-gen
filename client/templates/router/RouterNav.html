@@ -13,7 +13,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand noBorderOnFocus" href="/">Marais V1.20</a>
+				<a class="navbar-brand noBorderOnFocus" href="/">Marais</a>
 				<!-- Non collapsing zone -->
 				{{#if currentUser}}
 					<div class="navbar-text">   
@@ -69,6 +69,8 @@
 							<li class="dropdown-header">Préférences</li>
 							<li class="{{activeIfRouteIs 'PrefsChangerSosasRef'}}"><a href="/prefs/changerSosasRef">{{> LibIcone "iconePreferences"}} changer le sosa n°1</a></li>
 							<li class="{{activeIfRouteIs 'PrefsArbreDescCouleurs'}}"><a href="/prefs/arbreDescCouleurs">{{> LibIcone "iconePreferences"}} couleurs arbre descendant</a></li>
+							<li role="separator" class="divider"></li>
+							<li class="{{activeIfRouteIs 'OutilsVersion'}}"><a href="/outils/version">version</a></li>
 						</ul>
 					</li>
 					{{/unless}}
