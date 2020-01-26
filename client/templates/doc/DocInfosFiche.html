@@ -18,6 +18,22 @@
 				<hr/>
 				<h4>Remarques de recherche</h4>
 				{{> textXmlEditor collection=Docs id=_id field="recherche"}}
+				{{#if hlp_eq codage "GEO_REF"}}
+				<hr/>
+				<h4>URL de serveur de tuiles</h4>
+				<table class="table">
+					<tbody>
+						<tr>
+							<td>Image normale</td>
+							<td><code>{{urlServerNormal}}</code></td>
+						</tr>
+						<tr>
+							<td>Image détourée</td>
+							<td><code>{{urlServerCropped}}</code></td>
+						</tr>
+					</tbody>
+				</table>
+				{{/if}}
 			</div>
 		</div>
 		<div class="row">
