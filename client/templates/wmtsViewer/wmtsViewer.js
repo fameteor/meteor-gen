@@ -508,7 +508,6 @@ Template.wmtsViewer.events({
 	// Toogle options menu
 	'click #toogleOptions': function(e,tpl){
 		tpl.displayMenu.set(!tpl.displayMenu.get());
-		console.lg(tpl.displayMenu.get());
 		e.stopPropagation();
 	},
 	// Link on cursors --------------------------
