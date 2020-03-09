@@ -130,7 +130,7 @@ var defaultParms = {
 	},
 	'backgroundLayer': {
 		'Cartes IGN (local)': 	new L.tileLayer(
-			'http://marais.dev.com/marais/fondCartes/cartes_IGN/{z}/{x}/{y}.jpg', 
+			Meteor.absoluteUrl() + '/marais/fondCartes/cartes_IGN/{z}/{x}/{y}.jpg', 
 			{
 				attribution: ' &copy; Copyright service d\'images tuilées <a href="https://geoservices.ign.fr/documentation/geoservices/wmts.html">IGN</a>',
 				maxZoom: 	17,
@@ -139,7 +139,7 @@ var defaultParms = {
 			}
 		),
 		'Photos IGN (local)': 	new L.tileLayer(
-			'http://marais.dev.com/marais/fondCartes/photos_IGN/{z}/{x}/{y}.jpg', 
+			Meteor.absoluteUrl() + '/marais/fondCartes/photos_IGN/{z}/{x}/{y}.jpg', 
 			{
 				attribution: ' &copy; Copyright service d\'images tuilées <a href="https://geoservices.ign.fr/documentation/geoservices/wmts.html">IGN</a>',
 				maxZoom: 	17,
