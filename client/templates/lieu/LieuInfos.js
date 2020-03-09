@@ -5,8 +5,12 @@ Template.LieuInfos.helpers({
 	listeTabs() {
 		if (this.latLng && this.latLng.lat && this.latLng.lng) {
 			var listeTabs = [
-				{	label:"Carte géo-référencée",
+				{	label:"Carte géo-référencée (Leaflet)",
 					templateName:"wmtsViewerTabsAdaptor",
+					doc:{targetObj:this,type:"LIEU"}},
+					
+				{	label:"Carte géo-référencée (V0)",
+					templateName:"wmtsViewerTabsAdaptor_old",
 					doc:{targetObj:this,type:"LIEU"}},
 
 				{	label:"Cartes",
