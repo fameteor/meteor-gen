@@ -1,10 +1,9 @@
 import './fullScreenButton.html';
+import './fullScreenButton.css';
 
 /* ---------------------------------------------------------
 Améliorations à faire :
-- comprendre comment ca fonctionne avec boostrap (si interférence)
-- mettre le CSS (ne marche pas)
-- mettre le CSS pour un fond blanc (ne marche pas)
+- comprendre comment ca fonctionne avec boostrap (interférence avec images/icones sur bouton)
 - passer en paramètre au template le positionnement
 - détecter le fullscreen change et synchronier l'état du bouton avec la réalité (event ne marche pas)
 --------------------------------------------------------- */ 

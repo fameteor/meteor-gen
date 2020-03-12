@@ -1,7 +1,7 @@
 {
     "basic": "V1.22.0",
-    "complete": "V1.22.0-5-gcac3bb9",
+    "complete": "V1.22.0-6-g8102ed8",
     "branch": "master",
-    "commit": "cac3bb950f79f31c92a1289e848b3c74f7a0630a",
-    "timestamp": "Mon, 9 Mar 2020 15:09:15 +0100"
+    "commit": "8102ed8c0b3e794ce2e1c302116409b335a9270b",
+    "timestamp": "Wed, 11 Mar 2020 15:49:28 +0100"
 }

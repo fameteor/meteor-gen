@@ -1,18 +1,22 @@
+.fullScreenButton {
+	position:absolute;
+	left:20px;
+	top:5px;
+	z-index:99999;
+}
+
 /* Chrome, Safari and Opera syntax */
 div:-webkit-full-screen {
   background-color: #FFFFFF;
 }
-
 /* Firefox syntax */
 div:-moz-full-screen {
   background-color: #FFFFFF;
 }
-
 /* IE/Edge syntax */
 div:-ms-fullscreen {
   background-color: #FFFFFF;
 }
-
 /* Standard syntax */
 div:fullscreen {
   background-color: #FFFFFF;
