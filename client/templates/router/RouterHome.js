@@ -8,6 +8,12 @@ Template.RouterHome.helpers({
 	"nbPers" : function() {
 		return Pers.find().count();
 	},
+	"nbPersActesComplets" : function() {
+		return Pers.find({"etatRechActes":"COMPLET_VERIFIE"}).count();
+	},
+	"nbPersActesIncompletsRechFinie" : function() {
+		return Pers.find({"etatRechActes":"INCOMPLET_RECH_FINIE"}).count();
+	},
 	"nbLieux" : function() {
 		return Lieux.find().count();
 	},
