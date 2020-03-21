@@ -52,9 +52,7 @@
 										{{#with pers}}
 											{{#each .}}
 												{{#with (gh_persById .)}}
-													{{> PersIconeSexe}}
-													<a class="choixModal" href="#" title="Choisir cette personne">{{> PersNomPrenomsSansLien}}</a>
-													{{> PersDatesFormatCourt}} {{> PersSosas}}<br/>
+													{{> PersArbreDescExplorableRecursifChoisirModal pers=. generation=1}}
 												{{/with}}
 											{{/each}}
 										{{/with}}

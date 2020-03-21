@@ -133,9 +133,13 @@
 <!-- ===================================== -->
 <template name="LibPaginateGenObjectsList_PersDisplay">
 		{{#each .}}
-			{{> PersIconeSexe}}
-			{{# LibPaginateGenObjectsList_layoutLien}}{{> PersNomPrenomsSansLien}}{{/ LibPaginateGenObjectsList_layoutLien}}
-			{{> PersDatesFormatCourt}} {{> PersSosas}}<br/>
+			{{#if hlp_eq ../../class "choixModal"}}
+				{{> PersArbreDescExplorableRecursifChoisirModal pers=. generation=1}}
+			{{else}}
+				{{> PersIconeSexe}}
+				{{# LibPaginateGenObjectsList_layoutLien}}{{> PersNomPrenomsSansLien}}{{/ LibPaginateGenObjectsList_layoutLien}}
+				{{> PersDatesFormatCourt}} {{> PersSosas}}<br/>
+			{{/if}}
 		{{/each}}
 </template>
 

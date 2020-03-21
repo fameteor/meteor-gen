@@ -1,0 +1,50 @@
+<!-- ===================================== -->
+<!-- TEMPLATE PersArbreDescExplorableRecursifChoisirModal   -->
+<!-- Contexte {                            -->
+<!-- "pers" ::PERS                         -->
+<!-- "generation"::integer                 -->
+<!-- ===================================== -->
+<template name="PersArbreDescExplorableRecursifChoisirModal">
+	<div style="margin:0px;padding:0px;">
+	{{#with pers}}
+		{{#with gh_coupleEventsByPersId _id}}
+			{{#if isExplored}}
+				<img src="/moins.gif" title="Réduire"/>
+				{{#with ..}}<a class="choixModal" href="#" title="Choisir cette personne">{{> PersCompletSansLien}}</a>{{/with}}
+				{{#each .}}
+					{{#unless (hlp_eq type "DIVORCE")}}
+						{{#with gh_conjoint ../../_id .}}
+							<div style="margin-left:29px;">
+							{{#if (hlp_eq ../type "UNION-LIBRE")}}Union libre{{else}}{{#if (hlp_eq ../type "PACS")}}Pacsé{{/if}}{{#if (hlp_eq ../type "MARIAGE")}}Marié{{/if}}{{#if (hlp_eq ../../../sexe "F")}}e{{/if}}{{/if}}
+							({{#with ../date}}{{> DateformatCourt}}{{/with}}) avec : <a class="choixModal" href="#" title="Choisir cette personne">{{> PersCompletSansLien}}</a> :</div>
+							<div style="border-radius: 5px;margin-left:29px;margin-right:0px;margin-top:0px;margin-bottom:0px;padding:5px;background-color:{{couleurFond}};">
+								{{#with gh_listeEnfants ../../.. .}}
+									- enfants (génération {{generation}}) :<br/>
+										{{#each .}}
+											<div style="margin-left:0px;margin-right:0px;margin-top:0px;margin-bottom:0px;padding:0px">
+											{{> PersArbreDescExplorableRecursifChoisirModal pers=. generation=generationSuivante}}
+											</div>
+										{{/each}}
+								{{else}}
+									- pas d'enfant connu<br/>
+								{{/with}}
+							</div>
+						{{/with}}
+					{{else}}
+						{{#with gh_conjoint ../../_id .}}
+							<div style="margin-left:29px;">
+							Divorcé{{#if (hlp_eq ../../../sexe "F")}}e{{/if}}
+							({{#with ../date}}{{> DateformatCourt}}{{/with}}) de : <a class="choixModal" href="#" title="Choisir cette personne">{{> PersCompletSansLien}}</a> .</div>
+						{{/with}}
+					{{/unless}}
+				{{/each}}			
+			{{else}}
+				<img src="/plus.gif" title="Développer"/>
+				{{#with ..}}<a class="choixModal" href="#" title="Choisir cette personne">{{> PersCompletSansLien}}</a>{{/with}}
+			{{/if}}						
+		{{else}}
+			<div style="margin-left:13px;margin-right:0px;margin-top:0px;margin-bottom:0px;padding:0px;">{{#if ../focus}}<em>{{> PersCompletSansLien}}</em>{{else}}<a class="choixModal" href="#" title="Choisir cette personne">{{> PersCompletSansLien}}</a>{{/if}}</div>
+		{{/with}}
+	{{/with}}
+	</div>
+</template>
