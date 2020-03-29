@@ -68,6 +68,9 @@
 								{{#if (hlp_eq signe "NONPRECISE")}}
 									<em>{{gh_getCommonParmLabel "texteXmlSigne" signe}}</em>
 								{{/if}}
+								{{#if (hlp_eq signe "INCERTAIN")}}
+									<span class="orange">{{gh_getCommonParmLabel "texteXmlSigne" signe}}</span>
+								{{/if}}
 								{{#if (hlp_eq signe "N/A")}}
 									<em>{{gh_getCommonParmLabel "texteXmlSigne" signe}}</em>
 								{{/if}}

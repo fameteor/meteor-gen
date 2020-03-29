@@ -233,6 +233,7 @@ parametreCommuns = {
 		{valeur : "MAL",		intitule : {"FR":"signe mal"}},
 		{valeur : "NON",		intitule : {"FR":"ne sait pas signer"}},
 		{valeur : "NONPRECISE",	intitule : {"FR":"non précisé"}},
+		{valeur : "INCERTAIN",	intitule : {"FR":"incertain"}},
 		{valeur : "N/A",		intitule : {"FR":"non applicable"}},
 	],
 	
