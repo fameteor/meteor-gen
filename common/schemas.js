@@ -1546,7 +1546,7 @@ SCHEMA.doc = new SimpleSchema({
 						return "/geo_refs/"	
 						break;
 					case "ACTE":
-						return "/arch/actes_0002/hd/"	
+						return "/arch/actes_0003/hd/"	
 						break;
 					case "VIDEO":
 						return "/arch/video_0001/video/"	
