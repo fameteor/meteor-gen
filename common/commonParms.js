@@ -120,6 +120,7 @@ parametreCommuns = {
 		{valeur : "BAPTEME",		intitule : {"FR":"Acte de baptême"}},
 		{valeur : "BAPT-SEP",		intitule : {"FR":"Acte de baptême et de sépulture"}},
 		{valeur : "MARIAGE", 		intitule : {"FR":"Acte de mariage"}},
+		{valeur : "PUBLICATION-BANS", 		intitule : {"FR":"Certificat de publication des bans"}},
 		{valeur : "PROMESSE", 		intitule : {"FR":"Acte de promesse de mariage"}},
 		{valeur : "DECES",			intitule : {"FR":"Acte de décès"}},
 		{valeur : "DEC-NAIS",		intitule : {"FR":"Acte de décès et de naissance"}},
@@ -130,7 +131,7 @@ parametreCommuns = {
 		{valeur : "AUTRE",			intitule : {"FR":"Autre acte"}}
 	],
 	
-	// Affichage de la nature de l'évènement conugal
+	// Affichage de la nature de l'évènement conjugal
 	"coupleEventType" : [
 		{valeur : "MARIAGE", 		intitule : {"FR":"mariage"}},
 		{valeur : "DIVORCE", 		intitule : {"FR":"divorce"}},

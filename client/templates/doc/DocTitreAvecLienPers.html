@@ -9,9 +9,8 @@
 		{{#if (hlp_eq type "ACTE")}}
 			{{#if acteIsCoupleEvent}}
 				{{#with gh_coupleEventsByDocId _id}}
-					Acte de 
 					{{#each .}}
-						{{> CoupleEventTitle coupleEvent=.}}{{#unless (hlp_last .. .)}}, {{/unless}}
+						{{getActeTypeFormate ../..}} de {{#with gh_persById persA}} {{> PersCompletAvecLien}}{{/with}} avec {{#with gh_persById persB}}{{> PersCompletAvecLien}}{{/with}}{{#unless (hlp_last .. .)}}, {{/unless}}
 					{{/each}}
 				{{else}}
 					- NOUVEAU - {{getActeTypeFormate .}} 

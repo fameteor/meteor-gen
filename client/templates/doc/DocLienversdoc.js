@@ -33,6 +33,7 @@ Template.DocLienversdoc.helpers({
 					"BAPTEME" : "Voir cet acte de baptême",
 					"BAPT-SEP" : "Voir cet acte de baptême/sépulture",
 					"MARIAGE" : "Voir cet acte de mariage",
+					"PUBLICATION-BANS" : "Voir ce certificat de publication des bans",
 					"PROMESSE" : "Voir cette promesse de mariage",
 					"DECES" : "Voir cet acte de décès",
 					"DEC-NAIS" : "Voir cet acte de décès/naissance",

@@ -28,6 +28,7 @@ Template.DocTitreAvecLienPers.helpers({
 	},
 	"acteIsCoupleEvent"() {
 		return (	this.specif.ACTE_type === "MARIAGE"
+				||	this.specif.ACTE_type === "PUBLICATION-BANS"
 				||	this.specif.ACTE_type === "PROMESSE"
 				||	this.specif.ACTE_type === "PACS"
 				||	this.specif.ACTE_type === "DIVORCE"
