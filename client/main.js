@@ -678,6 +678,15 @@ AutoForm.hooks({
 	},*/
 	// Pour les PERSFORMMAIN ----------------------------	
 	"addPersFormMain" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(doc && doc.$set && doc.$set.prenoms) doc.$set.prenoms = doc.$set.prenoms.filter(function(obj){return obj;});
+					if(doc && doc.$set && doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -698,6 +707,15 @@ AutoForm.hooks({
 		}
 	},
 	"updatePersFormMain" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(doc && doc.$set && doc.$set.prenoms) doc.$set.prenoms = doc.$set.prenoms.filter(function(obj){return obj;});
+					if(doc && doc.$set && doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -717,6 +735,17 @@ AutoForm.hooks({
 	},
 	// Pour les updatePersFormBirth ----------------------------	
 	"updatePersFormBirth" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.naissance 
+						&& doc.$set.naissance.docs) doc.$set.naissance.docs = doc.$set.naissance.docs.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -797,6 +826,17 @@ AutoForm.hooks({
 	},
 		// Pour les updatePersFormDeath ----------------------------	
 	"updatePersFormDeath" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.deces 
+						&& doc.$set.deces.docs) doc.$set.deces.docs = doc.$set.deces.docs.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -816,6 +856,16 @@ AutoForm.hooks({
 	},
 	// Pour les COUPLEEVENTS ----------------------------	
 	"addCoupleEventForm" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.docs) doc.$set.docs = doc.$set.docs.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On ferme la popup
@@ -832,6 +882,16 @@ AutoForm.hooks({
 		}
 	},
 	"updateCoupleEventForm" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.docs) doc.$set.docs = doc.$set.docs.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On ferme la popup
@@ -849,6 +909,19 @@ AutoForm.hooks({
 	},
 	// Pour les LIEU ----------------------------
 	"addLieuForm" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.positionSurCartes) doc.$set.positionSurCartes = doc.$set.positionSurCartes.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -865,6 +938,19 @@ AutoForm.hooks({
 		}
 	},
 	"updateLieuForm" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.positionSurCartes) doc.$set.positionSurCartes = doc.$set.positionSurCartes.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -882,6 +968,19 @@ AutoForm.hooks({
 	},
 	// Pour les HIST ----------------------------
 	"addHistForm" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.themes) doc.$set.themes = doc.$set.themes.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -898,6 +997,19 @@ AutoForm.hooks({
 		}
 	},
 	"updateHistForm" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.themes) doc.$set.themes = doc.$set.themes.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -974,6 +1086,16 @@ AutoForm.hooks({
 		}
 	},*/
 	"addDocFormMain" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -992,6 +1114,16 @@ AutoForm.hooks({
 		}
 	},
 	"updateDocFormMain" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.tags) doc.$set.tags = doc.$set.tags.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On enregistre dans la liste des objets visités
@@ -1100,6 +1232,16 @@ AutoForm.hooks({
 	},
 	// Pour les tags
 	"addTagFormMain" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.objTypes) doc.$set.objTypes = doc.$set.objTypes.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On ferme la popup
@@ -1116,6 +1258,16 @@ AutoForm.hooks({
 		}
 	},
 	"updateTagFormMain" : {
+		// !!!!! Aldeed autoform bug correction : impossible to remove an element of an array outside the last one
+			before : {
+				update : function(doc) {
+					// We remove all undefined or null elements
+					if(	doc 
+						&& doc.$set 
+						&& doc.$set.objTypes) doc.$set.objTypes = doc.$set.objTypes.filter(function(obj){return obj;});
+					return doc;
+				}
+			},
 		// Called when any submit operation succeeds
 		onSuccess: function(formType, result) {
 			// On ferme la popup

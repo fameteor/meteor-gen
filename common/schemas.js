@@ -1100,6 +1100,7 @@ SCHEMA.hist = new SimpleSchema({
 		label: 	"Point d'histoire ayant probablement impacté mes ancêtres",
 		optional: 	false,
 	},
+	// Obsolete : to be deleted when HISTS migrated
 	"zones": {
 		type:	 	Array,
 		label: 	"Zones concernées par le point d'histoire",
