@@ -272,6 +272,15 @@ SCHEMA._acte = new SimpleSchema({
 		type:	 	String,
 		regEx:		/[0-9a-zA-Z]{17}$/
 	},
+	"permaLiens": {
+		type:	 	Array,
+		label: 		"Permaliens",
+		optional: 	true,
+	},
+	"permaLiens.$": {
+		type:	 	String,
+		label: 		"Permaliens",
+	},
 }, { tracker: Tracker });
 
 // ==============================================
@@ -837,6 +846,15 @@ SCHEMA.coupleEvent = new SimpleSchema({
 	"docs.$": {
 		type:	 	String,
 		regEx:		/[0-9a-zA-Z]{17}$/,
+	},
+	"permaLiens": {
+		type:	 	Array,
+		label: 		"Permaliens",
+		optional: 	true,
+	},
+	"permaLiens.$": {
+		type:	 	String,
+		label: 		"Permaliens",
 	},
 	"comment": {
 		type:	 	String,

@@ -13,6 +13,9 @@
 						{{#each naissance.docs}}
 							<span class="h4">{{> DocLienversdoc .}}</span>
 						{{/each}}
+						{{#each naissance.permaLiens}}
+							<span class="h4"><a href="{{.}}" target="_blank" title="Voir le document sur Internet">{{> LibIcone "iconeLien"}}</a></span>
+						{{/each}}
 						Né{{#if sexeFeminin}}e{{/if}}
 						{{#if naissance}}
 							{{#with naissance.date}}
@@ -126,6 +129,9 @@
 									{{#each docs}}
 										<span class="h4">{{> DocLienversdoc .}}</span>
 									{{/each}}
+									{{#each permaLiens}}
+										<span class="h4"><a href="{{.}}" target="_blank" title="Voir le document sur Internet">{{> LibIcone "iconeLien"}}</a></span>
+									{{/each}}
 									{{#if (hlp_eq ./type "UNION-LIBRE")}}Union libre{{else}}{{#if (hlp_eq ./type "MARIAGE")}}Marié{{/if}}{{#if (hlp_eq ./type "PACS")}}Pacsé{{/if}}{{#if (hlp_eq ./type "DIVORCE")}}Divorcé{{/if}}{{#if (hlp_eq ../../sexe "F")}}e{{/if}}{{/if}}
 									{{#if date}}
 									<strong>{{#with date}}{{> DateformatLong}}{{/with}}</strong>
@@ -218,6 +224,9 @@
 					<div class="surligne {{gh_classIncertainForDeces}}">
 						{{#each deces.docs}}
 							<span class="h4">{{> DocLienversdoc .}}</span>
+						{{/each}}
+						{{#each deces.permaLiens}}
+							<span class="h4"><a href="{{.}}" target="_blank" title="Voir le document sur Internet">{{> LibIcone "iconeLien"}}</a></span>
 						{{/each}}
 						Décédé{{#if sexeFeminin}}e{{/if}}
 						{{#if deces.date}}
