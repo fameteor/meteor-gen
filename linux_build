@@ -1,7 +1,7 @@
 echo ------------------------------------------
 echo     Lancement du BUILD
 echo ------------------------------------------
-meteor build --architecture=os.linux.x86_64 ../../meteor_builds/gen/gen.tar.gz
+meteor build --architecture=os.linux.x86_64 ../../meteor_builds/meteor-gen/meteor-gen.tar.gz
 echo ------------------------------------------
 echo     BUILD TERMINE
 echo ------------------------------------------
