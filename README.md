@@ -1,6 +1,6 @@
 # Do not forget to add the post-commit hook to .git/hooks/post-commit file containing :
 ```
-#!/bin/sh
+#!bin/bash
 echo "POST-COMMIT started"
 ver=$(git describe --abbrev=0)
 complete=$(git describe)
